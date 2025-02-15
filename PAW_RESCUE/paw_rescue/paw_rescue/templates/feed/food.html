@@ -1,0 +1,105 @@
+<style>
+    /* Container */
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+/* Card Styles */
+.card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 0 10px;
+}
+
+.card-desc {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.card-details {
+    font-size: 0.9rem;
+    color: #777;
+}
+</style>
+<head>
+    <div class="container">
+        <h1 style="grid-column: span 2;">Food & Nutrition</h1>
+        <div class="card" onclick="showOverlay('Dog Food', 'High-quality dog food for all breeds.', 'https://via.placeholder.com/400x200')">
+            <img src="https://via.placeholder.com/400x200" alt="Dog Food">
+            <div class="card-content">
+                <h2 class="card-title">Dog Food</h2>
+                <p class="card-desc">High-quality dog food for all breeds.</p>
+                <p class="card-details">Provides essential nutrients for growth and energy. Suitable for all life stages.</p>
+            </div>
+        </div>
+        <div class="card" onclick="showOverlay('Cat Food', 'Nutritious cat food for healthy growth.', 'https://via.placeholder.com/400x200')">
+            <img src="https://via.placeholder.com/400x200" alt="Cat Food">
+            <div class="card-content">
+                <h2 class="card-title">Cat Food</h2>
+                <p class="card-desc">Nutritious cat food for healthy growth.</p>
+                <p class="card-details">Rich in protein and taurine for optimal feline health. Supports a shiny coat and strong muscles.</p>
+            </div>
+        </div>
+        <div class="card" onclick="showOverlay('Bird Food', 'Balanced diet for all bird species.', 'https://via.placeholder.com/400x200')">
+            <img src="https://via.placeholder.com/400x200" alt="Bird Food">
+            <div class="card-content">
+                <h2 class="card-title">Bird Food</h2>
+                <p class="card-desc">Balanced diet for all bird species.</p>
+                <p class="card-details">Contains a mix of seeds, grains, and vitamins to support avian health and vitality.</p>
+            </div>
+        </div>
+        <div class="card" onclick="showOverlay('Fish Food', 'Nutrient-rich food for aquarium fish.', 'https://via.placeholder.com/400x200')">
+            <img src="https://via.placeholder.com/400x200" alt="Fish Food">
+            <div class="card-content">
+                <h2 class="card-title">Fish Food</h2>
+                <p class="card-desc">Nutrient-rich food for aquarium fish.</p>
+                <p class="card-details">Formulated to promote vibrant colors and healthy growth in freshwater and saltwater fish.</p>
+            </div>
+        </div>
+    </div> 
+</body>
+</head><body>
+    <script>
+        function showOverlay(title, description, imageUrl) {
+    document.getElementById('overlay-title').innerText = title;
+    document.getElementById('overlay-description').innerText = description;
+    document.getElementById('overlay-image').src = imageUrl;
+    document.getElementById('overlay').style.display = 'flex';
+}
+    </script>
+  

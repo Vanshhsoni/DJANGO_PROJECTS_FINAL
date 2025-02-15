@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body Styling */
+body {
+    background: url('https://t4.ftcdn.net/jpg/02/87/85/51/360_F_287855192_LMskFGSsFqdisMJNdvw5HOmrt0xijJOv.jpg') no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    backdrop-filter: blur(7px); /* Added missing semicolon */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.dark-mode {
+    background-color: #fee0f6; /* Teal background */
+    color: #e0f2f1; /* Light teal text color */
+}
+
+/* Navigation Bar Styling */
+.nav {
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+.back, .dark-mode-toggle {
+    background-color: rgb(186 172 172 / 40%);
+    color: #e0f2f1;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 2rem;
+}
+
+.back:hover, .dark-mode-toggle:hover {
+ background-color: #c480af;
+}
+
+/* Container Styling */
+.container {
+    background-color: rgb(186 172 172 / 40%);
+    padding: 75px 40px;
+    border-radius: 20px solid pink;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 40%; /* Cover 40% of the page width */
+    max-width: 400px;
+    transition: background-color 0.3s ease;
+   
+}
+
+.dark-mode .container {
+    background-color: rgba(199, 105, 176, 0.9); /* Semi-transparent teal container background */
+    color: #e0f2f1;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 3rem;
+    text-align: center;
+    color: #f4f9f8;
+}
+
+.dark-mode h1 {
+    color: #e0f2f1;
+}
+
+/* Input Fields */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1.5rem;
+    color: #f7f9f8;
+}
+
+.dark-mode label {
+    color: #e0f2f1;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ecaad0;
+    border-radius: 10px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #f7c7ef;
+}
+
+/* Buttons */
+button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: #fcd5f588;
+    color: #e0f2f1;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #9d6181;
+}
+
+/* Links */
+p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+a {
+    color: #f5fbfa;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #c480af;
+}
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <div class="back" onclick="goBack()">&#8592;</div>
+        <div class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</div>
+    </div>
+    <div class="container">
+        <h1>Login</h1>
+        <div class="messages">
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+    </div>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

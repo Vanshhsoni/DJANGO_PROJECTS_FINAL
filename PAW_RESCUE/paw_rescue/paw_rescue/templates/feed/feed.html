@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+      /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body */
+body {
+    background-color: #eaf4f4;
+    color: #333;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Navigation Bar */
+.navbar {
+    position: sticky;
+    top: 0;
+    background-color: #00796b;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar ul li {
+    display: inline;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 5px 10px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar ul li a:hover {
+    background-color: #005a4f;
+    border-radius: 5px;
+}
+
+.active {
+    background-color: #005a4f;
+    border-radius: 5px;
+}
+
+/* Statistics Section */
+.statistics {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px auto;
+    padding: 10px;
+    gap: 20px;
+}
+
+.statistics .card {
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    flex: 1;
+    animation: fadeIn 1s ease;
+}
+
+.statistics .card h2 {
+    color: #00796b;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.statistics .card p {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Feed Section */
+.feed {
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px 20px;
+}
+
+.feed .post {
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    animation: fadeIn 1s ease;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+}
+
+.feed .post img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.feed .post .content {
+    flex: 1;
+}
+
+.feed .post .content h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.feed .post .content p {
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+<nav class="navbar">
+    <div class="logo">Animal Rescue</div>
+    <ul>
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="{% url 'adoption_public' %}">Adopt</a></li>
+        <li><a href="#">Donate</a></li>
+        <li><a href="#">Rescue Center</a></li>
+        <li><a href="#">Treatment & Health</a></li>
+        <li><a href="#">Food & Nutrition</a></li>
+        <li><a href="{% url 'report' %}">Report a Stray</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="{% url 'volunteer_form' %}">Volunteer With Us</a></li>
+        <li>
+            <form method="POST" action="{% url 'logout' %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" style="background: none; border: none; color: white; cursor: pointer; font-size: 1rem;">Logout</button>
+            </form>
+        </li>
+    </ul>
+</nav>
+
+<!-- Example of dynamic stats using Django context -->
+<section class="statistics">
+    <div class="card">
+        <h2> {{ report_count }}</h2>
+        <p>Total Reports</p>
+    </div>
+    <div class="card">
+        <h2>{{ adoption_requests }}</h2>
+        <p>Adoption Requests</p>
+    </div>
+    <!-- Other cards -->
+</section>
+
+<!-- Feed Section -->
+<section class="feed">
+    {% for report in reports %}
+    <div class="post">
+        <img src="{{ report.image.url }}" alt="{{ report.title }}">
+        <div class="content">
+            <h3>{{ report.title }}</h3>
+            <p>{{ report.description }}</p>
+        </div>
+    </div>
+    {% empty %}
+    <p>No reports found. Be the first to report a stray!</p>
+    {% endfor %}
+</section>
+</body>
+<script>
+    // Fade-in animation for posts on scroll
+    const posts = document.querySelectorAll(".post");
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.style.animation = "fadeIn 1s ease forwards";
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    posts.forEach(post => {
+        observer.observe(post);
+    });
+</script>
+</html>

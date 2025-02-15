@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adoption Posts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Body Styling */
+        body {
+            background-color: #f4f4f9;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            width: 100%;
+            background-color: #00796b;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar ul li {
+            display: inline;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 5px 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #005a4f;
+            border-radius: 5px;
+        }
+
+        .back-button {
+            background-color: #004d40;
+            color: #e0f2f1;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .back-button:hover {
+            background-color: #00695c;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 80px auto 20px; /* Adjusted margin to account for fixed navbar */
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card img {
+            width: 100%;
+            height: 300px; /* Increased height for larger cards */
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 15px;
+        }
+
+        .card-title {
+            font-size: 1.8rem; /* Increased font size for larger cards */
+            font-weight: bold;
+            margin: 0 0 10px;
+        }
+
+        .card-desc {
+            font-size: 1.2rem; /* Increased font size for larger cards */
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .contact-button {
+            padding: 10px 15px;
+            background-color: #00796b;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .contact-button:hover {
+            background-color: #005a4f;
+        }
+
+        /* Overlay Styles */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .overlay-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+        }
+
+        .overlay-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .overlay-content h2 {
+            margin: 0 0 10px;
+        }
+
+        .overlay-content p {
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            color: #ff4d4d;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <button class="back-button" onclick="goBack()">&#8592; Back</button>
+        <div class="logo">Animal Rescue</div>
+        <ul>
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="{% url 'adoption_public' %}">Adopt</a></li>
+            <li><a href="#">Donate</a></li>
+            <li><a href="#">Rescue Center</a></li>
+            <li><a href="#">Treatment & Health</a></li>
+            <li><a href="#">Food & Nutrition</a></li>
+            <li><a href="{% url 'report' %}">Report a Stray</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Volunteer With Us</a></li>
+            <li>
+                <form method="POST" action="{% url 'logout' %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" style="background: none; border: none; color: white; cursor: pointer; font-size: 1rem;">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1 style="grid-column: span 2;">Available for Adoption</h1>
+        {% for adoption in adoptions %}
+        <div class="card" onclick="showOverlay('{{ adoption.title }}', '{{ adoption.description }}', '{{ adoption.image.url }}')">
+            <img src="{{ adoption.image.url }}" alt="{{ adoption.title }}">
+            <div class="card-content">
+                <h2 class="card-title">{{ adoption.title }}</h2>
+                <p class="card-desc">{{ adoption.description|truncatechars:100 }}</p>
+                <a href="mailto:sonivanshmaster@gmail.com" class="contact-button">Contact</a>
+            </div>
+        </div>
+        {% empty %}
+        <p>No adoptions available at the moment.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay">
+        <div class="overlay-content">
+            <button class="close-btn" onclick="closeOverlay()">&times;</button>
+            <img id="overlay-image" src="" alt="">
+            <h2 id="overlay-title"></h2>
+            <p id="overlay-description"></p>
+        </div>
+    </div>
+
+    <script>
+        // Show the overlay with the adoption details
+        function showOverlay(title, description, imageUrl) {
+            document.getElementById('overlay-title').innerText = title;
+            document.getElementById('overlay-description').innerText = description;
+            document.getElementById('overlay-image').src = imageUrl;
+            document.getElementById('overlay').style.display = 'flex';
+        }
+
+        // Close the overlay
+        function closeOverlay() {
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        // Go back to the previous page
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

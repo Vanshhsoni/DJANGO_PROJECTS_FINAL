@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Previous styles remain the same until navbar */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #fff5f7;
+            color: #4a5568;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: #FFC1CC;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 4px rgba(255, 0, 127, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-weight: 600;
+            color: #FF007F;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: '🐾';
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            height: 100%;
+            align-items: center;
+        }
+
+        .nav-links li {
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #FF007F;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 0, 127, 0.1);
+            color: #cc0066;
+        }
+
+        #active {
+            background-color: #FF007F;
+            color: white;
+        }
+
+        #active:hover {
+            background-color: #cc0066;
+            color: white;
+        }
+
+        /* Update hover effects for cards */
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(255, 0, 127, 0.15);
+            background-color: rgba(255, 193, 204, 0.1);
+        }
+
+        .post:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(255, 0, 127, 0.15);
+            background-color: rgba(255, 193, 204, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: #FF007F;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .logout-btn:hover {
+            background-color: rgba(255, 0, 127, 0.1);
+            color: #cc0066;
+        }
+
+        /* Rest of the previous styles remain the same */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .statistics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(255, 0, 127, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 193, 204, 0.3);
+        }
+
+        .stat-card h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #FF007F;
+        }
+
+        .stat-card p {
+            color: #FFC1CC;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .feed {
+            display: grid;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .post {
+            background: white;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(255, 0, 127, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid rgba(255, 193, 204, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .post img {
+            width: 100%;
+            height: 400px;
+            object-fit: contain;
+            background-color: #fff5f7;
+            padding: 1rem;
+        }
+
+        .post-content {
+            padding: 1.5rem;
+            text-align: center;
+            width: 100%;
+        }
+
+        .post-content h3 {
+            color: #FF007F;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .post-content p {
+            color: #4a5568;
+            line-height: 1.6;
+            font-size: 0.95rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+         /* Submit Button */
+ button {
+     padding: 15px;
+     border: none;
+     border-radius: 20px;
+     background-color: #fc49a3;
+     color: #e0f2f1;
+     font-size: 1.2rem;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+ }
+ 
+ button:hover {
+     background-color: #ff0080;
+ }
+    </style>
+</head>
+<body>
+    <!-- <div class="navbar">
+     <h1>Admin Dashboard</h1> -->
+    <!-- </div> --> 
+<nav class="navbar">
+    
+    <div class="logo">Paw Rescue</div>
+    <ul class="nav-links">
+        <li><a href="{% url 'adminpanel:admin_dashboard' %}" id="active">Dashboard</a></li>
+        <li><a href="{% url 'adminpanel:user_adoption' %}">Manage Adoptions</a></li>
+        <li><a href="{% url 'adminpanel:volunteer_list' %}">Volunteer Requests</a></li>
+        <!-- <li><a href="{% url 'adminpanel:add_adoption' %}">Add Adoption</a></li> -->
+        <!-- <li><a href="{% url 'adminpanel:adoption_list' %}">Delete Adoption</a></li> -->
+        <li><a href="{% url 'adminpanel:admin_logout' %}">Logout</a></li>
+    </ul>
+</nav>
+<!-- Admin Dashboard Home Page -->
+
+<!-- Feed Section -->
+<section class="feed">
+    {% for report in reports %}
+    <div class="post">
+        <img src="{{ report.image.url }}" alt="{{ report.title }}">
+        <div class="post-content">
+            <h3>{{ report.title }}</h3>
+            <p>{{ report.description }}</p>
+        </div>
+    </div>
+    {% empty %}
+    <p>No reports found. Be the first to report a stray!</p>
+    {% endfor %}
+</section>
+
+
+</body>
+</html>

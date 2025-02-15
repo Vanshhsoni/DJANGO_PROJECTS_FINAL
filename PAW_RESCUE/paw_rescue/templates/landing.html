@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paw Rescue</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-image: url("https://t4.ftcdn.net/jpg/02/87/85/51/360_F_287855192_LMskFGSsFqdisMJNdvw5HOmrt0xijJOv.jpg");
+            background-color: #f9d1e5; /* Light pink background */
+            color: #333; /* Dark text color */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            animation: fadeIn 2s ease-in-out;
+            background-repeat: no-repeat;
+            /* background-position: center; */
+            background-size: cover;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Logo and Website Name */
+        .header {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    /* background-color: #ff0080; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-right: 10px;
+    overflow: hidden; /* Ensure the image does not overflow the container */
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the entire container */
+    border-radius: 50%; /* Ensure the image is also rounded */
+}
+
+        .site-name {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        /* Top-Right Buttons */
+        .top-right {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 20px;
+            background-color: #ff0080;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #d4006b;
+        }
+
+        .dark-mode-toggle {
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Admin Login Floating Button */
+        .admin-button {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 20px;
+            background-color: #ff0080;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .admin-button:hover {
+            background-color: #d4006b;
+        }
+    </style>
+    <script>
+        function toggleDarkMode() {
+            const body = document.body;
+            if (body.style.backgroundColor === "#f9d1e5") {
+                body.style.backgroundColor = "#333";
+                body.style.color = "#f9d1e5";
+            } else {
+                body.style.backgroundColor = "#f9d1e5";
+                body.style.color = "#333";
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- Logo and Website Name -->
+    <div class="header">
+        <div class="logo"><img src="{% static 'images/logox.png' %}"></div>
+        <div class="site-name">Paw Rescue</div>
+    </div>
+
+    <!-- Top-Right Corner Buttons -->
+    <div class="top-right">
+        <div class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</div>
+        <a href="{% url 'login' %}" class="button">Login</a>
+        <a href="{% url 'signup' %}" class="button">Signup</a>
+    </div>
+
+    <!-- Admin Login Floating Button -->
+    <a href="{% url 'adminpanel:admin_login' %}" class="admin-button">Admin Login</a>
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adoption Posts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #fff5f7;
+            color: #4a5568;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: #FFC1CC;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 4px rgba(255, 0, 127, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-weight: 600;
+            color: #FF007F;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: '🐾';
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            height: 100%;
+            align-items: center;
+        }
+
+        .nav-links li {
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #FF007F;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 0, 127, 0.1);
+            color: #cc0066;
+        }
+
+        #active {
+            background-color: #FF007F;
+            color: white;
+        }
+
+        #active:hover {
+            background-color: #cc0066;
+            color: white;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 120px auto 40px;
+            padding: 0 2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 2.5rem;
+            padding: 2rem 0;
+        }
+
+        .title {
+            color: #FF007F;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .card {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(255, 0, 127, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            border: 1px solid rgba(255, 193, 204, 0.3);
+        }
+
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(255, 0, 127, 0.15);
+            background-color: rgba(255, 193, 204, 0.1);
+        }
+
+        .card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .card-title {
+            color: #FF007F;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .overlay.visible {
+            opacity: 1;
+        }
+
+        .overlay-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+        }
+
+        .overlay-content img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .overlay-title {
+            color: #FF007F;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .contact-info {
+            color: #4a5568;
+            font-size: 1.1rem;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: #FF007F;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.2s ease;
+        }
+
+        .close-btn:hover {
+            color: #cc0066;
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: #FF007F;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .logout-btn:hover {
+            background-color: rgba(255, 0, 127, 0.1);
+            color: #cc0066;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Paw Rescue</div>
+        <ul class="nav-links">
+            <li><a href="{% url 'feed' %}" >Home</a></li>
+            <li><a href="{% url 'adoption_public' %}"id="active">Adopt</a></li>
+            <li><a href="{% url 'donate' %}">Donate</a></li>
+            <li><a href="{% url 'location' %}">Rescue Center</a></li>
+            <li><a href="{% url 'health' %}">Treatment & Health</a></li>
+            <li><a href="{% url 'food' %}">Food & Nutrition</a></li>
+            <li><a href="{% url 'report' %}">Report a Stray</a></li>
+            <li><a href="{% url 'volunteer_form' %}">Volunteer With Us</a></li>
+            <li>
+                <form method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-btn">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1 class="title">Available for Adoption</h1>
+        <div class="grid">
+            {% for adoption in adoptions %}
+            <div class="card" onclick="showOverlay('{{ adoption.title }}', '{{ adoption.image.url }}')">
+                <img src="{{ adoption.image.url }}" alt="{{ adoption.title }}">
+                <div class="card-content">
+                    <h2 class="card-title">{{ adoption.title }}</h2>
+                </div>
+            </div>
+            {% empty %}
+            <p>No adoptions available at the moment.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay">
+        <div class="overlay-content">
+            <button class="close-btn" onclick="closeOverlay()">&times;</button>
+            <img id="overlay-image" src="" alt="">
+            <h2 class="overlay-title" id="overlay-title"></h2>
+            <p class="contact-info">Contact: 6367743066</p>
+        </div>
+    </div>
+
+    <script>
+        // Fade in cards on scroll
+        const cards = document.querySelectorAll('.card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        cards.forEach(card => {
+            observer.observe(card);
+        });
+
+        // Overlay functions
+        function showOverlay(title, imageUrl) {
+            const overlay = document.getElementById('overlay');
+            document.getElementById('overlay-title').innerText = title;
+            document.getElementById('overlay-image').src = imageUrl;
+            overlay.style.display = 'flex';
+            // Trigger reflow
+            overlay.offsetHeight;
+            overlay.classList.add('visible');
+        }
+
+        function closeOverlay() {
+            const overlay = document.getElementById('overlay');
+            overlay.classList.remove('visible');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 300);
+        }
+    </script>
+</body>
+</html>

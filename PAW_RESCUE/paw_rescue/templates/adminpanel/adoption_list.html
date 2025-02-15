@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adoption Posts</title>
+    <style>
+        body {
+            background-color: #fff5f7;
+            color: #4a5568;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #FFC1CC;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 4px rgba(255, 0, 127, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-weight: 600;
+            color: #FF007F;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: '🐾';
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            height: 100%;
+            align-items: center;
+        }
+
+        .nav-links li {
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #FF007F;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 0, 127, 0.1);
+            color: #cc0066;
+        }
+
+        #active {
+            background-color: #FF007F;
+            color: white;
+        }
+
+        #active:hover {
+            background-color: #cc0066;
+            color: white;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 120px 2rem 2rem; /* Adjust padding to account for navbar */
+            padding-top: 200px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+            width: auto;
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .card-content {
+            padding: 1rem;
+            align-items: center;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0;
+            color: #4a5568;
+        }
+
+        .card-text {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #6b7280;
+        }
+
+        .card.fade-in {
+            transform: translateY(0);
+            opacity: 1;
+            border: 1px solid #ff0080;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        body {
+            background-color: #fff5f7;
+            color: #4a5568;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: #FFC1CC;
+            padding: 0.4rem 0.8rem;
+            box-shadow: 0 2px 4px rgba(255, 0, 127, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-weight: 600;
+            color: #FF007F;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: '🐾';
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            height: 100%;
+            align-items: center;
+            padding-right: 37px;
+        }
+
+        .nav-links li {
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #FF007F;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+            
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 0, 127, 0.1);
+            color: #cc0066;
+        }
+
+        #active {
+            background-color: #FF007F;
+            color: white;
+        }
+
+        #active:hover {
+            background-color: #cc0066;
+            color: white;
+        }
+        .delete-btn {
+            padding: 15px;
+            position: absolute;
+            bottom: 5px;
+            border: none;
+            border-radius: 20px;
+            background-color: #fc49a3;
+            color: #e0f2f1;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+    
+        .delete-btn:hover {
+            background-color: #ff0080;
+        }
+        
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">PAW RESCUE</div>
+        <ul class="nav-links">
+            <li><a href="{% url 'adminpanel:admin_dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'adminpanel:add_adoption' %}">Add Adoption</a></li>
+            <li><a href="{% url 'adminpanel:user_adoption' %}" id="active">Adoption Page</a></li>
+            <li><a href="{% url 'adminpanel:admin_logout' %}">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="grid-container">
+        {% if adoptions %}
+            {% for adoption in adoptions %}
+            <div class="card fade-in">
+                <img src="{{ adoption.image.url }}" alt="{{ adoption.title }}">
+                <div class="card-content">
+                <h3 class="card-title">{{ adoption.title }}</h3>
+                <p class="card-text">{{ adoption.description }}</p>
+               <a href="{% url 'adminpanel:delete_adoption' adoption.pk %}" >
+               <button class="delete-btn">Delete</button></a>
+
+            </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No adoption posts available.</p>
+        {% endif %}
+    </div>
+
+
+    <script>
+        const cards = document.querySelectorAll('.card');
+
+        const fadeInOnScroll = () => {
+            cards.forEach((card) => {
+                const rect = card.getBoundingClientRect();
+                if (rect.top < window.innerHeight) {
+                    card.classList.add('fade-in');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', fadeInOnScroll);
+        fadeInOnScroll(); // Trigger on load in case some cards are in view
+    </script>
+</body>
+</html>

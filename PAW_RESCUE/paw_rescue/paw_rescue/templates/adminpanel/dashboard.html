@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Body */
+        body {
+            background-color: #f8f0f4;
+            color: #333;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            position: sticky;
+            top: 0;
+            background-color: #f9d1e5;
+            color: rgb(16, 15, 15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 21px 20px;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar ul li {
+            display: inline;
+        }
+
+        .navbar ul li a {
+            color: rgb(4, 4, 4);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 5px 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #ff0080;
+            border-radius: 5px;
+        }
+
+        .active {
+            background-color: #ff0080;
+            border-radius: 5px;
+        }
+
+        /* Statistics Section */
+        .statistics {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px auto;
+            padding: 10px;
+            gap: 20px;
+        }
+
+        .statistics .card {
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            flex: 1;
+            animation: fadeIn 1s ease;
+        }
+
+        .statistics .card h2 {
+            color: #ffc1cc;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .statistics .card p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* Feed Section */
+        .feed {
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 10px 20px;
+        }
+
+        .feed .post {
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            animation: fadeIn 1s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+        }
+
+        .feed .post img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .feed .post .content {
+            flex: 1;
+        }
+
+        .feed .post .content h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .feed .post .content p {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">Admin Dashboard</div>
+        <ul>
+            <li><a href="{% url 'feed' %}">Home</a></li>
+            <li><a href="{% url 'adminpanel:user_adoption' %}">Adoption Page</a></li>
+            <li><a href="{% url 'adminpanel:volunteer_list' %}">Volunteer Requests</a></li>
+            <li><a href="{% url 'adminpanel:admin_logout' %}">Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Admin Dashboard Home Page -->
+    <!-- <h1>Admin Dashboard</h1> -->
+
+    <!-- Feed Section -->
+    <section class="feed">
+        {% for report in reports %}
+        <div class="post">
+            <img src="{{ report.image.url }}" alt="{{ report.title }}">
+            <div class="content">
+                <h3>{{ report.title }}</h3>
+                <p>{{ report.description }}</p>
+            </div>
+        </div>
+        {% empty %}
+        <p>No reports found. Be the first to report a stray!</p>
+        {% endfor %}
+    </section>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report a Stray</title>
+    <style>
+       /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body Styling */
+body {
+    background-color: #f4f4f9;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+/* Container */
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(248, 220, 247, 0.26); /* Semi-transparent white background */
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    float: left;
+
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color:  rgba(248, 220, 247, 0.26);
+
+}
+
+form label {
+    font-size: 1rem;
+    color: #004d40;
+    background-color: rgba(248, 220, 247, 0.26);
+}
+
+form input, form textarea, form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cc006648;
+    border-radius: 10px;
+    transition: border-color 0.3s ease;
+    background-color: rgba(248, 220, 247, 0.26);
+}
+
+form input:focus, form textarea:focus, form select:focus {
+    outline: none;
+    border-color: black;
+}
+
+/* Submit Button */
+button {
+    padding: 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: #fc49a3;
+    color: #e0f2f1;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #ff0080;
+}
+        body {
+            background-color: #fff5f7;
+            color: #4a5568;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: #FFC1CC;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 4px rgba(255, 0, 127, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-weight: 600;
+            color: #FF007F;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: '🐾';
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            height: 100%;
+            align-items: center;
+        }
+
+        .nav-links li {
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #FF007F;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 0, 127, 0.1);
+            color: #cc0066;
+        }
+
+        #active {
+            background-color: #FF007F;
+            color: white;
+        }
+
+        #active:hover {
+            background-color: #cc0066;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Paw Rescue</div>
+        <ul class="nav-links">
+            <li><a href="{% url 'feed' %}" >Home</a></li>
+            <li><a href="{% url 'adoption_public' %}">Adopt</a></li>
+            <li><a href="{% url 'donate' %}">Donate</a></li>
+            <li><a href="{% url 'location' %}">Rescue Center</a></li>
+            <li><a href="{% url 'health' %}">Treatment & Health</a></li>
+            <li><a href="{% url 'food' %}">Food & Nutrition</a></li>
+            <li><a href="{% url 'report' %}"id="active">Report a Stray</a></li>
+            <li><a href="{% url 'volunteer_form' %}">Volunteer With Us</a></li>
+            <li>
+                <form method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-btn">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Report a Stray</h1>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit Report</button>
+        </form>
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

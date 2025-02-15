@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Submissions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            width: 1500px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            margin-top: -77px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding-top: 190px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background: #ff0080;
+            color: #fff;
+        }
+        body {
+            background-color: #fff5f7;
+            color: #4a5568;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #FFC1CC;
+            padding: -0.5rem 2rem;
+            box-shadow: 0 2px 4px rgba(255, 0, 127, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            
+        }
+
+        .logo {
+            font-weight: 600;
+            color: #FF007F;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: '🐾';
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            height: 100%;
+            align-items: center;
+        }
+
+        .nav-links li {
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #FF007F;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 0, 127, 0.1);
+            color: #cc0066;
+        }
+
+        #active {
+            background-color: #FF007F;
+            color: white;
+        }
+
+        #active:hover {
+            background-color: #cc0066;
+            color: white;
+        }
+
+
+        body {
+            background-color: #fff5f7;
+            color: #684a63;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">PAW RESCUE</div>
+        <ul class="nav-links">
+            <li><a href="{% url 'adminpanel:admin_dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'adminpanel:user_adoption' %}">Manage Adoptions</a></li>
+            <li><a href="{% url 'adminpanel:user_adoption' %}" id="active">Adoption Page</a></li>
+            <li><a href="{% url 'adminpanel:admin_logout' %}">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Volunteer Submissions</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>About</th>
+                    <th>Phone</th>
+                    <th>Submitted On</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for volunteer in volunteers %}
+                <tr>
+                    <td>{{ volunteer.name }}</td>
+                    <td>{{ volunteer.address }}</td>
+                    <td>{{ volunteer.about }}</td>
+                    <td>{{ volunteer.phone }}</td>
+                    <td>{{ volunteer.created_at }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No volunteer submissions yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

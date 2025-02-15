@@ -1,0 +1,203 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate to Us</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .header {
+            background-color: #cc0066;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .content p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .qr-code {
+            width: 250px;
+            height: 250px;
+            background-color: #f0f0f0;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #0077ff;
+            border-radius: 12px;
+        }
+
+        .qr-code img {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+        }
+
+        .instructions {
+            font-size: 16px;
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .donate-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #0077ff;
+            color: #fff;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .donate-button:hover {
+            background-color: #005bb5;
+        }
+
+        .footer {
+            background-color: #f1f1f1;
+            padding: 15px;
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+        }
+        body {
+            background-color: #fff5f7;
+            color: #4a5568;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: #FFC1CC;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 4px rgba(255, 0, 127, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-weight: 600;
+            color: #FF007F;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: '🐾';
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            height: 100%;
+            align-items: center;
+        }
+
+        .nav-links li {
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #FF007F;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 0, 127, 0.1);
+            color: #cc0066;
+        }
+
+        #active {
+            background-color: #FF007F;
+            color: white;
+        }
+
+        #active:hover {
+            background-color: #cc0066;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Paw Rescue</div>
+        <ul class="nav-links">
+            <li><a href="{% url 'feed' %}" >Home</a></li>
+            <li><a href="{% url 'adoption_public' %}">Adopt</a></li>
+            <li><a href="{% url 'donate' %}"id="active">Donate</a></li>
+            <li><a href="{% url 'location' %}">Rescue Center</a></li>
+            <li><a href="{% url 'health' %}">Treatment & Health</a></li>
+            <li><a href="{% url 'food' %}">Food & Nutrition</a></li>
+            <li><a href="{% url 'report' %}">Report a Stray</a></li>
+            <li><a href="{% url 'volunteer_form' %}">Volunteer With Us</a></li>
+            <li>
+                <form method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-btn">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="header">
+            <h1>Support Our Cause</h1>
+        </div>
+        <div class="content">
+            <p>Your donations help us rescue and care for street animals. Every contribution matters!</p>
+            <div class="qr-code">
+                {% load static %}
+                <img src="{% static 'images/QR.jpeg' %}" alt="QR Code for Donation">
+                
+            </div>
+            <p class="instructions">Scan the QR code above to donate using any UPI app or payment service.</p>
+        </div>
+        <div class="footer">
+            <p>Thank you for your support! Together, we can make a difference.</p>
+        </div>
+    </div>
+</body>
+</html>

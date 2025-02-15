@@ -1,0 +1,199 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map of India</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+}
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 50px;
+}
+.card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    border: 1px solid #ff0080;
+    width: auto;
+}
+.card:hover {
+    transform: scale(1.05);
+}
+.card img {
+    width: auto;
+    height: 500px;
+    object-fit: fill;
+}
+.card-content {
+    padding: 15px;
+    width: auto;
+}
+.card-content h3 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #333;
+}
+.card-content p {
+    color: #666;
+    margin: 10px 0 0;
+}
+/* Submit Button */
+button {
+padding: 15px;
+border: none;
+border-radius: 20px;
+background-color: #fc49a3;
+color: #e0f2f1;
+font-size: 1.2rem;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+button:hover {
+background-color: #ff0080;
+}
+body {
+    background-color: #fff5f7;
+    color: #4a5568;
+    min-height: 100vh;
+}
+
+.navbar {
+    background-color: #ffc1cc;
+    padding: 0.4rem 0.8rem;
+    box-shadow: 0 2px 4px rgba(255, 0, 127, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 99;
+    
+}
+
+.logo {
+    font-weight: 600;
+    color: #FF007F;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo::before {
+    content: '🐾';
+    font-size: 1.8rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    height: 100%;
+    align-items: center;
+    padding-right: 37px;
+}
+
+.nav-links li {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links a {
+    color: #FF007F;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 0.5rem 0.4rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.nav-links a:hover {
+    background-color: rgba(255, 0, 127, 0.1);
+    color: #cc0066;
+}
+
+#active {
+    background-color: #FF007F;
+    color: white;
+}
+
+#active:hover {
+    background-color: #cc0066;
+    color: white;
+}
+</style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Paw Rescue</div>
+        <ul class="nav-links">
+            <li><a href="{% url 'feed' %}" >Home</a></li>
+            <li><a href="{% url 'adoption_public' %}">Adopt</a></li>
+            <li><a href="{% url 'donate' %}">Donate</a></li>
+            <li><a href="{% url 'location' %}"id="active">Rescue Center</a></li>
+            <li><a href="{% url 'health' %}">Treatment & Health</a></li>
+            <li><a href="{% url 'food' %}">Food & Nutrition</a></li>
+            <li><a href="{% url 'report' %}">Report a Stray</a></li>
+            <li><a href="{% url 'volunteer_form' %}">Volunteer With Us</a></li>
+            <li>
+                <form method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-btn">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+
+    <h1 style="text-align: center; padding-top: 120px;">Health & Nutrition</h1>px
+    <div class="container">
+        <span class="card">
+            <img src="https://bhbinc.com/wp-content/uploads/2023/07/Quorum-Pearland-Gary-Logan-0023-5K-pixel-scaled.jpeg" alt="jaipur">
+            <div class="card-content">
+                <h3>Jaipur</h3>
+                <p><b>Animal Rescue Center - Jaipur</b> <br>
+                    <b>Address:</b> 12, Tonk Road, Near Jaipur International Airport, Jaipur, Rajasthan 302018 <br>
+                    <b>Contact:</b> +91 9876543210<br>
+                    <b>Email:</b> rescue@jaipuranimalhelp.org<br>
+                    <b>Opening Hours:</b> 9:00 AM to 7:00 PM (Monday to Saturday)<br>
+                    <b>Services:</b> Animal rescue, shelter, and veterinary support.</p>
+            </div>
+        </span>
+        <span class="card">
+            <img src="https://bhbinc.com/wp-content/uploads/2023/07/Quorum-Pearland-Gary-Logan-0023-5K-pixel-scaled.jpeg" alt="jaipur">
+            <div class="card-content">
+                <h3>Jaipur</h3>
+                <p><b>Animal Rescue Center - Jaipur</b> <br>
+                    <b>Address:</b> 12, Tonk Road, Near Jaipur International Airport, Jaipur, Rajasthan 302018 <br>
+                    <b>Contact:</b> +91 9876543210<br>
+                    <b>Email:</b> rescue@jaipuranimalhelp.org<br>
+                    <b>Opening Hours:</b> 9:00 AM to 7:00 PM (Monday to Saturday)<br>
+                    <b>Services:</b> Animal rescue, shelter, and veterinary support.</p>
+            </div>
+        </span>
+        <span class="card">
+            <img src="https://bhbinc.com/wp-content/uploads/2023/07/Quorum-Pearland-Gary-Logan-0023-5K-pixel-scaled.jpeg" alt="jaipur">
+            <div class="card-content">
+                <h3>Jaipur</h3>
+                <p><b>Animal Rescue Center - Jaipur</b> <br>
+                    <b>Address:</b> 12, Tonk Road, Near Jaipur International Airport, Jaipur, Rajasthan 302018 <br>
+                    <b>Contact:</b> +91 9876543210<br>
+                    <b>Email:</b> rescue@jaipuranimalhelp.org<br>
+                    <b>Opening Hours:</b> 9:00 AM to 7:00 PM (Monday to Saturday)<br>
+                    <b>Services:</b> Animal rescue, shelter, and veterinary support.</p>
+            </div>
+        </span>
+    </div>
+</body>
+</html>

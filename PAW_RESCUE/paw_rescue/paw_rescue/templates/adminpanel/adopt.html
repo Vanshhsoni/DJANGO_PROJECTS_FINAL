@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adopt a Stray</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Body Styling */
+        body {
+            background-color: #f4f4f9;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Navigation Bar Styling */
+        .navbar {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background-color: #f9d1e5;
+            color: rgb(16, 15, 15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar ul li {
+            display: inline;
+        }
+
+        .navbar ul li a {
+            color: rgb(4, 4, 4);
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 5px 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #ff0080;
+            border-radius: 5px;
+        }
+
+        .navbar ul li a.active {
+            background-color: #ff0080;
+            border-radius: 5px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Adoption Posts Section */
+        .adoption-posts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .post {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 300px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .post img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .post .content {
+            padding: 15px;
+        }
+
+        .post .content h3 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 0 10px;
+        }
+
+        .post .content p {
+            font-size: 1rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">Adopt a Stray</div>
+        <ul>
+            <li><a href="{% url 'adminpanel:admin_dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'adminpanel:add_adoption' %}">Add Adoption</a></li>
+            <li><a href="{% url 'adminpanel:user_adoption' %}">Adoption Page</a></li>
+            <li><a href="{% url 'adminpanel:admin_logout' %}">Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <h1>Adopt a Stray</h1>
+        <section class="adoption-posts">
+            {% for adoption in adoptions %}
+            <div class="post" onclick="showOverlay('{{ adoption.title }}', '{{ adoption.description }}', '{{ adoption.image.url }}')">
+                <img src="{{ adoption.image.url }}" alt="{{ adoption.title }}">
+                <div class="content">
+                    <h3>{{ adoption.title }}</h3>
+                    <p>{{ adoption.description }}</p>
+                </div>
+            </div>
+            {% empty %}
+            <p>No adoption posts available.</p>
+            {% endfor %}
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <style>
+       /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body Styling */
+body {
+    background: url('https://wallpapers.com/images/featured/dog-wj7msvc5kj9v6cyy.jpg') no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    backdrop-filter: blur(7px); /* Added missing semicolon */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.dark-mode {
+    background-color: #004d40; /* Teal background */
+    color: #e0f2f1; /* Light teal text color */
+}
+
+/* Navigation Bar Styling */
+.nav {
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+.back-button, .dark-mode-toggle {
+    background-color: rgb(186 172 172 / 40%);
+    color: #e0f2f1;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 2rem;
+}
+
+.back-button:hover, .dark-mode-toggle:hover {
+    background-color: #00695c;
+}
+
+/* Container Styling */
+.container {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white container background */
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 40%; /* Cover 40% of the page width */
+    max-width: 400px;
+    transition: background-color 0.3s ease;
+}
+
+.dark-mode .container {
+    background-color: rgba(0, 77, 64, 0.9); /* Semi-transparent teal container background */
+    color: #e0f2f1;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    text-align: center;
+    color: #004d40;
+}
+
+.dark-mode h1 {
+    color: #e0f2f1;
+}
+
+/* Input Fields */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1rem;
+    color: #004d40;
+}
+
+.dark-mode label {
+    color: #e0f2f1;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #004d40;
+    border-radius: 10px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #00695c;
+}
+
+/* Buttons */
+button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: #004d40;
+    color: #e0f2f1;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #00695c;
+}
+
+/* Links */
+p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+a {
+    color: #004d40;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #00695c;
+}
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <button class="back-button" id="back" onclick="goBack()">&#8592; </button>
+        <button class="dark-mode-toggle" id="dark" onclick="toggleDarkMode()">&#9788; </button>
+    </div>
+    <div class="container">
+        <h1>Sign Up</h1>
+        <div class="messages">
+            <!-- Django messages for error/success -->
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="confirm_password">Confirm Password:</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+
+            <button type="submit">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="{% url 'login' %}">Log in</a></p>
+    </div>
+
+    <script>
+        // Toggle Dark Mode
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        // Back Button Functionality
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>
