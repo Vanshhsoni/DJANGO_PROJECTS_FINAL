@@ -1,0 +1,232 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Profiles</title>
+    <style>
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            margin-left: 260px; /* This makes room for the sidebar */
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .search-bar {
+            width: 300px;
+            padding: 10px;
+            border: 2px solid #2A86FF;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .search-button {
+            background-color: #2A86FF;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .search-button img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .heading {
+            font-size: 24px;
+            color: #2A86FF;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .result-container {
+            width: 300px;
+            margin-top: 20px;
+            color:white;
+        }
+
+        .result-row {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            color:white;
+        }
+
+        .result-row:hover {
+            background-color: #f0f0f0;
+        }
+
+        .result-row img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .result-row:hover .result-username {
+            color: #2A86FF; /* Change text color to white on hover */
+        }
+
+        .result-username {
+            font-size: 18px;
+            color: #2A86FF;
+            color:white;
+        }
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            height: 100%;
+            background-color: white;
+            padding: 20px;
+            border-right: 2px solid #2A86FF;
+            position: fixed;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .sidebar h1 {
+            color: #2A86FF;
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 30px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+        }
+
+        .sidebar .section {
+            padding: 15px;
+            font-size: 1.2rem;
+            color: #2A86FF;
+            margin-bottom: 10px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer; /* Add cursor pointer */
+        }
+
+        .sidebar .section:hover {
+            background-color: #2A86FF;
+            color: white;
+            border-color: #2A86FF;
+            border-radius: 10px;
+            transform: scale(1.05); /* Use transform for scaling */
+            transition: ease-in-out 0.45s;
+        }
+        .result-row {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            background-color: #2A86FF; 
+            border-radius: 10px;
+            color: white; /* Add temporary background color to debug */
+        }
+        
+
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h1>Connectly</h1>
+        <div class="section" onclick="window.location.href='{% url 'feed:feed_home' %}'">Home</div>
+        <div class="section" onclick="window.location.href='{% url 'feed:profile_view' user.username %}'">Profile</div>
+        <div class="section" onclick="window.location.href='{% url 'feed:create_post' %}'">Create</div>
+        <div class="section logout-btn" onclick="window.location.href='{% url 'accounts:logout' %}'">Logout</div>
+    </div>
+    <!-- Main content -->
+    <div class="main-content">
+        <h1 class="heading">SEARCH PROFILES</h1>
+        <div class="search-container">
+            <input type="text" id="search-bar" class="search-bar" placeholder="Search username..." oninput="performSearch()">
+            <button class="search-button" onclick="performSearch()">
+                <img src="{% static 'magnifier.png' %}" alt="Search Icon">
+            </button>
+            
+        </div>
+
+        <!-- Display search results here -->
+        <h3 style="color: #2A86FF;">RESULTS:</h3>
+        <div id="results" class="result-container"></div>  <!-- This is where results will appear -->
+
+
+    </div>
+
+    <script>
+        function performSearch() {
+            const query = document.getElementById('search-bar').value;
+    
+            if (query.length > 0) {
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', '/feed/search/?q=' + encodeURIComponent(query), true);
+  // Make sure the URL matches your Django URL configuration
+                
+                xhr.onload = function() {
+                    if (this.status === 200) {
+                        const resultsDiv = document.getElementById('results');
+                        resultsDiv.innerHTML = '';  // Clear previous results
+    
+                        const data = JSON.parse(this.responseText);  // Parse the JSON response
+    
+                        // Check if any users were found
+                        if (data.length > 0) {
+                            data.forEach(user => {
+                                const resultRow = document.createElement('div');
+                                resultRow.className = 'result-row';
+                                resultRow.onclick = () => window.location.href = `/feed/profile/${user.username}/`;  // Navigate to user profile
+    
+                                const img = document.createElement('img');
+                                img.src = user.profile_pic;  // User's profile picture
+                                resultRow.appendChild(img);
+    
+                                const username = document.createElement('span');
+                                username.className = 'result-username';
+                                username.textContent = user.username;  // Display username
+                                resultRow.appendChild(username);
+    
+                                resultsDiv.appendChild(resultRow);  // Add result row to results container
+                            });
+                        } else {
+                            // If no users were found, display a message
+                            resultsDiv.innerHTML = '<div>No matching profiles found.</div>';
+                        }
+                    } else {
+                        console.error('Error fetching results:', this.status, this.statusText);
+                    }
+                };
+    
+                xhr.onerror = function() {
+                    console.error('Request failed');
+                };
+    
+                xhr.send();  // Send the request
+            } else {
+                document.getElementById('results').innerHTML = '';  // Clear results if query is empty
+            }
+        }
+    </script>
+    
+
+</body>
+</html>

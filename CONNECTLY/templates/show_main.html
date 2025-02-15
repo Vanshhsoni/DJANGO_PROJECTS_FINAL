@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #007bff;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            margin-bottom: 50px;
+            font-size: 48px;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 20px 40px;
+            font-size: 24px;
+            background-color: white;
+            color: #007bff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Connectly</h1>
+
+    <form method="POST" action="{% url 'load_main' %}">
+        {% csrf_token %}
+        <div class="button-container">
+            <button class="btn" id="registerBtn" type="submit" name="action" value="register">Register</button>
+            <button class="btn" id="loginBtn" type="submit" name="action" value="login">Login</button>
+        </div>
+    </form>
+    
+    <script>
+        const buttons = document.querySelectorAll('.btn');
+        const body = document.body;
+        
+        buttons.forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                body.style.backgroundColor = 'white';
+                body.style.color = '#007bff';
+                button.style.backgroundColor = '#007bff';
+                button.style.color = 'white';
+            });
+
+            button.addEventListener('mouseleave', () => {
+                body.style.backgroundColor = '#007bff';
+                body.style.color = 'white';
+                button.style.backgroundColor = 'white';
+                button.style.color = '#007bff';
+            });
+        });
+    </script>
+</body>
+</html>

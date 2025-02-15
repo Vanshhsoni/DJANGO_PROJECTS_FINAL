@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: #1c1c1c; /* Matte Black for the background */
+    color: #7a7a7a; /* Steel Silver for text */
+}
+
+nav {
+    position: sticky;
+    margin: 20px auto auto;
+    top: 10px;
+    width: 580px;
+    height: 50px;
+    background: #2c2c2c; /* Gunmetal Grey for the nav background */
+    border-radius: 8px;
+    font-size: 0;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .1);
+}
+
+nav a {
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #7a7a7a; /* Steel Silver for link text */
+    text-decoration: none;
+    line-height: 50px;
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    text-align: center;
+    width: 20%; /* Make links equal width */
+    transition: color 0.5s ease;
+}
+
+nav a:hover {
+    color: #1eff00; /* Change link color when hovered */
+}
+
+nav .animation {
+    position: absolute;
+    height: 5px; /* Reduced to just an underline */
+    top: 45px; /* Bottom of the nav */
+    left: 0px;
+    background-color: #1eff00; /* Brass Gold for the animation background */
+    width: 100px;
+    border-radius: 8px;
+    transition: all 0.5s ease 0s;
+}
+
+/* Link-specific animation targets */
+nav a:nth-child(1):hover ~ .animation {
+    width: 70px;
+    left: 30px;
+}
+
+nav a:nth-child(2):hover ~ .animation {
+    width: 70px;
+    left: 140px;
+}
+
+nav a:nth-child(3):hover ~ .animation {
+    width: 90px;
+    left: 250px;
+}
+
+nav a:nth-child(4):hover ~ .animation {
+    width: 100px;
+    left: 360px;
+}
+
+nav a:nth-child(5):hover ~ .animation {
+    width: 120px;
+    left: 470px;
+}
+
+#activesec {
+    color:#1eff00;
+}

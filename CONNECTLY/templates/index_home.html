@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Navbar Menu Hover Effect</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static '/style.css' %}">
+  </head>
+  <body>
+    <div>
+    <nav class="NAV">
+      <a href="#" id="activesec">Home</a>
+      <a href="#">SHOP</a>
+      <a href="{% url 'accounts:signup' %}">SIGNUP</a>
+      <a href="{% url 'accounts:login' %}">LOGIN</a>
+      <a href="send_email">CONTACT US</a>
+      <div class="animation"></div> <!-- Animation div placed here -->
+    </nav>
+    <div>
+  </body>
+</html>

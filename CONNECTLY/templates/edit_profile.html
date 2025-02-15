@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <style>
+        .edit-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .edit-form {
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+        .edit-form input, .edit-form textarea {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .save-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .error-message {
+            color: red;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="edit-container">
+        <h1>Edit Profile</h1>
+
+        {% if form.errors %}
+            <div class="error-message">
+                Please fix the errors below:
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <form method="POST" action="{% url 'feed:edit_profile' user.username %}" enctype="multipart/form-data" class="edit-form">
+
+            {% csrf_token %}
+            <label for="profile_picture">Profile Picture:</label>
+            <input type="file" name="profile_picture" id="profile_picture">
+
+            <label for="bio">Bio:</label>
+            <textarea name="bio" id="bio" rows="4">{{ user.bio }}</textarea>
+
+            <button type="submit" class="save-btn">Save</button>
+        </form>
+        
+    </div>
+
+</body>
+</html>

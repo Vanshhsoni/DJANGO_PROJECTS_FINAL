@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - MySocialApp</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #3498db;
+            transition: background-color 0.8s ease, color 0.8s ease;
+        }
+
+        .container {
+            text-align: center;
+            width: 300px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 40px;
+            transition: color 0.8s ease;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 25px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            background-color: white;
+            transition: background-color 0.8s ease, color 0.8s ease;
+        }
+
+        .btn {
+            position: relative;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            background-color: white;
+            color: #3498db;
+            border: none;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: color 0.8s ease, background-color 0.8s ease;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.8s ease;
+            pointer-events: none;
+        }
+
+        .btn:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .link {
+            margin-top: 20px;
+            display: block;
+            color: white;
+            cursor: pointer;
+            transition: color 0.8s ease;
+        }
+
+        /* Default placeholder color */
+        ::placeholder {
+            color: gray;
+            transition: color 0.8s ease;
+        }
+
+        /* White placeholder when class is added */
+        .white-placeholder::placeholder {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Register</h1>
+        <form method="POST" action="{% url 'accounts:signup' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" name="username" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn">Register</button>
+            <a href="{% url 'accounts:login' %}" class="link">Already have an account? Login</a>
+            <!-- Display messages -->
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li style="color: red;">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.querySelector('body');
+            const button = document.querySelector('.btn');
+            const inputs = document.querySelectorAll('input[type="text"], input[type="password"]');
+            const heading = document.querySelector('h1');
+            const links = document.querySelectorAll('.link');
+
+            button.addEventListener('mouseenter', () => {
+                // Change background and button colors
+                body.style.backgroundColor = '#ffffff'; // White background
+                body.style.color = '#3498db'; // Change body text color
+                button.style.backgroundColor = '#3498db'; // Blue button background
+                button.style.color = '#ffffff'; // White button text
+
+                // Change input field background and placeholder
+                inputs.forEach(input => {
+                    input.style.backgroundColor = '#3498db'; // Change input background to blue
+                    input.style.color = '#ffffff'; // Change input text color to white
+                    input.classList.add('white-placeholder'); // Change placeholder color to white
+                });
+
+                // Change h1 and a link colors
+                heading.style.color = '#3498db'; // Change h1 color to blue
+                links.forEach(link => link.style.color = '#3498db'); // Change all links to blue
+            });
+
+            button.addEventListener('mouseleave', () => {
+                // Revert background and button colors
+                body.style.backgroundColor = '#3498db'; // Blue background
+                body.style.color = '#ffffff'; // Revert body text color
+                button.style.backgroundColor = '#ffffff'; // White button background
+                button.style.color = '#3498db'; // Blue button text
+
+                // Revert input field background and placeholder
+                inputs.forEach(input => {
+                    input.style.backgroundColor = '#ffffff'; // Revert input background to white
+                    input.style.color = '#000000'; // Revert input text color to black
+                    input.classList.remove('white-placeholder'); // Revert placeholder color to gray
+                });
+
+                // Revert h1 and a link colors
+                heading.style.color = '#ffffff'; // Revert h1 color to white
+                links.forEach(link => link.style.color = '#ffffff'); // Revert all links to white
+            });
+        });
+    </script>
+</body>
+</html>

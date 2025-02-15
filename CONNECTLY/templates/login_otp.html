@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login using OTP - MySocialApp</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #3498db;
+            transition: background-color 0.8s ease;
+        }
+
+        .container {
+            text-align: center;
+            width: 300px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 40px;
+            transition: color 0.8s ease;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        input[type="email"], input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 25px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            background-color: white;
+            color: #000;
+        }
+
+        ::placeholder {
+            color: gray;
+            transition: color 0.8s ease;
+        }
+
+        .white-placeholder::placeholder {
+            color: white;
+        }
+
+        .btn {
+            position: relative;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            background-color: white;
+            color: #3498db;
+            border: none;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: color 0.8s ease, background-color 0.8s ease;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .link {
+            margin-top: 20px;
+            display: block;
+            color: white;
+            cursor: pointer;
+            transition: color 0.8s ease;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #3498db;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .overlay-content {
+            text-align: center;
+            width: 300px;
+        }
+
+        .overlay h1 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .overlay input[type="text"] {
+            background-color: white;
+            color: #000;
+        }
+
+        .overlay .btn {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .overlay .btn:hover {
+            background-color: white;
+            color: #3498db;
+        }
+
+        .close-btn {
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login using OTP</h1>
+        <form method="POST" action="{% url 'accounts:login_otp' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="email" name="user_email" placeholder="E-mail" required>
+            </div>
+
+            <button type="submit" class="btn">Send OTP</button>
+            <a href="{% url 'accounts:signup' %}" class="link">Don't have an account? Register</a>
+            <a href="{% url 'accounts:login' %}" class="link">Login with Password</a>
+        </form>
+    </div>
+
+    <div class="overlay" id="overlay">
+        <div class="overlay-content">
+            <span class="close-btn" onclick="closeOverlay()">&times;</span>
+            <h1>Submit OTP</h1>
+            <form method="POST" action="{% url 'accounts:verify_otp' %}">  <!-- Ensure this matches your URL pattern -->
+                {% csrf_token %}
+                <input type="text" name="user_otp" placeholder="Enter OTP" required>
+                <button type="submit" class="btn">Verify OTP</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.querySelector('body');
+            const button = document.querySelector('.btn');
+            const input = document.querySelector('input[type="email"]');
+            const heading = document.querySelector('h1');
+            const links = document.querySelectorAll('.link');
+            const overlay = document.getElementById('overlay');
+
+            button.addEventListener('mouseover', () => {
+                body.style.backgroundColor = '#ffffff';
+                button.style.backgroundColor = '#3498db';
+                button.style.color = '#ffffff';
+
+                input.style.backgroundColor = '#3498db';
+                input.style.color = '#ffffff';
+                input.classList.add('white-placeholder');
+
+                heading.style.color = '#3498db';
+                links.forEach(link => link.style.color = '#3498db');
+            });
+
+            button.addEventListener('mouseout', () => {
+                body.style.backgroundColor = '#3498db';
+                button.style.backgroundColor = '#ffffff';
+                button.style.color = '#3498db';
+
+                input.style.backgroundColor = '#ffffff';
+                input.style.color = '#000000';
+                input.classList.remove('white-placeholder');
+
+                heading.style.color = '#ffffff';
+                links.forEach(link => link.style.color = '#ffffff');
+            });
+
+            document.querySelector('#otp-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                overlay.style.display = 'flex'; // Show overlay
+            });
+        });
+
+        function closeOverlay() {
+            document.getElementById('overlay').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connectly</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: white;
+            display: flex;
+            height: 100vh;
+            color:white;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            height: 100%;
+            background-color: white;
+            padding: 20px;
+            border-right: 2px solid #2A86FF;
+            position: fixed;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .sidebar h1 {
+            color: #2A86FF;
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 30px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+        }
+
+        .sidebar .section {
+            padding: 15px;
+            font-size: 1.2rem;
+            color: #2A86FF;
+            margin-bottom: 10px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer; /* Add cursor pointer */
+        }
+
+        .sidebar .section:hover {
+            background-color: #2A86FF;
+            color: white;
+            border-color: #2A86FF;
+            border-radius: 10px;
+            transform: scale(1.05); /* Use transform for scaling */
+            transition: ease-in-out 0.45s;
+        }
+
+        /* Middle content */
+        .main-content {
+            margin-left: 300px;
+            width: calc(100% - 300px); /* Adjust width to fill the remaining space */
+            display: flex;
+            flex-direction: column; /* Stack posts vertically */
+            align-items: center; /* Center posts horizontally */
+            overflow-y: auto; /* Allow vertical scrolling */
+            padding: 20px 0; /* Add some padding */
+            height: 100%; /* Full height */
+        }
+
+        .main-content::-webkit-scrollbar {
+            display: none; /* Hide scrollbar in WebKit browsers */
+        }
+
+        .card {
+            background-color: #f9f9f9;
+            padding: 30px; /* Increased padding for larger cards */
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            border: 2px solid #2A86FF; /* Blue border */
+            width: 80%; /* Adjust width to make the card larger */
+            max-width: 600px; /* Set a maximum width */
+            background-color : white;
+            color: #2A86FF;
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #2A86FF; /* Blue border for post image */
+            background-color : white;
+            color: #2A86FF;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-around;
+            background-color : white;
+            color: #2A86FF;
+        }
+
+        .like-btn, .comment-btn {
+            padding: 10px 30px;
+            font-size: 1rem;
+            border: 2px solid white;
+            background-color: transparent;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: border-color 0.3s ease;
+        }
+
+        .like-btn:hover, .comment-btn:hover {
+            border-color: #2A86FF;
+            color: #2A86FF;
+            transform: scale(1.05);
+            transition: ease-in-out 0.45s;
+        }
+
+        .logout-btn {
+            padding: 15px;
+            font-size: 1.2rem;
+            color: #2A86FF;
+            text-align: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer; /* Add cursor pointer */
+        }
+        
+        .logout-btn:hover {
+            background-color: #2A86FF;
+            color: white;
+            border-radius: 10px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between; /* Space between username and button */
+            align-items: center; /* Center align vertically */
+
+        }
+        
+        .more-options {
+            background: none;
+            border: none;
+            font-size: 1.5rem; /* Size of the dots */
+            color: #2A86FF; /* Color to match your theme */
+            cursor: pointer;
+            padding: 0; /* Remove default padding */
+            background-color : white;
+        }
+        
+        .more-options:hover {
+            color: #2A86FF; /* Change color on hover */
+            transform: scale(1.1);
+            transition: ease-in-out 0.45s;
+        }
+
+        .caption:hover {
+            color: #2A86FF;
+        }
+
+        .image-container:hover {
+            transform: scale(1.015);
+            transition: ease-out 0.45s;
+        }
+
+        .liked {
+            color: #2A86FF;
+        }
+
+        .like-btn:hover {
+            background-color: #2A86FF;
+            color: white;
+        }
+
+        /* Styles for the overlay */
+        .overlay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            padding: 20px;
+            background-color: #f0f8ff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            display: none; /* Initially hidden */
+            z-index: 1000;
+        }
+
+        /* Overlay content styling */
+        .overlay-content {
+            position: relative;
+            background-color: #e6f2ff;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .overlay h2 {
+            color: #1e90ff;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        /* Textarea for the comment */
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border: 2px solid #1e90ff;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            resize: none;
+        }
+
+        /* Submit button styling */
+        .submit-btn {
+            background-color: #1e90ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #1c86ee;
+        }
+
+        /* Close button for the overlay */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: transparent;
+            border: none;
+            font-size: 24px;
+            color: #1e90ff;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: #1c86ee;
+        }
+
+        /* Adjusting like section alignment */
+        .like-section {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Add space between like count and button */
+            color: #2A86FF;
+        }
+
+        .like-count {
+            font-size: 1rem;
+            color: #2A86FF; /* Like count color */
+            font-weight: bold;
+        }
+
+        .like-btn {
+            padding: 10px 20px; /* Adjust padding */
+            font-size: 1rem;
+            border: 2px solid #2A86FF;
+            background-color: transparent;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: border-color 0.3s ease;
+            margin-left: auto; /* Push button to the right */
+            color: #2A86FF;
+        }
+
+        .like-btn:hover {
+            border-color: #2A86FF;
+            color: white;
+            transform: scale(1.05);
+            transition: ease-in-out 0.45s;
+        }
+
+        .comment-btn {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: 2px solid #2A86FF;
+            background-color: transparent;
+            cursor: pointer;
+            border-radius: 10px;
+            margin-top: 10px;
+            transition: border-color 0.3s ease;
+            color:#2A86FF
+        }
+
+        .comment-btn:hover {
+            border-color: #2A86FF;
+            color: white;
+            transform: scale(1.05);
+            transition: ease-in-out 0.45s;
+            background-color:#2A86FF;
+        }
+
+        /* Comment overlay styling */
+        .comment-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .overlay-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .submit-comment-btn {
+            margin-top: 10px;
+            background-color: #2A86FF;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .submit-comment-btn:hover {
+            background-color: #2980b9;
+        }
+
+        /* Comments section styling */
+        .comments-section {
+            margin-top: 20px;
+            color : black;
+        }
+
+        .comment-box {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f7f7f7;
+            border-radius: 5px;
+        }
+
+        .comment-time {
+            font-size: 0.8rem;
+            color: #999;
+        }
+q   </style>
+    <link href="" rel="stylesheet">
+</head>
+<body>
+<!-- Sidebar -->
+<div class="sidebar">
+    <h1>Connectly</h1>
+    
+    <div class="section" onclick="window.location.href='{% url 'feed:feed_home' %}'">Home</div>
+    <div class="section" onclick="window.location.href='{% url 'feed:search' %}'">Search</div> <!-- Use 'feed:search' to render the search page -->
+    <div class="section" onclick="window.location.href='{% url 'feed:create_post' %}'">Create</div>
+    <div class="section" onclick="window.location.href='{% url 'feed:profile_view' user.username %}'">Profile</div>
+    <div class="section logout-btn" onclick="window.location.href='{% url 'accounts:logout' %}'">Logout</div>
+</div>
+
+
+
+ <!-- Main content -->
+<!-- Main content -->
+<div class="main-content">
+    <!-- Social media post card -->
+    {% for post in posts %}
+    <div class="card">
+        <div class="card-header">
+            <p class="caption">{{ post.user.username }}</p>  
+            {% if post.user == request.user %}  <!-- Check if the logged-in user is the post author -->
+            <button class="more-options" onclick="toggleOptions('{{ post.id }}', this)">&#x22EE;</button>
+            {% endif %}
+        </div>
+        <div class="image-container">
+            <img src="{{ post.image.url }}" alt="Post Image">
+        </div>
+        <p class="caption">{{ post.caption }}</p>
+        <div class="card-footer">
+            <div class="like-section">
+                <span class="like-count">{{ post.likes.count }} likes</span>
+                <form method="POST" action="{% url 'feed:like_post' post.id %}" id="like-form-{{ post.id }}">
+                    {% csrf_token %}
+                    <button type="submit" class="like-btn {% if user in post.likes.all %}liked{% endif %}">
+                        {% if user in post.likes.all %}
+                        Liked
+                        {% else %}
+                        Like
+                        {% endif %}
+                    </button>
+                </form>
+            </div>
+            <button class="comment-btn" onclick="openOverlay('{{ post.id }}')">Comment</button>
+        </div>
+    </div>
+    
+    <!-- Comment Overlay -->
+    <div id="comment-overlay-{{ post.id }}" class="comment-overlay">
+        <div class="overlay-content">
+            <!-- Comment form -->
+            <form method="POST" action="{% url 'feed:add_comment' post.id %}">
+                {% csrf_token %}
+                <textarea name="comment_text" rows="3" placeholder="Add a comment..."></textarea>
+                <button type="submit" class="submit-comment-btn">Submit</button>
+            </form>
+
+            <!-- Display comments -->
+            <div class="comments-section">
+                {% for comment in post.comments.all %}
+                <div class="comment-box">
+                    <p><strong>{{ comment.user.username }}:</strong> {{ comment.comment_text }}</p>
+                    <p class="comment-time">{{ comment.created_at }}</p>
+                </div>
+                {% empty %}
+                <p>No comments yet !</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+<!-- Options Overlay -->
+<div id="options-overlay-{{ post.id }}" class="comment-overlay" style="display: none;">
+    <div class="overlay-content">
+        <button class="close-btn" onclick="closeOptions('{{ post.id }}')">&times;</button>
+        <h2>Options</h2>
+        <!-- Edit Button that opens edit overlay -->
+        <button type="button" class="submit-comment-btn" onclick="openEditOverlay('{{ post.id }}')">EDIT</button>
+        <!-- Delete Post Form -->
+        <form method="POST" action="{% url 'feed:delete_post' post.id %}" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="submit-comment-btn" onclick="return confirm('Are you sure you want to delete this post?');">DELETE</button>
+        </form>
+    </div>
+</div>
+
+<!-- Edit Caption Overlay -->
+<div id="edit-overlay-{{ post.id }}" class="edit-overlay" style="display: none;">
+    <div class="overlay-content">
+        <button class="close-btn" onclick="closeEditOverlay('{{ post.id }}')">&times;</button>
+        <h2>Edit Caption</h2>
+        <form method="POST" action="{% url 'feed:edit_post' post.id %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <!-- Textarea to edit the caption -->
+                <textarea name="caption" rows="4" required>{{ post.caption }}</textarea>
+            </div>
+            <div class="form-group">
+                <!-- Submit button to save edited caption -->
+                <button type="submit" class="submit-comment-btn">SAVE</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+    {% endfor %}
+</div>
+
+</body>
+    <script>
+        function openOverlay(postId) {
+            var overlay = document.getElementById('overlay');
+            var form = document.getElementById('commentForm');
+            form.action = `/feed/post/${postId}/comment/`;  // Update the form action with the correct post ID
+            overlay.style.display = 'block';
+        }
+
+        function closeOverlay() {
+            var overlay = document.getElementById('overlay');
+            overlay.style.display = 'none';
+        }
+
+        function toggleOptions(button) {
+            // Placeholder for options toggle logic (e.g., show delete/edit options)
+            console.log('Options button clicked!');
+        }
+        function openOverlay(postId) {
+            var overlay = document.getElementById('comment-overlay-' + postId);
+            overlay.style.display = 'flex';
+        }
+        
+        function closeOverlay(postId) {
+            var overlay = document.getElementById('comment-overlay-' + postId);
+            overlay.style.display = 'none';
+        }
+        function toggleOptions(postId, button) {
+            // Toggle visibility of the options overlay
+            var overlay = document.getElementById('options-overlay-' + postId);
+            overlay.style.display = (overlay.style.display === 'flex') ? 'none' : 'flex';
+        }
+    
+        function closeOptions(postId) {
+            var overlay = document.getElementById('options-overlay-' + postId);
+            overlay.style.display = 'none';
+        }
+
+
+            // Function to open options overlay
+    function openOptions(postId) {
+        document.getElementById(`options-overlay-${postId}`).style.display = "block";
+    }
+
+    // Function to close options overlay
+    function closeOptions(postId) {
+        document.getElementById(`options-overlay-${postId}`).style.display = "none";
+    }
+
+    // Function to open the edit caption overlay
+    function openEditOverlay(postId) {
+        document.getElementById(`edit-overlay-${postId}`).style.display = "block";
+        closeOptions(postId); // Close options overlay
+    }
+
+    // Function to close the edit caption overlay
+    function closeEditOverlay(postId) {
+        document.getElementById(`edit-overlay-${postId}`).style.display = "none";
+    }
+    </script>
+
+</html>
