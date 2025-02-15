@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>SHOTGUNs</title>
+    <link rel="stylesheet" href="{% static 'shop.css' %}">
+    <style>
+      .CATEGORY .animation {
+          position: absolute;
+          height: 2px; /* Height of the underline */
+          top: 45px; /* Position of the animation */
+          background-color: #ffffff; /* White for the animation background */
+          border-radius: 8px;
+          transition: all 0.5s ease 0s;
+          left : 46.5%;
+          width: 100px;
+      }
+      
+      /* Link-specific animation targets */
+      .CATEGORY a:nth-child(1):hover ~ .animation {
+          width: 50px;
+          left: 55px; /* Position under the first link */
+      }
+      
+      .CATEGORY a:nth-child(2):hover ~ .animation {
+          width: 55px;
+          left: 14.5%; /* Position under the second link */
+      }
+      
+      .CATEGORY a:nth-child(3):hover ~ .animation {
+          width: 55px;
+          left: 25.7%; /* Position under the third link */
+      }
+      
+      .CATEGORY a:nth-child(4):hover ~ .animation {
+          width: 40px;
+          left: 37.5%; /* Position under the fourth link */
+      }
+      
+      .CATEGORY a:nth-child(5):hover ~ .animation {
+          width: 100px;
+          left: 46.5%; /* Position under the fifth link */
+      }
+      
+      .CATEGORY a:nth-child(6):hover ~ .animation {
+          width: 100px;
+          left: 57.5%; /* Position under the sixth link */
+      }
+      
+      .CATEGORY a:nth-child(7):hover ~ .animation {
+          width: 75px;
+          left: 69.9%; /* Position under the seventh link */
+      }
+      
+      .CATEGORY a:nth-child(8):hover ~ .animation {
+          width: 100px;
+          left: 79.5%; /* Position under the eighth link */
+      }
+      
+      .CATEGORY a:nth-child(9):hover ~ .animation {
+          width: 40px;
+          left: 93%; /* Position under the ninth link */
+      }
+      .icon {
+        position: fixed;
+        top: 20px; /* Margin from the top */
+        left: 20px; /* Margin from the left */
+        width: 50px; /* Size of the icon */
+        height: 50px; /* Size of the icon */
+        background-color: #ffaa00; /* Background color */
+        color: #1c1c1c; /* Icon color */
+        border-radius: 10px; /* Rounded corners */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow */
+        transition: background-color 0.3s ease;
+        z-index: 999; /* Adjusted z-index */  
+    }
+
+    .icon:hover {
+        background-color: #1c1c1c; /* Change color on hover */
+        color: #ffaa00; /* Change icon color on hover */
+    }
+    button {
+      background-color: #ffaa00;
+      color: #1c1c1c;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 20px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      font-size: 1.2rem;
+  }
+  button:hover{
+    background-color: #7a7a7a;
+    color: #ffaa00;
+    transform: scale(1.05);
+  }
+  </style>
+  </head>
+  <body>
+    <nav class="NAV">
+      <a href='{% url 'armory:armory_home' %}'>HOME</a>
+      <a href='{% url 'armory:AR' %}' id="activesec">ARSENAL</a>
+      <a href='{% url 'armory:ATTACHMENTS_MAIN' %}'>GEARS</a>
+      <a href="{% url 'orders:show_orders' %}">MY ORDERS</a>
+      <a href="{% url 'armory:ABOUT_US' %}">ABOUT US</a>
+      <div class="animation"></div> <!-- Animation div placed here -->
+    </nav>
+    <div class="icon" onclick="window.location.href='{% url 'accounts:profile' username=user.username %}'">
+      <!-- You can put an icon here, e.g., an image or text -->
+      <span>👤</span> <!-- Example icon using emoji -->
+      <!-- You can also use an <img> tag if you have an icon image -->
+      <!-- <img src="{% static 'images/icon.png' %}" alt="Icon" style="width: 100%; height: 100%; border-radius: 10px;"> -->
+  </div>
+     <div id="weapon_written"><h1>WEAPONS</h1></div>
+     <nav class="CATEGORY">
+      <a href="{% url 'armory:AR' %}" >AR</a>
+      <a href="{% url 'armory:DMR' %}">DMR</a>
+      <a href="{% url 'armory:SMG' %}">SMG</a>
+      <a href="{% url 'armory:SR' %}">SR</a>
+      <a href="{% url 'armory:SHOTGUN' %}"id ="mainsec">SHOTGUN</a>
+      <a href="{% url 'armory:HANDGUN' %}">HANDGUN</a>
+      <a href="{% url 'armory:MELEE' %}">MELEE</a>
+      <a href="{% url 'armory:THROWABLE' %}">THROWABLE</a>
+      <a href="{% url 'armory:ETC' %}">ETC</a>
+        <div class="animation"></div> <!-- Animation div placed here -->
+      </nav>
+      <div class="card-container">
+        <div class="card" onclick="openModal('S12k', 'S12K - A semi-automatic shotgun known for its versatility in close-quarters combat. Chambered for 12-gauge shells, it delivers significant stopping power and fast follow-up shots, making it an effective choice for engaging enemies at close range.', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-s12k.png')">
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="M16A4 Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-s12k.png" alt="Tommy Gun Image" class="image2">
+          </div>
+          <h3>S12k</h3>
+        </div>
+
+        <div class="card" onclick="openModal('S1897', 'S1897 - A classic pump-action shotgun renowned for its reliability and powerful stopping power. Chambered for 12-gauge shells, it excels in close-quarters combat, delivering devastating impact with each shot.', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-s1897.png')">
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="UMP45 Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-s1897.png" alt="M416 Image" class="image2">
+          </div>
+          <h3>S1897</h3>
+        </div>
+
+        <div class="card" onclick="openModal('S686', 'S686 - A double-barrel shotgun known for its elegance and high stopping power. Chambered for 12-gauge shells, it offers rapid follow-up shots with two rounds and is highly effective in close-quarters engagements.', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-s686.png')">
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="SCAR-L Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-s686.png" alt="Micro UZI Image" class="image2">
+          </div>
+          <h3>S686</h3>
+        </div>
+    </div>
+    <div class="card-container">
+        <div class="card" onclick="openModal('DBS', 'DBS - A double-barreled shotgun that combines the firepower of two shots with a unique design. Chambered for 12-gauge shells, it excels in close-quarters combat, delivering devastating damage with each trigger pull.', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-dbs.png')">
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="G36C Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-dbs.png" alt="Vector Image" class="image2">
+          </div>
+          <h3>DBS</h3>
+        </div>
+
+        <div class="card" onclick="openModal('Sawed Off', 'Sawed Off Shotgun - A compact and powerful firearm, modified for increased maneuverability in close-quarters combat. Chambered for 12-gauge shells, it delivers a wide spread of shot, making it highly effective at short range.', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-sawed_off.png')">
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="QBZ95 Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-sawed_off.png" alt="PP-19 Bizon Image" class="image2">
+          </div>
+          <h3>Sawed Off</h3>
+        </div>
+
+        <div class="card" onclick="openModal('O12', 'O12 - A semi-automatic shotgun known for its high rate of fire and versatility. Chambered for 12-gauge shells, it offers quick follow-up shots and significant stopping power, making it ideal for close-quarters engagements.', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-o12.png')">
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="MP5K Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-o12.png" alt="MP5K Image" class="image2">
+          </div>
+          <h3>O12</h3>
+        </div>
+    </div>
+<!-- Modal Structure -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2 id="modalTitle" class="hover-effect"></h2>
+    <div class="modal-body">
+      <div id="modalDetails" class="details"></div>
+      <div class="image-containerx">
+        <img id="modalImage" src="" alt="Weapon Image">
+      </div>
+    </div>
+    <hr>
+    <!-- Form for submitting the modal title -->
+<!-- Form for submitting the modal title -->
+<form id="modalForm" action="" method="POST">
+  {% csrf_token %}
+  <input type="text" id="modalTitleInput" name="modalTitle" style="display: none;"> <!-- Hidden input -->
+  <button type="button" onclick="submitModalForm(this)">BUY</button>
+</form>
+
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    'use strict';
+
+    // Function to open the modal and set the weapon details
+    window.openModal = function(weaponName, weaponDetails, imageUrl) {
+        const modal = document.getElementById("myModal");
+
+        // Set the weapon name in the modal title
+        const modalTitle = document.getElementById("modalTitle");
+        if (modalTitle) {
+            modalTitle.textContent = weaponName;
+        } else {
+            console.error("Element with ID 'modalTitle' not found.");
+        }
+
+        // Set the weapon details in the modal body
+        const modalDetails = document.getElementById("modalDetails");
+        if (modalDetails) {
+            modalDetails.textContent = weaponDetails;
+        } else {
+            console.error("Element with ID 'modalDetails' not found.");
+        }
+
+        // Set the weapon image in the modal
+        const modalImage = document.getElementById("modalImage");
+        if (modalImage) {
+            modalImage.src = imageUrl;
+        } else {
+            console.error("Element with ID 'modalImage' not found.");
+        }
+
+        // Set the weapon name in the hidden input field
+        const modalTitleInput = document.getElementById('modalTitleInput');
+        if (modalTitleInput) {
+            modalTitleInput.value = weaponName;
+        } else {
+            console.error("Element with ID 'modalTitleInput' not found.");
+        }
+
+        // Update the form action to point to the correct buy URL
+        const form = document.getElementById('modalForm');
+        if (form) {
+            form.action = `/armory/buy/${encodeURIComponent(weaponName)}/`;
+
+        } else {
+            console.error("Form with ID 'modalForm' not found.");
+        }
+
+        // Show the modal
+        modal.style.display = "block";
+    };
+
+    // Function to handle form submission
+    window.submitModalForm = function(button) {
+        const form = document.getElementById('modalForm');
+        if (form) {
+            form.submit(); // Submit the form to the action URL
+        } else {
+            console.error("Form with ID 'modalForm' not found.");
+        }
+    };
+
+    // Optional: Close modal function
+    window.closeModal = function() {
+        const modal = document.getElementById("myModal");
+        if (modal) {
+            modal.style.display = "none"; // Hide the modal
+        } else {
+            console.error("Element with ID 'myModal' not found.");
+        }
+    };
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ gun.name }} - Gun Product Display</title>
+    <style>
+        /* Reset and Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #1c1c1c;
+            color: #ffaa00;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Main Product Container */
+        .product-container {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Video Styling */
+        .video-section video {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Title Styling */
+        .product-title {
+            font-size: 2.5rem;
+            color: #ffffff;
+            text-align: center;
+            margin-top: 10px;
+            transition: color 0.3s;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .product-title.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .product-title:hover {
+            color: #ffaa00;
+        }
+
+        /* Buy Section */
+        .buy-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            padding-top: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .buy-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #buyButton {
+            background-color: #ffaa00;
+            color: #1c1c1c;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        #buyButton:hover {
+            background-color: #7a7a7a;
+            color: #ffaa00;
+            transform: scale(1.05);
+        }
+
+        .price {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 10px;
+            border: 1px solid #ffaa00;
+            border-radius: 5px;
+            background-color: #3a3a3a;
+        }
+
+        /* Specifications Grid */
+        .specs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .specs.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .spec-item {
+            font-size: 1.2rem;
+            padding: 10px;
+            border: 1px solid #ffaa00;
+            border-radius: 5px;
+            background-color: #3a3a3a;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        /* Trigger & Reload Section */
+        #triggerReload {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        #triggerReload.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Review Section */
+        #reviews {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px 0;
+            color: #7a7a7a;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        #reviews.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .review {
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+        .username {
+            font-weight: bold;
+            color: #ffaa00;
+        }
+        /* Add this to your existing CSS */
+        .spec-item {
+            font-size: 1.2rem;
+            padding: 10px;
+            border: 1px solid #ffaa00;
+            border-radius: 5px;
+            background-color: #3a3a3a;
+            color: #ffffff;
+            text-align: center;
+            opacity: 0;  /* Start with opacity 0 for animation */
+            transform: translateY(20px); /* Start with a translation for animation */
+            transition: opacity 0.5s ease, transform 0.5s ease; /* Transition for animation */
+        }
+    
+        .spec-item.visible {
+            opacity: 1; /* Fully visible */
+            transform: translateY(0); /* Move to original position */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Product Container -->
+    <div class="product-container">
+
+        <!-- Video Section - Link2 (Looping without controls) -->
+        <div class="video-section">
+            <video autoplay loop muted>
+                <source src="{{ gun.link2 }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- Product Title -->
+        <div class="product-title">{{ gun.name }}</div>
+
+        <!-- Buy Section -->
+        <div class="buy-section">
+            <form method="POST" action="{% url 'orders:buy' weapon_name=gun.name %}">
+                {% csrf_token %}
+                <button type="submit" id="buyButton">BUY</button>
+            </form>
+            <span class="price">${{ gun.price }}</span>
+        </div>
+
+        <!-- Specifications Grid -->
+        <div class="specs">
+            <div class="spec-item"><strong>Magazine Capacity:</strong> {{ gun.magazine_capacity }} rounds</div>
+            <div class="spec-item"><strong>Ammo Type:</strong> {{ gun.ammo_type }}</div>
+            <div class="spec-item"><strong>Rate of Fire:</strong> {{ gun.rate_of_fire }}</div>
+            <div class="spec-item"><strong>Damage:</strong> {{ gun.damage }}</div>
+        </div>
+
+        <!-- Trigger & Reload Section - Link1 -->
+        <div id="triggerReload"><hr><br>Trigger & Reload</div>
+        <div class="video-section">
+            <video controls>
+                <source src="{{ gun.link1 }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+    </div>
+
+    <script>
+        // Function to check if an element is in the viewport
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+    
+        // Function to add 'visible' class to div elements in view
+        function handleScrollAnimation() {
+            const divs = document.querySelectorAll('.product-container div, .spec-item'); // Include spec-item
+            divs.forEach((el) => {
+                if (isElementInViewport(el)) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+    
+        // Initial check
+        handleScrollAnimation();
+    
+        // Add scroll event listener
+        window.addEventListener('scroll', handleScrollAnimation);
+    </script>
+</body>
+</html>

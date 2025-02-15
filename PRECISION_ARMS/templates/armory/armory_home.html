@@ -1,0 +1,254 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARMORY FEED</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            font-family: Arial, sans-serif;
+            font-size:20px;
+            
+        }
+        
+        .container {
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 50px;
+            margin: 70px 0;
+            transition: all 0.5s ease;
+        }
+        
+        #navbar {
+            display: none; /* Initially hidden */
+            position: fixed;
+            left: 50%; /* Positions it in the middle horizontally */
+            transform: translate(-50%, -50%); /* Adjusts the element to perfectly center it */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-right: 10px;
+            padding-left: 10px;
+            text-align: center;
+            transition: all 1s ease-in-out;
+        }
+        
+        
+        #navbar a {
+            color: white;
+            text-decoration: none;
+        }
+        .container {
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 50px;
+            margin: 50px 0;
+            color: white;
+        }
+
+        .scroll-parent-home {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            background-color: rgba(132, 15, 15, 0); /* Light background for visibility */
+        }
+
+        .scroll-element-home {
+            display: flex;
+            white-space: nowrap; /* Prevent line breaks */
+            transition: transform 0.5s linear; /* Smooth transition */
+        }
+
+        .img-home {
+            width: 500px;
+            height: 300px;
+            margin: 30px;
+            background-color: #cccccc85;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .img-home:hover{
+            scale: 1.08;
+            transition: all 0.6s ease-in-out;
+            background-color: #ffaa00bc;
+        }
+        #header-title{
+            color: #ffaa00;
+            font-size: 220px;
+            font-family: fantasy;
+            margin-bottom: 500px;
+            margin-top: 240px;
+        }
+        #titleg{
+            color: #ffdc97;
+        }
+        #titleg:hover{
+            color: #ffaa00;
+        }
+
+        .icon {
+            position: fixed;
+            top: 20px; /* Margin from the top */
+            left: 20px; /* Margin from the left */
+            width: 50px; /* Size of the icon */
+            height: 50px; /* Size of the icon */
+            background-color: #ffaa00; /* Background color */
+            color: #1c1c1c; /* Icon color */
+            border-radius: 10px; /* Rounded corners */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow */
+            transition: background-color 0.3s ease;
+            z-index: 999; /* Adjusted z-index */  
+        }
+
+        .icon:hover {
+            background-color: #1c1c1c; /* Change color on hover */
+            color: #ffaa00; /* Change icon color on hover */
+        }
+     </style>
+</head>
+<body>
+    <div class="container">
+        
+        <h1 id="header-title">Precision Arms</h1>
+        <nav class="nav" id="navbar">
+            <a href='{% url 'armory:armory_home' %}'>HOME</a>
+            <a href='{% url 'armory:AR' %}' id="activesec">ARSENAL</a>
+            <a href='{% url 'armory:ATTACHMENTS_MAIN' %}'>GEARS</a>
+            <a href="{% url 'orders:show_orders' %}">MY ORDERS</a>
+            <a href="{% url 'armory:ABOUT_US' %}">ABOUT US</a>
+            <div class="animation"></div> <!-- Animation div placed here -->
+          </nav>
+    </div>
+    <div class="icon" onclick="window.location.href='{% url 'accounts:profile' username=user.username %}'">
+        <!-- You can put an icon here, e.g., an image or text -->
+        <span>👤</span> <!-- Example icon using emoji -->
+        <!-- You can also use an <img> tag if you have an icon image -->
+        <!-- <img src="{% static 'images/icon.png' %}" alt="Icon" style="width: 100%; height: 100%; border-radius: 10px;"> -->
+    </div>
+    <!-- Single scroll set -->
+    <h1 id="titleg">FEATURED WEAPONS</h1>
+    <div class="scroll-parent-home">
+
+        <div class="scroll-element-home">
+            <a href="#"><div class="img-home"><img class="img-home" src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-lynx_amr.png" alt="Image 1" height="100%" width="100%"></div> </a>
+            <!--armory/buy/M416/ --><a href="#"><div class="img-home"><img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-m416.png" alt="Image 2" height="100%" width="100%"></div></a>
+            <a href="#"><div class="img-home"><img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-mg3.png" alt="Image 3" height="100%" width="100%"></div></a>
+            <!-- Duplicate for infinite effect -->
+            <a href="#"><div class="img-home"><img class="img-home" src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-lynx_amr.png" alt="Image 1" height="100%" width="100%"></div> </a>
+            <a href="#"><div class="img-home"><img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-m416.png" alt="Image 2" height="100%" width="100%"></div></a>
+            <a href="#"><div class="img-home"><img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-mg3.png" alt="Image 3" height="100%" width="100%"></div></a>
+
+        </div>
+    </div>
+            Unlock the true potential of your arsenal with our Featured Weapons collection—a showcase of the most sought-after firearms on the market. This exclusive selection brings together the most lethal and reliable weapons, each engineered to meet the demands of precision shooters and combat professionals alike. Whether you're engaging in high-speed skirmishes, taking down targets at a distance, or pushing through intense close-quarters combat, these weapons will not disappoint. Discover why seasoned marksmen and tactical experts consider these guns as the epitome of excellence in the field.
+<br>
+<br><br>
+<b>MG3:</b> The MG3 is a legendary light machine gun known for its blistering rate of fire and raw stopping power. Ideal for suppressive fire, this weapon boasts a firing rate of up to 990 rounds per minute, making it a game-changer in intense firefights. With its 7.62mm ammunition, the MG3 offers both firepower and versatility, ensuring dominance in any combat scenario.
+<br>
+<br>
+<b>M416:</b> A true all-rounder, the M416 is the epitome of versatility. It’s prized for its remarkable stability, customizability, and superior performance across various ranges. Fitted with multiple attachment options like scopes, grips, and extended mags, this weapon can adapt to any combat situation, making it a favorite among elite shooters. With its 5.56mm rounds, the M416 excels in both mid-range and close-quarters engagements, delivering consistent accuracy and control.
+<br>
+<br>
+<b>AMR (Anti-Materiel Rifle):</b> When it comes to sheer destructive power, nothing comes close to the AMR. This high-caliber sniper rifle is designed to pierce through armor and take down vehicles with ease. Its .50 BMG rounds are lethal, offering unparalleled damage output and range. The AMR is the go-to choice for sharpshooters who prioritize long-range precision and the ability to disable enemy assets with a single shot.
+<br><br><br>
+These featured weapons are meticulously curated to enhance your combat experience, allowing you to tackle any mission with confidence. Equip yourself with the best and become an unstoppable force on the battlefield.
+    
+        <h1 id="titleg">NEW WEAPONS</h1>
+        <div class="scroll-parent-home">
+    
+            <div class="scroll-element-home">
+                <a href="#"><div class="img-home"><img class="img-home" src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-p90.png" alt="Image 1" height="100%" width="100%"></div> </a>
+                <a href="#"><div class="img-home"><img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-lynx_amr.png" alt="Image 2" height="100%" width="100%"></div></a>
+                <a href="#"><div class="img-home"><img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-mortar.png" alt="Image 3" height="100%" width="100%"></div></a>
+                <!-- Duplicate for infinite effect -->
+                <a href="#"><div class="img-home"><img class="img-home" src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-p90.png" alt="Image 1" height="100%" width="100%"></div> </a>
+                <a href="#"><div class="img-home"><img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-lynx_amr.png" alt="Image 2" height="100%" width="100%"></div></a>
+                <a href="#"><div class="img-home"><img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-mortar.png" alt="Image 3" height="100%" width="100%"></div></a>
+    
+            </div>
+        </div>
+        Stay ahead of your opponents with our New Weapons collection—bringing you the latest advancements in cutting-edge firearm technology. Each weapon in this lineup is designed to push the boundaries of performance, giving you the upper hand in every combat scenario. Whether you need speed, power, or tactical precision, our newest arrivals are here to ensure you’re always prepared for the fight. Equip yourself with the latest and most innovative weapons to outclass your rivals and redefine your combat strategies."
+
+        <br><br>
+        
+        <b>P90:</b> The P90 is a compact, high-capacity submachine gun designed for maximum mobility and rapid fire. Known for its unique bullpup design and 50-round magazine, this weapon is perfect for close-quarters combat. Its 5.7x28mm ammunition delivers enhanced penetration capabilities, making it effective against armored targets. With minimal recoil and exceptional handling, the P90 is ideal for players who value agility and speed during engagements.
+        
+        <br><br>
+        
+        <b>AMR (Anti-Materiel Rifle):</b> Back by popular demand, the AMR has been upgraded to deliver even more devastating power. This long-range sniper rifle uses .50 BMG rounds, capable of penetrating armored vehicles and fortified positions with ease. Designed for sharpshooters who require extreme precision, the AMR is perfect for taking down high-value targets from a distance. Its unmatched firepower and range make it a must-have for those who dominate the battlefield from afar.
+        
+        <br><br>
+        
+        <b>Mortar:</b> Introducing the Mortar, a game-changing weapon designed for tactical bombardment. This portable artillery system allows you to launch explosive rounds over obstacles, providing critical support in hard-to-reach areas. Perfect for breaking enemy lines or securing objectives, the Mortar offers strategic versatility by allowing you to rain down destruction from a safe distance. Master its trajectory-based firing to control the battlefield and disrupt enemy formations with ease.
+        
+        <br><br><br>
+        
+        "Embrace the future of warfare with these innovative weapons, and stay one step ahead in every encounter. With our New Weapons collection, you’ll be prepared to dominate the battlefield with the latest technology at your fingertips.
+
+
+
+      <script>
+        // Get the elements
+        const headerTitle = document.getElementById('header-title');
+        const navbar = document.getElementById('navbar');
+
+        // Add event listener to the window scroll
+        window.onscroll = function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            // Check if we've scrolled past the h1 element
+            if (scrollTop > headerTitle.offsetHeight) {
+                navbar.style.display = 'block'; // Show nav
+            } else {
+                navbar.style.display = 'none'; // Hide nav
+            }
+        };
+        function initAutoScrollForAll() {
+            const scrollContainers = document.querySelectorAll('.scroll-parent-home');
+            
+            scrollContainers.forEach((container) => {
+                const scrollElement = container.querySelector('.scroll-element-home');
+                let scrollAmount = 0;
+                const scrollStep = 1; // Amount to scroll each time (in pixels)
+                const scrollInterval = 20; // Time interval for scrolling (in milliseconds)
+    
+                function autoScroll() {
+                    scrollAmount += scrollStep;
+                    if (scrollAmount >= scrollElement.scrollWidth / 2) { // Check for halfway point
+                        scrollAmount = 0; // Reset to start
+                    }
+                    scrollElement.style.transform = `translateX(-${scrollAmount}px)`;
+                }
+    
+                let scrolling = setInterval(autoScroll, scrollInterval);
+    
+                // Stop auto-scrolling on hover
+                container.addEventListener('mouseenter', () => clearInterval(scrolling));
+                container.addEventListener('mouseleave', () => scrolling = setInterval(autoScroll, scrollInterval));
+            });
+        }
+    
+        // Initialize auto-scrolling for all scroll sets
+        initAutoScrollForAll();
+    </script>
+</body>
+</html>

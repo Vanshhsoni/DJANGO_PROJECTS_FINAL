@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>MELEEs</title>
+    <link rel="stylesheet" href="{% static 'shop.css' %}">
+    <style>
+        .CATEGORY .animation {
+            position: absolute;
+            height: 2px; /* Height of the underline */
+            top: 45px; /* Position of the animation */
+            background-color: #ffffff; /* White for the animation background */
+            border-radius: 8px;
+            transition: all 0.5s ease 0s;
+            left: 69.9%;
+            width: 75px;
+        }
+        button {
+          background-color: #ffaa00;
+          color: #1c1c1c;
+          padding: 12px 25px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          margin-right: 20px;
+          transition: background-color 0.3s ease, transform 0.3s ease;
+          font-size: 1.2rem;
+      }
+      button:hover{
+        background-color: #7a7a7a;
+        color: #ffaa00;
+        transform: scale(1.05);
+      }
+        /* Link-specific animation targets */
+        .CATEGORY a:nth-child(1):hover ~ .animation {
+            width: 50px;
+            left: 55px; /* Position under the first link */
+        }
+        
+        .CATEGORY a:nth-child(2):hover ~ .animation {
+            width: 55px;
+            left: 14.5%; /* Position under the second link */
+        }
+        
+        .CATEGORY a:nth-child(3):hover ~ .animation {
+            width: 55px;
+            left: 25.7%; /* Position under the third link */
+        }
+        
+        .CATEGORY a:nth-child(4):hover ~ .animation {
+            width: 40px;
+            left: 37.5%; /* Position under the fourth link */
+        }
+        
+        .CATEGORY a:nth-child(5):hover ~ .animation {
+            width: 100px;
+            left: 46.5%; /* Position under the fifth link */
+        }
+        
+        .CATEGORY a:nth-child(6):hover ~ .animation {
+            width: 100px;
+            left: 57.5%; /* Position under the sixth link */
+        }
+        
+        .CATEGORY a:nth-child(7):hover ~ .animation {
+            width: 75px;
+            left: 69.9%; /* Position under the seventh link */
+        }
+        
+        .CATEGORY a:nth-child(8):hover ~ .animation {
+            width: 100px;
+            left: 79.5%; /* Position under the eighth link */
+        }
+        
+        .CATEGORY a:nth-child(9):hover ~ .animation {
+            width: 40px;
+            left: 93%; /* Position under the ninth link */
+        }
+        .icon {
+          position: fixed;
+          top: 20px; /* Margin from the top */
+          left: 20px; /* Margin from the left */
+          width: 50px; /* Size of the icon */
+          height: 50px; /* Size of the icon */
+          background-color: #ffaa00; /* Background color */
+          color: #1c1c1c; /* Icon color */
+          border-radius: 10px; /* Rounded corners */
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow */
+          transition: background-color 0.3s ease;
+          z-index: 999; /* Adjusted z-index */  
+      }
+
+      .icon:hover {
+          background-color: #1c1c1c; /* Change color on hover */
+          color: #ffaa00; /* Change icon color on hover */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <span class="logo">
+        <img src="https://i.pinimg.com/564x/86/08/b4/8608b4ab28ce68ec2195c11878dfa5f4.jpg">
+    </span> -->
+    <nav class="NAV">
+      <a href='{% url 'armory:armory_home' %}'>HOME</a>
+      <a href='{% url 'armory:AR' %}' id="activesec">ARSENAL</a>
+      <a href='{% url 'armory:ATTACHMENTS_MAIN' %}'>GEARS</a>
+      <a href="{% url 'orders:show_orders' %}">MY ORDERS</a>
+      <a href="{% url 'armory:ABOUT_US' %}">ABOUT US</a>
+      <div class="animation"></div> <!-- Animation div placed here -->
+    </nav>
+    <div class="icon" onclick="window.location.href='{% url 'accounts:profile' username=user.username %}'">
+      <!-- You can put an icon here, e.g., an image or text -->
+      <span>👤</span> <!-- Example icon using emoji -->
+      <!-- You can also use an <img> tag if you have an icon image -->
+      <!-- <img src="{% static 'images/icon.png' %}" alt="Icon" style="width: 100%; height: 100%; border-radius: 10px;"> -->
+  </div>
+    <div class="CONTENT"> <!-- Fixed this line -->
+      <div id="weapon_written"><h1>WEAPONS</h1></div>
+      <nav class="CATEGORY">
+        <a href="{% url 'armory:AR' %}" >AR</a>
+        <a href="{% url 'armory:DMR' %}">DMR</a>
+        <a href="{% url 'armory:SMG' %}">SMG</a>
+        <a href="{% url 'armory:SR' %}">SR</a>
+        <a href="{% url 'armory:SHOTGUN' %}">SHOTGUN</a>
+        <a href="{% url 'armory:HANDGUN' %}">HANDGUN</a>
+        <a href="{% url 'armory:MELEE' %}"id ="mainsec">MELEE</a>
+        <a href="{% url 'armory:THROWABLE' %}">THROWABLE</a>
+        <a href="{% url 'armory:ETC' %}">ETC</a>
+        <div class="animation"></div> <!-- Animation div placed here -->
+      </nav>
+      <div class="card-container">
+        <div class="card" onclick="openModal('Machete', 'Machete - A large, bladed tool traditionally used for cutting through dense vegetation, but also effective as a close-combat weapon. Its heavy blade delivers powerful strikes, making it a versatile tool for survival and self-defense situations.', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-machete.png')">
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="M16A4 Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-machete.png" alt="Mac Image" class="image2">
+          </div>
+          <h3>Machete</h3>
+        </div>
+
+        <div class="card" onclick="openModal('Pan', 'DPan - A cast-iron frying pan known for its surprising durability in combat situations. Not only is it an effective melee weapon, delivering blunt force damage, but its solid construction also provides protection, capable of deflecting bullets when equipped on the back.', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-pan.png')">
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="M416 Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-pan.png" alt="M416 Image" class="image2">
+          </div>
+          <h3>Pan</h3>
+        </div>
+
+        <div class="card" onclick="openModal('Sickle', 'Sickle - A curved, hand-held agricultural tool traditionally used for harvesting, but also effective as a close-combat weapon. Its sharp blade allows for swift, slashing attacks, making it a versatile option for self-defense in close-quarters combat.', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-sickle.png')"> <!-- Fixed this line -->
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="m24 Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-sickle.png" alt="SCAR-L Image" class="image2">
+          </div>
+          <h3>Sickle</h3>
+        </div>
+      </div>
+      <div class="card-container">
+        <div class="card" onclick="openModal('Pickaxe', 'Pickaxe - A sturdy tool with a pointed tip and a flat blade, traditionally used for breaking hard ground or rocks. In combat, its heavy and robust design makes it a powerful melee weapon capable of delivering strong, crushing blows.', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-pickaxe.png')">
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="AWM Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-pickaxe.png" alt="G36C Image" class="image2">
+          </div>
+          <h3>Pickaxe</h3>
+        </div>
+      </div>
+      
+<!-- Modal Structure -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2 id="modalTitle" class="hover-effect"></h2>
+    <div class="modal-body">
+      <div id="modalDetails" class="details"></div>
+      <div class="image-containerx">
+        <img id="modalImage" src="" alt="Weapon Image">
+      </div>
+    </div>
+    <hr>
+    <!-- Form for submitting the modal title -->
+<!-- Form for submitting the modal title -->
+<form id="modalForm" action="" method="POST">
+  {% csrf_token %}
+  <input type="text" id="modalTitleInput" name="modalTitle" style="display: none;"> <!-- Hidden input -->
+  <button type="button" onclick="submitModalForm(this)">BUY</button>
+</form>
+
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    'use strict';
+
+    // Function to open the modal and set the weapon details
+    window.openModal = function(weaponName, weaponDetails, imageUrl) {
+        const modal = document.getElementById("myModal");
+
+        // Set the weapon name in the modal title
+        const modalTitle = document.getElementById("modalTitle");
+        if (modalTitle) {
+            modalTitle.textContent = weaponName;
+        } else {
+            console.error("Element with ID 'modalTitle' not found.");
+        }
+
+        // Set the weapon details in the modal body
+        const modalDetails = document.getElementById("modalDetails");
+        if (modalDetails) {
+            modalDetails.textContent = weaponDetails;
+        } else {
+            console.error("Element with ID 'modalDetails' not found.");
+        }
+
+        // Set the weapon image in the modal
+        const modalImage = document.getElementById("modalImage");
+        if (modalImage) {
+            modalImage.src = imageUrl;
+        } else {
+            console.error("Element with ID 'modalImage' not found.");
+        }
+
+        // Set the weapon name in the hidden input field
+        const modalTitleInput = document.getElementById('modalTitleInput');
+        if (modalTitleInput) {
+            modalTitleInput.value = weaponName;
+        } else {
+            console.error("Element with ID 'modalTitleInput' not found.");
+        }
+
+        // Update the form action to point to the correct buy URL
+        const form = document.getElementById('modalForm');
+        if (form) {
+            form.action = `/armory/buy/${encodeURIComponent(weaponName)}/`;
+
+        } else {
+            console.error("Form with ID 'modalForm' not found.");
+        }
+
+        // Show the modal
+        modal.style.display = "block";
+    };
+
+    // Function to handle form submission
+    window.submitModalForm = function(button) {
+        const form = document.getElementById('modalForm');
+        if (form) {
+            form.submit(); // Submit the form to the action URL
+        } else {
+            console.error("Form with ID 'modalForm' not found.");
+        }
+    };
+
+    // Optional: Close modal function
+    window.closeModal = function() {
+        const modal = document.getElementById("myModal");
+        if (modal) {
+            modal.style.display = "none"; // Hide the modal
+        } else {
+            console.error("Element with ID 'myModal' not found.");
+        }
+    };
+});
+</script>
+</body>
+</html>

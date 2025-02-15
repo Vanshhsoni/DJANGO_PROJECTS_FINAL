@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Settings</title>
+  <style>
+    /* Page styling */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1c1c1c;
+      color: #ffaa00;
+      margin: 0;
+      padding: 0;
+    }
+    .settings-container {
+      max-width: 600px;
+      margin: 150px auto;
+      padding: 30px;
+      background-color: #333;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+      position: relative;
+      color: #ffaa00;
+    }
+
+    /* Close button positioned at top right of page */
+    .close-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-size: 24px;
+      color: #ffaa00;
+      cursor: pointer;
+      transition: transform 0.3s, color 0.3s;
+      z-index: 1000;
+    }
+    .close-btn:hover {
+      transform: rotate(90deg);
+      color: #ffbb33;
+    }
+
+    /* Overlay styling with fade-in animation */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.5s ease-in-out forwards;
+    }
+    .overlay-content {
+      background-color: #333;
+      padding: 30px;
+      border-radius: 12px;
+      width: 400px;
+      text-align: center;
+      color: #ffaa00;
+    }
+
+    /* Button and link styling */
+    button {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #ffaa00;
+      color: #1c1c1c;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #ffbb33;
+    }
+
+    .forgot-password {
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+      color: #ffaa00;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .forgot-password:hover {
+      color: #ffbb33;
+    }
+
+    .error-message {
+      color: red;
+      margin-top: 10px;
+    }
+
+    /* Input field styling */
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      box-sizing: border-box;
+      background-color: #1c1c1c;
+      border: 1px solid #ffaa00;
+      border-radius: 6px;
+      color: #ffaa00;
+    }
+    input[type="password"]::placeholder {
+      color: #ffaa00;
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="settings-container">
+    <h2>Account Settings</h2>
+    <button onclick="toggleOverlay()">Change Password</button>
+  </div>
+
+  <div class="close-btn" onclick="window.location.href = '{% url 'accounts:profile' username=user.username %}'">×</div>
+
+  <div class="overlay" id="overlay">
+    <div class="overlay-content">
+      <h3>Change Password</h3>
+      <form id="change-password-form" method="post">
+        {% csrf_token %}
+        <input type="password" name="old_password" placeholder="Previous Password" required><br>
+        <input type="password" name="new_password" placeholder="New Password" required><br>
+        <button type="submit">Submit</button>
+      </form>
+      <a class="forgot-password" href="#">Forgot Password?</a>
+      <p class="error-message" id="error-message" style="display: none;">Incorrect previous password.</p>
+    </div>
+  </div>
+
+  <script>
+    // Toggle overlay with fade-in
+    function toggleOverlay() {
+      const overlay = document.getElementById('overlay');
+      overlay.style.display = 'flex';
+      overlay.classList.add('fadeIn');
+    }
+
+    // Form submission
+    document.getElementById('change-password-form').onsubmit = async function (event) {
+      event.preventDefault();
+      const formData = new FormData(this);
+      const response = await fetch("{% url 'accounts:account_settings' %}", {
+        method: 'POST',
+        body: formData
+      });
+      const data = await response.json();
+      if (data.success) {
+        window.location.href = '{% url 'accounts:profile' username=user.username %}';
+      } else {
+        document.getElementById('error-message').style.display = 'block';
+      }
+    };
+  </script>
+
+</body>
+</html>

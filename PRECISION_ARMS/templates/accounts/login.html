@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1c1c1c; /* Changed from #3498db to #1c1c1c */
+            transition: background-color 0.8s ease;
+        }
+
+        .container {
+            text-align: center;
+            width: 300px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #ffaa00; /* Changed to match previous design */
+            margin-bottom: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 25px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            background-color: white; /* Initial input background color */
+            transition: background-color 0.8s ease;
+        }
+
+        /* Default placeholder color */
+        ::placeholder {
+            color: gray;
+            transition: color 0.8s ease;
+        }
+
+        /* White placeholder when class is added */
+        .white-placeholder::placeholder {
+            color: white;
+        }
+
+        .btn {
+            position: relative;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            background-color: white; /* Button background color */
+            color: #1c1c1c; /* Changed to match background */
+            border: none;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: color 0.8s ease, background-color 0.8s ease;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow */
+        }
+
+        .btn:hover {
+            background-color: #1c1c1c; /* Changed on hover */
+            color: white; /* White text on hover */
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.8s ease;
+            pointer-events: none;
+        }
+
+        .btn:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .link {
+            margin-top: 20px;
+            display: block;
+            color: #ffaa00; /* Changed to match previous design */
+            cursor: pointer;
+            transition: color 0.8s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <form method="POST" action="{% url 'accounts:login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" name="username" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <a href="{% url 'accounts:register' %}" class="link">Don't have an account? Register</a> <!-- CHANGE THIS -->
+            
+            <!-- Display messages -->
+            {% comment %} {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li style="color: red;">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %} {% endcomment %}
+
+
+
+            {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
+
+
+
+
+
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.querySelector('body');
+            const button = document.querySelector('.btn');
+            const heading = document.querySelector('h1');
+            const links = document.querySelectorAll('.link'); // Get all <a> elements with class "link"
+            const inputs = document.querySelectorAll('input[type="text"], input[type="password"]'); // Get all input fields
+
+            button.addEventListener('mouseover', () => {
+                body.style.backgroundColor = '#ffaa00'; // White background
+                button.style.backgroundColor = '#1c1c1c'; // Blue button background
+                button.style.color = '#ffffff'; // White text
+                heading.style.color = '#1c1c1c'; // Change h1 color to blue
+
+                // Change all <a> tags color to blue
+                links.forEach(link => {
+                    link.style.color = '#1c1c1c';
+                });
+
+                // Change background color of all input fields to blue and placeholder color to white
+                inputs.forEach(input => {
+                    input.style.backgroundColor = '#1c1c1c'; // Changed to match the background
+                    input.style.color = '#ffffff'; // Change input text color to white
+                    input.classList.add('white-placeholder'); // Add class to change placeholder to white
+                });
+            });
+
+            button.addEventListener('mouseout', () => {
+                body.style.backgroundColor = '#1c1c1c'; // Blue background
+                button.style.backgroundColor = '#ffffff'; // White button background
+                button.style.color = '#1c1c1c'; // Blue text
+                heading.style.color = '#ffaa00'; // Change h1 color back to white
+
+                // Change all <a> tags color back to white
+                links.forEach(link => {
+                    link.style.color = '#ffaa00'; // Changed back to yellow
+                });
+
+                // Change background color of input fields back to white and placeholder color back to gray
+                inputs.forEach(input => {
+                    input.style.backgroundColor = '#ffffff';
+                    input.style.color = '#000000'; // Reset input text color to black
+                    input.classList.remove('white-placeholder'); // Remove class to revert placeholder color
+                });
+            });
+        });
+    </script>
+</body>
+</html>

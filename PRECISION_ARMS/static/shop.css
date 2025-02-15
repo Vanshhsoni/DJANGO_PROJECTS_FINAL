@@ -1,0 +1,540 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+
+button {
+    background-color: #ffaa00;
+    color: #1c1c1c;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 1.2rem;
+}
+button:hover{
+  background-color: #7a7a7a;
+  color: #ffaa00;
+  transform: scale(1.05);
+}
+.icon {
+    position: fixed;
+    top: 20px; /* Margin from the top */
+    left: 20px; /* Margin from the left */
+    width: 50px; /* Size of the icon */
+    height: 50px; /* Size of the icon */
+    background-color: #ffaa00; /* Background color */
+    color: #1c1c1c; /* Icon color */
+    border-radius: 10px; /* Rounded corners */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow */
+    transition: background-color 0.3s ease;
+    z-index: 999; /* Adjusted z-index */  
+}
+
+.icon:hover {
+    background-color: #1c1c1c; /* Change color on hover */
+    color: #ffaa00; /* Change icon color on hover */
+}
+
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: #1c1c1c; /* Matte Black for the background */
+    color: #7a7a7a; /* Steel Silver for text */
+}
+
+nav {
+    position: sticky;
+    top: 10px; /* Stick to the top when scrolling */
+    margin: 20px auto auto; 
+    width: 580px;
+    height: 50px;
+    background: #2c2c2c; /* Gunmetal Grey for the nav background */
+    border-radius: 8px;
+    font-size: 0;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .1);
+    z-index: 99;
+}
+
+
+nav a {
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #7a7a7a; /* Steel Silver for link text */
+    text-decoration: none;
+    line-height: 50px;
+    position: relative;
+    z-index: 99;
+    display: inline-block;
+    text-align: center;
+    width: 20%; /* Make links equal width */
+    transition: color 0.5s ease;
+}
+
+nav a:hover {
+    color: #ffaa00; /* Change link color when hovered */
+}
+
+nav .animation {
+    position: absolute;
+    height: 5px; /* Reduced to just an underline */
+    top: 45px; /* Bottom of the nav */
+    left: 130px;
+    background-color: #ffaa00; /* Brass Gold for the animation background */
+    width: 90px;
+    border-radius: 8px;
+    transition: all 0.5s ease 0s;
+}
+
+/* Link-specific animation targets */
+nav a:nth-child(1):hover ~ .animation {
+    width: 70px;
+    left: 30px;
+}
+
+nav a:nth-child(2):hover ~ .animation {
+    width: 70px;
+    left: 140px;
+}
+
+nav a:nth-child(3):hover ~ .animation {
+    width: 90px;
+    left: 250px;
+}
+
+nav a:nth-child(4):hover ~ .animation {
+    width: 100px;
+    left: 360px;
+}
+
+nav a:nth-child(5):hover ~ .animation {
+    width: 120px;
+    left: 470px;
+}
+
+.CONTENT {
+    color: aliceblue;
+}
+
+body {
+
+    margin: 0;
+    padding: 20px;
+}
+
+.card-container {
+    display: flex;
+    justify-content: space-between; /* Space between the cards */
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 33%; /* Each card takes up 30% of the container width */
+    text-align: center;
+    padding: 20px;
+    position: relative; /* Establish positioning context for absolute children */
+    overflow: hidden; /* Hide overflowing parts of the images */
+    transition: transform 0.3s;
+    height: auto;
+}
+
+.image-container {
+    position: relative; /* Establish a positioning context for the images */
+    height: 270px; /* Fixed height to contain images */
+    position: relative;
+    width: 100%;
+    height: 300px;
+
+}
+
+.image1 {
+    width: 100%; /* Responsive first image */
+    height: 270px;
+    position: absolute; /* Position absolutely within the container */
+    top: 0;
+    left: 0;
+    z-index: 1; /* Lower z-index for the first image */
+
+
+    width: 100%; /* Ensure the image fills the width */
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover; /* Maintain image aspect ratio */
+    z-index: 1;
+}
+
+.image2 {
+    width: 70%; /* Adjust size for the second image */
+    height: 270px;
+    position: absolute; /* Position absolutely within the container */
+    top: 20px; /* Adjust top position to overlap */
+    left: 15%; /* Center the second image */
+    z-index: 2; /* Higher z-index for the second image */
+    align-items: center;
+
+
+    width: 80%; /* Adjusted size to fit over the first image */
+    height: 80%;
+    position: absolute;
+    top: 10%; /* Adjust the position to slightly overlap */
+    left: 10%;
+    object-fit: cover; /* Maintain aspect ratio */
+    z-index: 2;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card h3 {
+    margin: 15px 0 0;
+}
+
+.card:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+    color: #ffaa00;
+}
+/* CATEGORY CODE */
+
+.image2:hover{
+    transform: scale(1.5);
+    transition: transform 0.5s ease;
+}
+
+.CATEGORY {
+    position: relative;
+    top: 10px; /* Stick to the top when scrolling */
+    margin: auto;
+    width: 100%; /* Adjust width as needed */
+    height: 50px;
+    background: #2c2c2c; /* Gunmetal Grey for the nav background */
+    border-radius: 8px;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .1);
+    z-index: 99;
+    display: flex; /* Use flexbox to arrange items in a row */
+    justify-content: space-between; /* Space items evenly */
+}
+
+.CATEGORY a {
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #7a7a7a; /* Steel Silver for link text */
+    text-decoration: none;
+    line-height: 50px;
+    position: relative;
+    z-index: 99;
+    flex: 1; /* Each link takes equal space */
+    text-align: center;
+    transition: color 0.5s ease;
+}
+
+.CATEGORY a:hover {
+    color: #ffffff; /* Change link color when hovered */
+}
+
+.CATEGORY .animation {
+    position: absolute;
+    height: 2px; /* Height of the underline */
+    top: 45px; /* Position of the animation */
+    background-color: #ffffff; /* White for the animation background */
+    border-radius: 8px;
+    transition: all 0.5s ease 0s;
+    left : 55px;
+    width: 50px;
+}
+
+/* Link-specific animation targets */
+.CATEGORY a:nth-child(1):hover ~ .animation {
+    width: 50px;
+    left: 55px; /* Position under the first link */
+}
+
+.CATEGORY a:nth-child(2):hover ~ .animation {
+    width: 55px;
+    left: 14.5%; /* Position under the second link */
+}
+
+.CATEGORY a:nth-child(3):hover ~ .animation {
+    width: 55px;
+    left: 25.7%; /* Position under the third link */
+}
+
+.CATEGORY a:nth-child(4):hover ~ .animation {
+    width: 40px;
+    left: 37.5%; /* Position under the fourth link */
+}
+
+.CATEGORY a:nth-child(5):hover ~ .animation {
+    width: 100px;
+    left: 46.5%; /* Position under the fifth link */
+}
+
+.CATEGORY a:nth-child(6):hover ~ .animation {
+    width: 100px;
+    left: 57.5%; /* Position under the sixth link */
+}
+
+.CATEGORY a:nth-child(7):hover ~ .animation {
+    width: 75px;
+    left: 69.9%; /* Position under the seventh link */
+}
+
+.CATEGORY a:nth-child(8):hover ~ .animation {
+    width: 100px;
+    left: 79.5%; /* Position under the eighth link */
+}
+
+.CATEGORY a:nth-child(9):hover ~ .animation {
+    width: 40px;
+    left: 93%; /* Position under the ninth link */
+}
+#weapon_written{
+    color: #ffaa00;
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Courier New', Courier, monospace;
+}
+#mainsec {
+    color: #ffffff;
+}
+#activesec {
+    color:#ffaa00;
+}
+
+
+.card-container {
+    display: flex;
+    justify-content: space-between; /* Space between the cards */
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 33%; /* Each card takes up 30% of the container width */
+    text-align: center;
+    padding: 20px;
+    position: relative; /* Establish positioning context for absolute children */
+    overflow: hidden; /* Hide overflowing parts of the images */
+    transition: transform 0.3s;
+    height: auto;
+}
+
+
+
+.image1 {
+    width: 100%; /* Responsive first image */
+    height: 100%;
+    position: absolute; /* Position absolutely within the container */
+    top: 0;
+    left: 0;
+    z-index: 1; /* Lower z-index for the first image */
+    
+}
+
+
+.image2 {
+    width: 100%; /* Adjust size for the second image */
+    height: 100%;
+    position: absolute; /* Position absolutely within the container */
+    top: 20px; /* Adjust top position to overlap */
+    left: 0%; /* Center the second image */
+    z-index: 2; /* Higher z-index for the second image */
+    align-items: center;
+    object-fit: cover;
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; 
+    z-index: 99; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(255, 0, 0); 
+    background-color: rgba(0, 0, 0, 0.401);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 10px solid hsl(35, 100%, 50%);
+    /* height: 80%; */
+    width: 80%;
+    z-index: 99999;
+    background-color: #ffffff7d;   
+    border-radius: 12px;
+    /* position: relative; */
+    box-shadow: 0 10px 15px rgb(0 0 0 / 20%);
+    box-sizing: border-box;
+    backdrop-filter: blur(33px);
+    background-blend-mode: overlay;
+    margin: 10% auto;
+    padding: 20px;
+    max-width: 900px;
+    position: relative;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    border: 5px #ffaa00;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+/* Modal Image Styling */
+#modalImage {
+    width: 100%; /* Adjust the width as needed (e.g., 70% for 70% width of the modal) */
+    max-width: 350px; /* Set a maximum width */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Center the image in the modal */
+    margin: 0 auto; /* Center the image horizontally */
+    margin-right: 5%;
+}
+#modalImage:hover{
+    transform: scale(1.5);
+    transition: transform 0.5s ease;
+}
+
+
+.hover-effect {
+    font-size: 3rem;
+    font-weight: bold;
+    position: relative;
+    display: inline-block;
+}
+  
+.hover-effect:hover {
+    color: #ffaa00; /* Change the color of the hovered text */
+    text-shadow: 2px 0px 5px #ffaa00, -2px 0px 5px #ffaa00; /* Apply shadow around the text */
+    transition: color 0.3s ease, text-shadow 0.3s ease; /* Smooth transition */
+}
+  /* Title Styling */
+#modalTitle {
+    text-align: center;
+    margin: 0;
+    font-size: 55px;
+}
+  
+  /* Modal Body Layout */
+  .modal-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    color: white;
+  }
+  
+  /* Left Side: Details Styling */
+.details {
+    width: 60%;
+    font-size: 18px;
+    line-height: 1.6;
+    padding-right: 20px; /* Add space between details and image */
+}
+  
+  /* Right Side: Image Styling */
+  .image-containerx {
+    width: 35%;
+    text-align: center;
+  }
+  
+  #modalImage {
+    width: 100%; /* Set the image to fit the container */
+    max-width: 300px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  /* For smaller screens, adjust layout */
+  /* @media (max-width: 768px) {
+    .modal-body {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .details {
+      width: 100%;
+      padding-right: 0;
+      margin-bottom: 20px;
+    }
+  
+    .image-containerx {
+      width: 100%;
+    }
+  
+    #modalImage {
+      max-width: 200px;
+    }
+  }
+   */
+
+
+/* Card Hover Effect */
+.card:hover {
+    transform: scale(1.05);
+    color: #ffaa00;
+}
+
+.icon {
+    position: fixed;
+    top: 20px; /* Margin from the top */
+    left: 20px; /* Margin from the left */
+    width: 50px; /* Size of the icon */
+    height: 50px; /* Size of the icon */
+    background-color: #ffaa00; /* Background color */
+    color: #1c1c1c; /* Icon color */
+    border-radius: 10px; /* Rounded corners */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow */
+    transition: background-color 0.3s ease;
+    z-index: 999; /* Adjusted z-index */  
+}
+
+.icon:hover {
+    background-color: #1c1c1c; /* Change color on hover */
+    color: #ffaa00; /* Change icon color on hover */
+}
+
+button {
+    background-color: #ffaa00;
+    color: #1c1c1c;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 1.2rem;
+}
+button:hover{
+  background-color: #7a7a7a;
+  color: #ffaa00;
+  transform: scale(1.05);
+}

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1c1c1c;
+            transition: background-color 0.8s ease;
+        }
+
+        .container {
+            text-align: center;
+            width: 300px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #ffaa00;
+            margin-bottom: 40px;
+            transition: color 0.8s ease;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], input[type="password"], input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 25px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            background-color: white;
+            transition: background-color 0.8s ease, color 0.8s ease;
+        }
+
+        .btn {
+            position: relative;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            background-color: white;
+            color: black;
+            border: none;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: color 0.8s ease, background-color 0.8s ease;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            background-color: #ffaa00;
+            color: #1c1c1c;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.8s ease;
+            pointer-events: none;
+        }
+
+        .btn:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .link {
+            margin-top: 20px;
+            display: block;
+            color: #ffaa00;
+            cursor: pointer;
+            transition: color 0.8s ease;
+        }
+
+        /* Default placeholder color */
+        ::placeholder {
+            color: gray;
+            transition: color 0.8s ease;
+        }
+
+        /* White placeholder when class is added */
+        .white-placeholder::placeholder {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Register</h1>
+        <form method="POST" action="{% url 'accounts:register' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" name="username" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <input type="email" name="email" placeholder="E-mail" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn">Register</button>
+            <a href="{% url 'accounts:login' %}" class="link">Already have an account? Login</a>
+            <!-- Display messages -->
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li style="color: red;">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.querySelector('body');
+            const button = document.querySelector('.btn');
+            const inputs = document.querySelectorAll('input[type="text"], input[type="password"], input[type="email"]');
+            const heading = document.querySelector('h1');
+            const links = document.querySelectorAll('.link');
+
+            button.addEventListener('mouseenter', () => {
+                // Change background and button colors
+                body.style.backgroundColor = '#ffaa00'; // Yellow-orange background
+                button.style.backgroundColor = '#1c1c1c'; // Dark button background
+                button.style.color = 'white'; // Yellow-orange button text
+
+                // Change input field background and placeholder
+                inputs.forEach(input => {
+                    input.style.backgroundColor = '#1c1c1c'; // Change input background to dark
+                    input.style.color = '#ffaa00'; // Change input text color to yellow-orange
+                    input.classList.add('white-placeholder'); // Change placeholder color to white
+                });
+
+                // Change h1 and a link colors
+                heading.style.color = '#1c1c1c'; // Change h1 color to dark
+                links.forEach(link => link.style.color = '#1c1c1c'); // Change all links to dark
+            });
+
+            button.addEventListener('mouseleave', () => {
+                // Revert background and button colors
+                body.style.backgroundColor = '#1c1c1c'; // Dark background
+                button.style.backgroundColor = '#ffffff'; // White button background
+                button.style.color = 'black'; // Yellow-orange button text
+
+                // Revert input field background and placeholder
+                inputs.forEach(input => {
+                    input.style.backgroundColor = '#ffffff'; // Revert input background to white
+                    input.style.color = '#000000'; // Revert input text color to black
+                    input.classList.remove('white-placeholder'); // Revert placeholder color to gray
+                });
+
+                // Revert h1 and a link colors
+                heading.style.color = '#ffaa00'; // Revert h1 color to yellow-orange
+                links.forEach(link => link.style.color = '#ffaa00'); // Revert all links to yellow-orange
+            });
+        });
+    </script>
+</body>
+</html>

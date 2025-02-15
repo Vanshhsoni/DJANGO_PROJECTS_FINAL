@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gun Attachments - Under Development</title>
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Body Styling */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1c1c1c;
+            color: #ffaa00;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Container Styling */
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: #2a2a2a;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            color: #ffffff;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Heading Styling */
+        .title {
+            font-size: 2.5rem;
+            color: #ffaa00;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: slideDown 0.8s forwards 0.3s;
+        }
+
+        /* Message Styling */
+        .message {
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 0.8s forwards 0.5s;
+        }
+
+        /* Coming Soon Button */
+        .explore-soon-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            color: #1c1c1c;
+            background-color: #ffaa00;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .explore-soon-btn:hover {
+            background-color: #7a7a7a;
+            color: #ffaa00;
+            transform: scale(1.05);
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Title -->
+        <h1 class="title">Attachments - Coming Soon!</h1>
+
+        <!-- Message -->
+        <p class="message">
+            We're working on creating an exciting range of attachments for your favorite guns. 
+            This page is currently under development, but soon, you'll be able to explore an array of scopes, silencers, grips, and more.
+        </p>
+
+        <!-- Explore Soon Button -->
+        <a href='{% url 'armory:armory_home' %}' class="explore-soon-btn">Explore Soon</a>
+    </div>
+
+</body>
+</html>

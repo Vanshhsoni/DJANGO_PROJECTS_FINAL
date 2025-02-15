@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - PRECISIONS ARMS PROJECTS</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <style>
+        /* Reset and basic styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #f0f0f0;
+            padding: 0 20px;
+        }
+
+        /* Container for each section */
+        .section {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 20px;
+            background: #1a1a1a;
+            border-left: 5px solid #f77b00;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        /* Section heading */
+        .section h2 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            color: #f77b00;
+        }
+
+        /* Horizontal rule styling */
+        hr {
+            border: 0;
+            height: 2px;
+            background: #f77b00;
+            margin: 20px 0;
+        }
+
+        /* Scroll animation: make visible */
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Smooth fade-in and fade-out for each section */
+        .section.fade-out {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+
+
+
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: #1c1c1c; /* Matte Black for the background */
+    color: #7a7a7a; /* Steel Silver for text */
+}
+
+nav {
+    position: sticky;
+    margin: 20px auto auto;
+    top: 10px;
+    width: 580px;
+    height: 50px;
+    background: #2c2c2c96; /* Gunmetal Grey for the nav background */
+    border-radius: 8px;
+    font-size: 0;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .1);
+    z-index: 9999999999999999999999999999;
+}
+
+nav a {
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #7a7a7a; /* Steel Silver for link text */
+    text-decoration: none;
+    line-height: 50px;
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    text-align: center;
+    width: 20%; /* Make links equal width */
+    transition: color 0.5s ease;
+}
+
+nav a:hover {
+    color: #ffaa00; /* Change link color when hovered */
+}
+
+nav .animation {
+    position: absolute;
+    height: 5px; /* Reduced to just an underline */
+    top: 45px; /* Bottom of the nav */
+    left: 470px;
+    background-color: #ffaa00; /* Brass Gold for the animation background */
+    width: 100px;
+    border-radius: 8px;
+    transition: all 0.5s ease 0s;
+}
+
+/* Link-specific animation targets */
+nav a:nth-child(1):hover ~ .animation {
+    width: 70px;
+    left: 30px;
+}
+
+nav a:nth-child(2):hover ~ .animation {
+    width: 70px;
+    left: 140px;
+}
+
+nav a:nth-child(3):hover ~ .animation {
+    width: 90px;
+    left: 250px;
+}
+
+nav a:nth-child(4):hover ~ .animation {
+    width: 100px;
+    left: 360px;
+}
+
+nav a:nth-child(5):hover ~ .animation {
+    width: 120px;
+    left: 470px;
+}
+
+#activesec {
+    color:#ffaa00;
+}
+
+.icon {
+    position: fixed;
+    top: 20px; /* Margin from the top */
+    left: 20px; /* Margin from the left */
+    width: 50px; /* Size of the icon */
+    height: 50px; /* Size of the icon */
+    background-color: #ffaa00; /* Background color */
+    color: #1c1c1c; /* Icon color */
+    border-radius: 10px; /* Rounded corners */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow */
+    transition: background-color 0.3s ease;
+    z-index: 999; /* Adjusted z-index */  
+}
+
+.icon:hover {
+    background-color: #1c1c1c; /* Change color on hover */
+    color: #ffaa00; /* Change icon color on hover */
+}
+    </style>
+</head>
+<body>
+    <nav class="nav" id="navbar">
+        <a href='{% url 'armory:armory_home' %}'>HOME</a>
+        <a href='{% url 'armory:AR' %}'>ARSENAL</a>
+        <a href='{% url 'armory:ATTACHMENTS_MAIN' %}'>GEARS</a>
+        <a href="{% url 'orders:show_orders' %}">MY ORDERS</a>
+        <a href="{% url 'armory:ABOUT_US' %}"  id="activesec">ABOUT US</a>
+        <div class="animation"></div> <!-- Animation div placed here -->
+      </nav>
+      <div class="icon" onclick="window.location.href='{% url 'accounts:profile' username=user.username %}'">
+        <!-- You can put an icon here, e.g., an image or text -->
+        <span>👤</span> <!-- Example icon using emoji -->
+        <!-- You can also use an <img> tag if you have an icon image -->
+        <!-- <img src="{% static 'images/icon.png' %}" alt="Icon" style="width: 100%; height: 100%; border-radius: 10px;"> -->
+    </div>
+    <div class="section" id="introduction">
+        <h2>Introduction</h2>
+        <p>Welcome to <strong>PRECISIONS ARMS PROJECTS</strong>, where precision meets expertise in the world of advanced weaponry. Our mission is to provide our customers with reliable, high-quality firearms and equipment that are built to perform under any condition. With a deep commitment to innovation, safety, and quality assurance, we strive to set a new standard in the arms industry, delivering products that meet the demands of professionals and enthusiasts alike.</p>
+        <hr>
+    </div>
+
+    <div class="section" id="mission">
+        <h2>Mission</h2>
+        <p>Our mission at <strong>PRECISIONS ARMS PROJECTS</strong> is clear: to create a seamless experience for our customers by offering state-of-the-art weaponry that combines craftsmanship with cutting-edge technology. We aim to provide products that not only enhance operational effectiveness but also ensure reliability and safety. Our mission drives us to constantly push the boundaries, innovate, and remain at the forefront of the arms industry.</p>
+        <hr>
+    </div>
+
+    <div class="section" id="product-overview">
+        <h2>Product Range Overview</h2>
+        <p>We offer a diverse range of products designed to meet the needs of various professionals and enthusiasts. Our catalog includes high-performance firearms, tactical equipment, and accessories, all manufactured to rigorous standards of precision. Every product at <strong>PRECISIONS ARMS PROJECTS</strong> undergoes strict testing to ensure quality, reliability, and safety.</p>
+        <hr>
+    </div>
+
+    <div class="section" id="commitment-to-quality">
+        <h2>Commitment to Quality</h2>
+        <p>At <strong>PRECISIONS ARMS PROJECTS</strong>, quality is paramount. We work closely with renowned manufacturers and suppliers to source premium materials, and each product undergoes multiple quality assurance tests before reaching our customers. Our commitment ensures that every item you purchase is dependable and built to last.</p>
+        <hr>
+    </div>
+
+    <div class="section" id="customer-centric">
+        <h2>Customer-Centric Approach</h2>
+        <p>Our customers are at the heart of everything we do. From a seamless shopping experience to dedicated customer support, we are here to meet your needs. We also offer resources and expert guidance for new buyers, ensuring that you make informed choices every step of the way.</p>
+        <hr>
+    </div>
+
+    <div class="section" id="safety">
+        <h2>Safety and Responsibility</h2>
+        <p>We uphold the highest standards of safety in every aspect of our operations. <strong>PRECISIONS ARMS PROJECTS</strong> is committed to promoting responsible weapon ownership and usage. Our products come with detailed safety guidelines, and we continually work to educate our customers on safe handling practices.</p>
+        <hr>
+    </div>
+
+    <div class="section" id="future-vision">
+        <h2>Future Vision</h2>
+        <p>Looking ahead, <strong>PRECISIONS ARMS PROJECTS</strong> aims to expand its reach globally and continue innovating in the field of advanced weaponry. We are excited to explore new technologies and partnerships, including potential collaborations with military forces, law enforcement, and research institutions, to further our impact in the industry.</p>
+        <hr>
+    </div>
+
+    <div class="section" id="contact-info">
+        <h2>Contact Information</h2>
+        <p>If you have any inquiries or need assistance, please do not hesitate to contact us. We are here to provide guidance and answer any questions you may have about our products.</p>
+        <p>Email: sonivanshmaster@gmail.com</p>
+        <p>Phone: +91 6367743066</p>
+        <p>Address: Location Confidential</p>
+    </div>
+
+    <script>
+        // JavaScript to handle scroll-based animations
+        document.addEventListener("scroll", function() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const sectionBottom = section.getBoundingClientRect().bottom;
+
+                // Fade-in on scroll down
+                if (sectionTop < window.innerHeight - 100 && sectionBottom > 0) {
+                    section.classList.add('visible');
+                    section.classList.remove('fade-out');
+                }
+                // Fade-out on scroll up
+                else if (sectionBottom <= 0 || sectionTop >= window.innerHeight) {
+                    section.classList.remove('visible');
+                    section.classList.add('fade-out');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

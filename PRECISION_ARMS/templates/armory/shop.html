@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>ARs</title>
+    <link rel="stylesheet" href="{% static 'shop.css' %}">
+    <style>
+      .icon {
+        position: fixed;
+        top: 20px; /* Margin from the top */
+        left: 20px; /* Margin from the left */
+        width: 50px; /* Size of the icon */
+        height: 50px; /* Size of the icon */
+        background-color: #ffaa00; /* Background color */
+        color: #1c1c1c; /* Icon color */
+        border-radius: 10px; /* Rounded corners */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow */
+        transition: background-color 0.3s ease;
+        z-index: 999; /* Adjusted z-index */  
+    }
+
+    .icon:hover {
+        background-color: #1c1c1c; /* Change color on hover */
+        color: #ffaa00; /* Change icon color on hover */
+    }
+    button {
+      background-color: #ffaa00;
+      color: #1c1c1c;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 20px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      font-size: 1.2rem;
+  }
+  button:hover{
+    background-color: #7a7a7a;
+    color: #ffaa00;
+    transform: scale(1.05);
+  }
+    </style>
+
+  </head>
+  <body>
+    <nav class="NAV">
+      <a href='{% url 'armory:armory_home' %}'>HOME</a>
+      <a href='{% url 'armory:AR' %}' id="activesec">ARSENAL</a>
+      <a href='{% url 'armory:ATTACHMENTS_MAIN' %}'>GEARS</a>
+      <a href="{% url 'orders:show_orders' %}">MY ORDERS</a>
+      <a href="{% url 'armory:ABOUT_US' %}">ABOUT US</a>
+      <div class="animation"></div> <!-- Animation div placed here -->
+    </nav>
+  <div class="icon" onclick="window.location.href='{% url 'accounts:profile' username=user.username %}'">
+    <!-- You can put an icon here, e.g., an image or text -->
+    <span>👤</span> <!-- Example icon using emoji -->
+    <!-- You can also use an <img> tag if you have an icon image -->
+    <!-- <img src="{% static 'images/icon.png' %}" alt="Icon" style="width: 100%; height: 100%; border-radius: 10px;"> -->
+</div>
+     <div id="weapon_written"><h1>WEAPONS</h1></div>
+     <nav class="CATEGORY">
+        <a href="{% url 'armory:AR' %}" id ="mainsec">AR</a>
+        <a href="{% url 'armory:DMR' %}">DMR</a>
+        <a href="{% url 'armory:SMG' %}">SMG</a>
+        <a href="{% url 'armory:SR' %}">SR</a>
+        <a href="{% url 'armory:SHOTGUN' %}">SHOTGUN</a>
+        <a href="{% url 'armory:HANDGUN' %}">HANDGUN</a>
+        <a href="{% url 'armory:MELEE' %}">MELEE</a>
+        <a href="{% url 'armory:THROWABLE' %}">THROWABLE</a>
+        <a href="{% url 'armory:ETC' %}">ETC</a>
+        <div class="animation"></div> <!-- Animation div placed here -->
+      </nav>
+      <div class="card-container">
+        <div class="card" onclick="openModal('M16A4', 'Details about M16A4', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-m16a4.png')">
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="M16A4 Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-m16a4.png" alt="M16A4 Image" class="image2">
+          </div>
+          <h3>M16A4</h3>
+        </div>
+
+        <div class="card" onclick="openModal('M416', 'Details about M416', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-m416.png')">
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="M416 Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-m416.png" alt="M416 Image" class="image2">
+          </div>
+          <h3>M416</h3>
+        </div>
+
+        <div class="card" onclick="openModal('SCAR-L', 'Details about SCAR-L', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-scar-l.png')">
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="SCAR-L Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-scar-l.png" alt="SCAR-L Image" class="image2">
+          </div>
+          <h3>SCAR-L</h3>
+        </div>
+    </div>
+    <div class="card-container">
+        <div class="card" onclick="openModal('G36C', 'Details about G36C', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-g36c.png')">
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="G36C Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-g36c.png" alt="G36C Image" class="image2">
+          </div>
+          <h3>G36C</h3>
+        </div>
+
+        <div class="card" onclick="openModal('QBZ95', 'Details about QBZ95', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-qbz95.png')">
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="QBZ95 Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-qbz95.png" alt="QBZ95 Image" class="image2">
+          </div>
+          <h3>QBZ95</h3>
+        </div>
+
+        <div class="card" onclick="openModal('K2', 'Details about K2', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-k2.png')">
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="K2 Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-k2.png" alt="K2 Image" class="image2">
+          </div>
+          <h3>K2</h3>
+        </div>
+    </div>
+    <div class="card-container">
+        <div class="card" onclick="openModal('AUG', 'Details about AUG', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-aug_a3.png')">
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="AUG Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-aug_a3.png" alt="AUG Image" class="image2">
+          </div>
+          <h3>AUG</h3>
+        </div>
+
+        <div class="card" onclick="openModal('FAMAS', 'Details about FAMAS', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-famas_g2.png')">
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="FAMAS Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-famas_g2.png" alt="FAMAS Image" class="image2">
+          </div>
+          <h3>FAMAS</h3>
+        </div>
+
+        <div class="card" onclick="openModal('AKM', 'Details about AKM', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-akm.png')">
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="AKM Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-akm.png" alt="AKM Image" class="image2">
+          </div>
+          <h3>AKM</h3>
+        </div>
+        </div>
+          <div class="card-container">
+            <div class="card" onclick="openModal('M762', 'Details about M762', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-beryl_m762.png')">
+              <div class="image-container">
+                <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="M762 Image" class="image1">
+                <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-beryl_m762.png" alt="M762 Image" class="image2">
+              </div>
+              <h3>M762</h3>
+            </div>
+    
+            <div class="card" onclick="openModal('MK47', 'Details about MK47', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-mk47_mutant.png')">
+              <div class="image-container">
+                <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="MK47 Image" class="image1">
+                <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-mk47_mutant.png" alt="MK47 Image" class="image2">
+              </div>
+              <h3>MK47</h3>
+            </div>
+    
+            <div class="card" onclick="openModal('GROZA', 'Details about GROZA', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-groza.png')">
+              <div class="image-container">
+                <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="GROZA Image" class="image1">
+                <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-groza.png" alt="GROZA Image" class="image2">
+              </div>
+              <h3>GROZA</h3>
+            </div>
+    </div>
+    <div class="card-container">
+        <!-- ACE32 Card -->
+        <div class="card" onclick="openModal('ACE32', 'Details about ACE32', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-ace32.png')">
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="ACE32 Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-ace32.png" alt="ACE32 Image" class="image2">
+          </div>
+          <h3>ACE32</h3>
+        </div>
+      
+        <!-- Weapon 1 Card - 1st Occurrence -->
+        <div class="card">
+            <div></div>
+        </div>
+      
+        <!-- Weapon 1 Card - 2nd Occurrence -->
+        <div class="card">
+<div></div>
+      </div>
+      
+<!-- Modal Structure -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2 id="modalTitle" class="hover-effect"></h2>
+    <div class="modal-body">
+      <div id="modalDetails" class="details"></div>
+      <div class="image-containerx">
+        <img id="modalImage" src="" alt="Weapon Image">
+      </div>
+    </div>
+    <hr>
+    <!-- Form for submitting the modal title -->
+<!-- Form for submitting the modal title -->
+<form id="modalForm" action="" method="POST">
+  {% csrf_token %}
+  <input type="text" id="modalTitleInput" name="modalTitle" style="display: none;"> <!-- Hidden input -->
+  <button type="button" onclick="submitModalForm(this)">BUY</button>
+</form>
+
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    'use strict';
+
+    // Function to open the modal and set the weapon details
+    window.openModal = function(weaponName, weaponDetails, imageUrl) {
+        const modal = document.getElementById("myModal");
+
+        // Set the weapon name in the modal title
+        const modalTitle = document.getElementById("modalTitle");
+        if (modalTitle) {
+            modalTitle.textContent = weaponName;
+        } else {
+            console.error("Element with ID 'modalTitle' not found.");
+        }
+
+        // Set the weapon details in the modal body
+        const modalDetails = document.getElementById("modalDetails");
+        if (modalDetails) {
+            modalDetails.textContent = weaponDetails;
+        } else {
+            console.error("Element with ID 'modalDetails' not found.");
+        }
+
+        // Set the weapon image in the modal
+        const modalImage = document.getElementById("modalImage");
+        if (modalImage) {
+            modalImage.src = imageUrl;
+        } else {
+            console.error("Element with ID 'modalImage' not found.");
+        }
+
+        // Set the weapon name in the hidden input field
+        const modalTitleInput = document.getElementById('modalTitleInput');
+        if (modalTitleInput) {
+            modalTitleInput.value = weaponName;
+        } else {
+            console.error("Element with ID 'modalTitleInput' not found.");
+        }
+
+        // Update the form action to point to the correct buy URL
+        const form = document.getElementById('modalForm');
+        if (form) {
+            form.action = `/armory/buy/${encodeURIComponent(weaponName)}/`;
+
+        } else {
+            console.error("Form with ID 'modalForm' not found.");
+        }
+
+        // Show the modal
+        modal.style.display = "block";
+    };
+
+    // Function to handle form submission
+    window.submitModalForm = function(button) {
+        const form = document.getElementById('modalForm');
+        if (form) {
+            form.submit(); // Submit the form to the action URL
+        } else {
+            console.error("Form with ID 'modalForm' not found.");
+        }
+    };
+
+    // Optional: Close modal function
+    window.closeModal = function() {
+        const modal = document.getElementById("myModal");
+        if (modal) {
+            modal.style.display = "none"; // Hide the modal
+        } else {
+            console.error("Element with ID 'myModal' not found.");
+        }
+    };
+});
+</script>
+</body>
+</html>

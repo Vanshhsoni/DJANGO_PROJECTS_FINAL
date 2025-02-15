@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>SRs</title>
+    <link rel="stylesheet" href="{% static 'shop.css' %}">
+      <style>
+
+        .CATEGORY .animation {
+            position: absolute;
+            height: 2px; /* Height of the underline */
+            top: 45px; /* Position of the animation */
+            background-color: #ffffff; /* White for the animation background */
+            border-radius: 8px;
+            transition: all 0.5s ease 0s;
+            left : 37.5%;
+            width: 40px;
+        }
+        
+        /* Link-specific animation targets */
+        .CATEGORY a:nth-child(1):hover ~ .animation {
+            width: 50px;
+            left: 55px; /* Position under the first link */
+        }
+
+        .CATEGORY a:nth-child(2):hover ~ .animation {
+            width: 55px;
+            left: 14.5%; /* Position under the second link */
+        }
+
+        .CATEGORY a:nth-child(3):hover ~ .animation {
+            width: 55px;
+            left: 25.7%; /* Position under the third link */
+        }
+
+        .CATEGORY a:nth-child(4):hover ~ .animation {
+            width: 40px;
+            left: 37.5%; /* Position under the fourth link */
+        }
+
+        .CATEGORY a:nth-child(5):hover ~ .animation {
+            width: 100px;
+            left: 46.5%; /* Position under the fifth link */
+        }
+
+        .CATEGORY a:nth-child(6):hover ~ .animation {
+            width: 100px;
+            left: 57.5%; /* Position under the sixth link */
+        }
+
+        .CATEGORY a:nth-child(7):hover ~ .animation {
+            width: 75px;
+            left: 69.9%; /* Position under the seventh link */
+        }
+
+        .CATEGORY a:nth-child(8):hover ~ .animation {
+            width: 100px;
+            left: 79.5%; /* Position under the eighth link */
+        }
+
+        .CATEGORY a:nth-child(9):hover ~ .animation {
+            width: 40px;
+            left: 93%; /* Position under the ninth link */
+        }
+        .icon {
+          position: fixed;
+          top: 20px; /* Margin from the top */
+          left: 20px; /* Margin from the left */
+          width: 50px; /* Size of the icon */
+          height: 50px; /* Size of the icon */
+          background-color: #ffaa00; /* Background color */
+          color: #1c1c1c; /* Icon color */
+          border-radius: 10px; /* Rounded corners */
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow */
+          transition: background-color 0.3s ease;
+          z-index: 999; /* Adjusted z-index */  
+      }
+
+      .icon:hover {
+          background-color: #1c1c1c; /* Change color on hover */
+          color: #ffaa00; /* Change icon color on hover */
+      }
+      button {
+        background-color: #ffaa00;
+        color: #1c1c1c;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 20px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        font-size: 1.2rem;
+    }
+    button:hover{
+      background-color: #7a7a7a;
+      color: #ffaa00;
+      transform: scale(1.05);
+    }
+    </style>
+  </head>
+  <body>
+    <nav class="NAV">
+      <a href='{% url 'armory:armory_home' %}'>HOME</a>
+      <a href='{% url 'armory:AR' %}' id="activesec">ARSENAL</a>
+      <a href='{% url 'armory:ATTACHMENTS_MAIN' %}'>GEARS</a>
+      <a href="{% url 'orders:show_orders' %}">MY ORDERS</a>
+      <a href="{% url 'armory:ABOUT_US' %}">ABOUT US</a>
+      <div class="animation"></div> <!-- Animation div placed here -->
+    </nav>
+    <div class="icon" onclick="window.location.href='{% url 'accounts:profile' username=user.username %}'">
+      <!-- You can put an icon here, e.g., an image or text -->
+      <span>👤</span> <!-- Example icon using emoji -->
+      <!-- You can also use an <img> tag if you have an icon image -->
+      <!-- <img src="{% static 'images/icon.png' %}" alt="Icon" style="width: 100%; height: 100%; border-radius: 10px;"> -->
+  </div>
+     <div id="weapon_written"><h1>WEAPONS</h1></div>
+     <nav class="CATEGORY">
+      <a href="{% url 'armory:AR' %}">AR</a>
+      <a href="{% url 'armory:DMR' %}">DMR</a>
+      <a href="{% url 'armory:SMG' %}">SMG</a>
+      <a href="{% url 'armory:SR' %}"id ="mainsec">SR</a>
+      <a href="{% url 'armory:SHOTGUN' %}">SHOTGUN</a>
+      <a href="{% url 'armory:HANDGUN' %}">HANDGUN</a>
+      <a href="{% url 'armory:MELEE' %}">MELEE</a>
+      <a href="{% url 'armory:THROWABLE' %}">THROWABLE</a>
+      <a href="{% url 'armory:ETC' %}">ETC</a>
+        <div class="animation"></div> <!-- Animation div placed here -->
+      </nav>
+      <div class="card-container">
+        <div class="card" onclick="openModal('Kar98', 'Kar98k - A bolt-action sniper rifle, known for its high damage and long-range precision. It uses 7.62mm ammo and can take down targets with a single well-placed headshot.', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-kar98k.png')">
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="M16A4 Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-kar98k.png" alt="M16A4 Image" class="image2">
+          </div>
+          <h3>Kar98</h3>
+        </div>
+
+        <div class="card" onclick="openModal('Mosin Nagant', 'Mosin Nagant - A bolt-action sniper rifle, similar in performance to the Kar98k, using 7.62mm ammo. It excels in long-range combat with powerful headshot capabilities.', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-mosin_nagant.png')">
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="M416 Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-mosin_nagant.png" alt="M416 Image" class="image2">
+          </div>
+          <h3>Mosin Nagant</h3>
+        </div>
+
+        <div class="card" onclick="openModal('M24', 'M24 - A high-powered bolt-action sniper rifle, prized for its superior range and damage. It uses 7.62mm ammo and is capable of delivering lethal headshots, making it a top choice for long-range engagements.', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-m24.png')">
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="m24 Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-m24.png" alt="SCAR-L Image" class="image2">
+          </div>
+          <h3>M24</h3>
+        </div>
+    </div>
+    <div class="card-container">
+        <div class="card" onclick="openModal('AWM', 'AWM (Arctic Warfare Magnum) - A powerful bolt-action sniper rifle, renowned for its unmatched damage and long-range accuracy. It uses .300 Magnum ammo, capable of eliminating targets with a single shot, even through heavy armor', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-awm.png')">
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="AWM Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-awm.png" alt="G36C Image" class="image2">
+          </div>
+          <h3>AWM</h3>
+        </div>
+
+        <div class="card" onclick="openModal('Win94', 'Win94 (Winchester Model 1894) - A lever-action marksman rifle, known for its unique iron sights and high accuracy. It uses .45 ACP ammo, excelling in medium-range combat with precise headshots', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-win94.png')">
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="Win94 Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-win94.png" alt="QBZ95 Image" class="image2">
+          </div>
+          <h3>Win94</h3>
+        </div>
+
+        <div class="card" onclick="openModal('AMR', 'AMR (Anti-Material Rifle) - A devastating semi-automatic sniper rifle, designed to penetrate vehicles and heavy armor. It uses .50 BMG ammo, delivering extreme damage at long range, capable of destroying both targets and equipment with ease', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-lynx_amr.png')">
+          <div class="image-container">
+            <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="AMR Image" class="image1">
+            <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-lynx_amr.png" alt="K2 Image" class="image2">
+          </div>
+          <h3>AMR</h3>
+        </div>
+    </div>
+<!-- Modal Structure -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2 id="modalTitle" class="hover-effect"></h2>
+    <div class="modal-body">
+      <div id="modalDetails" class="details"></div>
+      <div class="image-containerx">
+        <img id="modalImage" src="" alt="Weapon Image">
+      </div>
+    </div>
+    <hr>
+    <!-- Form for submitting the modal title -->
+<!-- Form for submitting the modal title -->
+<form id="modalForm" action="" method="POST">
+  {% csrf_token %}
+  <input type="text" id="modalTitleInput" name="modalTitle" style="display: none;"> <!-- Hidden input -->
+  <button type="button" onclick="submitModalForm(this)">BUY</button>
+</form>
+
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    'use strict';
+
+    // Function to open the modal and set the weapon details
+    window.openModal = function(weaponName, weaponDetails, imageUrl) {
+        const modal = document.getElementById("myModal");
+
+        // Set the weapon name in the modal title
+        const modalTitle = document.getElementById("modalTitle");
+        if (modalTitle) {
+            modalTitle.textContent = weaponName;
+        } else {
+            console.error("Element with ID 'modalTitle' not found.");
+        }
+
+        // Set the weapon details in the modal body
+        const modalDetails = document.getElementById("modalDetails");
+        if (modalDetails) {
+            modalDetails.textContent = weaponDetails;
+        } else {
+            console.error("Element with ID 'modalDetails' not found.");
+        }
+
+        // Set the weapon image in the modal
+        const modalImage = document.getElementById("modalImage");
+        if (modalImage) {
+            modalImage.src = imageUrl;
+        } else {
+            console.error("Element with ID 'modalImage' not found.");
+        }
+
+        // Set the weapon name in the hidden input field
+        const modalTitleInput = document.getElementById('modalTitleInput');
+        if (modalTitleInput) {
+            modalTitleInput.value = weaponName;
+        } else {
+            console.error("Element with ID 'modalTitleInput' not found.");
+        }
+
+        // Update the form action to point to the correct buy URL
+        const form = document.getElementById('modalForm');
+        if (form) {
+            form.action = `/armory/buy/${encodeURIComponent(weaponName)}/`;
+
+        } else {
+            console.error("Form with ID 'modalForm' not found.");
+        }
+
+        // Show the modal
+        modal.style.display = "block";
+    };
+
+    // Function to handle form submission
+    window.submitModalForm = function(button) {
+        const form = document.getElementById('modalForm');
+        if (form) {
+            form.submit(); // Submit the form to the action URL
+        } else {
+            console.error("Form with ID 'modalForm' not found.");
+        }
+    };
+
+    // Optional: Close modal function
+    window.closeModal = function() {
+        const modal = document.getElementById("myModal");
+        if (modal) {
+            modal.style.display = "none"; // Hide the modal
+        } else {
+            console.error("Element with ID 'myModal' not found.");
+        }
+    };
+});
+</script>
+</body>
+</html>

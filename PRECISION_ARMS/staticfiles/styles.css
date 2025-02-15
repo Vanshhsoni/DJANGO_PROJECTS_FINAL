@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: #1c1c1c; /* Matte Black for the background */
+    color: #7a7a7a; /* Steel Silver for text */
+}
+
+nav {
+    position: sticky;
+    margin: 20px auto auto;
+    top: 10px;
+    width: 580px;
+    height: 50px;
+    background: #2c2c2c96; /* Gunmetal Grey for the nav background */
+    border-radius: 8px;
+    font-size: 0;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .1);
+    z-index: 9999999999999999999999999999;
+}
+
+nav a {
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #7a7a7a; /* Steel Silver for link text */
+    text-decoration: none;
+    line-height: 50px;
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    text-align: center;
+    width: 20%; /* Make links equal width */
+    transition: color 0.5s ease;
+}
+
+nav a:hover {
+    color: #0021da; /* Change link color when hovered */
+}
+
+nav .animation {
+    position: absolute;
+    height: 5px; /* Reduced to just an underline */
+    top: 45px; /* Bottom of the nav */
+    left: 0px;
+    background-color: #ffaa00; /* Brass Gold for the animation background */
+    width: 100px;
+    border-radius: 8px;
+    transition: all 0.5s ease 0s;
+}
+
+/* Link-specific animation targets */
+nav a:nth-child(1):hover ~ .animation {
+    width: 70px;
+    left: 30px;
+}
+
+nav a:nth-child(2):hover ~ .animation {
+    width: 70px;
+    left: 140px;
+}
+
+nav a:nth-child(3):hover ~ .animation {
+    width: 90px;
+    left: 250px;
+}
+
+nav a:nth-child(4):hover ~ .animation {
+    width: 100px;
+    left: 360px;
+}
+
+nav a:nth-child(5):hover ~ .animation {
+    width: 120px;
+    left: 470px;
+}
+
+#activesec {
+    color:#ffaa00;
+}
+
+.icon {
+    position: fixed;
+    top: 20px; /* Margin from the top */
+    left: 20px; /* Margin from the left */
+    width: 50px; /* Size of the icon */
+    height: 50px; /* Size of the icon */
+    background-color: #ffaa00; /* Background color */
+    color: #1c1c1c; /* Icon color */
+    border-radius: 10px; /* Rounded corners */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow */
+    transition: background-color 0.3s ease;
+    z-index: 999; /* Adjusted z-index */  
+}
+
+.icon:hover {
+    background-color: #1c1c1c; /* Change color on hover */
+    color: #ffaa00; /* Change icon color on hover */
+}

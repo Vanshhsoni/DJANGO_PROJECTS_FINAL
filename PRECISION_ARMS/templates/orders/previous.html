@@ -1,0 +1,319 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previous Orders</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <style>
+        /* General Layout */
+        body {
+            background-color: #1c1c1c;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* Header */
+        h1 {
+            font-size: 2em;
+            margin: 20px;
+        }
+        
+        /* Full-width Navigation Bar */
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            background-color: #2a2a2a;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+        
+        .nav-item {
+            font-size: 1.1em;
+            color: #ffaa00;
+            padding: 15px 20px;
+            margin: 0 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .nav-item:hover {
+            background-color: #ffaa00;
+            color: #1c1c1c;
+        }
+        
+        .nav-item.active {
+            background-color: #ffaa00;
+            color: #1c1c1c;
+        }
+        
+        /* Order Container */
+        .order-container {
+            width: 90%; /* Increased width for better horizontal space */
+            max-width: 800px; /* Max width for large screens */
+            background-color: #2a2a2a;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            padding: 15px;
+            transition: transform 0.3s;
+        }
+        
+        .order-container:hover {
+            transform: scale(1.05); /* Scale effect on hover */
+        }
+        
+        /* Weapon Image */
+        .weapon-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 5px;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+        
+        /* Weapon Info */
+        .weapon-info {
+            flex-grow: 1;
+        }
+        
+        .weapon-name {
+            font-size: 1.2em;
+            color: #ffaa00;
+            margin-bottom: 5px;
+        }
+        
+        /* Delete Button */
+        .delete-button {
+            background-color: transparent;
+            border: none;
+            color: #ff4444;
+            font-size: 1.2em;
+            cursor: pointer;
+            padding: 5px;
+            width: 40px; /* Fixed width for delete button */
+            height: 40px; /* Fixed height for delete button */
+            transition: color 0.3s;
+        }
+        
+        .delete-button img {
+            width: 100%; /* Make the image fill the button */
+            height: 100%; /* Make the image fill the button */
+        }
+        
+        .delete-button:hover {
+            color: #ff8888;
+        }
+        
+        /* Confirm Order Button */
+        .confirm-button {
+            display: block;
+            width: 200px;
+            padding: 12px;
+            margin: 20px auto;
+            background-color: #ffaa00;
+            color: #1c1c1c;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .confirm-button:hover {
+            background-color: #ffbb33;
+        }
+
+        .custom-order:hover {
+            background-color: #ffbb33; /* Hover effect */
+        }
+        /* Page loading animation */
+.page-loading {
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+.page-loading .order-container {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Fade-out animation for deleting */
+.fade-out {
+    animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(0.95); }
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-right: 15px;
+}
+.quantity-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #ffaa00;
+    background-color: transparent;
+    color: #ffaa00;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.quantity-button:hover {
+    background-color: #ffaa00;
+    color: #1c1c1c;
+}
+.quantity-display {
+    font-size: 1.1em;
+    color: #ffaa00;
+}
+
+body {
+    background-color: #1c1c1c;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative; /* Needed for absolute positioning of close button */
+}
+
+/* Close Button */
+.close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5em;
+    color: #ffaa00;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.close-button:hover {
+    color: #ff4444; /* Change color on hover */
+    transform: rotate(90deg); /* Rotate effect on hover */
+}
+
+
+.warning-modal {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's above other elements */
+}
+
+.warning-content {
+    background: #2a2a2a;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.input-field {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 80%;
+    border: 1px solid #ffaa00;
+    border-radius: 5px;
+    background: transparent;
+    color: #ffffff;
+}
+
+.final-confirm-button {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #ffaa00;
+    color: #1c1c1c;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.final-confirm-button:hover {
+    background-color: #ffbb33;
+}
+.icon {
+    position: fixed;
+    top: 20px; /* Margin from the top */
+    left: 20px; /* Margin from the left */
+    width: 50px; /* Size of the icon */
+    height: 50px; /* Size of the icon */
+    background-color: #ffaa00; /* Background color */
+    color: #1c1c1c; /* Icon color */
+    border-radius: 10px; /* Rounded corners */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow */
+    transition: background-color 0.3s ease;
+    z-index: 999; /* Adjusted z-index */  
+}
+
+.icon:hover {
+    background-color: #1c1c1c; /* Change color on hover */
+    color: #ffaa00; /* Change icon color on hover */
+}
+
+    </style>
+</head>
+<body>
+    <div class="icon" onclick="window.location.href='{% url 'accounts:profile' username=user.username %}'">
+        <span>👤</span>
+    </div>
+    <h1>Your Previous Orders</h1>
+
+    <div class="navbar">
+        <div class="nav-item" onclick="window.location.href='{% url 'orders:show_orders' %}'">MY CART</div>
+        <div class="nav-item active" onclick="window.location.href='{% url 'orders:previous' %}'">PREVIOUS ORDERS</div>
+    </div>
+
+    <div class="order-list">
+        {% for ordered_order in ordered_orders %}
+            <div class="order-container">
+                <img src="{{ ordered_order.weapon_image }}" alt="Weapon Image" class="weapon-image">
+                <div class="weapon-info">
+                    <h2 class="weapon-name">{{ ordered_order.weapon_name }}</h2>
+                    <p class="weapon-quantity">Quantity: {{ ordered_order.quantity }}</p>
+                    <p class="order-date">Ordered on: {{ ordered_order.order_date|date:"D, d M Y H:i" }}</p>
+                    <span class="order-status {% if ordered_order.status == 'taken' %}status-taken{% elif ordered_order.status == 'shipping' %}status-shipping{% elif ordered_order.status == 'delivered' %}status-delivered{% else %}status-failed{% endif %}">
+                        {{ ordered_order.status|capfirst }}
+                    </span>
+                </div>
+            </div>
+        {% empty %}
+            <p>No orders found.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

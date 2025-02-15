@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>THROWABLEs</title>
+    <link rel="stylesheet" href="{% static 'shop.css' %}">
+    <style>
+        .CATEGORY .animation {
+            position: absolute;
+            height: 2px; /* Height of the underline */
+            top: 45px; /* Position of the animation */
+            background-color: #ffffff; /* White for the animation background */
+            border-radius: 8px;
+            transition: all 0.5s ease 0s;
+            left : 79.8%;
+            width: 110px;
+        }
+        
+        /* Link-specific animation targets */
+        .CATEGORY a:nth-child(1):hover ~ .animation {
+            width: 50px;
+            left: 55px; /* Position under the first link */
+        }
+        
+        .CATEGORY a:nth-child(2):hover ~ .animation {
+            width: 55px;
+            left: 14.5%; /* Position under the second link */
+        }
+        
+        .CATEGORY a:nth-child(3):hover ~ .animation {
+            width: 55px;
+            left: 25.7%; /* Position under the third link */
+        }
+        
+        .CATEGORY a:nth-child(4):hover ~ .animation {
+            width: 40px;
+            left: 37.5%; /* Position under the fourth link */
+        }
+        
+        .CATEGORY a:nth-child(5):hover ~ .animation {
+            width: 100px;
+            left: 46.5%; /* Position under the fifth link */
+        }
+        
+        .CATEGORY a:nth-child(6):hover ~ .animation {
+            width: 100px;
+            left: 57.5%; /* Position under the sixth link */
+        }
+        
+        .CATEGORY a:nth-child(7):hover ~ .animation {
+            width: 75px;
+            left: 69.9%; /* Position under the seventh link */
+        }
+        
+        .CATEGORY a:nth-child(8):hover ~ .animation {
+            width: 100px;
+            left: 79.5%; /* Position under the eighth link */
+        }
+        
+        .CATEGORY a:nth-child(9):hover ~ .animation {
+            width: 40px;
+            left: 93%; /* Position under the ninth link */
+        }
+        .icon {
+            position: fixed;
+            top: 20px; /* Margin from the top */
+            left: 20px; /* Margin from the left */
+            width: 50px; /* Size of the icon */
+            height: 50px; /* Size of the icon */
+            background-color: #ffaa00; /* Background color */
+            color: #1c1c1c; /* Icon color */
+            border-radius: 10px; /* Rounded corners */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow */
+            transition: background-color 0.3s ease;
+            z-index: 999; /* Adjusted z-index */  
+        }
+
+        .icon:hover {
+            background-color: #1c1c1c; /* Change color on hover */
+            color: #ffaa00; /* Change icon color on hover */
+        }
+        button {
+            background-color: #ffaa00;
+            color: #1c1c1c;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-size: 1.2rem;
+        }
+        button:hover{
+          background-color: #7a7a7a;
+          color: #ffaa00;
+          transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <nav class="NAV">
+        <a href='{% url 'armory:armory_home' %}'>HOME</a>
+        <a href='{% url 'armory:AR' %}' id="activesec">ARSENAL</a>
+        <a href='{% url 'armory:ATTACHMENTS_MAIN' %}'>GEARS</a>
+        <a href="{% url 'orders:show_orders' %}">MY ORDERS</a>
+        <a href="{% url 'armory:ABOUT_US' %}">ABOUT US</a>
+        <div class="animation"></div> <!-- Animation div placed here -->
+      </nav>
+      <div class="icon" onclick="window.location.href='{% url 'accounts:profile' username=user.username %}'">
+        <!-- You can put an icon here, e.g., an image or text -->
+        <span>👤</span> <!-- Example icon using emoji -->
+        <!-- You can also use an <img> tag if you have an icon image -->
+        <!-- <img src="{% static 'images/icon.png' %}" alt="Icon" style="width: 100%; height: 100%; border-radius: 10px;"> -->
+    </div>
+    <div class="CONTENT">
+        <div id="weapon_written"><h1>WEAPONS</h1></div>
+        <nav class="CATEGORY">
+            <a href="{% url 'armory:AR' %}">AR</a>
+            <a href="{% url 'armory:DMR' %}">DMR</a>
+            <a href="{% url 'armory:SMG' %}">SMG</a>
+            <a href="{% url 'armory:SR' %}">SR</a>
+            <a href="{% url 'armory:SHOTGUN' %}">SHOTGUN</a>
+            <a href="{% url 'armory:HANDGUN' %}">HANDGUN</a>
+            <a href="{% url 'armory:MELEE' %}">MELEE</a>
+            <a href="{% url 'armory:THROWABLE' %}"id="mainsec">THROWABLE</a>
+            <a href="{% url 'armory:ETC' %}">ETC</a>
+            <div class="animation"></div> <!-- Animation div placed here --> 
+        </nav>
+
+        <div class="card-container">
+            <div class="card" onclick="openModal('Stun Grenade', 'Stun Grenade - A tactical explosive device that disorients and temporarily incapacitates enemies with a blinding flash and deafening sound. Ideal for tactical entries and disrupting enemy movements during engagements.', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-stun_grenade.png')">
+                <div class="image-container">
+                    <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="Stun Grenade Image" class="image1">
+                    <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-stun_grenade.png" alt="Stun Grenade Image" class="image2">
+                </div>
+                <h3>Stun Grenade</h3>
+            </div>
+
+            <div class="card" onclick="openModal('Frag Grenade', 'Frag Grenade - A versatile explosive device designed to cause damage through fragmentation. Upon detonation, it disperses shrapnel in all directions, making it effective for clearing rooms or dealing with groups of enemies', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-frag_grenade.png')">
+                <div class="image-container">
+                    <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="Frag Grenade Image" class="image1">
+                    <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-frag_grenade.png" alt="Frag Grenade Image" class="image2">
+                </div>
+                <h3>Frag Grenade</h3>
+            </div>
+
+            <div class="card" onclick="openModal('Molotov Cocktail', 'Molotov Cocktail - An improvised incendiary device that ignites on impact, creating a fireball and spreading flames over a designated area. Effective for area denial and flushing out enemies from cover.', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-molotov_cocktail.png')">
+                <div class="image-container">
+                    <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="Molotov Cocktail Image" class="image1">
+                    <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-molotov_cocktail.png" alt="Molotov Cocktail Image" class="image2">
+                </div>
+                <h3>Molotov Cocktail</h3>
+            </div>
+            </div>
+            <div class="card-container">
+            <div class="card" onclick="openModal('Sticky Bomb', 'Sticky Bomb - A versatile explosive device that adheres to surfaces upon deployment, allowing for strategic placement. It detonates after a short delay, making it ideal for ambushes and surprising unsuspecting enemies.', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-sticky_bomb.png')">
+                <div class="image-container">
+                    <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="Sticky Bomb Image" class="image1">
+                    <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-sticky_bomb.png" alt="Sticky Bomb Image" class="image2">
+                </div>
+                <h3>Sticky Bomb</h3>
+            </div>
+
+            <div class="card" onclick="openModal('Smoke Grenade', 'Smoke Grenade - A tactical device that releases a thick cloud of smoke upon detonation, providing visual concealment for movement and tactical maneuvers. Effective for obscuring enemy visibility and creating cover during engagements.', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-smoke_grenade.png')">
+                <div class="image-container">
+                    <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="Smoke Grenade Image" class="image1">
+                    <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-smoke_grenade.png" alt="Smoke Grenade Image" class="image2">
+                </div>
+                <h3>Smoke Grenade</h3>
+            </div>
+
+            <div class="card" onclick="openModal('C4', 'C4 Explosive - A powerful plastic explosive that can be detonated remotely. Known for its versatility, it is effective for demolishing structures, vehicles, or creating ambushes, offering a significant tactical advantage in engagements.', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-c4.png')">
+                <div class="image-container">
+                    <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="C4 Image" class="image1">
+                    <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-c4.png" alt="C4 Image" class="image2">
+                </div>
+                <h3>C4</h3>
+            </div>
+            </div>
+            <div class="card-container">
+            <div class="card" onclick="openModal('BZ Grenade', 'BZ (Benzilate) - A chemical agent used to incapacitate enemies, causing disorientation and confusion. It can impair vision and coordination, making it effective for crowd control and tactical maneuvers in combat situations.', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-bz_grenade.png')">
+                <div class="image-container">
+                    <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="BZ Grenade Image" class="image1">
+                    <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-bz_grenade.png" alt="BZ Grenade Image" class="image2">
+                </div>
+                <h3>BZ Grenade</h3>
+            </div>
+
+            <div class="card" onclick="openModal('Decoy Grenade', 'Decoy Grenade - A tactical device that emits sound and light to simulate gunfire and distract enemies. It draws attention away from your position, making it useful for flanking maneuvers and creating opportunities for strategic advantages.', 'https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-decoy_grenade.png')">
+                <div class="image-container">
+                    <img src="https://wstatic-prod.pubg.com/web/live/main_e0d2a32/img/09cb859.png" alt="Decoy Grenade Image" class="image1">
+                    <img src="https://wstatic-prod.pubg.com/web/live/static/game-info/weapons/images/viewer/img-weapons-decoy_grenade.png" alt="Decoy Grenade Image" class="image2">
+                </div>
+                <h3>Decoy Grenade</h3>
+            </div>
+            <div class="card">
+            </div>
+        </div>
+        </div>
+    </div>
+
+<!-- Modal Structure -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="modalTitle" class="hover-effect"></h2>
+      <div class="modal-body">
+        <div id="modalDetails" class="details"></div>
+        <div class="image-containerx">
+          <img id="modalImage" src="" alt="Weapon Image">
+        </div>
+      </div>
+      <hr>
+      <!-- Form for submitting the modal title -->
+  <!-- Form for submitting the modal title -->
+  <form id="modalForm" action="" method="POST">
+    {% csrf_token %}
+    <input type="text" id="modalTitleInput" name="modalTitle" style="display: none;"> <!-- Hidden input -->
+    <button type="button" onclick="submitModalForm(this)">BUY</button>
+  </form>
+  
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      'use strict';
+  
+      // Function to open the modal and set the weapon details
+      window.openModal = function(weaponName, weaponDetails, imageUrl) {
+          const modal = document.getElementById("myModal");
+  
+          // Set the weapon name in the modal title
+          const modalTitle = document.getElementById("modalTitle");
+          if (modalTitle) {
+              modalTitle.textContent = weaponName;
+          } else {
+              console.error("Element with ID 'modalTitle' not found.");
+          }
+  
+          // Set the weapon details in the modal body
+          const modalDetails = document.getElementById("modalDetails");
+          if (modalDetails) {
+              modalDetails.textContent = weaponDetails;
+          } else {
+              console.error("Element with ID 'modalDetails' not found.");
+          }
+  
+          // Set the weapon image in the modal
+          const modalImage = document.getElementById("modalImage");
+          if (modalImage) {
+              modalImage.src = imageUrl;
+          } else {
+              console.error("Element with ID 'modalImage' not found.");
+          }
+  
+          // Set the weapon name in the hidden input field
+          const modalTitleInput = document.getElementById('modalTitleInput');
+          if (modalTitleInput) {
+              modalTitleInput.value = weaponName;
+          } else {
+              console.error("Element with ID 'modalTitleInput' not found.");
+          }
+  
+          // Update the form action to point to the correct buy URL
+          const form = document.getElementById('modalForm');
+          if (form) {
+              form.action = `/armory/buy/${encodeURIComponent(weaponName)}/`;
+  
+          } else {
+              console.error("Form with ID 'modalForm' not found.");
+          }
+  
+          // Show the modal
+          modal.style.display = "block";
+      };
+  
+      // Function to handle form submission
+      window.submitModalForm = function(button) {
+          const form = document.getElementById('modalForm');
+          if (form) {
+              form.submit(); // Submit the form to the action URL
+          } else {
+              console.error("Form with ID 'modalForm' not found.");
+          }
+      };
+  
+      // Optional: Close modal function
+      window.closeModal = function() {
+          const modal = document.getElementById("myModal");
+          if (modal) {
+              modal.style.display = "none"; // Hide the modal
+          } else {
+              console.error("Element with ID 'myModal' not found.");
+          }
+      };
+  });
+  </script>
+  </body>
+  </html>

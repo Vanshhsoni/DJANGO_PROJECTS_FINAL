@@ -1,0 +1,91 @@
+<!-- orders/templates/orders/confirm.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <style>
+        /* General Layout */
+        body {
+            background-color: #1c1c1c;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        /* Home Button */
+        .home-button {
+            background-color: #ffaa00;
+            color: #1c1c1c;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .home-button:hover {
+            background-color: #ffbb33;
+        } 
+        .icon {
+            position: fixed;
+            top: 20px; /* Margin from the top */
+            left: 20px; /* Margin from the left */
+            width: 50px; /* Size of the icon */
+            height: 50px; /* Size of the icon */
+            background-color: #ffaa00; /* Background color */
+            color: #1c1c1c; /* Icon color */
+            border-radius: 10px; /* Rounded corners */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow */
+            transition: background-color 0.3s ease;
+            z-index: 999; /* Adjusted z-index */  
+        }
+        
+        .icon:hover {
+            background-color: #1c1c1c; /* Change color on hover */
+            color: #ffaa00; /* Change icon color on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="icon" onclick="window.location.href='{% url 'accounts:profile' username=user.username %}'">
+        <!-- You can put an icon here, e.g., an image or text -->
+        <span>👤</span> <!-- Example icon using emoji -->
+        <!-- You can also use an <img> tag if you have an icon image -->
+        <!-- <img src="{% static 'images/icon.png' %}" alt="Icon" style="width: 100%; height: 100%; border-radius: 10px;"> -->
+    </div>
+    <h1>Order Placed!</h1>
+    <p>Thank you for your order. We will contact you soon.</p>
+    <button class="home-button" onclick="window.location.href='/armory/armory_home/'">Return to Homepage</button>
+    <script>
+        // Add a script in confirm.html or your main JS file if preferred
+
+document.querySelector('.home-button').addEventListener('mouseover', function() {
+    this.style.backgroundColor = '#ffbb33';
+});
+
+document.querySelector('.home-button').addEventListener('mouseout', function() {
+    this.style.backgroundColor = '#ffaa00';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        /* General body and background styling */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('{% static 'gunAK.jpg' %}');
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            color: #ffaa00;
+        }
+
+        /* Main profile container */
+        .profile-container {
+            background-color: rgba(44, 44, 44, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            width: 90%;
+            max-width: 1100px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        /* Profile picture styling */
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        /* Edit button style */
+        .edit-button {
+            background: none;
+            border: none;
+            color: #ffaa00;
+            font-size: 20px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .edit-button:hover {
+            transform: scale(1.2);
+        }
+
+        /* Divider style */
+        hr {
+            border: 1px solid #ffaa00;
+            margin: 20px 0;
+            width: 100%;
+        }
+
+        /* Button container for profile options */
+        .button-container {
+            display: flex;
+            justify-content: space-evenly;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .btn {
+            background-color: #ffaa00;
+            color: #2c2c2c;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            flex: 1;
+            margin: 0 5px;
+            width: 500px;
+        }
+
+        .btn:hover {
+            background-color: #1c1c1c;
+            color: #ffaa00;
+            transform: translateY(-2px);
+        }
+
+        /* Close button style */
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .close-button:hover {
+            transform: rotate(45deg);
+            color: #ffaa00;
+        }
+
+        /* Logout button style */
+        .logout-button {
+            background-color: #ff4d4d;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-left: 10px;
+        }
+
+        .logout-button:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <!-- Close button -->
+        <button class="close-button" onclick="window.history.back();">×</button>
+
+        {% load static %}
+        <img id="previewImage" class="profile-pic" 
+             src="{{ profile_picture }}" 
+             alt="Profile Picture"
+             onerror="this.onerror=null; this.src='{% static 'images/default.jpg' %}';">
+
+
+        <a href="{% url 'accounts:edit_profile' %}"><button class="edit-button">✏️</button></a>
+
+        <!-- Display Username and Logout -->
+        <h2 style="display: inline;">{{ profile_user.username }}</h2>
+        <button class="logout-button" onclick="window.location.href='{% url 'accounts:logout' %}'">Logout</button>
+        
+        <!-- Divider Line -->
+        <hr>
+
+        <!-- Button Container for Profile Options -->
+        <div class="button-container">
+            <a href='{% url 'orders:show_orders' %}'><button class="btn">MY ORDERS </button></a>
+            <a href='{% url 'accounts:account_settings' %}'><button class="btn">ACCOUNT SETTINGS </button></a>
+        </div>
+    </div>
+
+    <!-- Fade-in Animation Script -->
+    <script>
+        window.onload = function() {
+            const profileContainer = document.querySelector('.profile-container');
+            profileContainer.style.opacity = '1';
+            profileContainer.style.transform = 'translateY(0)';
+        };
+    </script>
+</body>
+</html>
+{% comment %} onclick="window.location.href='{% url 'accounts:reviews' %}'" {% endcomment %}
