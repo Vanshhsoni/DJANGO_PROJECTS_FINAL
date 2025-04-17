@@ -1,0 +1,1991 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap");
+/* line 30, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.carousel-indicators [data-bs-target] {
+    background-color: #000;
+}
+
+/* line 34, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+body {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #080808;
+    overflow-x: hidden;
+}
+
+@media (max-width: 575.98px) {
+    /* line 38, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    body {
+        font-size: 14px;
+    }
+}
+
+/* line 45, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+a {
+    text-decoration: none;
+    color: #bd9658;
+}
+
+/* line 48, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+a:hover {
+    color: #a67f41;
+}
+
+/* line 54, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* line 61, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.form-select:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* line 67, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.link-clr {
+    color: #ffffff;
+}
+
+/* line 70, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.link-clr:hover {
+    color: #f6f6f6;
+}
+
+/* line 75, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.link {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #080808;
+}
+
+/* line 78, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.link:hover {
+    color: #034EA2;
+}
+
+/* line 84, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.btn:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+/* line 91, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.form-control:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* line 97, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.card {
+    border: none;
+}
+
+/* line 101, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.red-btn {
+    background: #bd9658;
+    border-radius: 5px;
+    color: #ffffff;
+}
+
+/* line 106, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.red-btn:hover {
+    background: #080808;
+    color: #ffffff;
+}
+
+/* line 112, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.blue-btn {
+    background: #034EA2;
+    border-radius: 5px;
+    color: #ffffff;
+}
+
+/* line 117, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.blue-btn:hover {
+    background: #080808;
+    color: #ffffff;
+}
+
+/* line 123, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.heading-h2 {
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+    font-size: 36px;
+    color: #080808;
+}
+
+@media (max-width: 575.98px) {
+    /* line 127, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    .heading-h2 {
+        font-size: 25px;
+    }
+}
+
+/* line 133, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.heading-h3 {
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+    font-size: 36px;
+    color: #ffffff;
+}
+
+@media (max-width: 575.98px) {
+    /* line 137, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    .heading-h3 {
+        font-size: 25px;
+    }
+}
+
+/* line 143, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.heading-h5 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #080808;
+    letter-spacing: 0.03em;
+}
+
+@media (max-width: 575.98px) {
+    /* line 148, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    .heading-h5 {
+        font-size: 17px;
+    }
+}
+
+/* line 154, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.heading-h6 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: #080808;
+    letter-spacing: 0.03em;
+}
+
+@media (max-width: 575.98px) {
+    /* line 159, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    .heading-h6 {
+        font-size: 14px;
+    }
+}
+
+/* line 165, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.sub-heading {
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+@media (max-width: 575.98px) {
+    /* line 169, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    .sub-heading {
+        font-size: 20px;
+    }
+}
+
+/* line 175, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.red-text {
+    font-family: "Playfair Display", serif;
+    color: #bd9658;
+}
+
+/* line 180, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.gold-text {
+    font-family: "Playfair Display", serif;
+    color: #bd9658;
+}
+
+/* line 185, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.blue-text {
+    font-family: "Playfair Display", serif;
+    color: #034EA2;
+}
+
+/* line 190, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.white-text {
+    color: #ffffff;
+}
+
+/* line 195, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.blue-box {
+    background: #C9FFFC;
+}
+
+/* line 198, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.blue-box .card-title {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 30px;
+    color: #022B2E;
+}
+
+@media (max-width: 575.98px) {
+    /* line 202, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    .blue-box .card-title {
+        font-size: 24px;
+    }
+}
+
+/* line 209, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.red-box {
+    background: #FED8D9;
+}
+
+/* line 212, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.red-box .card-title {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 30px;
+    color: #bd9658;
+}
+
+@media (max-width: 575.98px) {
+    /* line 216, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    .red-box .card-title {
+        font-size: 24px;
+    }
+}
+
+/* line 223, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.green-box {
+    background: #C7FDC6;
+}
+
+/* line 226, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.green-box .card-title {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 30px;
+    color: #1BCF17;
+}
+
+@media (max-width: 575.98px) {
+    /* line 230, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    .green-box .card-title {
+        font-size: 24px;
+    }
+}
+
+/* line 237, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.purple-box {
+    background: #CCCDFF;
+}
+
+/* line 240, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.purple-box .card-title {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 30px;
+    color: #2E3192;
+}
+
+@media (max-width: 575.98px) {
+    /* line 244, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    .purple-box .card-title {
+        font-size: 24px;
+    }
+}
+
+/* line 251, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.recru-head {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #bd9658;
+}
+
+@media (max-width: 575.98px) {
+    /* line 255, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    .recru-head {
+        font-size: 18px;
+    }
+}
+
+/* line 261, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.faculty-head {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #034EA2;
+}
+
+@media (max-width: 575.98px) {
+    /* line 265, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    .faculty-head {
+        font-size: 18px;
+    }
+}
+
+/* line 272, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.top-sep {
+    position: relative;
+}
+
+/* line 275, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.top-sep::after {
+    content: url("../webicon/top-sep.svg");
+    position: absolute;
+    top: -4px;
+    right: 0;
+}
+
+/* line 284, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.top .top-text {
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    color: #080808;
+}
+
+/* line 293, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.sub-menu .navbar .navbar-nav .nav-link {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #080808;
+}
+
+/* line 296, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.sub-menu .navbar .navbar-nav .nav-link:hover {
+    color: #bd9658;
+}
+
+/* line 304, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.sub-menu svg {
+    fill: #080808;
+}
+
+/* line 307, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.sub-menu svg:hover {
+    fill: #034EA2;
+}
+
+/* line 313, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.menu {
+    background: #034EA2;
+}
+
+/* line 318, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.menu .navbar .navbar-nav .nav-link {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+/* line 321, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.menu .navbar .navbar-nav .nav-link:hover {
+    color: #bd9658;
+}
+
+/* line 328, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.menu .navbar .menu-btn {
+    background: #bd9658;
+}
+
+/* line 331, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.menu .navbar .menu-btn:hover {
+    background: #080808;
+}
+
+/* line 338, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.glance {
+    background: #f6f6f6;
+}
+
+/* line 341, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.glance .fact-base {
+    background: #FFFFFF;
+    border-radius: 15px;
+    min-height: 190px;
+}
+
+@media (max-width: 575.98px) {
+    /* line 347, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.glance .fact-base {
+        min-height: 157px;
+    }
+}
+
+/* line 352, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.glance .fact-base img {
+    width: 80px;
+    height: 80px;
+}
+
+/* line 358, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.glance .owl-carousel .owl-nav {
+    position: absolute;
+    top: -36px;
+    right: -1px;
+}
+
+/* line 363, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.glance .owl-carousel .owl-nav button.owl-next,
+section.glance .owl-carousel .owl-nav button.owl-prev {
+    margin: 0 5px;
+}
+
+/* line 377, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.glance .owl-carousel .owl-item img {
+    width: auto;
+    display: inline;
+}
+
+/* line 386, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.about .abt-base {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+}
+
+/* line 393, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.our-institutes {
+    background: #f6f6f6;
+}
+
+/* line 396, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.our-institutes .institute-card {
+    border-radius: 10px 10px;
+    transition: 0.4s;
+}
+
+/* line 400, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.our-institutes .institute-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 0px 20px rgba(3, 78, 162, 0.15);
+    -webkit-transform: translateY(-10px);
+}
+
+/* line 406, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.our-institutes .institute-card .card-text {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+    letter-spacing: 0.03em;
+}
+
+@media (max-width: 575.98px) {
+    /* line 411, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.our-institutes .institute-card .card-text {
+        font-size: 18px;
+    }
+}
+
+/* line 417, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.our-institutes .institute-card .title {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 26px;
+    color: #ffffff;
+    letter-spacing: 0.03em;
+}
+
+@media (max-width: 575.98px) {
+    /* line 422, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.our-institutes .institute-card .title {
+        font-size: 20px;
+    }
+}
+
+/* line 429, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.our-institutes .blue-card-body {
+    background: #034EA2;
+    border-radius: 0px 0px 10px 10px;
+}
+
+/* line 434, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.our-institutes .red-card-body {
+    background: #bd9658;
+    border-radius: 0px 0px 10px 10px;
+}
+
+/* line 439, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.our-institutes .isnt-card {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+
+/* line 444, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.our-institutes .isnt-card .card-title {
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+    font-size: 36px;
+    color: #034EA2;
+}
+
+@media (max-width: 575.98px) {
+    /* line 448, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.our-institutes .isnt-card .card-title {
+        font-size: 25px;
+    }
+}
+
+/* line 454, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.our-institutes .isnt-card .isnt-h2 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    color: #034EA2;
+}
+
+/* line 457, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.our-institutes .isnt-card .isnt-h2:hover {
+    color: #bd9658;
+}
+
+@media (max-width: 575.98px) {
+    /* line 462, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.our-institutes .isnt-card .isnt-h2 {
+        font-size: 20px;
+    }
+}
+
+/* line 471, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.recruiters .recru-base {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+/* line 478, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.faculty {
+    background: #f6f6f6;
+}
+
+/* line 481, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.faculty .faculty-card {
+    background: #FFFFFF;
+    border-radius: 5px;
+}
+
+/* line 485, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.faculty .faculty-card .card-title {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: #034EA2;
+}
+
+@media (max-width: 575.98px) {
+    /* line 489, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.faculty .faculty-card .card-title {
+        font-size: 18px;
+    }
+}
+
+/* line 496, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.faculty .owl-carousel .owl-nav button.owl-next {
+    position: absolute;
+    top: -127px;
+    right: -1px;
+}
+
+@media (max-width: 575.98px) {
+    /* line 502, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.faculty .owl-carousel .owl-nav button.owl-next {
+        top: 181px;
+        right: 130px;
+    }
+}
+
+/* line 509, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.faculty .owl-carousel .owl-nav button.owl-prev {
+    position: absolute;
+    top: -127px;
+    right: 58px;
+}
+
+@media (max-width: 575.98px) {
+    /* line 515, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.faculty .owl-carousel .owl-nav button.owl-prev {
+        top: 180px;
+        right: 178px;
+    }
+}
+
+/* line 522, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.faculty .owl-carousel .owl-item img {
+    width: auto;
+    display: inline;
+}
+
+/* line 529, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.testimonial {
+    background-image: url("../img/testimonial-bg.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* line 535, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.testimonial .testimonial-card {
+    background: none;
+}
+
+/* line 538, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.testimonial .testimonial-card .card-title {
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+@media (max-width: 575.98px) {
+    /* line 542, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.testimonial .testimonial-card .card-title {
+        font-size: 20px;
+    }
+}
+
+/* line 548, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.testimonial .testimonial-card .card-text {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: #ffffff;
+    letter-spacing: 0.05em;
+}
+
+@media (max-width: 575.98px) {
+    /* line 553, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.testimonial .testimonial-card .card-text {
+        font-size: 16px;
+    }
+}
+
+/* line 559, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.testimonial .testimonial-card .test-img {
+    width: 150px;
+    height: 150px;
+}
+
+/* line 565, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.testimonial .owl-carousel .owl-item img {
+    display: inline;
+}
+
+/* line 569, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.testimonial .owl-carousel .owl-nav button.owl-next {
+    position: absolute;
+    top: 220px;
+    right: -43px;
+}
+
+@media (max-width: 575.98px) {
+    /* line 575, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.testimonial .owl-carousel .owl-nav button.owl-next {
+        display: none;
+    }
+}
+
+/* line 581, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.testimonial .owl-carousel .owl-nav button.owl-prev {
+    position: absolute;
+    top: 220px;
+    left: -43px;
+}
+
+@media (max-width: 575.98px) {
+    /* line 587, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.testimonial .owl-carousel .owl-nav button.owl-prev {
+        display: none;
+    }
+}
+
+/* line 594, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.footer-menu {
+    background: #f6f6f6;
+}
+
+/* line 597, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.footer-menu .f-txt {
+    color: #080808;
+    font-size: 15px;
+}
+
+/* line 600, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.footer-menu .f-txt:hover {
+    color: #034EA2;
+}
+
+/* line 606, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.footer {
+    background: #1A1B20;
+}
+
+/* line 609, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.footer .f-text {
+    color: #ffffff;
+}
+
+/* line 612, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.footer .f-text:hover {
+    color: #bd9658;
+}
+
+/* line 617, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.footer .form-control {
+    color: #ffffff;
+    background-color: #52555F;
+    border: none;
+}
+
+/* line 623, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.footer .form-control::placeholder {
+    color: #ffffff;
+}
+
+/* line 627, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.footer svg {
+    fill: #ffffff;
+}
+
+/* line 630, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.footer svg:hover {
+    fill: #bd9658;
+}
+
+/* line 637, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.mobile-btn .fixbtn {
+    background: #034EA2;
+    color: #ffffff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    text-decoration: none;
+    text-align: center;
+    z-index: 99;
+}
+
+/* line 648, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.mobile-btn .whtfixbtn {
+    position: fixed;
+    bottom: 0;
+    background-color: #53CB58;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    z-index: 99;
+}
+
+/* line 659, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.green-campus {
+    background: #034EA2;
+}
+
+/* line 662, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.green-campus .campus-sep {
+    position: relative;
+}
+
+/* line 665, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.green-campus .campus-sep:before {
+    content: url("../img/campus-sep.png");
+    position: absolute;
+    top: -10px;
+    left: 242px;
+}
+
+@media (max-width: 575.98px) {
+    /* line 672, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.green-campus .campus-sep:before {
+        content: " ";
+    }
+}
+
+/* line 680, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.resources {
+    background: #f6f6f6;
+}
+
+/* line 683, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.resources a:hover {
+    text-decoration: none;
+}
+
+/* line 687, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.resources .feature-card {
+    height: 271px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(0deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 179.59%), #C4C4C4;
+    border-radius: 10px 10px 15px 15px;
+}
+
+@media (max-width: 575.98px) {
+    /* line 696, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.resources .feature-card {
+        height: 157px;
+    }
+}
+
+/* line 702, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.resources .feature-card-deatails {
+    position: absolute;
+    bottom: -228px;
+    left: 0;
+    width: 100%;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.6);
+    transition: 0.3s ease-in-out;
+    font-size: 15px;
+    color: #080808;
+}
+
+/* line 714, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.resources .feature-card-tilte {
+    position: absolute;
+    left: 0;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+    text-transform: uppercase;
+    transition: 0.3s ease-in-out;
+    padding: 20px;
+    background: #fff;
+}
+
+@media (max-width: 575.98px) {
+    /* line 726, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.resources .feature-card-tilte {
+        padding: 12px;
+    }
+}
+
+/* line 732, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.resources .feature-card-tilte h3 {
+    font-size: 22px;
+    color: #080808;
+}
+
+@media (max-width: 575.98px) {
+    /* line 737, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.resources .feature-card-tilte h3 {
+        font-size: 16px;
+    }
+}
+
+/* line 743, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.resources .feature-card:hover .feature-card-tilte {
+    bottom: -67px;
+}
+
+/* line 747, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.resources .feature-card-deatails h4 {
+    font-size: 20px;
+    color: #034EA2;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+/* line 754, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.resources .feature-card:hover .feature-card-deatails {
+    bottom: 0;
+}
+
+/* line 760, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec .course-sec-card {
+    background: #C7FDC6;
+    border-radius: 0px;
+}
+
+/* line 764, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec .course-sec-card .card-text {
+    color: #064705;
+}
+
+@media (max-width: 575.98px) {
+    /* line 768, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.course-sec .course-sec-card .card-text {
+        font-size: 8px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    /* line 776, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.course-sec .course-sec-card .icon-size {
+        width: 35px;
+    }
+}
+
+/* line 783, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec .course-sec-card2 {
+    background: #CCCDFF;
+    border-radius: 0px;
+}
+
+/* line 787, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec .course-sec-card2 .card-text {
+    color: #022B2E;
+}
+
+@media (max-width: 575.98px) {
+    /* line 791, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.course-sec .course-sec-card2 .card-text {
+        font-size: 11px;
+    }
+}
+
+/* line 798, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec .course-sec-card3 {
+    background: url("/img/course-banner.jpg");
+    background-size: cover;
+    border-radius: 0px;
+}
+
+/* line 803, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec .course-sec-card3 .card-text {
+    color: #ED1C24;
+}
+
+@media (max-width: 575.98px) {
+    /* line 807, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.course-sec .course-sec-card3 .card-text {
+        font-size: 11px;
+    }
+}
+
+/* line 815, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec1 {
+    background: #f6f6f6;
+}
+
+/* line 818, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec1 .overview-card {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* line 823, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec1 .overview-card span {
+    color: #034EA2;
+}
+
+/* line 830, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec2 .nav-tabs {
+    border-bottom: none;
+}
+
+@media (max-width: 575.98px) {
+    /* line 834, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.course-sec2 .nav-tabs {
+        flex-wrap: nowrap;
+    }
+}
+
+/* line 840, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec2 .course-btn {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+/* line 846, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec2 .nav-tabs .nav-link {
+    box-shadow: 5px 0px 8px -2px rgba(0, 0, 0, 0.15);
+    border-radius: 5px 5px 0px 0px;
+    color: #080808;
+}
+
+/* line 853, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec2 .nav-tabs .nav-item.show .nav-link,
+section.course-sec2 .nav-tabs .nav-link.active {
+    background: #034EA2;
+    border-radius: 5px 5px 0px 0px;
+    color: #DCE2E8;
+}
+
+/* line 860, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec2 .tab-content {
+    background: rgba(3, 78, 162, 0.4);
+}
+
+/* line 868, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec2 .branch-card .branch-img {
+    margin-top: -68px;
+}
+
+@media (max-width: 575.98px) {
+    /* line 872, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.course-sec2 .branch-card .branch-img {
+        margin-top: -50px;
+        height: 84px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    /* line 881, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.course-sec2 .branch-card .card-title {
+        font-size: 16px;
+    }
+}
+
+/* line 889, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec3 {
+    background: #f6f6f6;
+}
+
+/* line 892, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec3 .quick-fact-card {
+    border: 1px solid #034EA2;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+/* line 898, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec3 .owl-carousel .owl-nav button.owl-next {
+    position: absolute;
+    top: 37px;
+    right: -51px;
+}
+
+@media (max-width: 575.98px) {
+    /* line 904, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.course-sec3 .owl-carousel .owl-nav button.owl-next {
+        top: 100px;
+        right: 2px;
+    }
+}
+
+/* line 911, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec3 .owl-carousel .owl-nav button.owl-prev {
+    position: absolute;
+    top: 37px;
+    left: -51px;
+}
+
+@media (max-width: 575.98px) {
+    /* line 917, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.course-sec3 .owl-carousel .owl-nav button.owl-prev {
+        top: 100px;
+        left: 304px;
+    }
+}
+
+/* line 924, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec3 .owl-carousel .owl-item img {
+    width: auto;
+    display: inline;
+}
+
+/* line 931, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec4 {
+    background: #EAF4FF;
+}
+
+/* line 934, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec4 .head-card {
+    background: none;
+}
+
+/* line 937, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec4 .head-card .card-title {
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+    font-size: 26px;
+    color: #080808;
+}
+
+@media (max-width: 575.98px) {
+    /* line 941, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.course-sec4 .head-card .card-title {
+        font-size: 18px;
+    }
+}
+
+/* line 947, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec4 .head-card .head-txt {
+    color: #52555F;
+    font-weight: 600;
+}
+
+/* line 952, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec4 .head-card .quote-size {
+    width: 75px;
+}
+
+/* line 957, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec4 .owl-carousel .owl-nav button.owl-next {
+    position: absolute;
+    bottom: 25px;
+    right: -5px;
+}
+
+@media (max-width: 575.98px) {
+    /* line 963, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.course-sec4 .owl-carousel .owl-nav button.owl-next {
+        bottom: 5px;
+    }
+}
+
+/* line 969, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec4 .owl-carousel .owl-nav button.owl-prev {
+    position: absolute;
+    right: 49px;
+    bottom: 25px;
+}
+
+@media (max-width: 575.98px) {
+    /* line 975, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.course-sec4 .owl-carousel .owl-nav button.owl-prev {
+        bottom: 5px;
+        right: 42px;
+    }
+}
+
+/* line 982, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.course-sec4 .owl-carousel .owl-item img {
+    width: auto;
+    display: inline;
+}
+
+/* line 989, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.course-img {
+    height: 310px;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* line 995, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.sidebar-sec {
+    background: #EAF4FF;
+}
+
+/* line 1000, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.sidebar-sec2 .sidenav {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* line 1003, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.sidebar-sec2 .sidenav .sidenav-head {
+    background: #034EA2;
+}
+
+/* line 1007, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.sidebar-sec2 .sidenav .sidenav-link {
+    background: #f6f6f6;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #080808;
+    display: block;
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #C4C4C4;
+}
+
+/* line 1014, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.sidebar-sec2 .sidenav .sidenav-link:hover {
+    background: #EAF4FF;
+    color: #034EA2;
+}
+
+/* line 1021, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.sidebar-sec2 .tab-base {
+    border-radius: 10px;
+    background: #f9f9f9;
+}
+
+/* line 1026, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.sidebar-sec2 .tab-base-txt {
+    font-size: 18px;
+    color: #080808;
+    font-weight: 600;
+}
+
+/* line 1031, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.sidebar-sec2 .tab-base-txt:hover {
+    color: #bd9658;
+}
+
+/* line 1039, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.sidebar-sec2 .accordion .accordion-item .accordion-header {
+    border-bottom: 1px solid #000;
+}
+
+/* line 1042, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.sidebar-sec2 .accordion .accordion-item .accordion-header .accordion-button {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 500;
+    font-size: 21px;
+    color: #080808;
+    border-bottom: 0px;
+    border-radius: 0;
+    background: rgba(187, 147, 85, 0.8);
+}
+
+@media (max-width: 575.98px) {
+    /* line 1049, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.sidebar-sec2 .accordion .accordion-item .accordion-header .accordion-button {
+        font-size: 18px;
+    }
+}
+
+/* line 1054, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.sidebar-sec2 .accordion .accordion-item .accordion-header .accordion-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* line 1062, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.sidebar-sec2 .accordion-button:not(.collapsed)::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    transform: rotate(-180deg);
+}
+
+/* line 1070, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.inquiry-form {
+    background: #EAF4FF;
+}
+
+/* line 1073, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.inquiry-form .heading-form {
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+    font-size: 56px;
+    color: #080808;
+}
+
+@media (max-width: 575.98px) {
+    /* line 1077, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.inquiry-form .heading-form {
+        font-size: 23px;
+    }
+}
+
+/* line 1085, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.form-inquiry .form-box {
+    background: #034EA2;
+}
+
+/* line 1088, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.form-inquiry .form-box .footer-text {
+    color: #ffffff;
+}
+
+/* line 1091, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.form-inquiry .form-box .footer-text:hover {
+    color: #bd9658;
+}
+
+/* line 1097, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.form-inquiry .form-base {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+    background: #ffffff;
+}
+
+/* line 1103, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.contact-details {
+    background: #f9f9f9;
+}
+
+/* line 1106, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.contact-details .ct-card {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* line 1110, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+section.contact-details .ct-card .card-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #034EA2;
+}
+
+@media (max-width: 575.98px) {
+    /* line 1116, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    section.contact-details .ct-card .card-title {
+        font-size: 18px;
+    }
+}
+
+/* ------------------- MAIN CSS- mobile menu css ------------------*/
+
+/* ------------------- MAIN CSS- mobile menu css ------------------*/
+
+/* General styles for all menus */
+
+/* line 1127, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu {
+    background: #fff;
+    position: fixed;
+    box-shadow: 3px 0 20px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* line 1133, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu h3 {
+    color: #afdefa;
+    font-size: 1.9em;
+    padding: 20px;
+    margin: 0;
+    font-weight: 300;
+    background: #bd9658;
+}
+
+/* line 1145, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu .slide-category .accordion-button {
+    padding: 1rem 4.5%;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    color: #080808;
+    font-size: 0.83rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* line 1154, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu .slide-category .accordion-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* line 1165, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu .slide-category .accordion-body {
+    padding: 0px;
+}
+
+/* line 1168, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu .slide-category .accordion-body a {
+    display: block;
+    color: #080808;
+    font-size: 0.83rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* line 1180, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu a {
+    display: block;
+    color: #080808;
+    font-size: 0.83rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* .cbp-spmenu a:hover {
+	background: #4db6ac;
+}
+
+.cbp-spmenu a:active {
+	background: #afdefa;
+	color: #47a3da;
+} */
+
+/* Orientation-dependent styles for the content of the menu */
+
+/* line 1202, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu-vertical {
+    width: 280px;
+    height: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+/* line 1209, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu-vertical a {
+    /*border-bottom: 1px solid #258ecd;*/
+    padding: 0.9rem 1rem;
+}
+
+/* line 1214, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu-horizontal {
+    width: 100%;
+    height: 150px;
+    left: 0;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+/* line 1223, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu-horizontal h3 {
+    height: 100%;
+    width: 20%;
+    float: left;
+}
+
+/* line 1229, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu-horizontal a {
+    float: left;
+    width: 20%;
+    padding: 0.8em;
+    border-left: 1px solid #258ecd;
+}
+
+/* Vertical menu that slides from the left or right */
+
+/* line 1238, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu-left {
+    left: -300px;
+}
+
+/* line 1242, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu-right {
+    right: -240px;
+}
+
+/* line 1246, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu-left.cbp-spmenu-open {
+    left: 0px;
+}
+
+/* line 1250, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu-right.cbp-spmenu-open {
+    right: 0px;
+}
+
+/* Horizontal menu that slides from the top or bottom */
+
+/* line 1256, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu-top {
+    top: -150px;
+}
+
+/* line 1260, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu-bottom {
+    bottom: -150px;
+}
+
+/* line 1264, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu-top.cbp-spmenu-open {
+    top: 0px;
+}
+
+/* line 1268, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu-bottom.cbp-spmenu-open {
+    bottom: 0px;
+}
+
+/* Push classes applied to the body */
+
+/* line 1274, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu-push {
+    overflow-x: hidden;
+    position: relative;
+    left: 0;
+}
+
+/* line 1280, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu-push-toright {
+    left: 240px;
+}
+
+/* line 1284, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu-push-toleft {
+    left: -240px;
+}
+
+/* Transitions */
+
+/* line 1290, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu,
+.cbp-spmenu-push {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    z-index: 1031;
+}
+
+/* Example media queries */
+
+@media screen and (max-width: 55.1875em) {
+    /* line 1302, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    .cbp-spmenu-horizontal {
+        font-size: 75%;
+        height: 110px;
+    }
+    /* line 1307, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    .cbp-spmenu-top {
+        top: -110px;
+    }
+    /* line 1311, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    .cbp-spmenu-bottom {
+        bottom: -110px;
+    }
+}
+
+@media screen and (max-height: 26.375em) {
+    /* line 1319, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    .cbp-spmenu-vertical {
+        font-size: 90%;
+    }
+    /* line 1330, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    .cbp-spmenu-right {
+        right: -190px;
+    }
+    /* line 1334, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    .cbp-spmenu-push-toright {
+        left: 190px;
+    }
+}
+
+/* line 1339, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+button#showLeft {
+    background: transparent;
+    border-color: transparent;
+    line-height: 14px;
+}
+
+/* line 1345, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+button#showLeft img {
+    width: 30px;
+}
+
+/* line 1349, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+button#showLeft:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* line 1354, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+button.cbpbtn {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 10px 15px;
+    color: #fff;
+    background: transparent;
+    border-color: transparent;
+}
+
+/* line 1363, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu-left.cbp-spmenu-open {
+    z-index: 1031;
+    overflow-y: overlay;
+}
+
+/* line 1368, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+button.cbpbtn:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+/* line 1373, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.slide-logo {
+    width: 70px;
+    padding: 0.2rem 0.5rem !important;
+}
+
+/* line 1378, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.slide-category .nav-link {
+    padding-left: 5%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* line 1383, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu .slide-category a:hover,
+.cbp-spmenu .slide-link a:hover {
+    color: #ffffff;
+    background: #080808;
+}
+
+/* line 1395, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu .slide-category .dropdown .dropdown-menu li a:active {
+    background-color: #080808;
+    color: #ffffff;
+}
+
+/* line 1406, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.cbp-spmenu .nav-link {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.83rem;
+    letter-spacing: 2px;
+}
+
+/* line 1413, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.slide-link img {
+    width: 20px;
+}
+
+/* line 1419, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.slide-link .iconmenu .nav-link {
+    padding: 0px 10px 10px 0px;
+}
+
+/* line 1423, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.slide-link .iconmenu li.nav-item.iconli {
+    display: inline-block;
+}
+
+/* line 1426, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.slide-link .iconmenu li.nav-item.iconli svg {
+    fill: #FDE7EA;
+}
+
+/* line 1431, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.slide-link .iconmenu li.nav-item.iconli:hover svg {
+    fill: #e41631;
+}
+
+/* line 1439, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.slide-link h5 {
+    font-family: 'poppins', sans-serif;
+}
+
+/* line 1445, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.slide-link a {
+    padding: 0rem 0.2rem 0rem;
+}
+
+/* line 1449, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.slide-link ul,
+.slide-link h5 {
+    padding-left: 1rem;
+}
+
+/* line 1454, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.slide-link h5 {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 1rem;
+}
+
+/* line 1460, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+ul.slide-contact {
+    list-style-type: none;
+}
+
+/* line 1464, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.slide-contact i.btn-primary:focus {
+    font-size: 0.8rem;
+}
+
+/* line 1468, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.slide-contact li {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+/* line 1474, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+#showLeft {
+    display: none;
+}
+
+@media (min-width: 320px) and (max-width: 768px) {
+    /* line 1474, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+    #showLeft {
+        display: block;
+    }
+}
+
+/* ------------------- MAIN CSS- mobile menu css close ------------------*/
+
+/* line 1492, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.leadership .card-img-top {
+    height: 365px;
+    object-fit: cover;
+    object-position: top;
+}
+
+/* line 1498, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.fitbg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* line 1506, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.opensans {
+    font-family: "Open Sans", sans-serif;
+}
+
+/* line 1510, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.list-card {
+    border-color: #034EA2 !important;
+}
+
+/* line 1512, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.list-card-header {
+    background-color: #034EA2;
+    color: #ffffff;
+}
+
+/* line 1519, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.table .table-top {
+    background: #034EA2;
+    color: #ffffff;
+}
+
+/* line 1525, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.sidebutton {
+    position: fixed;
+    right: -113px;
+    bottom: 50%;
+    transform: rotate(270deg);
+    top: 50%;
+    z-index: 999;
+}
+
+/* line 1534, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.gallery-border {
+    border: 3px solid #034EA2;
+}
+
+/* line 1537, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.table-border {
+    border-color: #053b77;
+}
+
+/* line 1540, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.table> :not(:first-child) {
+    border-top: 2px solid #034EA2;
+}
+
+/* line 1543, ../../wamp64/www/poornimagroup/public/scss/style.scss */
+
+.blinkbtn {
+    -webkit-animation: 1s blink infinite;
+    animation: 1s blink infinite;
+}
+
+@keyframes blink {
+    0% {
+        background-color: #bd9658;
+    }
+    30% {
+        background-color: #bd9658;
+    }
+    60% {
+        background-color: #198754;
+    }
+    100% {
+        background-color: #198754;
+        color: #fff;
+    }
+}
+
+@-webkit-keyframes blink {
+    0% {
+        background-color: #bd9658;
+    }
+    30% {
+        background-color: #bd9658;
+    }
+    60% {
+        background-color: #198754;
+    }
+    100% {
+        background-color: #198754;
+        color: #fff;
+    }
+}
+
+/*# sourceMappingURL=style.css.map */

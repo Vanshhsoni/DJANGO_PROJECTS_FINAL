@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoornimaX</title>
+    <style>
+        /* General Layout */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #001a33;
+            color: #f1f1f1;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 20px;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #00aaff;
+            border-bottom: 2px solid #0d3c5b;
+        }
+
+        /* Container */
+        .container {
+            background-color: #0d3c5b;
+            margin: 20px auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 85%;
+            max-width: 900px;
+            box-shadow: 0 0 20px rgba(0, 76, 153, 0.4);
+        }
+
+        /* Question Set Styling */
+        .question-set {
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #00aaff;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            border-left: 5px solid #00aaff;
+            padding-left: 10px;
+        }
+
+        /* Individual Question Box */
+        .question-box {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #001a33;
+            border: 1px solid #00aaff;
+            border-radius: 5px;
+        }
+
+        .question-box h3 {
+            margin-bottom: 10px;
+        }
+
+        .options label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        hr {
+            border: 0;
+            height: 2px;
+            background-color: #00aaff;
+            margin: 30px 0;
+        }
+
+        /* Submit Button */
+        button {
+            background-color: #00aaff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 1rem;
+            background-color: #001a33;
+            color: #00aaff;
+            border-top: 2px solid #0d3c5b;
+        }
+    </style>
+</head>
+<body>
+    <header>PoornimaX</header>
+    <form method="POST" action="{% url 'accounts:questionnaire_view' %}">
+        {% csrf_token %}
+        <div class="container">
+
+            <!-- Set 1 -->
+                <!-- Set 1: Comma-separated text inputs for multiple choice questions -->
+    <div class="question-set">
+    <h2>Set 2: Single Choice Questions</h2>
+    <div class="question-box">
+    <label>Hobbies (comma-separated):</label>
+    <input required type="text" name="hobbies" placeholder="e.g. Music, Sports, Gaming" value="{{ questionnaire.hobbies|default:'' }}" />
+    </div>
+    <div class="question-box">
+    <label>College Events (comma-separated):</label>
+    <input required type="text" name="college_events" placeholder="e.g. Fests, Hackathons, Sports" value="{{ questionnaire.college_events|default:'' }}" />
+    </div>
+    <div class="question-box">
+    <label>Weekend Plans (comma-separated):</label>
+    <input required type="text" name="weekend_plans" placeholder="e.g. Binge-watching, Gym, Sleeping" value="{{ questionnaire.weekend_plans|default:'' }}" />
+    </div>
+    <div class="question-box">
+    <label>What do you value most in friendships? (comma-separated):</label>
+    <input required type="text" name="friendship_values" placeholder="e.g. Loyalty, Humor, Communication" value="{{ questionnaire.friendship_values|default:'' }}" />
+    </div>
+    <div class="question-box">
+    <label>What kind of content do you like to post? (comma-separated):</label>
+    <input required type="text" name="content_posting" placeholder="e.g. Memes, Vlogs, Food pics" value="{{ questionnaire.content_posting|default:'' }}" />
+    </div>
+    <div class="question-box">
+    <label>What excites you the most in college? (comma-separated):</label>
+    <input required  type="text" name="college_excitements" placeholder="e.g. Internships, Career prep, Friends" value="{{ questionnaire.college_excitements|default:'' }}" />
+    </div>
+    <div class="question-box">
+    <label>How do you prefer to learn? (comma-separated):</label>
+    <input required  type="text" name="learning_preferences" placeholder="e.g. Videos, Books, Group study" value="{{ questionnaire.learning_preferences|default:'' }}" />
+    </div>
+    <div class="question-box">
+    <label>How do you typically relax? (comma-separated):</label>
+    <input required type="text" name="relaxation_methods" placeholder="e.g. Music, Gaming, Meditation" value="{{ questionnaire.relaxation_methods|default:'' }}" />
+    </div>
+    </div>
+            <hr>
+
+            <div class="question-set">
+                <h2>Set 2: Single Choice Questions</h2>
+
+                <div class="question-box">
+                    <h3>Are you Introvert or Extrovert</h3>
+                    <div class="options">
+                        <label><input required  type="radio" name="introvert_extrovert" value="Introvert" > Introvert</label>
+                        <label><input required  type="radio" name="introvert_extrovert" value="Extrovert" >  Extrovert</label>
+                        <label><input required  type="radio" name="introvert_extrovert" value="Ambivert" > Ambivert</label>
+                        <label><input required  type="radio" name="introvert_extrovert" value="Shy" > Shy</label>
+                    </div>
+                </div>
+            
+                <div class="question-box">
+                    <h3>What’s your ideal first meet-up?</h3>
+                    <div class="options">
+                        <label><input required type="radio" name="first_meet" value="Canteen chai"> Canteen chai</label>
+                        <label><input required type="radio" name="first_meet" value="Library talk" > Library talk</label>
+                        <label><input required type="radio" name="first_meet" value="Random walk" > Random walk</label>
+                        <label><input required type="radio" name="first_meet" value="Event hangout"> Event hangout</label>
+                        <label><input required type="radio" name="first_meet" value="Virtual hangout"> Virtual hangout (online)</label>
+                    </div>
+                </div>
+            
+                <div class="question-box">
+                    <h3>Night owl or early bird?</h3>
+                    <div class="options">
+                        <label><input required type="radio" name="sleep_type" value="Night owl"> Night owl</label>
+                        <label><input required type="radio" name="sleep_type" value="Early bird"> Early bird</label>
+                        <label><input required type="radio" name="sleep_type" value="Depends"> Neither, depends on my mood</label>
+                    </div>
+                </div>
+            
+                <div class="question-box">
+                    <h3>What’s more important in a person?</h3>
+                    <div class="options">
+                        <label><input required type="radio" name="important_trait" value="Looks"> Looks</label>
+                        <label><input required type="radio" name="important_trait" value="Vibe"> Vibe</label>
+                        <label><input required type="radio" name="important_trait" value="Communication"> Communication</label>
+                        <label><input required type="radio" name="important_trait" value="Ambition"> Ambition</label>
+                        <label><input required type="radio" name="important_trait" value="Humor"> Humor</label>
+                    </div>
+                </div>
+            
+                <div class="question-box">
+                    <h3>Which year are you in?</h3>
+                    <div class="options">
+                        <label><input required type="radio" name="year" value="1st Year"> 1st Year</label>
+                        <label><input required type="radio" name="year" value="2nd Year"> 2nd Year</label>
+                        <label><input required type="radio" name="year" value="3rd Year"> 3rd Year</label>
+                        <label><input required type="radio" name="year" value="Final Year"> Final Year</label>
+                        <label><input required type="radio" name="year" value="Postgraduate"> Postgraduate</label>
+                    </div>
+                </div>
+            
+                <div class="question-box">
+                    <h3>What’s your communication style?</h3>
+                    <div class="options">
+                        <label><input required type="radio" name="comm_style" value="Dry Texter"> Dry Texter</label>
+                        <label><input required type="radio" name="comm_style" value="Emojis & Memes"> Emojis & Memes</label>
+                        <label><input required type="radio" name="comm_style" value="Deep Conversations"> Deep Conversations</label>
+                        <label><input required type="radio" name="comm_style" value="Voice Notes Lover"> Voice Notes Lover</label>
+                        <label><input required type="radio" name="comm_style" value="Frequent Calls"> Frequent Calls</label>
+                    </div>
+                </div>
+            
+                <div class="question-box">
+                    <h3>How often do you post on social media?</h3>
+                    <div class="options">
+                        <label><input required type="radio" name="posting_frequency" value="Rarely"> Rarely</label>
+                        <label><input required type="radio" name="posting_frequency" value="Occasionally"> Occasionally</label>
+                        <label><input required type="radio" name="posting_frequency" value="Frequently"> Frequently</label>
+                        <label><input required type="radio" name="posting_frequency" value="Almost daily"> Almost daily</label>
+                        <label><input required type="radio" name="posting_frequency" value="Only when important"> Only when I have something important to share</label>
+                    </div>
+                </div>
+            
+                <div class="question-box">
+                    <h3>How do you make decisions?</h3>
+                    <div class="options">
+                        <label><input required type="radio" name="decision_style" value="Logically"> Logically</label>
+                        <label><input required type="radio" name="decision_style" value="Emotionally"> Emotionally</label>
+                        <label><input required type="radio" name="decision_style" value="Mix"> Mix of both</label>
+                        <label><input required type="radio" name="decision_style" value="Impulsive"> Impulsive</label>
+                    </div>
+                </div>
+            
+                <div class="question-box">
+                    <h3>How do you like to spend your free time?</h3>
+                    <div class="options">
+                        <label><input required type="radio" name="free_time" value="Alone"> Alone, doing my own thing</label>
+                        <label><input required type="radio" name="free_time" value="With friends"> Hanging with friends</label>
+                        <label><input required type="radio" name="free_time" value="Exploring"> Exploring new activities</label>
+                        <label><input required type="radio" name="free_time" value="Creative"> Doing something creative (art, writing, etc.)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-set">
+                <h2>Set 3: Relationship Intent Questions</h2>
+            
+                <div class="question-box">
+                    <h3>Your current relationship status</h3>
+                    <div class="options">
+                        <label><input required type="radio" name="relationship_status" value="Single"> Single</label>
+                        <label><input required type="radio" name="relationship_status" value="Taken"> Taken</label>
+                        <label><input required type="radio" name="relationship_status" value="It’s complicated"> It’s complicated</label>
+                        <label><input required type="radio" name="relationship_status" value="Not telling"> Not telling</label>
+                        <label><input required type="radio" name="relationship_status" value="Open"> In an open relationship</label>
+                    </div>
+                </div>
+            
+                <div class="question-box">
+                    <h3>You’re looking for</h3>
+                    <div class="options">
+                        <label><input required type="radio" name="looking_for" value="Girlfriend"> Girlfriend</label>
+                        <label><input required type="radio" name="looking_for" value="Boyfriend"> Boyfriend</label>
+                        <label><input required type="radio" name="looking_for" value="Hookup"> Hookup</label>
+                        <label><input required type="radio" name="looking_for" value="Serious partner"> Serious partner</label>
+                        <label><input required type="radio" name="looking_for" value="Friend"> Friend</label>
+                        <label><input required type="radio" name="looking_for" value="BFF"> BFF</label>
+                        <label><input required type="radio" name="looking_for" value="College mate"> College mate</label>
+                        <label><input required type="radio" name="looking_for" value="FWB"> FWB</label>
+                        <label><input required type="radio" name="looking_for" value="Chill vibe"> Chill vibe</label>
+                        <label><input required type="radio" name="looking_for" value="Not sure yet"> Not sure yet</label>
+                        <label><input required type="radio" name="looking_for" value="Chat"> Someone to chat with</label>
+                    </div>
+                </div>
+            
+                <div class="question-box">
+                    <h3>What is your approach to dating?</h3>
+                    <div class="options">
+                        <label><input required type="radio" name="dating_approach" value="Slow"> I like to take things slow</label>
+                        <label><input required type="radio" name="dating_approach" value="Dive in"> I dive in quickly and see where it goes</label>
+                        <label><input required type="radio" name="dating_approach" value="Long-term"> I prefer long-term commitment</label>
+                        <label><input required type="radio" name="dating_approach" value="Fun"> I’m just here for fun</label>
+                    </div>
+                </div>
+            
+                <div class="question-box">
+                    <h3>How important is compatibility for you?</h3>
+                    <div class="options">
+                        <label><input required type="radio" name="compatibility" value="Very"> Very important</label>
+                        <label><input required type="radio" name="compatibility" value="Somewhat"> Somewhat important</label>
+                        <label><input required type="radio" name="compatibility" value="Open"> I’m open to exploring any kind of relationship</label>
+                        <label><input required type="radio" name="compatibility" value="Not important"> Not important at all</label>
+                    </div>
+                </div>
+            
+                <div class="question-box">
+                    <h3>Are you looking for someone with similar interests?</h3>
+                    <div class="options">
+                        <label><input required type="radio" name="similar_interests" value="Yes"> Yes, definitely</label>
+                        <label><input required type="radio" name="similar_interests" value="Open"> I’m open to different interests</label>
+                        <label><input required type="radio" name="similar_interests" value="Unique"> I prefer someone with unique interests</label>
+                    </div>
+                </div>
+            
+                <div class="question-box">
+                    <h3>How do you view relationships?</h3>
+                    <div class="options">
+                        <label><input required type="radio" name="relationship_view" value="Serious"> Serious commitment</label>
+                        <label><input required type="radio" name="relationship_view" value="Casual"> Fun and casual</label>
+                        <label><input required type="radio" name="relationship_view" value="Unsure"> I’m unsure</label>
+                        <label><input required type="radio" name="relationship_view" value="Journey"> Just enjoying the journey</label>
+                    </div>
+                </div>
+            </div>
+                <button type="submit">Submit</button>
+        </div>
+    </form>
+    <footer>YOU KNOW WHO I AM</footer>
+</body>
+</html>

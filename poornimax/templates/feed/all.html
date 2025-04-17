@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Users - Compatibility</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .user-list {
+            margin-top: 20px;
+        }
+        .user-card {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .user-card img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+        .user-info {
+            flex-grow: 1;
+        }
+        .user-info h3 {
+            margin: 0;
+            color: #333;
+        }
+        .compatibility {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Users and Compatibility</h1>
+
+    <div class="user-list">
+        {% for user, compatibility_score in compatibility_scores %}
+        <div class="user-card">
+            <div class="user-info">
+                <img src="{{ user.profile_picture.url }}" alt="Profile Picture">
+                <h3>{{ user.full_name }}</h3>
+                <p><strong>Department:</strong> {{ user.department }}</p>
+            </div>
+            <div class="compatibility">
+                <p>Compatibility: {{ compatibility_score }}%</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>

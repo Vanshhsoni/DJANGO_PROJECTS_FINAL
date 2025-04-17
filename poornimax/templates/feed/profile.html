@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>{{ user.username }}'s Profile</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f8;
+      color: #222;
+    }
+
+    .header {
+      background-color: #1e2a38;
+      color: #fff;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+    }
+
+    .back-button {
+      text-decoration: none;
+      color: #00bcd4;
+      font-size: 1.5rem;
+      margin-right: 12px;
+    }
+
+    .header h2 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    .profile-container {
+      max-width: 600px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 24px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .profile-picture {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 16px;
+      border: 3px solid #1e2a38;
+    }
+
+    .username {
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #1e2a38;
+    }
+
+    .bio {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #607d8b;
+      margin-bottom: 20px;
+    }
+
+    .info {
+      text-align: center;
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+      color: #37474f;
+    }
+
+    .info p {
+      margin: 6px 0;
+    }
+
+    .profile-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-edit {
+      background-color: #1976d2;
+      color: white;
+    }
+
+    .btn-edit:hover {
+      background-color: #1565c0;
+    }
+
+    .btn-chat {
+      background-color: #00bfa5;
+      color: white;
+    }
+
+    .btn-chat:hover {
+      background-color: #009688;
+    }
+
+    .btn-unfriend {
+      background-color: #e53935;
+      color: white;
+    }
+
+    .btn-unfriend:hover {
+      background-color: #c62828;
+    }
+
+    .post-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .post-item {
+      background-color: #eceff1;
+      height: 120px;
+      border-radius: 8px;
+    }
+
+    @media screen and (max-width: 500px) {
+      .profile-container {
+        margin: 20px;
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <a href="{% url 'feed:home' %}" class="back-button">←</a>
+    <h2>{{ profile_user.username }}</h2>
+  </div>
+
+  <div class="profile-container">
+    <img src="{{ profile_user.profile_picture.url }}" alt="Profile Picture" class="profile-picture" />
+    <div class="username">@{{ profile_user.username }}</div>
+    <div class="bio">{{ profile_user.bio|default:"No bio added yet." }}</div>
+
+    <div class="info">
+      <p><strong>College:</strong> {{ profile_user.college }}</p>
+      <p><strong>Department:</strong> {{ profile_user.department }}</p>
+      <p><strong>DOB:</strong> {{ profile_user.dob }}</p>
+      <p><strong>Gender:</strong> {{ profile_user.gender }}</p>
+    </div>
+
+    {% if request.user.username == profile_user.username %}
+    <div class="profile-buttons">
+        <a href="/accounts/edit-profile/" class="btn btn-edit">✏️ Edit Profile</a>
+    </div>
+{% else %}
+<div class="profile-buttons">
+  <form method="POST" action="{% url 'feed:crush_action' profile_user.id %}">
+    {% csrf_token %}
+
+    {% if is_mutual %}
+        <button type="submit" name="crush_action" value="uncrush">
+            <img src="{% static 'feed/heart-red.png' %}" class="btn-heart" alt="Heart" />
+            <p>Mutual Crush 💖</p>
+        </button>
+    
+    {% elif sent_crush %}
+        <button type="submit" name="crush_action" value="uncrush">
+            <img src="{% static 'feed/heart-pink.png' %}" class="btn-heart" alt="Heart" />
+            <p>Sent a Crush</p>
+        </button>
+
+    {% elif received_crush %}
+        <button type="submit" name="crush_action" value="accept_crush">
+            <img src="{% static 'feed/heart-empty.png' %}" class="btn-heart" alt="Heart" />
+            <p>Accept Crush</p>
+        </button>
+
+    {% else %}
+        <button type="submit" name="crush_action" value="send_crush">
+            <img src="{% static 'feed/heart-empty.png' %}" class="btn-heart" alt="Heart" />
+            <p>Send Crush</p>
+        </button>
+    {% endif %}
+  </form>
+</div>
+
+
+    
+    </div>
+{% endif %}
+
+
+    <div class="post-grid">
+      <!-- Placeholder for posts -->
+      <div class="post-item"></div>
+      <div class="post-item"></div>
+      <div class="post-item"></div>
+      <div class="post-item"></div>
+    </div>
+  </div>
+</body>
+
+
+</html>

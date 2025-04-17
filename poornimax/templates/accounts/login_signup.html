@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoornimaX - Engage</title>
+    <style>
+        /* General Body Style */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: radial-gradient(circle, #0e0e0e 30%, #161616 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            color: #d9d9d9;
+        }
+
+        /* Container Styling */
+        .container {
+            text-align: center;
+            padding: 40px;
+            border-radius: 8px;
+            background: #212121;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+            width: 95%;
+            max-width: 450px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
+        }
+
+        h1 {
+            color: #d9d9d9;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            color: #b3b3b3;
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        p.subtext {
+            font-size: 1rem;
+            color: #787878;
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        /* Button Styling */
+        .btn {
+            background: #303030;
+            color: #d9d9d9;
+            padding: 14px 40px;
+            border-radius: 25px;
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            outline: none;
+            margin: 15px;
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #383838;
+            transform: translateY(-5px);
+        }
+
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            animation: bubble 0.6s ease-out;
+        }
+
+        @keyframes bubble {
+            0% {
+                width: 0;
+                height: 0;
+            }
+            100% {
+                width: 300%;
+                height: 300%;
+            }
+        }
+
+        /* Brand Text */
+        .brand-text {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #555555;
+            font-weight: 400;
+        }
+
+        /* Floating Bubbles Animation */
+        @keyframes float-bubble {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .floating-bubble {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            background-color: #404040;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: float-bubble 3s infinite ease-in-out;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Bubbles -->
+    <div class="floating-bubble" style="left: 20%; animation-delay: 0s;"></div>
+    <div class="floating-bubble" style="left: 50%; animation-delay: -0.5s;"></div>
+    <div class="floating-bubble" style="left: 80%; animation-delay: -1s;"></div>
+
+    <div class="container">
+        <h1>PoornimaX</h1>
+        <h2>Where Journeys Begin and Mysteries Unfold</h2>
+        <p class="subtext">Your doorway to infinite connections and boundless opportunities.</p>
+        <a href="{% url 'accounts:load_login' %}">
+            <button class="btn">Login</button>
+        </a>
+        <a href="{% url 'accounts:load_signup' %}">
+            <button class="btn">Signup</button>
+        </a>
+        <p class="brand-text">YOU KNOW WHO I AM</p>
+    </div>
+</body>
+</html>

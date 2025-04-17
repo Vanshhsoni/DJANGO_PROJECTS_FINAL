@@ -1,0 +1,1542 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+$playfair: 'Playfair Display',
+serif;
+$poppins: 'Poppins',
+sans-serif;
+$opensans: 'Open Sans',
+sans-serif;
+$shadow : 0px 0px 20px rgba(0, 0, 0, 0.15);
+
+$background   : #f6f6f6;
+$white        : #ffffff;
+$primary-color: #080808;
+// $red          : #ED1C24;
+$gold          : #bd9658;
+$blue         : #034EA2;
+$purple       : #2E3192;
+$darkgreeen   : #1BCF17;
+$green        : #C7FDC6;
+$size         : 16px;
+$weight       : 400;
+
+@mixin primary-text($color, $font, $size, $weight) {
+    font-family: $font;
+    font-weight: $weight;
+    font-size  : $size;
+    color      : $color;
+}
+
+.carousel-indicators [data-bs-target]{
+    background-color: #000;
+}
+
+body {
+    @include primary-text($primary-color, $poppins, $size, $weight);
+
+    @media (max-width:575.98px) {
+        & {
+            font-size: 14px;
+        }
+    }
+    overflow-x: hidden;
+}
+
+a{
+    text-decoration: none;
+    color: $gold;
+    &:hover{
+        color: darken($gold, $amount: 9)
+    }
+}
+
+//----common classes
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin            : 0;
+}
+
+.form-select {
+    &:focus {
+        outline   : none;
+        box-shadow: none;
+    }
+}
+
+.link-clr {
+    color: $white;
+
+    &:hover {
+        color: $background;
+    }
+}
+
+.link {
+    @include primary-text($primary-color, $poppins, 14px, 600);
+
+    &:hover {
+        color: $blue;
+    }
+}
+
+.btn {
+    &:focus {
+        box-shadow: none;
+        outline   : none;
+    }
+}
+
+.form-control {
+    &:focus {
+        outline   : none;
+        box-shadow: none;
+    }
+}
+
+.card {
+    border: none;
+}
+
+.red-btn {
+    background   : $gold;
+    border-radius: 5px;
+    color        : $white;
+
+    &:hover {
+        background: $primary-color;
+        color     : $white;
+    }
+}
+
+.blue-btn {
+    background   : $blue;
+    border-radius: 5px;
+    color        : $white;
+
+    &:hover {
+        background: $primary-color;
+        color     : $white;
+    }
+}
+
+.heading-h2 {
+    @include primary-text($primary-color, $opensans, 36px, bold);
+
+    @media (max-width: 575.98px) {
+        & {
+            font-size: 25px;
+        }
+    }
+}
+
+.heading-h3 {
+    @include primary-text($white, $opensans, 36px, bold);
+
+    @media (max-width: 575.98px) {
+        & {
+            font-size: 25px;
+        }
+    }
+}
+
+.heading-h5 {
+    @include primary-text($primary-color, $poppins, 20px, 600);
+    letter-spacing: 0.03em;
+
+    @media (max-width: 575.98px) {
+        & {
+            font-size: 17px;
+        }
+    }
+}
+
+.heading-h6 {
+    @include primary-text($primary-color, $poppins, 18px, 600);
+    letter-spacing: 0.03em;
+
+    @media (max-width: 575.98px) {
+        & {
+            font-size: 14px;
+        }
+    }
+}
+
+.sub-heading {
+    @include primary-text($white, $opensans, 24px, bold);
+
+    @media (max-width:575.98px) {
+        & {
+            font-size: 20px;
+        }
+    }
+}
+
+.red-text {
+    font-family: $playfair;
+    color      : $gold;
+}
+
+.gold-text {
+    font-family: $playfair;
+    color      : $gold;
+}
+
+.blue-text {
+    font-family: $playfair;
+    color      : $blue;
+}
+
+.white-text {
+    color: $white;
+}
+
+// -------header-------- //
+.blue-box {
+    background: #C9FFFC;
+
+    .card-title {
+        @include primary-text(#022B2E, $poppins, 30px, 600);
+
+        @media (max-width:575.98px) {
+            & {
+                font-size: 24px;
+            }
+        }
+    }
+}
+
+.red-box {
+    background: #FED8D9;
+
+    .card-title {
+        @include primary-text($gold, $poppins, 30px, 600);
+
+        @media (max-width:575.98px) {
+            & {
+                font-size: 24px;
+            }
+        }
+    }
+}
+
+.green-box {
+    background: #C7FDC6;
+
+    .card-title {
+        @include primary-text(#1BCF17, $poppins, 30px, 600);
+
+        @media (max-width:575.98px) {
+            & {
+                font-size: 24px;
+            }
+        }
+    }
+}
+
+.purple-box {
+    background: #CCCDFF;
+
+    .card-title {
+        @include primary-text($purple, $poppins, 30px, 600);
+
+        @media (max-width:575.98px) {
+            & {
+                font-size: 24px;
+            }
+        }
+    }
+}
+
+.recru-head {
+    @include primary-text($gold, $opensans, 20px, 600);
+
+    @media (max-width:575.98px) {
+        & {
+            font-size: 18px;
+        }
+    }
+}
+
+.faculty-head {
+    @include primary-text($blue, $opensans, 20px, 600);
+
+    @media (max-width:575.98px) {
+        & {
+            font-size: 18px;
+        }
+    }
+}
+
+// -------top bar
+.top-sep {
+    position: relative;
+
+    &::after {
+        content : url("../webicon/top-sep.svg");
+        position: absolute;
+        top     : -4px;
+        right    : 0;
+    }
+}
+
+section.top {
+    .top-text {
+        @include primary-text($primary-color, $poppins, 12px, 300);
+    }
+
+}
+
+section.sub-menu {
+    .navbar {
+        .navbar-nav {
+            .nav-link {
+                @include primary-text($primary-color, $opensans, 14px, $weight);
+
+                &:hover {
+                    color: $gold;
+                }
+            }
+
+        }
+    }
+
+    svg {
+        fill: $primary-color;
+
+        &:hover {
+            fill: $blue;
+        }
+    }
+}
+
+section.menu {
+    background: $blue;
+
+    .navbar {
+        .navbar-nav {
+            .nav-link {
+                @include primary-text($white, $opensans, 16px, $weight);
+
+                &:hover {
+                    color: $gold;
+                }
+            }
+
+        }
+
+        .menu-btn {
+            background: $gold;
+
+            &:hover {
+                background: $primary-color;
+            }
+        }
+    }
+}
+
+section.glance {
+    background: $background;
+
+    .fact-base {
+        background   : #FFFFFF;
+        border-radius: 15px;
+        min-height   : 190px;
+
+        @media (max-width: 575.98px) {
+            & {
+                min-height: 157px;
+            }
+        }
+
+        img {
+            width : 80px;
+            height: 80px;
+        }
+    }
+
+    .owl-carousel .owl-nav{
+        position: absolute;
+        top: -36px;
+        right: -1px;
+    }
+    .owl-carousel .owl-nav button.owl-next, .owl-carousel .owl-nav button.owl-prev {
+        // position: absolute;
+        // top     : -127px;
+        // right   : 58px;
+        margin: 0 5px;
+
+        // @media (max-width:575.98px) {
+        //     & {
+        //         top  : -80px;
+        //         right: 46px;
+        //     }
+        // }
+    }
+
+    .owl-carousel .owl-item img {
+        width  : auto;
+        display: inline;
+
+    }
+
+}
+
+section.about {
+    .abt-base {
+        background   : #FFFFFF;
+        box-shadow   : 0px 0px 20px rgba(0, 0, 0, 0.15);
+        border-radius: 5px;
+    }
+}
+
+section.our-institutes {
+    background: $background;
+
+    .institute-card {
+        border-radius: 10px 10px;
+        transition   : 0.4s;
+
+        &:hover {
+            transform        : translateY(-10px);
+            box-shadow       : 0px 0px 20px rgba(3, 78, 162, 0.15);
+            -webkit-transform: translateY(-10px);
+        }
+
+        .card-text {
+            @include primary-text($white, $poppins, 20px, 600);
+            letter-spacing: 0.03em;
+
+            @media (max-width: 575.98px) {
+                & {
+                    font-size: 18px;
+                }
+            }
+        }
+
+        .title {
+            @include primary-text($white, $poppins, 26px, 600);
+            letter-spacing: 0.03em;
+
+            @media (max-width: 575.98px) {
+                & {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+
+    .blue-card-body {
+        background   : $blue;
+        border-radius: 0px 0px 10px 10px;
+    }
+
+    .red-card-body {
+        background   : $gold;
+        border-radius: 0px 0px 10px 10px;
+    }
+
+    .isnt-card {
+        background   : #FFFFFF;
+        box-shadow   : 0px 0px 20px rgba(0, 0, 0, 0.15);
+        border-radius: 10px;
+
+        .card-title {
+            @include primary-text($blue, $opensans, 36px, bold);
+
+            @media (max-width:575.98px) {
+                & {
+                    font-size: 25px;
+                }
+            }
+        }
+
+        .isnt-h2 {
+            @include primary-text($blue, $poppins, 24px, 500);
+
+            &:hover {
+                color: $gold;
+            }
+
+            @media (max-width:575.98px) {
+                & {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+}
+
+section.recruiters {
+    .recru-base {
+        background   : #FFFFFF;
+        box-shadow   : 0px 0px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+    }
+}
+
+section.faculty {
+    background: $background;
+
+    .faculty-card {
+        background   : #FFFFFF;
+        border-radius: 5px;
+
+        .card-title {
+            @include primary-text($blue, $opensans, 22px, 600);
+
+            @media (max-width:575.98px) {
+                & {
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+
+    .owl-carousel .owl-nav button.owl-next {
+        position: absolute;
+        top     : -127px;
+        right   : -1px;
+
+        @media (max-width:575.98px) {
+            & {
+                top  : 181px;
+                right: 130px;
+            }
+        }
+    }
+
+    .owl-carousel .owl-nav button.owl-prev {
+        position: absolute;
+        top     : -127px;
+        right   : 58px;
+
+        @media (max-width:575.98px) {
+            & {
+                top  : 180px;
+                right: 178px;
+            }
+        }
+    }
+
+    .owl-carousel .owl-item img {
+        width  : auto;
+        display: inline;
+
+    }
+}
+
+section.testimonial {
+    background-image   : url("../img/testimonial-bg.png");
+    background-position: center;
+    background-repeat  : no-repeat;
+    background-size    : cover;
+
+    .testimonial-card {
+        background: none;
+
+        .card-title {
+            @include primary-text($white, $opensans, 24px, bold);
+
+            @media (max-width:575.98px) {
+                & {
+                    font-size: 20px;
+                }
+            }
+        }
+
+        .card-text {
+            @include primary-text($white, $poppins, 18px, 600);
+            letter-spacing: 0.05em;
+
+            @media (max-width:575.98px) {
+                & {
+                    font-size: 16px;
+                }
+            }
+        }
+
+        .test-img {
+            width : 150px;
+            height: 150px;
+        }
+    }
+
+    .owl-carousel .owl-item img {
+        display: inline;
+    }
+
+    .owl-carousel .owl-nav button.owl-next {
+        position: absolute;
+        top     : 220px;
+        right   : -43px;
+
+        @media (max-width:575.98px) {
+            & {
+                display: none;
+            }
+        }
+    }
+
+    .owl-carousel .owl-nav button.owl-prev {
+        position: absolute;
+        top     : 220px;
+        left    : -43px;
+
+        @media (max-width:575.98px) {
+            & {
+                display: none;
+            }
+        }
+    }
+}
+
+section.footer-menu {
+    background: $background;
+
+    .f-txt {
+        color: $primary-color;
+        font-size: 15px;
+        &:hover {
+            color: $blue;
+        }
+    }
+}
+
+section.footer {
+    background: #1A1B20;
+
+    .f-text {
+        color: $white;
+
+        &:hover {
+            color: $gold;
+        }
+    }
+
+    .form-control {
+        color           : $white;
+        background-color: #52555F;
+        border          : none;
+    }
+
+    .form-control::placeholder {
+        color: $white;
+    }
+
+    svg {
+        fill: $white;
+
+        &:hover {
+            fill: $gold;
+        }
+    }
+}
+
+section.mobile-btn {
+    .fixbtn {
+        background     : $blue;
+        color          : $white;
+        position       : fixed;
+        bottom         : 0;
+        left           : 0;
+        text-decoration: none;
+        text-align     : center;
+        z-index        : 99;
+    }
+
+    .whtfixbtn {
+        position        : fixed;
+        bottom          : 0;
+        background-color: #53CB58;
+        color           : #ffffff;
+        text-align      : center;
+        text-decoration : none;
+        z-index         : 99;
+    }
+}
+
+section.green-campus {
+    background: $blue;
+
+    .campus-sep {
+        position: relative;
+
+        &:before {
+            content : url("../img/campus-sep.png");
+            position: absolute;
+            top     : -10px;
+            left    : 242px;
+
+            @media (max-width:575.98px) {
+                & {
+                    content: " ";
+                }
+            }
+        }
+    }
+}
+
+section.resources {
+    background: $background;
+
+    a:hover {
+        text-decoration: none
+    }
+
+    .feature-card {
+        height  : 271px;
+        overflow: hidden;
+        position: relative;
+        background: linear-gradient(0deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 179.59%),
+            #C4C4C4;
+        border-radius: 10px 10px 15px 15px;
+
+        @media (max-width:575.98px) {
+            & {
+                height: 157px;
+            }
+        }
+    }
+
+    .feature-card-deatails {
+        position  : absolute;
+        bottom    : -228px;
+        left      : 0;
+        width     : 100%;
+        padding   : 25px;
+        background: rgba(255, 255, 255, 0.6);
+        transition: 0.3s ease-in-out;
+        font-size : 15px;
+        color     : $primary-color;
+    }
+
+    .feature-card-tilte {
+        position      : absolute;
+        left          : 0;
+        text-align    : center;
+        bottom        : 0;
+        width         : 100%;
+        text-transform: uppercase;
+        transition    : 0.3s ease-in-out;
+        padding       : 20px;
+        background    : #fff;
+
+        @media (max-width:575.98px) {
+            & {
+                padding: 12px;
+            }
+        }
+    }
+
+    .feature-card-tilte h3 {
+        font-size: 22px;
+        color    : $primary-color;
+
+        @media (max-width:575.98px) {
+            & {
+                font-size: 16px;
+            }
+        }
+    }
+
+    .feature-card:hover .feature-card-tilte {
+        bottom: -67px;
+    }
+
+    .feature-card-deatails h4 {
+        font-size     : 20px;
+        color         : $blue;
+        text-transform: uppercase;
+        font-weight   : 700;
+    }
+
+    .feature-card:hover .feature-card-deatails {
+        bottom: 0;
+    }
+}
+
+section.course-sec {
+    .course-sec-card {
+        background   : #C7FDC6;
+        border-radius: 0px;
+
+        .card-text {
+            color: #064705;
+
+            @media (max-width: 575.98px) {
+                & {
+                    font-size: 8px;
+                }
+            }
+        }
+
+        .icon-size {
+            @media (max-width: 575.98px) {
+                & {
+                    width: 35px;
+                }
+            }
+        }
+    }
+
+    .course-sec-card2 {
+        background   : #CCCDFF;
+        border-radius: 0px;
+
+        .card-text {
+            color: #022B2E;
+
+            @media (max-width: 575.98px) {
+                & {
+                    font-size: 11px;
+                }
+            }
+        }
+    }
+
+    .course-sec-card3 {
+        background   : url('/img/course-banner.jpg');
+        background-size: cover;
+        border-radius: 0px;
+
+        .card-text {
+            color: #ED1C24;
+
+            @media (max-width: 575.98px) {
+                & {
+                    font-size: 11px;
+                }
+            }
+        }
+    }
+}
+
+section.course-sec1 {
+    background: $background;
+
+    .overview-card {
+        background   : #FFFFFF;
+        box-shadow   : 0px 0px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+
+        span {
+            color: $blue;
+        }
+    }
+}
+
+section.course-sec2 {
+    .nav-tabs {
+        border-bottom: none;
+
+        @media (max-width: 575.98px) {
+            & {
+                flex-wrap: nowrap;
+            }
+        }
+    }
+
+    .course-btn {
+        overflow-x : auto;
+        overflow-y : hidden;
+        white-space: nowrap;
+    }
+
+    .nav-tabs .nav-link {
+        //background   : #CBD0D6;
+        box-shadow   : 5px 0px 8px -2px rgba(0, 0, 0, 0.15);
+        border-radius: 5px 5px 0px 0px;
+        color        : $primary-color;
+    }
+
+    .nav-tabs .nav-item.show .nav-link,
+    .nav-tabs .nav-link.active {
+        background   : $blue;
+        border-radius: 5px 5px 0px 0px;
+        color        : #DCE2E8;
+    }
+
+    .tab-content {
+        // background: #F4F4F4;
+        background: rgba(3, 78, 162, 0.4);
+    }
+
+    
+
+    .branch-card {
+        .branch-img {
+            margin-top: -68px;
+
+            @media (max-width: 575.98px) {
+                & {
+                    margin-top: -50px;
+                    height    : 84px;
+                }
+            }
+        }
+
+        .card-title {
+            @media (max-width: 575.98px) {
+                & {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}
+
+section.course-sec3 {
+    background: $background;
+
+    .quick-fact-card {
+        border       : 1px solid $blue;
+        box-sizing   : border-box;
+        border-radius: 5px;
+    }
+
+    .owl-carousel .owl-nav button.owl-next {
+        position: absolute;
+        top     : 37px;
+        right   : -51px;
+
+        @media (max-width:575.98px) {
+            & {
+                top  : 100px;
+                right: 2px;
+            }
+        }
+    }
+
+    .owl-carousel .owl-nav button.owl-prev {
+        position: absolute;
+        top     : 37px;
+        left    : -51px;
+
+        @media (max-width:575.98px) {
+            & {
+                top : 100px;
+                left: 304px
+            }
+        }
+    }
+
+    .owl-carousel .owl-item img {
+        width  : auto;
+        display: inline;
+
+    }
+}
+
+section.course-sec4 {
+    background: #EAF4FF;
+
+    .head-card {
+        background: none;
+
+        .card-title {
+            @include primary-text($primary-color, $opensans, 26px, bold);
+
+            @media (max-width:575.98px) {
+                & {
+                    font-size: 18px;
+                }
+            }
+        }
+
+        .head-txt {
+            color      : #52555F;
+            font-weight: 600;
+        }
+
+        .quote-size {
+            width: 75px;
+        }
+    }
+
+    .owl-carousel .owl-nav button.owl-next {
+        position: absolute;
+        bottom  : 25px;
+        right   : -5px;
+
+        @media (max-width:575.98px) {
+            & {
+                bottom: 5px;
+            }
+        }
+    }
+
+    .owl-carousel .owl-nav button.owl-prev {
+        position: absolute;
+        right   : 49px;
+        bottom  : 25px;
+
+        @media (max-width:575.98px) {
+            & {
+                bottom: 5px;
+                right : 42px;
+            }
+        }
+    }
+
+    .owl-carousel .owl-item img {
+        width  : auto;
+        display: inline;
+
+    }
+}
+
+.course-img{
+    height: 310px;
+    width: 100%;
+    object-fit: cover;
+}
+
+section.sidebar-sec {
+    background: #EAF4FF;
+}
+
+section.sidebar-sec2 {
+    .sidenav {
+        box-shadow: $shadow;
+
+        .sidenav-head {
+            background: $blue;
+        }
+
+        .sidenav-link {
+            background: $background;
+            @include primary-text($primary-color, $opensans, 16px, $weight);
+            display      : block;
+            padding      : 1rem 1rem;
+            border-bottom: 1px solid #C4C4C4;
+
+            &:hover {
+                background: #EAF4FF;
+                color     : $blue;
+            }
+        }
+    }
+
+    .tab-base {
+        //box-shadow     : $shadow;
+        border-radius: 10px;
+        background   : #f9f9f9;
+
+        &-txt {
+            font-size  : 18px;
+            color      : $primary-color;
+            font-weight: 600;
+
+            &:hover {
+                color: $gold;
+            }
+        }
+    }
+
+    .accordion {
+        .accordion-item {
+            .accordion-header {
+                border-bottom: 1px solid #000;
+
+                .accordion-button {
+                    @include primary-text($primary-color, $opensans, 21px, 500);
+                    border-bottom: 0px;
+                    border-radius: 0;
+                    background   : rgba(187, 147, 85, 0.8);
+
+                    @media (max-width:575.98px) {
+                        & {
+                            font-size: 18px;
+                        }
+                    }
+
+                    &:focus {
+                        outline   : none;
+                        box-shadow: none;
+                    }
+                }
+            }
+
+        }
+        &-button:not(.collapsed)::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+            transform: rotate(-180deg);
+        }
+    }
+    
+}
+
+section.inquiry-form {
+    background: #EAF4FF;
+
+    .heading-form {
+        @include primary-text($primary-color, $opensans, 56px, bold);
+
+        @media (max-width:575.98px) {
+            & {
+                font-size: 23px;
+            }
+        }
+    }
+}
+
+section.form-inquiry {
+    .form-box {
+        background: $blue;
+
+        .footer-text {
+            color: $white;
+
+            &:hover {
+                color: $gold;
+            }
+        }
+    }
+
+    .form-base {
+        box-shadow: $shadow;
+        background: $white;
+    }
+}
+
+section.contact-details {
+    background: #f9f9f9;
+
+    .ct-card {
+        //border: 1px solid $blue;
+        box-shadow: $shadow;
+
+        .card-title {
+            font-size  : 24px;
+            font-weight: 600;
+            color      : $blue;
+
+            @media (max-width:575.98px) {
+                & {
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+}
+
+/* ------------------- MAIN CSS- mobile menu css ------------------*/
+/* ------------------- MAIN CSS- mobile menu css ------------------*/
+/* General styles for all menus */
+.cbp-spmenu {
+    background: #fff;
+    position  : fixed;
+    box-shadow: 3px 0 20px 3px rgba(0, 0, 0, 0.3);
+}
+
+.cbp-spmenu h3 {
+    color      : #afdefa;
+    font-size  : 1.9em;
+    padding    : 20px;
+    margin     : 0;
+    font-weight: 300;
+    background : $gold;
+}
+
+
+.cbp-spmenu {
+    .slide-category {
+        .accordion-button {
+            padding       : 1rem 4.5%;
+            border        : 1px solid rgba(255, 255, 255, .125);
+            border-bottom : 1px solid rgba(0, 0, 0, 0.1);
+            color         : $primary-color;
+            font-size     : 0.83rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+
+            &:focus {
+                outline   : none;
+                box-shadow: none;
+            }
+
+            // &:not(.collapsed) {
+            //     color           : $primarycolor;
+            //     background-color: $lightpink;
+            // }
+        }
+
+        .accordion-body {
+            padding: 0px;
+
+            a {
+                display       : block;
+                color         : $primary-color;
+                font-size     : 0.83rem;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+            }
+        }
+    }
+}
+
+.cbp-spmenu {
+    a {
+        display       : block;
+        color         : $primary-color;
+        font-size     : 0.83rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+}
+
+
+
+/* .cbp-spmenu a:hover {
+	background: #4db6ac;
+}
+
+.cbp-spmenu a:active {
+	background: #afdefa;
+	color: #47a3da;
+} */
+
+/* Orientation-dependent styles for the content of the menu */
+
+.cbp-spmenu-vertical {
+    width  : 280px;
+    height : 100%;
+    top    : 0;
+    z-index: 1000;
+}
+
+.cbp-spmenu-vertical a {
+    /*border-bottom: 1px solid #258ecd;*/
+    padding: 0.9rem 1rem;
+}
+
+.cbp-spmenu-horizontal {
+    width   : 100%;
+    height  : 150px;
+    left    : 0;
+    z-index : 1000;
+    overflow: hidden;
+}
+
+
+.cbp-spmenu-horizontal h3 {
+    height: 100%;
+    width : 20%;
+    float : left;
+}
+
+.cbp-spmenu-horizontal a {
+    float      : left;
+    width      : 20%;
+    padding    : 0.8em;
+    border-left: 1px solid #258ecd;
+}
+
+/* Vertical menu that slides from the left or right */
+
+.cbp-spmenu-left {
+    left: -300px;
+}
+
+.cbp-spmenu-right {
+    right: -240px;
+}
+
+.cbp-spmenu-left.cbp-spmenu-open {
+    left: 0px;
+}
+
+.cbp-spmenu-right.cbp-spmenu-open {
+    right: 0px;
+}
+
+/* Horizontal menu that slides from the top or bottom */
+
+.cbp-spmenu-top {
+    top: -150px;
+}
+
+.cbp-spmenu-bottom {
+    bottom: -150px;
+}
+
+.cbp-spmenu-top.cbp-spmenu-open {
+    top: 0px;
+}
+
+.cbp-spmenu-bottom.cbp-spmenu-open {
+    bottom: 0px;
+}
+
+/* Push classes applied to the body */
+
+.cbp-spmenu-push {
+    overflow-x: hidden;
+    position  : relative;
+    left      : 0;
+}
+
+.cbp-spmenu-push-toright {
+    left: 240px;
+}
+
+.cbp-spmenu-push-toleft {
+    left: -240px;
+}
+
+/* Transitions */
+
+.cbp-spmenu,
+.cbp-spmenu-push {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition   : all 0.3s ease;
+    transition        : all 0.3s ease;
+    z-index           : 1031;
+}
+
+/* Example media queries */
+
+@media screen and (max-width: 55.1875em) {
+
+    .cbp-spmenu-horizontal {
+        font-size: 75%;
+        height   : 110px;
+    }
+
+    .cbp-spmenu-top {
+        top: -110px;
+    }
+
+    .cbp-spmenu-bottom {
+        bottom: -110px;
+    }
+
+}
+
+@media screen and (max-height: 26.375em) {
+
+    .cbp-spmenu-vertical {
+        font-size: 90%;
+        // width    : 190px;
+    }
+
+    // .cbp-spmenu-left,
+    // .cbp-spmenu-push-toleft {
+    //     left   : -270px;
+    //     /* left: -190px; */
+    // }
+
+    .cbp-spmenu-right {
+        right: -190px;
+    }
+
+    .cbp-spmenu-push-toright {
+        left: 190px;
+    }
+}
+
+button#showLeft {
+    background  : transparent;
+    border-color: transparent;
+    line-height : 14px;
+}
+
+button#showLeft img {
+    width: 30px;
+}
+
+button#showLeft:focus {
+    outline   : none;
+    box-shadow: none;
+}
+
+button.cbpbtn {
+    font-size   : 20px;
+    font-weight : 600;
+    margin      : 10px 15px;
+    color       : #fff;
+    background  : transparent;
+    border-color: transparent;
+}
+
+.cbp-spmenu-left.cbp-spmenu-open {
+    z-index: 1031;
+    overflow-y: overlay;
+}
+
+button.cbpbtn:focus {
+    box-shadow: none;
+    outline   : none;
+}
+
+.slide-logo {
+    width  : 70px;
+    padding: 0.2rem 0.5rem !important;
+}
+
+.slide-category .nav-link {
+    padding-left : 5%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.cbp-spmenu .slide-category a:hover,
+.cbp-spmenu .slide-link a:hover {
+
+    color     : $white;
+    background: $primary-color;
+}
+
+.cbp-spmenu {
+    .slide-category {
+        .dropdown {
+            .dropdown-menu {
+                li {
+                    a:active {
+                        background-color: $primary-color;
+                        color           : $white;
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+.cbp-spmenu .nav-link {
+    text-decoration: none;
+    text-transform : uppercase;
+    font-size      : 0.83rem;
+    letter-spacing : 2px;
+}
+
+.slide-link img {
+    width: 20px;
+}
+
+.slide-link {
+    .iconmenu {
+        .nav-link {
+            padding: 0px 10px 10px 0px;
+        }
+
+        li.nav-item.iconli {
+            display: inline-block;
+
+            svg {
+                fill: #FDE7EA;
+            }
+
+            &:hover {
+                svg {
+                    fill: #e41631;
+                }
+            }
+        }
+
+    }
+
+    h5 {
+        font-family: 'poppins', sans-serif;
+    }
+
+}
+
+.slide-link a {
+    padding: 0rem 0.2rem 0rem;
+}
+
+.slide-link ul,
+.slide-link h5 {
+    padding-left: 1rem;
+}
+
+.slide-link h5 {
+
+    border-top : 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 1rem;
+}
+
+ul.slide-contact {
+    list-style-type: none;
+}
+
+.slide-contact i.btn-primary:focus {
+    font-size: 0.8rem;
+}
+
+.slide-contact li {
+    font-size    : 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+
+#showLeft {
+    display: none;
+
+    @media (min-width:320px) and (max-width:768px) {
+        display: block;
+    }
+
+}
+
+// /*Black-logo*/
+// .dark-logo{
+//     .second-logo{
+//         display:
+//     }
+// }
+/* ------------------- MAIN CSS- mobile menu css close ------------------*/
+
+
+.leadership .card-img-top{
+    height: 365px;
+    object-fit: cover;
+    object-position: top;
+}
+
+.fitbg{
+     
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.opensans{
+    font-family: $opensans;
+}
+
+.list-card{
+    border-color: $blue !important;
+    &-header{
+        background-color: $blue;
+        color: $white;
+    }
+}
+
+.table {
+    .table-top {
+        background: $blue;
+        color     : $white;
+    }
+}
+
+.sidebutton{
+    position: fixed;
+    right: -113px;
+    bottom: 50%;
+    transform: rotate(270deg);
+    top: 50%;
+    z-index: 999;
+}
+
+.gallery-border{
+    border: 3px solid $blue;
+}
+.table-border{
+    border-color: #053b77;
+}
+.table>:not(:first-child) {
+    border-top: 2px solid $blue;
+}

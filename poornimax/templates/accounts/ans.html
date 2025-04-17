@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Answers</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #001a33;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            padding: 30px;
+            background-color: #0d3c5b;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 76, 153, 0.4);
+            width: 80%;
+            max-width: 800px;
+        }
+
+        h1 {
+            color: #00aaff;
+            font-size: 2rem;
+        }
+
+        .profile, .answers {
+            margin-bottom: 30px;
+        }
+
+        .profile img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+
+        .answers ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .answers ul li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Your Questionnaire Answers</h1>
+
+        <div class="profile">
+            <h2>Profile Information</h2>
+            <p><strong>Name:</strong> {{ user.full_name }}</p>
+            <p><strong>Username:</strong> {{ user.username }}</p>
+
+            {% if user.profile_picture %}
+                <p><strong>Profile Picture:</strong> <img src="{{ user.profile_picture.url }}" alt="Profile Picture"></p>
+            {% else %}
+                <p><strong>Profile Picture:</strong> No profile picture uploaded.</p>
+            {% endif %}
+
+            <p><strong>Date of Birth:</strong> {{ user.dob }}</p>
+        </div>
+
+        <div class="answers">
+            <h2>Your Answers</h2>
+            <p><strong>Introvert/Extrovert:</strong> {{ questionnaire.introvert_extrovert }}</p>
+            <p><strong>First Meet Option:</strong> {{ questionnaire.first_meet }}</p>
+            <p><strong>Sleep Type:</strong> {{ questionnaire.sleep_type }}</p>
+            <p><strong>Important Trait in Others:</strong> {{ questionnaire.important_trait }}</p>
+            <p><strong>Year:</strong> {{ questionnaire.year }}</p>
+            <p><strong>Communication Style:</strong> {{ questionnaire.comm_style }}</p>
+            <p><strong>Posting Frequency:</strong> {{ questionnaire.posting_frequency }}</p>
+            <p><strong>Decision Style:</strong> {{ questionnaire.decision_style }}</p>
+            <p><strong>Free Time Preference:</strong> {{ questionnaire.free_time }}</p>
+            <p><strong>Relationship Status:</strong> {{ questionnaire.relationship_status }}</p>
+            <p><strong>Dating Approach:</strong> {{ questionnaire.dating_approach }}</p>
+            <p><strong>Compatibility Importance:</strong> {{ questionnaire.compatibility }}</p>
+            <p><strong>Similar Interests:</strong> {{ questionnaire.similar_interests }}</p>
+            <p><strong>Relationship View:</strong> {{ questionnaire.relationship_view }}</p>
+
+            <!-- Display hobbies, college events, weekend plans etc. -->
+            <h3>Hobbies:</h3>
+            <ul>
+                {% for hobby in hobbies %}
+                    <li>{{ hobby }}</li>
+                {% endfor %}
+            </ul>
+            
+            <h3>College Events:</h3>
+            <ul>
+                {% for event in college_events %}
+                    <li>{{ event }}</li>
+                {% endfor %}
+            </ul>
+            
+            <h3>Weekend Plans:</h3>
+            <ul>
+                {% for plan in weekend_plans %}
+                    <li>{{ plan }}</li>
+                {% endfor %}
+            </ul>
+            
+            <h3>Friendship Values:</h3>
+            <ul>
+                {% for value in friendship_values %}
+                    <li>{{ value }}</li>
+                {% endfor %}
+            </ul>
+            
+            <h3>Content Posting:</h3>
+            <ul>
+                {% for content in content_posting %}
+                    <li>{{ content }}</li>
+                {% endfor %}
+            </ul>
+            
+            <h3>College Excitements:</h3>
+            <ul>
+                {% for excite in college_excitements %}
+                    <li>{{ excite }}</li>
+                {% endfor %}
+            </ul>
+            
+            <h3>Learning Preferences:</h3>
+            <ul>
+                {% for learn in learning_preferences %}
+                    <li>{{ learn }}</li>
+                {% endfor %}
+            </ul>
+            
+            <h3>Relaxation Methods:</h3>
+            <ul>
+                {% for relax in relaxation_methods %}
+                    <li>{{ relax }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+
+</body>
+</html>

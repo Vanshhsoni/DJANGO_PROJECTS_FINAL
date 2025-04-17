@@ -1,0 +1,1604 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- carousel -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.green.min.css" integrity="sha512-C8Movfk6DU/H5PzarG0+Dv9MA9IZzvmQpO/3cIlGIflmtY3vIud07myMu4M/NTPJl8jmZtt/4mC9bAioMZBBdA==" crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+
+    <!-- animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'poornima_site/css/mstyles.css' %}">
+    <title>Top-Ranked Engineering College in Jaipur | Poornima Group</title>
+    <meta name="description" content="Poornima Group is the top Engineering Colleges in Jaipur, Rajasthan. Approved by AICTE &amp; MHRD, recognized as best Placement College in Rajasthan under REAP.">
+
+    <link rel='canonical' href='https://www.poornima.org/' />
+
+    <meta name="facebook-domain-verification" content="p9jl84z4scz5fagazjsp63klqdhf1v" />
+    <meta name="google-site-verification" content="lJYwAuwDu_kBTAvH_ES9Qww9GoUBJwB-vKmaxFMVoOM" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.poornima.org/">
+    <meta property="og:title" content="Top-Ranked Engineering College in Jaipur | Poornima Group">
+    <meta property="og:description" content="Poornima Group is the top Engineering Colleges in Jaipur, Rajasthan. Approved by AICTE &amp; MHRD, recognized as best Placement College in Rajasthan under REAP.">
+    <meta property="og:image" content="https://www.poornima.org/img/poornima-group1.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.poornima.org/">
+    <meta property="twitter:title" content="Top-Ranked Engineering College in Jaipur | Poornima Group">
+    <meta property="twitter:description" content="Poornima Group is the top Engineering Colleges in Jaipur, Rajasthan. Approved by AICTE &amp; MHRD, recognized as best Placement College in Rajasthan under REAP.">
+    <meta property="twitter:image" content="https://www.poornima.org/img/poornima-group1.jpg">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "CollegeOrUniversity",
+            "name": "Poornima Group",
+            "alternateName": "Poornima Group of Colleges",
+            "url": "https://poornima.org",
+            "logo": "https://poornima.org/img/logo.jpg",
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+91-9928555222",
+                "contactType": "sales"
+            },
+            "sameAs": [
+                "https://www.facebook.com/Poornima.College.Engineering",
+                "https://twitter.com/poornimacollege",
+                "https://www.instagram.com/poornimacollege",
+                "https://www.youtube.com/channel/UC2msVsvmUenma6MNv_KWCZw",
+                "https://www.linkedin.com/school/poornima-college-of-engineering-jaipur"
+            ],
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "ISI 6 & 2, RIICO Institutional Area Sitapura",
+                "addressLocality": "Jaipur",
+                "addressRegion": "Rajasthan",
+                "postalCode": "302022",
+                "addressCountry": "India"
+            }
+        }
+    </script>
+
+
+
+    <!-- second google tag manager -->
+
+    <!-- Google Tag Manager -->
+    <script>
+        (function(w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-PVQVTR3');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P5MYCFDTPY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-P5MYCFDTPY');
+    </script>
+
+    <!-- Meta Pixel Code -->
+    <script>
+        ! function(f, b, e, v, n, t, s) {
+            if (f.fbq) return;
+            n = f.fbq = function() {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = '2.0';
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '589684304068882');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=589684304068882&ev=PageView&noscript=1"
+/></noscript>
+    <!-- End Meta Pixel Code -->
+
+
+    <style>
+        .animated-btn {
+            -webkit-animation: glowing 1500ms infinite;
+            -moz-animation: glowing 1500ms infinite;
+            -o-animation: glowing 1500ms infinite;
+            animation: glowing 1500ms infinite;
+        }
+
+        @-webkit-keyframes glowing {
+            0% {
+                background-color: #bd9658;
+            }
+            50% {
+                background-color: #bd9658;
+            }
+            75% {
+                background-color: #bd9658;
+            }
+            100% {
+                background-color: black;
+            }
+        }
+
+        @-moz-keyframes glowing {
+            0% {
+                background-color: #bd9658;
+            }
+            50% {
+                background-color: #bd9658;
+            }
+            75% {
+                background-color: #bd9658;
+            }
+            100% {
+                background-color: black;
+            }
+        }
+
+        @-o-keyframes glowing {
+            0% {
+                background-color: #bd9658;
+            }
+            50% {
+                background-color: #bd9658;
+            }
+            75% {
+                background-color: #bd9658;
+            }
+            100% {
+                background-color: black;
+            }
+        }
+
+        @keyframes glowing {
+            0% {
+                background-color: #bd9658;
+            }
+            50% {
+                background-color: #bd9658;
+            }
+            75% {
+                background-color: #bd9658;
+            }
+            100% {
+                background-color: black;
+            }
+        }
+
+        .facultyimage {
+            width: 104px;
+            height: 114px;
+        }
+
+        .recru-base {
+            img {
+                width: 130px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M3G58W4" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <script type="text/javascript">
+        var npf_d = 'https://admission.poornima.org';
+        var npf_c = '347';
+        var npf_m = '1';
+        var s = document.createElement("script");
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://track.nopaperforms.com/js/track.js";
+        document.body.appendChild(s);
+    </script>
+    <!--_________________mobile side menu close___________________-->
+    <section class="top py-2 d-none d-md-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-4 col-xxl-6 align-self-center">
+                    <a href="/" class="text-decoration-none">
+                        <img src="{% static 'poornima_site/img/logo.jpg' %}" alt="logo" style="width: 350px;" class="img-fluid">
+                    </a>
+                </div>
+                <div class="col-8 col-xxl-6 text-end align-self-center">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src="{% static 'poornima_site/img/aicte.png' %}" alt="logo" class="img-fluid me-3" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Approved with AICTE">
+                            <img src="{% static 'poornima_site/img/rtu-logo.png' %}" alt="logo" class="img-fluid" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Affiliated with RTU">
+                        </div>
+                        <div class="col-md-3 text-start align-self-center top-sep">
+                            <p class="top-text mb-0">Email Us</p>
+                            <a href="/cdn-cgi/l/email-protection#6801060e07281807071a0601050946071a0f" class="text-decoration-none link"><span class="__cf_email__" data-cfemail="2940474f46695946465b4740444807465b4e">[email&#160;protected]</span></a>
+                        </div>
+                        <div class="col-md-3 text-start align-self-center top-sep">
+                            <p class="top-text mb-0">Whatsapp us</p>
+                            <a href="https://api.whatsapp.com/send?text=Hi!+I+have+an+enquiry&phone=%20+91-9928666222" class="text-decoration-none link">+91-9928666222</a>
+                        </div>
+                        <div class="col-md-3 text-start align-self-center">
+                            <p class="top-text mb-0">Enquire now</p>
+                            <a href="tel:+91-9928555222" class="text-decoration-none link">+91-9928555222</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="sub-menu">
+        <nav class="navbar navbar-expand-lg bg-light py-0">
+            <div class="container">
+                <a class="navbar-brand d-block d-md-none me-0" href="/">
+                    <img src="{% static 'poornima_site/img/logo.jpg' %}" alt="logo" class="img-fluid">
+                </a>
+                <div class="d-flex d-sm-block d-md-none">
+                    <!--menu-btn-->
+                    <button id="showLeft"><img src="{% static 'poornima_site/webicon/menu.svg' %}" alt="menu icon" /></button>
+                </div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link me-2" href="https://www.poornima.org/placement">Placement</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link me-2" href="https://www.poornima.org/current-students">Current Students</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="aboutdropdown" role="button" aria-expanded="false" aria-haspopup="true">Career</a>
+                            <ul class="dropdown-menu" aria-labelledby="aboutdropdown" style="display: none;">
+                                <li><a href="https://www.linkedin.com/school/poornima-college-of-engineering-jaipur/jobs" class="dropdown-item" style="white-space: inherit;">Poornima College of Engineering</a></li>
+                                <li><a href="https://www.linkedin.com/school/poornima-group-of-colleges/jobs" class="dropdown-item" style="white-space: inherit;">Poornima Institute of Engineering & Technology</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link me-2" href="https://www.poornima.org/hostel/basic-essentials">Hostel</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link me-2" href="https://www.tcsion.com/dotcom/TCSSMB/Login/login.html" target="_blank">ERP</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link me-2" href="https://ieeexplore.ieee.org/Xplore/home.jsp" target="_blank">IEEE Explore</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link me-2" href="https://www.poornima.org/public/uploads/PGCProspectus2024-25.pdf" target="_blank">Download Brochure</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="d-flex d-none d-md-block">
+                    <a href="https://www.facebook.com/Poornima.College.Engineering" target="_blank" class="text-decoration-none me-3">
+                        <img src="{% static 'poornima_site/webicon/fb.svg' %}" alt="facebook icon" class="topicon">
+                    </a>
+                    <a href="https://www.instagram.com/poornimacollege" target="_blank" class="text-decoration-none me-3">
+                        <img src="{% static 'poornima_site/webicon/insta.svg' %}" alt="instagram icon" class="topicon">
+                    </a>
+                    <a href="https://www.linkedin.com/school/poornima-college-of-engineering-jaipur" target="_blank" class="text-decoration-none me-3">
+                        <img src="{% static 'poornima_site/webicon/linkedin.svg' %}" alt="linkedin icon" class="topicon">
+                    </a>
+                    <a href="https://twitter.com/poornimacollege" target="_blank" class="text-decoration-none me-3">
+                        <img src="{% static 'poornima_site/webicon/twitter.svg' %}" alt="twitter icon" class="topicon">
+                    </a>
+                    <a href="https://www.youtube.com/channel/UC2msVsvmUenma6MNv_KWCZw?view_as=subscriber" target="_blank" class="text-decoration-none">
+                        <img src="{% static 'poornima_site/webicon/youtube.svg' %}" alt="youtube icon" class="topicon">
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </section>
+    
+    <section class="menu d-none d-md-block">
+        <nav class="navbar navbar-expand-lg py-0">
+            <div class="container">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav  mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link me-2" href="/">HOME</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="aboutdropdown" role="button" aria-expanded="false" aria-haspopup="true">ABOUT US</a>
+                            <ul class="dropdown-menu" aria-labelledby="aboutdropdown">
+                                <li><a href="https://www.poornima.org/about-us/chairman-message" class="dropdown-item">Chairman&#039;s Message</a></li>
+                                <li><a href="https://www.poornima.org/about-us/management" class="dropdown-item">Poornima Leadership</a></li>
+                                <li><a href="https://www.poornima.org/about-us/history-of-poornima" class="dropdown-item">History of Poornima</a></li>
+                                <li><a href="https://www.poornima.org/about-us/affiliation-accreditation" class="dropdown-item">Affiliation &amp; Accreditation</a></li>
+                                <li><a href="https://www.poornima.org/about-us/poornima-philosophy" class="dropdown-item">Poornima Philosophy</a></li>
+                                <li><a href="https://www.poornima.org/about-us/poornima-faculties" class="dropdown-item">Poornima Family</a></li>
+                                <li><a href="https://www.poornima.org/about-us/poornima-advantage" class="dropdown-item">Poornima Advantage</a></li>
+                                <li><a href="https://www.poornima.org/about-us/value-added-programs-with-ibm" class="dropdown-item">Value Added Programs with IBM</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="aboutdropdown" role="button" aria-expanded="false" aria-haspopup="true">ADMISSION</a>
+                            <ul class="dropdown-menu" aria-labelledby="aboutdropdown">
+                                <li><a href="https://www.poornima.org/admission/btech-at-poornima-group-of-colleges" class="dropdown-item">Bachelor Of Technology (B.Tech.)</a></li>
+                                <li><a href="https://www.poornima.org/admission/b-tech-lateral-entry" class="dropdown-item">B.Tech. Lateral Entry</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link me-2" href="https://www.poornima.org/contact-us">CONTACT US</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link me-2" href="https://www.poornima.org/updates">UPDATES</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="d-flex">
+                    <!--menu-btn-->
+                </div>
+            </div>
+        </nav>
+    </section>
+    <section class="hero">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 p-0">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="10000">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-current="true" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="{% static 'poornima_site/img/slider/new/PIETWebBanner.webp' %}" class="d-block w-100" alt="banner">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{% static 'poornima_site/img/slider/new/11zon.webp' %}" class="d-block w-100" alt="banner">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{% static 'poornima_site/img/slider/new/Web Banner (2) (2).jpg' %}" class="d-block w-100" alt="banner">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{% static 'poornima_site/img/slider/new/happy2025.jpg' %}" class="d-block w-100" alt="banner">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{% static 'poornima_site/img/slider/new/Web Banner 3.jpg' %}" class="d-block w-100" alt="banner">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{% static 'poornima_site/img/slider/new/tekconnect.jpg' %}" class="d-block w-100" alt="banner">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{% static 'poornima_site/img/slider/new/Web Banner.jpg' %}" class="d-block w-100" loading="lazy" alt="banner">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{% static 'poornima_site/img/slider/new/Ashneer Web Bannner.jpg' %}" class="d-block w-100" loading="lazy" alt="banner">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{% static 'poornima_site/img/slider/new/Website-banner (1) (2).jpg' %}" class="d-block w-100" loading="lazy" alt="banner">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{% static 'poornima_site/img/slider/new/QS Iguage Web Banner.jpg' %}" class="d-block w-100" loading="lazy" alt="banner">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{% static 'poornima_site/img/slider/new/pgcbannerstarguide.jpg' %}" class="d-block w-100" loading="lazy" alt="banner">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{% static 'poornima_site/img/slider/new/sitebanner2.png' %}" class="d-block w-100" loading="lazy" alt="banner">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{% static 'poornima_site/img/slider/new/aarohanbanner.jpg' %}" class="d-block w-100" loading="lazy" alt="banner">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{% static 'poornima_site/img/slider/new/NAAC Web Banner.jpg' %}" class="d-block w-100" loading="lazy" alt="banner">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{% static 'poornima_site/img/slider/new/3.jpg' %}" class="d-block w-100" alt="banner">
+                            </div>
+                        </div>
+    
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <section class="glance py-4 py-md-5">
+        <div class="container">
+            <h1 style="font-family: 'Open Sans', sans-serif; font-weight: bold; font-size: 36px; color: #080808;">
+                <span class="blue-text">POORNIMA</span> GROUP<br>AT A GLANCE
+            </h1>            
+            <img src="{% static 'poornima_site/webicon/gold-line.svg' %}" alt="line" class="topicon">
+            <div class="row pt-4">
+                <div class="col-12">
+                    <p>Born with a vision of creating an engineering college, Poornima College & Institute was established about 3 decades ago in the year 2000 in Jaipur (Rajasthan). With the primary aim to offer excellent professional & technical education to the students, Poornima College & Institute was created under the flagship of Shanti Education Society (SES) that engraved its existence in the year 1999, thereby registering itself under the Rajasthan Societies act.</p>
+                </div>
+            </div>
+            <div class="row pt-4">
+                <div class="col-md-12">
+                    <div class="feature owl-carousel">
+                        <div class="card text-center fact-base p-2 p-md-3">
+                            <div class="card-body p-0 p-md-2">
+                                <img loading="lazy" src="{% static 'poornima_site/img/features/1.png' %}" alt="icon" class="img-fluid">
+                                <div class="heading-h6 pt-3 mb-0">45 LPA Highest Package</div>
+                            </div>
+                        </div>
+                        <div class="card text-center fact-base p-2 p-md-3">
+                            <div class="card-body p-0 p-md-2">
+                                <img loading="lazy" src="{% static 'poornima_site/img/features/2.png' %}" alt="icon" class="img-fluid">
+                                <div class="heading-h6 pt-3 mb-0">4 Campuses</div>
+                            </div>
+                        </div>
+                        <div class="card text-center fact-base p-2 p-md-3">
+                            <div class="card-body p-0 p-md-2">
+                                <img loading="lazy" src="{% static 'poornima_site/img/features/3.png' %}" alt="icon" class="img-fluid">
+                                <div class="heading-h6 pt-3 mb-0">1100+ Faculty & Staff</div>
+                            </div>
+                        </div>
+                        <div class="card text-center fact-base p-2 p-md-3">
+                            <div class="card-body p-0 p-md-2">
+                                <img loading="lazy" src="{% static 'poornima_site/img/features/4.png' %}" alt="icon" class="img-fluid">
+                                <div class="heading-h6 pt-3 mb-0">350+ Placement Drives</div>
+                            </div>
+                        </div>
+                        <div class="card text-center fact-base p-2 p-md-3">
+                            <div class="card-body p-0 p-md-2">
+                                <img loading="lazy" src="{% static 'poornima_site/img/features/5.png' %}" alt="icon" class="img-fluid">
+                                <div class="heading-h6 pt-3 mb-0">75+ RTU Merits</div>
+                            </div>
+                        </div>
+                        <div class="card text-center fact-base p-2 p-md-3">
+                            <div class="card-body p-0 p-md-2">
+                                <img loading="lazy" src="{% static 'poornima_site/img/features/6.png' %}" alt="icon" class="img-fluid">
+                                <div class="heading-h6 pt-3 mb-0">63 Funded DST Projects</div>
+                            </div>
+                        </div>
+                        <div class="card text-center fact-base p-2 p-md-3">
+                            <div class="card-body p-0 p-md-2">
+                                <img loading="lazy" src="{% static 'poornima_site/img/features/7.png' %}" alt="icon" class="img-fluid">
+                                <div class="heading-h6 pt-3 mb-0">100+ AIESEC Incoming Internships</div>
+                            </div>
+                        </div>
+                        <div class="card text-center fact-base p-2 p-md-3">
+                            <div class="card-body p-0 p-md-2">
+                                <img loading="lazy" src="{% static 'poornima_site/img/features/8.png' %}" alt="icon" class="img-fluid">
+                                <div class="heading-h6 pt-3 mb-0">4500+ Placements in Last 3 Years</div>
+                            </div>
+                        </div>
+                        <div class="card text-center fact-base p-2 p-md-3">
+                            <div class="card-body p-0 p-md-2">
+                                <img loading="lazy" src="{% static 'poornima_site/img/features/1.png' %}" alt="icon" class="img-fluid">
+                                <div class="heading-h6 pt-3 mb-0">5.40 LPA Average Package</div>
+                            </div>
+                        </div>
+                        <div class="card text-center fact-base p-2 p-md-3">
+                            <div class="card-body p-0 p-md-2">
+                                <img loading="lazy" src="{% static 'poornima_site/img/features/9.png' %}" alt="icon" class="img-fluid">
+                                <div class="heading-h6 pt-3 mb-0">3 Decades of Academic Excellence</div>
+                            </div>
+                        </div>
+                        <div class="card text-center fact-base p-2 p-md-3">
+                            <div class="card-body p-0 p-md-2">
+                                <img loading="lazy" src="{% static 'poornima_site/img/features/10.png' %}" alt="icon" class="img-fluid">
+                                <div class="heading-h6 pt-3 mb-0">44000+ Alumni</div>
+                            </div>
+                        </div>
+                        <div class="card text-center fact-base p-2 p-md-3">
+                            <div class="card-body p-0 p-md-2">
+                                <img loading="lazy" src="{% static 'poornima_site/img/features/10.png' %}" alt="icon" class="img-fluid">
+                                <div class="heading-h6 pt-3 mb-0">4500+ Alumni Globally</div>
+                            </div>
+                        </div>
+                        <div class="card text-center fact-base p-2 p-md-3">
+                            <div class="card-body p-0 p-md-2">
+                                <img loading="lazy" src="{% static 'poornima_site/img/features/11.png' %}" alt="icon" class="img-fluid">
+                                <div class="heading-h6 pt-3 mb-0">30 AIESEC Outgoing Internships</div>
+                            </div>
+                        </div>
+                        <div class="card text-center fact-base p-2 p-md-3">
+                            <div class="card-body p-0 p-md-2">
+                                <img loading="lazy" src="{% static 'poornima_site/img/features/11.png' %}" alt="icon" class="img-fluid">
+                                <div class="heading-h6 pt-3 mb-0">PCE QIV RTU Ranking - 2nd</div>
+                            </div>
+                        </div>
+                        <div class="card text-center fact-base p-2 p-md-3">
+                            <div class="card-body p-0 p-md-2">
+                                <img loading="lazy" src="{% static 'poornima_site/img/features/11.png' %}" alt="icon" class="img-fluid">
+                                <div class="heading-h6 pt-3 mb-0">PIET QUV RTU Ranking - 4th</div>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <section class="about py-5">
+        <div class="container">
+            <h2 class="heading-h2 text-center">SHAPE YOUR FUTURE</h2>
+            <div class="text-center">
+                <img src="{% static 'poornima_site/webicon/blue-line.svg' %}" alt="Blue Line Icon" class="topicon">
+            </div>
+    
+            <div class="row pt-4">
+                <div class="col-md-4" data-aos="fade-right" data-aos-duration="3000">
+                    <img src="{% static 'poornima_site/img/about-img1.png' %}" alt="about" class="img-fluid">
+                </div>
+                <div class="col-md-8 align-self-center pt-4 pt-md-0" data-aos="fade-left" data-aos-duration="3000">
+                    <p class="text-center text-md-start mb-0">
+                        Created with a mission of shaping the future of the students, Poornima College and Institute works to provide high-quality technical education and keep up with the demands of today's competitive business world and rapid technological advancements. The College Curriculum focuses on both the fundamentals and the latest advancements. Special efforts have been made to locate, attract, and retain highly qualified and competent faculty. The Institute offers premium infrastructure, including multimedia classrooms, laboratories, simulations, a well-stocked modern library, auditorium, seminar halls, separate hostels for boys and girls, and playgrounds.
+                    </p>
+                    <div class="row py-3">
+                        <div class="col-md-2 text-center align-self-center">
+                            <img src="{% static 'poornima_site/img/emblem.png' %}" alt="img" class="img-fluid">
+                        </div>
+                        <div class="col-md-10 pt-4 pt-md-0">
+                            <div class="card abt-base text-center p-3">
+                                <div class="card-body">
+                                    <p class="mb-0">
+                                        Moreover, it creates a perfect environment favorable to maximizing the potential of faculty members and students, through its systematic and efficient planning and supervision of the teaching and learning process, both inside and outside the classroom. Furthermore, the fundamental teaching and learning processes of the students are enhanced by organizing Tech-fests, cultural and sports events, industry-institute meetings, and guest lectures by renowned figures.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <h3 class="text-center">Why Us?</h3>
+                    <p class="text-center text-md-start">
+                        Poornima College & Poornima Institute offers a pleasant and engaging environment to its students. The student's routine revolves around a balanced amount of work, play, and leisure time activities. Moreover, the college curriculum is structured in a way that it is both engaging and challenging. Project-based learning, problem-based learning, and the freedom to select the desired subject, enhance the student's participation in college activities.
+                    </p>
+    
+                    <p class="text-center text-md-start">
+                        Furthermore, a weekly induction programme, mentor system, and close student-teacher relationship help to keep the students eager and motivated to study. The students' creative engagement is maintained throughout the year by organizing frequent technical, sports, and cultural activities at departmental, intra-institutional, and inter-institutional levels.
+                    </p>
+    
+                    <p class="text-center text-md-start mb-0">
+                        Last but not the least, Jaipur's pleasant climate, good food, transportation system, parks, and other amenities make a stay at the Poornima campus comfortable and advantageous for the overall development of the students.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <section class="our-institutes py-5">
+        <div class="container">
+            <div class="heading-h2 text-center">OUR INSTITUTES</div>
+            <div class="row pt-4">
+                <div class="col-md-4" data-aos="flip-left" data-aos-duration="3000">
+                    <div class="card institute-card h-100">
+                        <img src="{% static 'poornima_site/img/pce.jpg' %}" class="card-img-top" alt="Poornima College of Engineering (PCE)">
+                        <div class="card-body blue-card-body text-center p-4">
+                            <p class="card-text mb-0">POORNIMA COLLEGE OF ENGINEERING (PCE)</p>
+                            <div class="title mb-0 pt-2">REAP CODE 1023</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 py-4 py-md-0" data-aos="zoom-in" data-aos-duration="3000">
+                    <div class="card isnt-card text-center h-100 py-3 py-md-5">
+                        <div class="card-body">
+                            <p class="card-text">All the institutions are associated with Rajasthan Technical University and sanctioned by the All India Council of Technical Education (AICTE) & Recognized by UGC under 2(f) and the Ministry of Human Resource & Development (MHRD).</p>
+                            <h5 class="card-title mt-5 pt-4">Help Line</h5>
+                            <div class="pt-2">
+                                <img src="{% static 'poornima_site/webicon/help-call.svg' %}" alt="call" class="topicon me-3">
+                                <a href="tel:+91-9928555222" class="text-decoration-none isnt-h2">+91-9928555222</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="flip-right" data-aos-duration="3000">
+                    <div class="card institute-card h-100">
+                        <img src="{% static 'poornima_site/img/piet.jpg' %}" class="card-img-top" alt="Poornima Institute of Engineering & Technology (PIET)">
+                        <div class="card-body red-card-body text-center p-4">
+                            <p class="card-text mb-0">POORNIMA INSTITUTE OF<br />ENGG. & TECH. (PIET)</p>
+                            <div class="title mb-0 pt-2">REAP CODE 1050</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <section class="recruiters py-5">
+        <div class="container">
+            <div class="heading-h2 text-center"> <span class="red-text">OUR</span> RECRUITERS</div>
+            <div class="row pt-4">
+                <div class="col-md-8 text-center">
+                    <div class="recru-base">
+                        <div class="row p-4 align-items-center" data-aos="zoom-in-up" data-aos-duration="3000">
+                            <div class="col-6 col-md-3 d-flex justify-content-center align-items-center">
+                                <img loading="lazy" src="{% static 'poornima_site/img/recruiters/amazon.jpg' %}" alt="amazon recruiter" class="img-fluid">
+                            </div>
+                            <div class="col-6 col-md-3 d-flex justify-content-center align-items-center">
+                                <img loading="lazy" src="{% static 'poornima_site/img/recruiters/infosys.jpg' %}" alt="infosys recruiter" class="img-fluid">
+                            </div>
+                            <div class="col-6 col-md-3 d-flex justify-content-center align-items-center">
+                                <img loading="lazy" src="{% static 'poornima_site/img/recruiters/cactusglobal.jpg' %}" alt="cactusglobal recruiter" class="img-fluid">
+                            </div>
+                            <div class="col-6 col-md-3 d-flex justify-content-center align-items-center">
+                                <img loading="lazy" src="{% static 'poornima_site/img/recruiters/tekion.jpg' %}" alt="tekion recruiter" class="img-fluid">
+                            </div>
+    
+                            <div class="col-6 col-md-3 d-flex justify-content-center align-items-center">
+                                <img loading="lazy" src="{% static 'poornima_site/img/recruiters/capgemini.jpg' %}" alt="capgemini recruiter" class="img-fluid">
+                            </div>
+    
+                            <div class="col-6 col-md-3 d-flex justify-content-center align-items-center">
+                                <img loading="lazy" src="{% static 'poornima_site/img/recruiters/cimpress.jpg' %}" alt="cimpress recruiter" class="img-fluid">
+                            </div>
+    
+                            <div class="col-6 col-md-3 d-flex justify-content-center align-items-center">
+                                <img loading="lazy" src="{% static 'poornima_site/img/recruiters/aurigait.jpg' %}" alt="aurigait recruiter" class="img-fluid">
+                            </div>
+    
+                            <div class="col-6 col-md-3 d-flex justify-content-center align-items-center">
+                                <img loading="lazy" src="{% static 'poornima_site/img/recruiters/xebia.jpg' %}" alt="xebia recruiter" class="img-fluid">
+                            </div>
+    
+                            <div class="col-6 col-md-3">
+                                <img loading="lazy" src="{% static 'poornima_site/img/recruiters/celebal.jpg' %}" alt="celebal recruiter" class="img-fluid">
+                            </div>
+    
+                            <div class="col-6 col-md-3 d-flex justify-content-center align-items-center">
+                                <img loading="lazy" src="{% static 'poornima_site/img/recruiters/jioplatform.jpg' %}" alt="jioplatform recruiter" class="img-fluid">
+                            </div>
+    
+                            <div class="col-6 col-md-3 d-flex justify-content-center align-items-center">
+                                <img loading="lazy" src="{% static 'poornima_site/img/recruiters/freecharge.jpg' %}" alt="freecharge recruiter" class="img-fluid">
+                            </div>
+    
+                            <div class="col-6 col-md-3 d-flex justify-content-center align-items-center">
+                                <img loading="lazy" src="{% static 'poornima_site/img/recruiters/locus.jpg' %}" alt="locus recruiter" class="img-fluid">
+                            </div>
+    
+                            <div class="col-6 col-md-3 d-flex justify-content-center align-items-center">
+                                <img loading="lazy" src="{% static 'poornima_site/img/recruiters/optum.jpg' %}" alt="optum recruiter" class="img-fluid">
+                            </div>
+    
+                            <div class="col-6 col-md-3 d-flex justify-content-center align-items-center">
+                                <img loading="lazy" src="{% static 'poornima_site/img/recruiters/rtcamp.jpg' %}" alt="rtcamp recruiter" class="img-fluid">
+                            </div>
+    
+                            <div class="col-6 col-md-3 d-flex justify-content-center align-items-center">
+                                <img loading="lazy" src="{% static 'poornima_site/img/recruiters/synopsys.jpg' %}" alt="synopsys recruiter" class="img-fluid">
+                            </div>
+    
+                            <div class="col-6 col-md-3 d-flex justify-content-center align-items-center">
+                                <img loading="lazy" src="{% static 'poornima_site/img/recruiters/sierracloud.jpg' %}" alt="sierracloud recruiter" class="img-fluid">
+                            </div>
+    
+                            <div class="col-6 col-md-3 d-flex justify-content-center align-items-center">
+                                <img loading="lazy" src="{% static 'poornima_site/img/recruiters/elasticrun.jpg' %}" alt="elasticrun recruiter" class="img-fluid">
+                            </div>
+    
+                            <div class="col-6 col-md-3 d-flex justify-content-center align-items-center">
+                                <img loading="lazy" src="{% static 'poornima_site/img/recruiters/nirvana.jpg' %}" alt="nirvana recruiter" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                    <a href="https://www.poornima.org/placement/recruiters" class="text-decoration-none btn blue-btn mt-3">VIEW ALL</a>
+                </div>
+    
+                <div class="col-6 col-md-2 pt-4 pt-md-0 countermain" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1500" data-aos-duration="3000">
+                    <div class="card blue-box text-center p-3">
+                        <div class="card-body">
+                            <h5 class="card-title"><span class="counter1" data-count="5500">0</span>+</h5>
+                            <p class="card-text">Placement Offers</p>
+                        </div>
+                    </div>
+                    <div class="card red-box text-center p-1 p-md-3 mt-4">
+                        <div class="card-body">
+                            <h5 class="card-title"><span class="counter1" data-count="20">0</span>+</h5>
+                            <p class="card-text">Students received placement offers of 10 LPA and above</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-6 col-md-2 align-self-center pt-4 pt-md-0" data-aos="fade-up" data-aos-duration="3000">
+                    <div class="card green-box text-center p-1 p-md-3">
+                        <div class="card-body">
+                            <h5 class="card-title"><span class="counter1" data-count="100">0</span>+</h5>
+                            <p class="card-text">Students received placement offers in core branches</p>
+                        </div>
+                    </div>
+                    <div class="card purple-box text-center p-1 p-md-3 mt-4">
+                        <div class="card-body">
+                            <h5 class="card-title"><span class="counter1" data-count="150">0</span>+</h5>
+                            <p class="card-text">Received placement offers of 5 LPA and above</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    {% load static %}  <!-- Add this line at the top -->
+
+    <section class="faculty py-5">
+        <div class="container">
+            <div class="heading-h2">OUR <span class="blue-text">FACULTY</span></div>
+            <img src="{% static 'poornima_site/webicon/blue-line.svg' %}" alt="Blue Line Icon">
+            <div class="row pt-4 pb-2 pb-md-0">
+                <div class="col-md-4">
+                    <p>The faculty members at Poornima College & Institute are dedicated to student learning and are highly accessible, which makes the student's education experience a unique one. Let us give you a quick look at our professionally qualified faculty members. It is a perfect blend of core and visiting members. You can also have a look at the staff directory to find out their contact details <a href="/faculty">here</a></p>
+                </div>
+                <div class="col-md-8">
+                    <div class="gallery-slider owl-carousel">
+                        <!-- Faculty Member 1 -->
+                        <div class="card faculty-card p-4">
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-2">
+                                        <img loading="lazy" src="{% static 'poornima_site/uploads/team/1716885842.jpg' %}" class="img-fluid rounded-start" alt="Dr. Rekha Nair">
+                                    </div>
+                                    <div class="col-10 align-self-center">
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-0">Dr. Rekha Nair</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="heading-h5"><img loading="lazy" src="{% static 'poornima_site/img/check-circle.png' %}" alt="icon" class="img-fluid me-2">Dean, I Year</div>
+                                <p class="mb-0">Department of Chemistry</p>
+                            </div>
+                        </div>
+                        <!-- Faculty Member 2 -->
+                        <div class="card faculty-card p-4">
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-2">
+                                        <img loading="lazy" src="{% static 'poornima_site/uploads/team/narayan.jpeg' %}" class="img-fluid rounded-start" alt="Dr. Narayan Lal Jain">
+                                    </div>
+                                    <div class="col-10 align-self-center">
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-0">Dr. Narayan Lal Jain</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="heading-h5"><img src="{% static 'poornima_site/img/check-circle.png' %}" alt="icon" class="img-fluid  me-2">HOD</div>
+                                <p class="mb-0">Department of ME</p>
+                            </div>
+                        </div>
+                        <!-- Faculty Member 3 -->
+                        <div class="card faculty-card p-4">
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-2">
+                                        <img loading="lazy" src="{% static 'poornima_site/uploads/team/1716886545.jpg' %}" class="img-fluid rounded-start" alt="Dr. Garima Mathur">
+                                    </div>
+                                    <div class="col-10 align-self-center">
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-0">Dr. Garima Mathur</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="heading-h5"><img src="{% static 'poornima_site/img/check-circle.png' %}" alt="icon" class="img-fluid me-2">HOD</div>
+                                <p class="mb-0">Department of ECE</p>
+                            </div>
+                        </div>
+                        <!-- Faculty Member 4 -->
+                        <div class="card faculty-card p-4">
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-2">
+                                        <img loading="lazy" src="{% static 'poornima_site/uploads/team/1716889031.jpg' %}" class="img-fluid rounded-start" alt="Dr. Sama Jain">
+                                    </div>
+                                    <div class="col-10 align-self-center">
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-0">Dr. Sama Jain</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="heading-h5"><img src="{% static 'poornima_site/img/check-circle.png' %}" alt="icon" class="img-fluid me-2">HOD, 1 Year</div>
+                                <p class="mb-0">Department of Chemistry</p>
+                            </div>
+                        </div>
+                        <!-- Faculty Member 5 -->
+                        <div class="card faculty-card p-4">
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-2">
+                                        <img loading="lazy" src="{% static 'poornima_site/uploads/team/1716888965.jpg' %}" class="img-fluid rounded-start" alt="Dr. Budesh Kanwar">
+                                    </div>
+                                    <div class="col-10 align-self-center">
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-0">Dr. Budesh Kanwar</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="heading-h5"><img src="{% static 'poornima_site/img/check-circle.png' %}" alt="icon" class="img-fluid me-2">HOD</div>
+                                <p class="mb-0">Department of AI & DS</p>
+                            </div>
+                        </div>
+                        <!-- Additional faculty members would follow the same structure -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+
+    <section class="testimonial py-5">
+        <div class="container">
+            <div class="heading-h3 text-center">TESTIMONIALS</div>
+            <div class="row pt-3 pt-md-4">
+                <div class="col-md-12">
+                    <div class="owl-carousel review-slider">
+                        <div class="card testimonial-card">
+                            <div class="card-body text-center p-0 p-md-2">
+                                <img loading="lazy" src="{% static 'poornima_site/img/testimonials/Chandan Agrawal.jpg' %}" alt="img" class="img-fluid test-img">
+                                <p class="white-text pt-3 pt-md-5">I was pleasantly surprised by the development and progress on campus since I graduated. The new facilities and infrastructure enhancements reflect a commitment to excellence. It's inspiring to see the dedication to providing
+                                    students with top-notch resources and opportunities for growth.</p>
+                                <h5 class="card-title pt-2">Chandan Agarwal</h5>
+                                <h5 class="card-text">Alumni, Batch 2016-20 (SDE,Microsoft)</h5>
+                            </div>
+                        </div>
+                        <div class="card testimonial-card">
+                            <div class="card-body text-center p-0 p-md-2">
+                                <img loading="lazy" src="{% static 'poornima_site/img/testimonials/Himanshu Rajput.jpg' %}" alt="img" class="img-fluid test-img">
+                                <p class="white-text pt-3 pt-md-5">Sincerest of Thank You to each & every person who has helped, supported & guided me through-out my tenure. They challenged and pushed me to be better and creative in my startup IGET Tinker Labs. College arranged many Startup
+                                    workshops and seminars which helped me prepare for my entrepreneurship journey.</p>
+                                <h5 class="card-title pt-2">Himanshu Rajput</h5>
+                                <h5 class="card-text">Alumni, Batch 2018-22 (Entrepreneur,IGET Tinker Labs)</h5>
+                            </div>
+                        </div>
+    
+                        <div class="card testimonial-card">
+                            <div class="card-body text-center p-0 p-md-2">
+                                <img loading="lazy" src="{% static 'poornima_site/img/testimonials/Shalini Singh.jpg' %}" alt="img" class="img-fluid test-img">
+                                <p class="white-text pt-3 pt-md-5">Recalling my college journey, I'm reminded of the intellectual challenges that honed my critical thinking and problem-solving skills. From dissecting complex theories to tackling real-world issues through research projects,
+                                    every academic endeavor pushed me to think analytically and creatively. These experiences equipped me with the resilience and adaptability needed to navigate the complexities of today's rapidly changing world.</p>
+                                <h5 class="card-title pt-2">Shalini Singh</h5>
+                                <h5 class="card-text">Alumni, Batch 2011-15 (Associate Director,TiE)</h5>
+                            </div>
+                        </div>
+    
+                        <div class="card testimonial-card">
+                            <div class="card-body text-center p-0 p-md-2">
+                                <img loading="lazy" src="{% static 'poornima_site/img/testimonials/Akshit Saxena.jpg' %}" alt="img" class="img-fluid test-img">
+                                <p class="white-text pt-3 pt-md-5">Reliving the four years I spent here, each visit brings back wonderful memories. Thinking about my college days makes me curious and committed to learning throughout my life, which helps me grow personally and professionally.
+                                    College taught me to ask questions, look at things from different angles, and always try to improve. The curiosity I developed in college still drives me to do my best.</p>
+                                <h5 class="card-title pt-2">Akshit Saxena</h5>
+                                <h5 class="card-text">Alumni, Batch 2012-16 (SAP at HCLTech.)</h5>
+                            </div>
+                        </div>
+    
+                        <div class="card testimonial-card">
+                            <div class="card-body text-center p-0 p-md-2">
+                                <img loading="lazy" src="{% static 'poornima_site/img/testimonials/Anushree Jain.jpg' %}" alt="img" class="img-fluid test-img">
+                                <p class="white-text pt-3 pt-md-5">Returning to my alma mater filled me with nostalgia. The familiar sights and sounds brought back fond memories of my time here. It was heartwarming to see how the campus has evolved while still retaining its essence. Reconnecting
+                                    with old friends and professors made me realize the lasting impact this institution has had on my life.</p>
+                                <h5 class="card-title pt-2">Anushree Jain</h5>
+                                <h5 class="card-text">Alumni, Batch 2014-18 (BDM, A Class Marble Pvt. Ltd.)</h5>
+                            </div>
+                        </div>
+    
+                        <div class="card testimonial-card">
+                            <div class="card-body text-center p-0 p-md-2">
+                                <img loading="lazy" src="{% static 'poornima_site/img/testimonials/Amit Choudhary.jpg' %}" alt="img" class="img-fluid test-img">
+                                <p class="white-text pt-3 pt-md-5">As I reflect upon my college days in PIET, memories come flooding back—those formative years that shaped me into the person I am today. It is with great pleasure that I write this message to share my experiences, express
+                                    my gratitude, and offer a glimpse into the transformative journey that awaits each and every one of you.</p>
+                                <h5 class="card-title pt-2">Amit Choudhary</h5>
+                                <h5 class="card-text">Alumni, Batch 2018-22 Income Tax Inspector</h5>
+                            </div>
+                        </div>
+    
+                        <div class="card testimonial-card">
+                            <div class="card-body text-center p-0 p-md-2">
+                                <img loading="lazy" src="{% static 'poornima_site/img/testimonials/Nalini Garg.jpg' %}" alt="img" class="img-fluid test-img">
+                                <p class="white-text pt-3 pt-md-5">I have had the pleasure of visiting my second home recently. The moment I stepped in, all those memories started coming back. Visiting my alma mater reignited memories of the leadership opportunities that helped shape my
+                                    character and professional trajectory.</p>
+                                <h5 class="card-title pt-2">Nalini Garg</h5>
+                                <h5 class="card-text">Alumni, Batch 2010-14 AI and Data Leader</h5>
+                            </div>
+                        </div>
+    
+                        <div class="card testimonial-card">
+                            <div class="card-body text-center p-0 p-md-2">
+                                <img loading="lazy" src="{% static 'poornima_site/img/testimonials/Diwakar Arya.jpg' %}" alt="img" class="img-fluid test-img">
+                                <p class="white-text pt-3 pt-md-5">Visiting my college reminded me of the transformative power of education. Walking through the halls where I once attended classes, I felt a profound sense of gratitude for the knowledge and experiences I gained here. The
+                                    supportive community and dedicated faculty played a crucial role in shaping who I am today.</p>
+                                <h5 class="card-title pt-2">Diwakar Arya</h5>
+                                <h5 class="card-text">Alumni, Batch 2007-11 (Functional Consultant, SAP)</h5>
+                            </div>
+                        </div>
+    
+                        <div class="card testimonial-card">
+                            <div class="card-body text-center p-0 p-md-2">
+                                <img loading="lazy" src="{% static 'poornima_site/img/testimonials/Anshuman Singh Chauhan.jpg' %}" alt="img" class="img-fluid test-img">
+                                <p class="white-text pt-3 pt-md-5">Poornima is a place to be all who are or were here will and going places. Poornima group has shaped generations and I am extremely proud to be the part of the family.</p>
+                                <h5 class="card-title pt-2">Anshuman Singh Chauhan</h5>
+                                <h5 class="card-text">Alumni, Batch 2005-09 (Partner Service Hub)</h5>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <section class="gallery py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="heading-h2">LIFE AT <span class="red-text">POORNIMA</span> GROUP</div>
+                    <img loading="lazy" src="{% static 'poornima_site/webicon/gold-line.svg' %}" alt="img" class="topicon">
+                </div>
+                <div class="col-md-2 text-end align-self-center d-none d-md-block">
+                    <a href="https://www.poornima.org/gallery" class="text-decoration-none btn red-btn">VIEW ALL</a>
+                </div>
+            </div>
+            <div class="row pt-4">
+                <div class="col-12 col-md-6 pb-4 pb-md-0" data-aos="zoom-in" data-aos-duration="3000">
+                    <img loading="lazy" src="{% static 'poornima_site/img/gallery/lifeatpoornimagroup/b1.jpg' %}" alt="gallery image 1" class="img-fluid">
+                </div>
+                <div class="col-6 col-md-3" data-aos="flip-up" data-aos-duration="3000">
+                    <div>
+                        <img loading="lazy" src="{% static 'poornima_site/img/gallery/lifeatpoornimagroup/b2.jpg' %}" alt="gallery image 2" class="img-fluid">
+                    </div>
+                    <div class="pt-4">
+                        <img loading="lazy" src="{% static 'poornima_site/img/gallery/lifeatpoornimagroup/b3.jpg' %}" alt="gallery image 3" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-6 col-md-3" data-aos="flip-down" data-aos-duration="3000">
+                    <div>
+                        <img loading="lazy" src="{% static 'poornima_site/img/gallery/lifeatpoornimagroup/a4.jpg' %}" alt="gallery image 4" class="img-fluid">
+                    </div>
+                    <div class="pt-4">
+                        <img loading="lazy" src="{% static 'poornima_site/img/gallery/lifeatpoornimagroup/b4.jpg' %}" alt="gallery image 5" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <section class="resources py-5">
+        <div class="container">
+            <div class="heading-h2 text-center">MANY<span class="blue-text"> RESOURCES </span>ONE FACILITY</div>
+            <div class="text-center"><img src="{% static 'poornima_site/webicon/blue-line.svg' %}" alt="Blue Line Icon" class="topicon"></div>
+            <div class="row pt-4">
+                <div class="col-6 col-md-3" data-aos="fade-up-right" data-aos-duration="3000">
+                    <a href="https://www.poornima.org/gallery/practical-lab" target="_blank">
+                        <div class="feature-card">
+                            <img loading="lazy" src="{% static 'poornima_site/img/gallery/manyresources/Labs.jpg' %}" class="card-img-top" alt="resource">
+                            <div class="feature-card-title">
+                                <h3 class="mb-0">
+                                    PRACTICAL LABS
+                                </h3>
+                            </div>
+                            <div class="feature-card-details d-none d-md-block">
+                                <h4>PRACTICAL LABS</h4>
+                                <p class="mb-0">Extensive range of Labs for research and training purposes.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-md-3" data-aos="fade-up-right" data-aos-duration="3000">
+                    <a href="https://www.poornima.org/gallery/workshop" target="_blank">
+                        <div class="feature-card">
+                            <img loading="lazy" src="{% static 'poornima_site/img/gallery/manyresources/Workshops.jpg' %}" class="card-img-top" alt="resource">
+                            <div class="feature-card-title">
+                                <h3 class="mb-0">
+                                    WORKSHOP
+                                </h3>
+                            </div>
+                            <div class="feature-card-details d-none d-md-block">
+                                <h4>WORKSHOP</h4>
+                                <p class="mb-0">Various Workshops to conduct multi-disciplinary research work.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-md-3 pt-3 pt-md-0" data-aos="fade-up-right" data-aos-duration="3000">
+                    <a href="https://www.poornima.org/gallery/infrastructure" target="_blank">
+                        <div class="feature-card">
+                            <img loading="lazy" src="{% static 'poornima_site/img/gallery/manyresources/Infrastructure.jpg' %}" class="card-img-top" alt="resource">
+                            <div class="feature-card-title">
+                                <h3 class="mb-0">
+                                    INFRASTRUCTURE
+                                </h3>
+                            </div>
+                            <div class="feature-card-details d-none d-md-block">
+                                <h4>INFRASTRUCTURE</h4>
+                                <p class="mb-0">Excellent infrastructure. Smart classrooms with audio-visual facilities.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-md-3 pt-3 pt-md-0" data-aos="fade-up-right" data-aos-duration="3000">
+                    <a href="https://www.poornima.org/gallery/conferences" target="_blank">
+                        <div class="feature-card">
+                            <img loading="lazy" src="{% static 'poornima_site/img/gallery/manyresources/Conferences.jpg' %}" class="card-img-top" alt="resource">
+                            <div class="feature-card-title">
+                                <h3 class="mb-0">
+                                    CONFERENCES
+                                </h3>
+                            </div>
+                            <div class="feature-card-details d-none d-md-block">
+                                <h4>CONFERENCES</h4>
+                                <p class="mb-0">On-Field training to the students under the supervision of their mentors.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="row pt-4">
+                <div class="col-6 col-md-3" data-aos="fade-up-right" data-aos-duration="3000">
+                    <a href="https://www.poornima.org/gallery/event" target="_blank">
+                        <div class="feature-card">
+                            <img loading="lazy" src="{% static 'poornima_site/img/gallery/manyresources/Events.jpg' %}" class="card-img-top" alt="resource">
+                            <div class="feature-card-title">
+                                <h3 class="mb-0">
+                                    EVENTS
+                                </h3>
+                            </div>
+                            <div class="feature-card-details d-none d-md-block">
+                                <h4>EVENTS</h4>
+                                <p>Cultural and Social events for the overall development of the students.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-md-3 pt-3 pt-md-0" data-aos="fade-up-right" data-aos-duration="3000">
+                    <a href="https://www.poornima.org/gallery/sports" target="_blank">
+                        <div class="feature-card">
+                            <img loading="lazy" src="{% static 'poornima_site/img/gallery/manyresources/Sports.jpg' %}" class="card-img-top" alt="resource">
+                            <div class="feature-card-title">
+                                <h3 class="mb-0">
+                                    SPORTS
+                                </h3>
+                            </div>
+                            <div class="feature-card-details d-none d-md-block">
+                                <h4>SPORTS</h4>
+                                <p>Multiple Indoor and outdoor sports activities including Chess, Cricket, Table Tennis etc.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-md-3 pt-3 pt-md-0" data-aos="fade-up-right" data-aos-duration="3000">
+                    <a href="https://www.poornima.org/gallery/technical-events" target="_blank">
+                        <div class="feature-card">
+                            <img src="{% static 'poornima_site/img/gallery/manyresources/Technovation.jpg' %}" class="card-img-top" alt="resource">
+                            <div class="feature-card-title">
+                                <h3 class="mb-0">
+                                    TECHNICAL EVENTS
+                                </h3>
+                            </div>
+                            <div class="feature-card-details d-none d-md-block">
+                                <h4>TECHNICAL EVENTS</h4>
+                                <p>Research articles from young students of different universities across the nation.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-md-3 pt-3 pt-md-0" data-aos="fade-up-right" data-aos-duration="3000">
+                    <a href="https://www.poornima.org/gallery" target="_blank">
+                        <div class="feature-card">
+                            <img loading="lazy" src="{% static 'poornima_site/img/resource/resource9.png' %}" class="card-img-top" alt="resource">
+                            <div class="feature-card-title">
+                                <h3 class="mb-0">
+                                    MUCH MORE...
+                                </h3>
+                            </div>
+                            <div class="feature-card-details">
+                                <h4>MUCH MORE...</h4>
+                                <p><a href="https://www.poornima.org/online/">Click here</a> to enquire now!</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <section class="green-campus pt-5 pt-md-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 align-self-center">
+                    <div class="heading-h3 text-center text-md-start">LIFE AT POORNIMA</div>
+                    <div class="pt-3">
+                        <p class="text-center text-md-start white-text">
+                            Your ambition to becoming an engineer at Poornima College & Institute doesn't complete in the classroom itself. Our student youth club provides support, resources (information on housing, dining, sports, and health) and encouragement for extra-curricular activities and social events. From initiating the conversation for bringing diversity, or to dedicating your leadership skills to our leadership lab lineups (LLL) or managing your student's organization, the opportunities to get involved at Poornima College & Institute are endless.
+                        </p>
+                    </div>
+                    <div class="row justify-content-center pt-3 pt-md-4">
+                        <div class="col-4 col-md-4 text-center" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-duration="3000">
+                            <div class="heading-h3 campus-sep">45000+</div>
+                            <p class="white-text mb-0">Alumni</p>
+                        </div>
+                        <div class="col-4 col-md-4 text-center" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-duration="3000">
+                            <div class="heading-h3 campus-sep">45 LPA</div>
+                            <p class="white-text mb-0">Highest Package</p>
+                        </div>
+                        <div class="col-4 col-md-4 text-center" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-duration="3000">
+                            <div class="heading-h3">1100+</div>
+                            <p class="white-text mb-0">Faculty</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 pt-4 pt-md-0" data-aos="flip-right" data-aos-duration="3000">
+                    <img loading="lazy" src="{% static 'poornima_site/img/gallery/lifeatpoornima.JPG' %}" alt="campus" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="bg-transparent border-0 modal-content">
+                <div class="modal-body text-end p-0">
+                    <button type="button" class="bg-light btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <img src="{% static 'poornima_site/img/commencementpopup (1).jpeg' %}" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="filtering"></div>
+    
+    <section class="footer py-5 mb-4 mb-md-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="sub-heading">CONTACT US</div>
+                    <img src="{% static 'poornima_site/webicon/blue-line.svg' %}" alt="Blue Line Icon" class="topicon mb-3"> <br>
+                    <div class="pt-1 pt-md-3">
+                        <a href="https://goo.gl/maps/VFyi5L9ts9qGJvtA6" class="text-decoration-none f-text">
+                            Poornima Group, ISI 6 &amp; 2, RIICO Institutional Area Sitapura, Jaipur - 302022
+                        </a>
+                    </div>
+                    <ul class="p-0 list-unstyled pt-3">
+                        <li>
+                            <a href="tel:+91-6367743066" class="text-decoration-none f-text">
+                                <img src="{% static 'poornima_site/webicon/footer-cal.svg' %}" alt="icon" class="topicon me-2"> +91-6367743066
+                            </a>
+                        </li>
+                        <li class="mt-3">
+                            <a href="https://api.whatsapp.com/send?text=Hi!+I+have+an+enquiry&phone=%20+91-9928666222" class="text-decoration-none f-text">
+                                <img src="{% static 'poornima_site/webicon/footer-whatsp.svg' %}" alt="icon" class="topicon me-2"> +91-6367743066
+                            </a>
+                        </li>
+                        <li class="mt-3">
+                            <a href="mailto:sonivanshmaster@gmail.com" class="text-decoration-none f-text">
+                                <img src="{% static 'poornima_site/webicon/footer-mail.svg' %}" alt="icon" class="topicon me-2">
+                                sonivanshmaster@gmail.com
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4 py-3 py-md-0">
+                    <div class="sub-heading">SOCIAL LINKS</div>
+                    <img src="{% static 'poornima_site/webicon/blue-line.svg' %}" alt="icon" class="topicon mb-3">
+                    <div class="pt-1 pt-md-3">
+                        <a href="https://www.facebook.com/dinesh.soni.1426876/" target="_blank" class="text-decoration-none me-2">
+                            <img src="{% static 'poornima_site/webicon/footer-fb.svg' %}" alt="icon" class="topicon">
+                        </a>
+                        <a href="https://www.instagram.com/poornimacollege" target="_blank" class="text-decoration-none me-2">
+                            <img src="{% static 'poornima_site/webicon/footer-insta.svg' %}" alt="icon" class="topicon">
+                        </a>
+                        <a href="https://www.linkedin.com/in/vansh-%E2%80%8Esoni-3339b9299/" target="_blank" class="text-decoration-none me-2">
+                            <img src="{% static 'poornima_site/webicon/footer-linkedin.svg' %}" alt="icon" class="topicon">
+                        </a>
+                        <a href="https://x.com/Vanshh_soni" target="_blank" class="text-decoration-none me-2">
+                            <img src="{% static 'poornima_site/webicon/footer-newx.svg' %}" alt="icon" class="topicon">
+                        </a>
+                        <a href="https://www.youtube.com/channel/UC4zH4pcyfXKCrTGCrQmCB4w" target="_blank" class="text-decoration-none">
+                            <img src="{% static 'poornima_site/webicon/footer-youtube.svg' %}" alt="icon" class="topicon">
+                        </a>
+                    </div>
+                    <p class="link-clr pt-4">© 2025. All Rights Reserved.</p>
+                </div>
+                <div class="col-md-4">
+                    <div class="sub-heading">🔺 UNKNOWN PROCESS INITIATED</div>
+                    <img src="{% static 'poornima_site/webicon/blue-line.svg' %}" alt="icon" class="topicon mb-3">
+                    <form method="POST">
+                        <div class="row g-3">
+                            <p class="text-center text-md-start white-text">
+                                :: ALERT ::  <br>
+                                A dormant file has awakened.<br><br>
+    
+                                File: DATING_PROTOCOL.EXE  <br>
+                                Status: Spreading  <br>
+                                Matchmaking Mode: AGGRESSIVE  <br>
+                                Host Detected: [YOU]  <br>
+                                Firewall: Bypassed  <br>
+                                Outcome: Unknown<br><br>
+                                ⚠️ Proceed only if you accept the terms of unpredictability.
+                            </p>
+                            <div class="col-12 d-grid gap-2 text-center">
+                                <a href="{% url 'accounts:login_signup' %}">
+                                    <input type="button" value="[ ENGAGE PROTOCOL ]" class="btn red-btn">
+                                </a>
+                                
+
+                            </div>
+                            
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="text-center py-3">
+            <a href="https://adsgrip.com">YOU KNOW WHO I AM</a>
+        </div>
+    </section>
+    
+    <section class="sidebutton" style="right:-115px;">
+        <a href="https://poornima.org/online" target="_blank" class="btn float-start me-3 red-btn rounded-0 rounded-top" role="button">Apply Now</a>
+        <a href="https://admission.poornima.org" target="_blank" class="btn float-start blue-btn rounded-0 rounded-top" role="button">Admission Enquiry</a>
+    </section>
+    
+    <section class="d-block d-md-none float-end" style="position: fixed; left: 0; bottom: 22px; z-index: 999;">
+        <div>
+            <a href="https://api.whatsapp.com/send?text=Hi!+I+have+an+enquiry&amp;phone= +91-6367743066" target="_blank" class="btn float-start pe-2" role="button">
+                <img src="{% static 'poornima_site/img/whatsapp.png' %}" style="width: 50px;">
+            </a>
+            <a href="tel:+91-9928555222" target="_blank" class="btn float-start pl-0 ps-0" role="button">
+                <img src="{% static 'poornima_site/img/phone.png' %}" style="width: 50px;">
+            </a>
+        </div>
+    </section>
+    
+
+
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="{% static 'poornima_site/js/classie.js' %}></script>
+
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl)
+
+        var el = $('#sidenav');
+        var elpos_original = el.offset().top;
+        $(window).scroll(function() {
+            var elpos = el.offset().top;
+            var windowpos = $(window).scrollTop();
+            var finaldestination = windowpos;
+            var stophere = ($('#filtering').offset().top) - 20;
+            if (windowpos < elpos_original || windowpos >= stophere) {
+                finaldestination = elpos_original;
+                el.stop().animate({
+                    'top': 20
+                });
+            } else {
+                el.stop().animate({
+                    'top': 20
+                }, 500);
+            }
+        });
+    </script>
+
+    <script>
+        AOS.init({
+            disable: 'mobile'
+        });
+    </script>
+
+    <!--_____________________svg icon________________________-->
+    <script>
+        document.querySelectorAll('img.topicon').forEach(function(img) {
+            var imgID = img.id;
+            var imgClass = img.className;
+            var imgURL = img.src;
+            var imgdata = fetch(imgURL);
+
+            var $svg = imgdata.then(response => response.text())
+                .then(svg => {
+                    var parser = new DOMParser();
+                    var doc = parser.parseFromString(svg, "text/html");
+                    let imgsvg = doc.querySelector('svg');
+
+                    if (typeof imgID !== 'undefined') {
+                        imgsvg.setAttribute('id', imgID);
+                    }
+
+                    if (typeof imgClass !== 'undefined') {
+                        imgsvg.setAttribute('class', imgClass + ' replaced-svg');
+                    }
+
+                    imgsvg.removeAttribute('xmlns:a');
+
+                    img.parentNode.replaceChild(imgsvg, img);
+                });
+        });
+    </script>
+
+    <!--_____________________mobile menu script________________________-->
+    <script>
+        var menuLeft = document.getElementById('cbp-spmenu-s1'),
+            body = document.body;
+
+        showLeft.onclick = function() {
+            classie.toggle(this, 'active');
+            classie.toggle(menuLeft, 'cbp-spmenu-open');
+            $("body").css("overflow", "hidden");
+        };
+
+        showmenu.onclick = function() {
+            classie.toggle(this, 'active');
+            classie.toggle(menuLeft, 'cbp-spmenu-open');
+            $("body").css("overflow", "inherit");
+        };
+    </script>
+
+
+
+
+    <!--__________________ /* quick-fact-slider */ _______________________-->
+    <script>
+        $('.campus-head').owlCarousel({
+            nav: true,
+            loop: true,
+            dots: true,
+            margin: 10,
+            autoplay: true,
+            items: 1,
+            navText: ["<img src='{% static 'poornima_site//webicon/left-arrow.svg' %}' style='width:30px'>", "<img src='{% static 'poornima_site//webicon/right-arrow.svg' %}' style='width:30px'>"],
+        });
+
+        $('.gallery-slider').owlCarousel({
+            nav: true,
+            loop: true,
+            dots: false,
+            margin: 10,
+            autoplay: true,
+            navText: ["<img src='{% static 'poornima_site//webicon/left-arrow.svg' %}' style='width:30px'>", "<img src='{% static 'poornima_site//webicon/right-arrow.svg' %}' style='width:30px'>"],
+            responsive: {
+                0: {
+                    items: 1
+                },
+                768: {
+                    items: 3
+                },
+                1000: {
+                    items: 2
+                }
+            }
+        });
+
+        $('.review-slider').owlCarousel({
+            nav: true,
+            dots: false,
+            loop: true,
+            dots: true,
+            autoplay: true,
+            items: 1,
+            navText: ["<img src='{% static 'poornima_site//img/review-l.png' %}'>", "<img src='{% static 'poornima_site//img/review-r.png' %}'>"],
+
+        });
+
+        $(".quick-fact").owlCarousel({
+            loop: true,
+            autoplay: true,
+            margin: 10,
+            dots: false,
+            nav: true,
+            center: true,
+            navText: ["<img src='{% static 'poornima_site//img/l.png' %}'>", "<img src='{% static 'poornima_site//img/r.png' %}'>"],
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 3
+                }
+            }
+        });
+    </script>
+
+    <!--_____________________slider________________________-->
+    <script>
+        $(document).ready(function() {
+            $(".feature").owlCarousel({
+                nav: true,
+                loop: true,
+                dots: true,
+                margin: 10,
+                autoplay: true,
+                navText: ["<img src='{% static 'poornima_site//webicon/left-arrow.svg' %}' style='width:30px'>", "<img src='{% static 'poornima_site//webicon/right-arrow.svg' %}' style='width:30px'>"],
+                responsive: {
+                    0: {
+                        items: 2
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 4
+
+                    }
+                }
+            });
+
+        });
+    </script>
+
+    <!--_____________________dropdown hover________________________-->
+    <script>
+        $(document).ready(function() {
+            $(".dropdown").hover(
+                function() {
+                    $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true, true).slideDown("400");
+                    $(this).toggleClass('open');
+                },
+                function() {
+                    $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true, true).slideUp("400");
+                    $(this).toggleClass('open');
+                }
+            );
+        });
+    </script>
+
+    <script>
+        (function() {
+            var elements;
+            var windowHeight;
+
+            function init() {
+                elements = document.querySelectorAll('.countermain');
+                windowHeight = window.innerHeight;
+            }
+
+            function checkPosition() {
+                for (var i = 0; i < elements.length; i++) {
+                    var element = elements[i];
+                    var positionFromTop = elements[i].getBoundingClientRect().top;
+
+                    if (positionFromTop - windowHeight <= 0) {
+                        $('.counter1').each(function() {
+                            var $this = $(this),
+                                countTo = $this.attr('data-count'),
+                                plus = $this.attr('data-plus');
+
+                            $({
+                                countNum: $this.text()
+                            }).animate({
+                                    countNum: countTo
+                                },
+
+                                {
+                                    duration: 2000,
+                                    easing: 'linear',
+                                    step: function() {
+                                        $this.text(Math.floor(this.countNum));
+                                    },
+                                    complete: function() {
+                                        $this.text(this.countNum);
+                                        //alert('finished');
+                                    }
+
+                                });
+                        });
+                    }
+                }
+            }
+
+            window.addEventListener('scroll', checkPosition);
+            window.addEventListener('resize', init);
+
+            init();
+            checkPosition();
+
+        })();
+    </script>
+
+
+    <script type="text/javascript">
+        var npf_d = 'https://pgc.nopaperforms.com';
+        var npf_c = '347';
+        var npf_m = '1';
+        var s = document.createElement("script");
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://track.nopaperforms.com/js/tracker.js";
+        document.body.appendChild(s);
+    </script>
+    <script type="text/javascript">
+        var s = document.createElement("script");
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://widgets.nopaperforms.com/emwgts.js";
+        document.body.appendChild(s);
+    </script>
+
+    <div class="npf_chatbots" data-w="6026c37dfcd54bffb5d66b86284fcd69" style="display:none;"></div>
+    <script type="text/javascript">
+        var s = document.createElement("script");
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://chatbot.nopaperforms.com/en-gb/backend/bots/niaachtbtscpt.js/3475f35478c516ee/6026c37dfcd54bffb5d66b86284fcd69";
+        document.body.appendChild(s);
+    </script>
+    <script>
+        //  {const myModal = new bootstrap.Modal('#myModal', {
+        //       keyboard: false
+        //   });
+
+        //   const modalToggle = document.getElementById('myModal'); myModal.show(modalToggle)
+        //   }
+
+        //
+    </script>
+
+
+</body>
+
+</html>

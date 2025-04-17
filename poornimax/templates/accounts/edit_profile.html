@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Edit Profile</title>
+  <style>
+    body {
+      background-color: #f4f6f8;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    .header {
+      background-color: #1e2a38;
+      padding: 16px;
+      color: white;
+      display: flex;
+      align-items: center;
+    }
+
+    .header a {
+      text-decoration: none;
+      color: #00bcd4;
+      font-size: 1.5rem;
+      margin-right: 12px;
+    }
+
+    .header h2 {
+      font-size: 1.25rem;
+      margin: 0;
+    }
+
+    .form-container {
+      max-width: 500px;
+      background: #fff;
+      margin: 30px auto;
+      padding: 24px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-container h3 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      background-color: #1976d2;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #1565c0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <a href="/feed/profile/">←</a>
+    <h2>Edit Profile</h2>
+  </div>
+
+  <div class="form-container">
+    <h3>Update Your Information</h3>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label for="full_name">Full Name</label>
+      <input type="text" id="full_name" name="full_name" value="{{ user.full_name }}" required>
+
+      <label for="bio">Bio</label>
+      <textarea id="bio" name="bio" rows="3">{{ user.bio }}</textarea>
+
+      <label for="department">Department</label>
+      <select name="department" id="department" required>
+        <option value="">Select Department</option>
+        <option value="CORE" {% if user.department == 'CORE' %}selected{% endif %}>CORE</option>
+        <option value="ECE" {% if user.department == 'ECE' %}selected{% endif %}>ECE</option>
+        <option value="Cyber Security" {% if user.department == 'Cyber Security' %}selected{% endif %}>Cyber Security</option>
+        <option value="IT" {% if user.department == 'IT' %}selected{% endif %}>IT</option>
+        <option value="Civil" {% if user.department == 'Civil' %}selected{% endif %}>Civil</option>
+        <option value="Mechanical" {% if user.department == 'Mechanical' %}selected{% endif %}>Mechanical</option>
+        <option value="Electrical" {% if user.department == 'Electrical' %}selected{% endif %}>Electrical</option>
+      </select>
+
+      <label for="year">Year</label>
+      <select name="year" id="year" required>
+        <option value="">Select Year</option>
+        <option value="1st Year" {% if questionnaire.year == '1st Year' %}selected{% endif %}>1st Year</option>
+        <option value="2nd Year" {% if questionnaire.year == '2nd Year' %}selected{% endif %}>2nd Year</option>
+        <option value="3rd Year" {% if questionnaire.year == '3rd Year' %}selected{% endif %}>3rd Year</option>
+        <option value="Final Year" {% if questionnaire.year == 'Final Year' %}selected{% endif %}>Final Year</option>
+        <option value="Postgraduate" {% if questionnaire.year == 'Postgraduate' %}selected{% endif %}>Postgraduate</option>
+      </select>
+
+      <label for="profile_picture">Profile Picture</label>
+      <input type="file" id="profile_picture" name="profile_picture">
+
+      <button type="submit">Save Changes</button>
+    </form>
+  </div>
+
+</body>
+</html>
