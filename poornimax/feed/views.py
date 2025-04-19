@@ -11,7 +11,10 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from accounts.models import Crush, Friendship
+from django.utils.timesince import timesince
+
 from django.db import models
+from datetime import datetime 
 
 
 
@@ -168,65 +171,6 @@ from django.contrib.auth.decorators import login_required
 
 from django.contrib import messages
 
-@login_required
-def profile(request, user_id):
-    profile_user = get_object_or_404(User, id=user_id)
-    
-    # Check crush status without filtering by is_mutual
-    sent_crush = Crush.objects.filter(sender=request.user, receiver=profile_user).exists()
-    received_crush = Crush.objects.filter(sender=profile_user, receiver=request.user).exists()
-    
-    # Check if both users have sent crushes to each other and at least one is marked mutual
-    is_mutual = False
-    if sent_crush and received_crush:
-        sent_crush_obj = Crush.objects.get(sender=request.user, receiver=profile_user)
-        received_crush_obj = Crush.objects.get(sender=profile_user, receiver=request.user)
-        is_mutual = sent_crush_obj.is_mutual or received_crush_obj.is_mutual
-    
-    if request.method == 'POST':
-        crush_action = request.POST.get('crush_action')
-
-        if crush_action == 'send_crush':
-            # Only create if it doesn't exist
-            if not sent_crush:
-                crush = Crush.objects.create(sender=request.user, receiver=profile_user)
-                # Check if this creates a mutual crush
-                crush.check_mutual_and_create_friendship()
-                messages.success(request, "Crush sent! 💘")
-            else:
-                messages.info(request, "You've already sent a crush.")
-            
-        elif crush_action == 'accept_crush':
-            if received_crush and not sent_crush:
-                # Create the return crush
-                crush = Crush.objects.create(sender=request.user, receiver=profile_user)
-                # This will handle setting both to mutual and creating friendship
-                crush.check_mutual_and_create_friendship()
-                messages.success(request, "Crush accepted! It's a match! 💖")
-            else:
-                messages.error(request, "No crush to accept.")
-                
-        elif crush_action == 'uncrush':
-            # Remove the crush regardless of mutual status
-            Crush.objects.filter(sender=request.user, receiver=profile_user).delete()
-            
-            # If there was a mutual relationship, update the other person's crush
-            if is_mutual:
-                other_crush = Crush.objects.filter(sender=profile_user, receiver=request.user).first()
-                if other_crush:
-                    other_crush.is_mutual = False
-                    other_crush.save()
-            
-            messages.success(request, "Crush removed 💔")
-            
-        return redirect('feed:profile', user_id=user_id)
-
-    return render(request, 'feed/profile.html', {
-        'profile_user': profile_user,
-        'sent_crush': sent_crush,
-        'received_crush': received_crush,
-        'is_mutual': is_mutual,  # Changed from mutual_crush to is_mutual to match template
-    })
 
 
 
@@ -310,3 +254,288 @@ def crush_action(request, user_id):
 
     # If not POST request
     return HttpResponse("Invalid request", status=400)
+
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.http import JsonResponse
+from django.utils.timesince import timesince
+from .forms import *
+from .models import *
+
+@login_required
+def profile(request, user_id):
+    profile_user = get_object_or_404(User, id=user_id)
+    
+    # Check crush status without filtering by is_mutual
+    sent_crush = Crush.objects.filter(sender=request.user, receiver=profile_user).exists()
+    received_crush = Crush.objects.filter(sender=profile_user, receiver=request.user).exists()
+    
+    # Check if both users have sent crushes to each other and at least one is marked mutual
+    is_mutual = False
+    if sent_crush and received_crush:
+        sent_crush_obj = Crush.objects.get(sender=request.user, receiver=profile_user)
+        received_crush_obj = Crush.objects.get(sender=profile_user, receiver=request.user)
+        is_mutual = sent_crush_obj.is_mutual or received_crush_obj.is_mutual
+    
+    # Get user's posts
+    posts = Post.objects.filter(user=profile_user).order_by('-created_at')
+    
+    # Get the latest post
+    latest_post = posts.first()
+    
+    # Add like and comment counts to posts
+    for post in posts:
+        post.likes_count = Like.objects.filter(post=post).count()
+        post.comments_count = Comment.objects.filter(post=post).count()
+    
+    context = {
+        'profile_user': profile_user,
+        'sent_crush': sent_crush,
+        'received_crush': received_crush,
+        'is_mutual': is_mutual,
+        'posts': posts,
+        'latest_post': latest_post,
+    }
+    
+    return render(request, 'feed/profile.html', context)
+
+# Add this to feed/views.py
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from .forms import *
+from .models import *
+
+@login_required
+def create_post(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+            messages.success(request, "Post created successfully!")
+            return redirect('feed:profile', user_id=request.user.id)
+    else:
+        form = PostForm()
+    
+    return render(request, 'feed/create_post.html', {'form': form})
+
+# Add these to feed/views.py
+@login_required
+def explore(request):
+    query = request.GET.get('q', '')
+    users = []
+    
+    if query:
+        users = User.objects.filter(username__icontains=query).exclude(id=request.user.id)[:20]
+    
+    # Get recent confessions
+    confessions = Confession.objects.all()[:20]
+    
+    return render(request, 'feed/explore.html', {
+        'query': query,
+        'users': users,
+        'confessions': confessions
+    })
+
+@login_required
+def create_confession(request):
+    if request.method == 'POST':
+        form = ConfessionForm(request.POST)
+        if form.is_valid():
+            confession = form.save(commit=False)
+            
+            # Only store user reference if not anonymous
+            if not confession.is_anonymous:
+                confession.user = request.user
+            
+            confession.save()
+            messages.success(request, "Confession posted successfully!")
+            return redirect('feed:explore')
+    else:
+        form = ConfessionForm(initial={'is_anonymous': True})
+    
+    return render(request, 'feed/confession.html', {'form': form})
+
+@login_required
+def like_post(request, post_id):
+    if request.method == 'POST':
+        post = get_object_or_404(Post, id=post_id)
+        
+        # Check if already liked
+        like_exists = Like.objects.filter(post=post, user=request.user).exists()
+        
+        if like_exists:
+            # Unlike
+            Like.objects.filter(post=post, user=request.user).delete()
+            liked = False
+        else:
+            # Like
+            Like.objects.create(post=post, user=request.user)
+            liked = True
+        
+        # Redirect to the profile page of the post owner
+        return redirect('feed:profile', user_id=post.user.id)
+    
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+
+@login_required
+def add_comment(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    
+    if request.method == 'POST':
+        content = request.POST.get('content')
+        if content:
+            comment = Comment.objects.create(
+                post=post,
+                user=request.user,
+                content=content
+            )
+            
+            # Redirect to the profile page of the post owner
+            return redirect('feed:profile', user_id=post.user.id)
+    
+    return JsonResponse({'success': False, 'error': 'Invalid request'})
+
+
+@login_required
+def delete_comment(request, comment_id):
+    if request.method == 'POST':
+        comment = get_object_or_404(Comment, id=comment_id)
+        post_user_id = comment.post.user.id
+        
+        # Only comment owner or post owner can delete
+        if request.user == comment.user or request.user == comment.post.user:
+            comment.delete()
+            # Redirect to the profile page of the post owner
+            return redirect('feed:profile', user_id=post_user_id)
+        
+        return JsonResponse({'success': False, 'error': 'Permission denied'})
+    
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})
+
+
+@login_required
+def delete_post(request, post_id):
+    if request.method == 'POST':
+        post = get_object_or_404(Post, id=post_id)
+        post_user_id = post.user.id
+        
+        # Only post owner can delete their post
+        if request.user == post.user:
+            post.delete()
+            # Redirect to the profile page of the post owner
+            return redirect('feed:profile', user_id=post_user_id)
+        
+        return JsonResponse({'success': False, 'error': 'Permission denied'})
+    
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})
+
+@login_required
+def get_post_data(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    
+    # Check if user can view this post
+    profile_user = post.user
+    sent_crush = Crush.objects.filter(sender=request.user, receiver=profile_user).exists()
+    received_crush = Crush.objects.filter(sender=profile_user, receiver=request.user).exists()
+    
+    is_mutual = False
+    if sent_crush and received_crush:
+        sent_crush_obj = Crush.objects.get(sender=request.user, receiver=profile_user)
+        received_crush_obj = Crush.objects.get(sender=profile_user, receiver=request.user)
+        is_mutual = sent_crush_obj.is_mutual or received_crush_obj.is_mutual
+    
+    # Check if user can see this post
+    if not (request.user == profile_user or is_mutual):
+        return JsonResponse({'success': False, 'error': 'Not authorized'})
+    
+    # Get comments
+    comments = []
+    for comment in Comment.objects.filter(post=post).order_by('-created_at'):
+        comments.append({
+            'id': comment.id,
+            'username': comment.user.username,
+            'user_id': comment.user.id,
+            'user_image': comment.user.profile_picture.url,
+            'content': comment.content,
+            'time': timesince(comment.created_at),
+            'is_owner': comment.user == request.user,
+            'can_delete': comment.user == request.user or post.user == request.user
+        })
+    
+    # Check if user has liked this post
+    liked = Like.objects.filter(post=post, user=request.user).exists()
+    likes_count = Like.objects.filter(post=post).count()
+    
+    return JsonResponse({
+        'success': True,
+        'post': {
+            'id': post.id,
+            'image': post.image.url,
+            'caption': post.caption,
+            'time': timesince(post.created_at),
+            'username': post.user.username,
+            'user_id': post.user.id,
+            'user_image': post.user.profile_picture.url,
+            'liked': liked,
+            'likes_count': likes_count,
+            'comments': comments,
+            'is_owner': post.user == request.user
+        }
+    })
+    post = get_object_or_404(Post, id=post_id)
+    
+    # Check if user can view this post
+    profile_user = post.user
+    sent_crush = Crush.objects.filter(sender=request.user, receiver=profile_user).exists()
+    received_crush = Crush.objects.filter(sender=profile_user, receiver=request.user).exists()
+    
+    is_mutual = False
+    if sent_crush and received_crush:
+        sent_crush_obj = Crush.objects.get(sender=request.user, receiver=profile_user)
+        received_crush_obj = Crush.objects.get(sender=profile_user, receiver=request.user)
+        is_mutual = sent_crush_obj.is_mutual or received_crush_obj.is_mutual
+    
+    # Check if user can see this post
+    if not (request.user == profile_user or is_mutual):
+        return JsonResponse({'success': False, 'error': 'Not authorized'})
+    
+    # Get comments
+    comments = []
+    for comment in Comment.objects.filter(post=post):
+        comments.append({
+            'id': comment.id,
+            'username': comment.user.username,
+            'user_id': comment.user.id,
+            'user_image': comment.user.profile_picture.url,
+            'content': comment.content,
+            'time': timesince(comment.created_at),
+            'is_owner': comment.user == request.user,
+            'can_delete': comment.user == request.user or post.user == request.user
+        })
+    
+    # Check if user has liked this post
+    liked = Like.objects.filter(post=post, user=request.user).exists()
+    likes_count = Like.objects.filter(post=post).count()
+    
+    return JsonResponse({
+        'success': True,
+        'post': {
+            'id': post.id,
+            'image': post.image.url,
+            'caption': post.caption,
+            'time': timesince(post.created_at),
+            'username': post.user.username,
+            'user_id': post.user.id,
+            'user_image': post.user.profile_picture.url,
+            'liked': liked,
+            'likes_count': likes_count,
+            'comments': comments,
+            'is_owner': post.user == request.user
+        }
+    })

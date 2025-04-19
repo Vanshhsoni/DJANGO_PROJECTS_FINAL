@@ -1,129 +1,564 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Edit Profile</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Profile | PoornimaX</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+  <script src="https://kit.fontawesome.com/b8b432d7d3.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
   <style>
-    body {
-      background-color: #f4f6f8;
-      font-family: 'Segoe UI', sans-serif;
+    /* Base Styles */
+    :root {
+      --primary: #6c63ff;
+      --primary-light: #8f88ff;
+      --primary-dark: #5046e5;
+      --secondary: #ff6584;
+      --bg: #f8f9fa;
+      --text: #333;
+      --text-light: #777;
+      --card-bg: #fff;
+      --shadow: rgba(0, 0, 0, 0.1);
+      --radius: 12px;
+      --transition: all 0.3s ease;
+    }
+
+    * {
       margin: 0;
       padding: 0;
-      color: #333;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
     }
 
-    .header {
-      background-color: #1e2a38;
-      padding: 16px;
-      color: white;
-      display: flex;
-      align-items: center;
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding-bottom: 70px;
     }
 
-    .header a {
+    a {
       text-decoration: none;
-      color: #00bcd4;
-      font-size: 1.5rem;
-      margin-right: 12px;
+      color: inherit;
     }
-
-    .header h2 {
-      font-size: 1.25rem;
-      margin: 0;
-    }
-
-    .form-container {
-      max-width: 500px;
-      background: #fff;
-      margin: 30px auto;
-      padding: 24px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    }
-
-    .form-container h3 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      margin-top: 15px;
-      margin-bottom: 6px;
+    
+    button {
+      cursor: pointer;
+      border: none;
+      outline: none;
+      font-size: 14px;
       font-weight: 500;
     }
 
-    input, select, textarea {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1rem;
+    /* Layout */
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 0 15px;
     }
 
-    button {
-      margin-top: 20px;
+    /* Particles Background */
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
-      background-color: #1976d2;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.2;
+    }
+
+    /* Edit Profile Card */
+    .edit-profile-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 20px var(--shadow);
+      overflow: hidden;
+      margin-bottom: 40px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Header Section */
+    .profile-header {
+      background: linear-gradient(120deg, var(--primary), var(--primary-dark));
+      padding: 20px;
+      position: relative;
       color: white;
-      padding: 12px;
-      border: none;
-      border-radius: 30px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
+      text-align: center;
+      animation: gradientFlow 10s ease infinite;
     }
 
-    button:hover {
-      background-color: #1565c0;
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .profile-header h2 {
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    /* Back Button */
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      transition: var(--transition);
+    }
+
+    .back-button:hover {
+      background: rgba(255, 255, 255, 0.4);
+      transform: scale(1.1);
+    }
+
+    /* Form Container */
+    .form-container {
+      padding: 30px;
+    }
+
+    .form-container h3 {
+      color: var(--primary);
+      margin-bottom: 25px;
+      font-size: 18px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .form-container h3:after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--primary);
+      animation: slideIn 1s ease;
+    }
+
+    @keyframes slideIn {
+      from { width: 0; opacity: 0; }
+      to { width: 60px; opacity: 1; }
+    }
+
+    /* Form Fields */
+    .form-group {
+      margin-bottom: 20px;
+      animation: fadeUp 0.5s ease;
+      animation-fill-mode: both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .form-group:nth-child(1) { animation-delay: 0.1s; }
+    .form-group:nth-child(2) { animation-delay: 0.2s; }
+    .form-group:nth-child(3) { animation-delay: 0.3s; }
+    .form-group:nth-child(4) { animation-delay: 0.4s; }
+    .form-group:nth-child(5) { animation-delay: 0.5s; }
+    .form-group:nth-child(6) { animation-delay: 0.6s; }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    input[type="text"], 
+    textarea, 
+    select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: var(--radius);
+      font-size: 14px;
+      transition: var(--transition);
+    }
+
+    input:focus, 
+    textarea:focus, 
+    select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    /* File Upload Styling */
+    .file-upload {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .file-upload-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 15px;
+      border: 1px dashed var(--primary);
+      border-radius: var(--radius);
+      color: var(--primary);
+      cursor: pointer;
+      transition: var(--transition);
+      background: rgba(108, 99, 255, 0.05);
+    }
+
+    .file-upload-label:hover {
+      background: rgba(108, 99, 255, 0.1);
+    }
+
+    .file-upload input[type="file"] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .file-name {
+      margin-top: 5px;
+      font-size: 12px;
+      color: var(--text-light);
+    }
+
+    /* Submit Button */
+    .submit-btn {
+      background: linear-gradient(to right, var(--primary), var(--primary-dark));
+      color: white;
+      padding: 14px 25px;
+      border-radius: 30px;
+      font-weight: 600;
+      display: block;
+      width: 100%;
+      margin-top: 30px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .submit-btn::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 10px;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease-out, height 0.6s ease-out, opacity 0.6s ease-out;
+    }
+
+    .submit-btn:active::after {
+      width: 300px;
+      height: 300px;
+      opacity: 1;
+      transition: width 0.6s ease-out, height 0.6s ease-out, opacity 0s;
+    }
+
+    /* Custom Select Styling */
+    .custom-select {
+      position: relative;
+      display: block;
+    }
+
+    .custom-select select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      cursor: pointer;
+    }
+
+    .custom-select::after {
+      content: '\f078';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-light);
+      pointer-events: none;
+      transition: var(--transition);
+    }
+
+    .custom-select:hover::after {
+      color: var(--primary);
+    }
+
+    /* Bottom Navigation */
+    nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 0;
+      box-shadow: 0 -2px 10px var(--shadow);
+      z-index: 100;
+    }
+
+    nav a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: var(--text-light);
+      padding: 8px 16px;
+      position: relative;
+    }
+
+    nav a i {
+      font-size: 20px;
+      margin-bottom: 3px;
+      transition: var(--transition);
+    }
+
+    nav a.active-link {
+      color: var(--primary);
+    }
+
+    nav a:hover i {
+      transform: translateY(-3px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .form-container {
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .profile-header h2 {
+        font-size: 20px;
+      }
+      
+      .form-container {
+        padding: 15px;
+      }
     }
   </style>
 </head>
+
 <body>
+  <!-- Particle Background -->
+  <div id="particles-js"></div>
+  
+  <div class="container">
+    <div class="edit-profile-card">
+      <!-- Header -->
+      <div class="profile-header">
+        <a href="{% url 'feed:profile' request.user.id %}" class="back-button">
+          <i class="fas fa-arrow-left"></i>
+        </a>
+        <h2>Edit Profile</h2>
+      </div>
 
-  <div class="header">
-    <a href="/feed/profile/">←</a>
-    <h2>Edit Profile</h2>
+      <!-- Form Container -->
+      <div class="form-container">
+        <h3>Update Your Information</h3>
+        
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          
+          <div class="form-group">
+            <label for="full_name">Full Name</label>
+            <input type="text" id="full_name" name="full_name" value="{{ user.full_name }}" required>
+          </div>
+
+          <div class="form-group">
+            <label for="bio">Bio</label>
+            <textarea id="bio" name="bio" rows="3">{{ user.bio }}</textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="department">Department</label>
+            <div class="custom-select">
+              <select name="department" id="department" required>
+                <option value="">Select Department</option>
+                <option value="CORE" {% if user.department == 'CORE' %}selected{% endif %}>CORE</option>
+                <option value="ECE" {% if user.department == 'ECE' %}selected{% endif %}>ECE</option>
+                <option value="Cyber Security" {% if user.department == 'Cyber Security' %}selected{% endif %}>Cyber Security</option>
+                <option value="IT" {% if user.department == 'IT' %}selected{% endif %}>IT</option>
+                <option value="Civil" {% if user.department == 'Civil' %}selected{% endif %}>Civil</option>
+                <option value="Mechanical" {% if user.department == 'Mechanical' %}selected{% endif %}>Mechanical</option>
+                <option value="Electrical" {% if user.department == 'Electrical' %}selected{% endif %}>Electrical</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="year">Year</label>
+            <div class="custom-select">
+              <select name="year" id="year" required>
+                <option value="">Select Year</option>
+                <option value="1st Year" {% if questionnaire.year == '1st Year' %}selected{% endif %}>1st Year</option>
+                <option value="2nd Year" {% if questionnaire.year == '2nd Year' %}selected{% endif %}>2nd Year</option>
+                <option value="3rd Year" {% if questionnaire.year == '3rd Year' %}selected{% endif %}>3rd Year</option>
+                <option value="Final Year" {% if questionnaire.year == 'Final Year' %}selected{% endif %}>Final Year</option>
+                <option value="Postgraduate" {% if questionnaire.year == 'Postgraduate' %}selected{% endif %}>Postgraduate</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="profile_picture">Profile Picture</label>
+            <div class="file-upload">
+              <label class="file-upload-label">
+                <i class="fas fa-upload"></i>
+                <span>Choose a file</span>
+                <input type="file" id="profile_picture" name="profile_picture">
+              </label>
+              <div class="file-name" id="file-name">No file chosen</div>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <i class="fas fa-save"></i> Save Changes
+          </button>
+        </form>
+      </div>
+    </div>
   </div>
 
-  <div class="form-container">
-    <h3>Update Your Information</h3>
-    <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      <label for="full_name">Full Name</label>
-      <input type="text" id="full_name" name="full_name" value="{{ user.full_name }}" required>
+  <!-- Bottom Navigation -->
+  <nav>
+    <a href="{% url 'feed:home' %}">
+      <i class="fas fa-home"></i>
+    </a>
+    <a href="{% url 'feed:explore' %}">
+      <i class="fas fa-compass"></i>
+    </a>
+    <a href="{% url 'feed:create_post' %}">
+      <i class="fas fa-plus-circle"></i>
+    </a>
+    <a href="#" class="active-link">
+      <i class="fas fa-user-friends"></i>
+    </a>
+    <a href="{% url 'feed:confession' %}">
+      <i class="fas fa-bell"></i>
+    </a>
+  </nav>
 
-      <label for="bio">Bio</label>
-      <textarea id="bio" name="bio" rows="3">{{ user.bio }}</textarea>
+  <script>
+    // Initialize particles.js
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#6c63ff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5, random: false },
+        size: { value: 3, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#6c63ff",
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: "none",
+          random: false,
+          straight: false,
+          out_mode: "out",
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "grab" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
+        },
+        modes: {
+          grab: { distance: 140, line_linked: { opacity: 1 } },
+          push: { particles_nb: 4 }
+        }
+      }
+    });
 
-      <label for="department">Department</label>
-      <select name="department" id="department" required>
-        <option value="">Select Department</option>
-        <option value="CORE" {% if user.department == 'CORE' %}selected{% endif %}>CORE</option>
-        <option value="ECE" {% if user.department == 'ECE' %}selected{% endif %}>ECE</option>
-        <option value="Cyber Security" {% if user.department == 'Cyber Security' %}selected{% endif %}>Cyber Security</option>
-        <option value="IT" {% if user.department == 'IT' %}selected{% endif %}>IT</option>
-        <option value="Civil" {% if user.department == 'Civil' %}selected{% endif %}>Civil</option>
-        <option value="Mechanical" {% if user.department == 'Mechanical' %}selected{% endif %}>Mechanical</option>
-        <option value="Electrical" {% if user.department == 'Electrical' %}selected{% endif %}>Electrical</option>
-      </select>
+    // File upload name display
+    document.getElementById('profile_picture').addEventListener('change', function() {
+      const fileName = this.files[0]?.name || 'No file chosen';
+      document.getElementById('file-name').textContent = fileName;
+      
+      // Add animation to the file name
+      const fileNameElement = document.getElementById('file-name');
+      fileNameElement.style.animation = 'none';
+      setTimeout(() => {
+        fileNameElement.style.animation = 'fadeUp 0.5s ease';
+      }, 10);
+    });
 
-      <label for="year">Year</label>
-      <select name="year" id="year" required>
-        <option value="">Select Year</option>
-        <option value="1st Year" {% if questionnaire.year == '1st Year' %}selected{% endif %}>1st Year</option>
-        <option value="2nd Year" {% if questionnaire.year == '2nd Year' %}selected{% endif %}>2nd Year</option>
-        <option value="3rd Year" {% if questionnaire.year == '3rd Year' %}selected{% endif %}>3rd Year</option>
-        <option value="Final Year" {% if questionnaire.year == 'Final Year' %}selected{% endif %}>Final Year</option>
-        <option value="Postgraduate" {% if questionnaire.year == 'Postgraduate' %}selected{% endif %}>Postgraduate</option>
-      </select>
+    // Form inputs animation on focus
+    const formInputs = document.querySelectorAll('input, textarea, select');
+    formInputs.forEach(input => {
+      input.addEventListener('focus', function() {
+        this.parentElement.style.transform = 'translateX(5px)';
+        setTimeout(() => {
+          this.parentElement.style.transform = 'translateX(0)';
+        }, 300);
+      });
+    });
 
-      <label for="profile_picture">Profile Picture</label>
-      <input type="file" id="profile_picture" name="profile_picture">
-
-      <button type="submit">Save Changes</button>
-    </form>
-  </div>
-
+    // Submit button ripple effect
+    document.querySelector('.submit-btn').addEventListener('click', function(e) {
+      const button = e.currentTarget;
+      const rect = button.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const ripple = document.createElement('span');
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+      
+      button.appendChild(ripple);
+      
+      setTimeout(() => {
+        ripple.remove();
+      }, 600);
+    });
+  </script>
 </body>
 </html>

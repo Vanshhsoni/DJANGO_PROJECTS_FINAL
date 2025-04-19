@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Confession | PoornimaX</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+  <script src="https://kit.fontawesome.com/b8b432d7d3.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+  <style>
+    /* Base Styles */
+    :root {
+      --primary: #6c63ff;
+      --primary-light: #8f88ff;
+      --primary-dark: #5046e5;
+      --secondary: #ff6584;
+      --bg: #f8f9fa;
+      --text: #333;
+      --text-light: #777;
+      --card-bg: #fff;
+      --shadow: rgba(0, 0, 0, 0.1);
+      --radius: 12px;
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding-bottom: 70px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    button {
+      cursor: pointer;
+      border: none;
+      outline: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* Layout */
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 0 15px;
+    }
+
+    /* Particles Background */
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.2;
+    }
+
+    /* Main Card */
+    .confession-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 20px var(--shadow);
+      overflow: hidden;
+      animation: fadeInUp 0.5s ease;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Header Section */
+    .confession-header {
+      background: linear-gradient(120deg, var(--secondary), #ff8da3);
+      padding: 20px;
+      position: relative;
+      color: white;
+      text-align: center;
+      animation: gradientFlow 10s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .confession-header h2 {
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    /* Back Button */
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      transition: var(--transition);
+    }
+
+    .back-button:hover {
+      background: rgba(255, 255, 255, 0.4);
+      transform: scale(1.1);
+    }
+
+    /* Confession Guidelines */
+    .confession-body {
+      padding: 25px;
+    }
+
+    .confession-guidelines {
+      background-color: rgba(255, 101, 132, 0.05);
+      border-left: 4px solid var(--secondary);
+      padding: 15px 20px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      animation: fadeIn 0.6s ease;
+    }
+
+    .confession-guidelines h4 {
+      color: var(--secondary);
+      margin-bottom: 10px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+    }
+
+    .confession-guidelines h4:before {
+      content: "\f05a";
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      margin-right: 10px;
+      font-size: 18px;
+    }
+
+    .confession-guidelines ul {
+      list-style-type: none;
+      padding-left: 28px;
+    }
+
+    .confession-guidelines li {
+      position: relative;
+      padding: 5px 0;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .confession-guidelines li:before {
+      content: "";
+      position: absolute;
+      left: -15px;
+      top: 14px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--secondary);
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--text);
+      font-size: 16px;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: var(--radius);
+      font-size: 16px;
+      min-height: 180px;
+      transition: var(--transition);
+      resize: vertical;
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px rgba(255, 101, 132, 0.2);
+    }
+
+    .form-check {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+      padding: 12px 16px;
+      background-color: rgba(255, 255, 255, 0.6);
+      border-radius: 8px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .form-check input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-right: 12px;
+      accent-color: var(--secondary);
+      cursor: pointer;
+    }
+
+    .form-check label {
+      font-size: 15px;
+      cursor: pointer;
+      user-select: none;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .btn-post {
+      background: linear-gradient(to right, var(--secondary), #ff8da3);
+      color: white;
+      padding: 14px 20px;
+      width: 100%;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(255, 101, 132, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-post:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 101, 132, 0.4);
+    }
+
+    .btn-post::after {
+      content: "";
+      position: absolute;
+      width: 120%;
+      height: 120%;
+      background: rgba(255, 255, 255, 0.2);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      border-radius: 50%;
+      transition: transform 0.4s ease;
+    }
+
+    .btn-post:active::after {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    /* Bottom Navigation */
+    nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 0;
+      box-shadow: 0 -2px 10px var(--shadow);
+      z-index: 100;
+    }
+
+    nav a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: var(--text-light);
+      padding: 8px 16px;
+      position: relative;
+    }
+
+    nav a i {
+      font-size: 20px;
+      margin-bottom: 3px;
+      transition: var(--transition);
+    }
+
+    nav a.active-link {
+      color: var(--primary);
+    }
+
+    nav a:hover i {
+      transform: translateY(-3px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        margin: 20px auto;
+      }
+      
+      .confession-body {
+        padding: 20px;
+      }
+
+      textarea {
+        min-height: 150px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .confession-header h2 {
+        font-size: 20px;
+      }
+      
+      .confession-body {
+        padding: 15px;
+      }
+      
+      .confession-guidelines {
+        padding: 12px 15px;
+      }
+
+      .confession-guidelines li {
+        font-size: 13px;
+      }
+      
+      .btn-post {
+        padding: 12px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Particle Background -->
+  <div id="particles-js"></div>
+  
+  <div class="container">
+    <div class="confession-card">
+      <!-- Header -->
+      <div class="confession-header">
+        <a href="{% url 'feed:explore' %}" class="back-button">
+          <i class="fas fa-arrow-left"></i>
+        </a>
+        <h2>Create Confession</h2>
+      </div>
+
+      <!-- Confession Body -->
+      <div class="confession-body">
+        <div class="confession-guidelines">
+          <h4>Confession Guidelines</h4>
+          <ul>
+            <li>Keep it respectful and avoid harmful content.</li>
+            <li>Don't share personal information of others.</li>
+            <li>Confessions that violate community guidelines may be removed.</li>
+          </ul>
+        </div>
+
+        <form method="POST">
+          {% csrf_token %}
+          
+          <div class="form-group">
+            <textarea id="id_content" name="content" placeholder="Share your thoughts anonymously..."></textarea>
+          </div>
+          
+          <div class="form-check">
+            <input type="checkbox" id="id_is_anonymous" name="is_anonymous" checked>
+            <label for="id_is_anonymous">Post anonymously <i class="fas fa-user-secret" style="margin-left: 5px; color: var(--secondary);"></i></label>
+          </div>
+          
+          <button type="submit" class="btn-post">
+            <i class="fas fa-feather-alt" style="margin-right: 8px;"></i> Post Confession
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav>
+    <a href="{% url 'feed:home' %}">
+      <i class="fas fa-home"></i>
+    </a>
+    <a href="{% url 'feed:explore' %}">
+      <i class="fas fa-compass"></i>
+    </a>
+    <a href="{% url 'feed:create_post' %}">
+      <i class="fas fa-plus-circle"></i>
+    </a>
+    <a href="#">
+      <i class="fas fa-user-friends"></i>
+    </a>
+    <a href="{% url 'feed:confession' %}" class="active-link">
+      <i class="fas fa-bell"></i>
+    </a>
+  </nav>
+
+  <script>
+    // Initialize particles.js
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#ff6584" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5, random: false },
+        size: { value: 3, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#ff6584",
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: "none",
+          random: false,
+          straight: false,
+          out_mode: "out",
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "grab" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
+        },
+        modes: {
+          grab: { distance: 140, line_linked: { opacity: 1 } },
+          push: { particles_nb: 4 }
+        }
+      }
+    });
+
+    // Textarea animation
+    const textarea = document.getElementById('id_content');
+    textarea.addEventListener('focus', function() {
+      this.style.transform = 'scale(1.01)';
+      setTimeout(() => {
+        this.style.transform = 'scale(1)';
+      }, 200);
+    });
+
+    // Guidelines section animation
+    document.addEventListener('DOMContentLoaded', function() {
+      const guidelines = document.querySelector('.confession-guidelines');
+      setTimeout(() => {
+        guidelines.style.borderLeftWidth = '4px';
+      }, 500);
+    });
+
+    // Checkbox animation
+    const checkbox = document.getElementById('id_is_anonymous');
+    checkbox.addEventListener('change', function() {
+      const label = this.nextElementSibling;
+      label.style.transform = 'scale(1.05)';
+      setTimeout(() => {
+        label.style.transform = 'scale(1)';
+      }, 200);
+    });
+  </script>
+</body>
+</html>

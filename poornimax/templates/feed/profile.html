@@ -2,217 +2,1140 @@
 {% load static %}
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>{{ user.username }}'s Profile</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ profile_user.username }}'s Profile | PoornimaX</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+  <script src="https://kit.fontawesome.com/b8b432d7d3.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+  <!-- Keep the same style as in your original code -->
   <style>
-    body {
+    /* Base Styles */
+    :root {
+      --primary: #6c63ff;
+      --primary-light: #8f88ff;
+      --primary-dark: #5046e5;
+      --secondary: #ff6584;
+      --bg: #f8f9fa;
+      --text: #333;
+      --text-light: #777;
+      --card-bg: #fff;
+      --shadow: rgba(0, 0, 0, 0.1);
+      --radius: 12px;
+      --transition: all 0.3s ease;
+    }
+
+    * {
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f6f8;
-      color: #222;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
     }
 
-    .header {
-      background-color: #1e2a38;
-      color: #fff;
-      padding: 16px;
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding-bottom: 70px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    button {
+      cursor: pointer;
+      border: none;
+      outline: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* Layout */
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 15px;
+    }
+
+    /* Particles Background */
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.2;
+    }
+
+    /* Cards & Sections */
+    .profile-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 20px var(--shadow);
+      overflow: hidden;
+    }
+
+    .profile-header {
+      background: linear-gradient(120deg, var(--primary), var(--primary-dark));
+      padding: 30px 20px;
+      position: relative;
+      color: white;
+      text-align: center;
+    }
+
+    /* Back Button */
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
       display: flex;
       align-items: center;
+      justify-content: center;
+      color: white;
+      transition: var(--transition);
     }
 
-    .back-button {
-      text-decoration: none;
-      color: #00bcd4;
-      font-size: 1.5rem;
-      margin-right: 12px;
+    .back-button:hover {
+      background: rgba(255, 255, 255, 0.4);
+      transform: scale(1.1);
     }
 
-    .header h2 {
-      margin: 0;
-      font-size: 1.25rem;
-    }
-
-    .profile-container {
-      max-width: 600px;
-      margin: 30px auto;
-      background: #fff;
-      padding: 24px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    }
-
-    .profile-picture {
-      width: 100px;
-      height: 100px;
+    /* Profile Image */
+    .profile-image {
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
+      margin: 0 auto 15px;
+      border: 4px solid white;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
+
+    .profile-image img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      display: block;
-      margin: 0 auto 16px;
-      border: 3px solid #1e2a38;
     }
 
     .username {
-      text-align: center;
-      font-size: 1.4rem;
+      font-size: 24px;
       font-weight: 600;
-      margin-bottom: 4px;
-      color: #1e2a38;
+      margin-bottom: 5px;
     }
 
-    .bio {
-      text-align: center;
-      font-size: 0.95rem;
-      color: #607d8b;
-      margin-bottom: 20px;
+    .page-title {
+      font-size: 16px;
+      opacity: 0.8;
     }
 
-    .info {
-      text-align: center;
-      font-size: 0.95rem;
-      margin-bottom: 24px;
-      color: #37474f;
+    /* Profile Body Layout */
+    .profile-body {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 25px;
+      padding: 25px;
     }
 
-    .info p {
-      margin: 6px 0;
-    }
-
-    .profile-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
+    /* Buttons */
     .btn {
-      text-decoration: none;
-      padding: 10px 20px;
+      padding: 12px 20px;
       border-radius: 30px;
-      font-size: 0.95rem;
-      font-weight: 500;
-      transition: background-color 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition);
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
     .btn-edit {
-      background-color: #1976d2;
+      background-color: var(--primary);
       color: white;
     }
 
-    .btn-edit:hover {
-      background-color: #1565c0;
-    }
-
-    .btn-chat {
-      background-color: #00bfa5;
+    .btn-post {
+      background-color: var(--secondary);
       color: white;
     }
 
-    .btn-chat:hover {
-      background-color: #009688;
+    .btn-message {
+      background-color: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--text-light);
     }
 
-    .btn-unfriend {
-      background-color: #e53935;
+    .heart-btn {
+      padding: 12px 20px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition);
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .btn-mutual {
+      background-color: var(--secondary);
       color: white;
     }
 
-    .btn-unfriend:hover {
-      background-color: #c62828;
+    .btn-sent {
+      background-color: rgba(255, 101, 132, 0.8);
+      color: white;
+    }
+
+    .btn-received {
+      background-color: var(--bg);
+      color: var(--secondary);
+      border: 1px solid var(--secondary);
+    }
+
+    .btn-send {
+      background-color: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--text-light);
+    }
+
+    /* Bio Section */
+    .bio {
+      background-color: rgba(108, 99, 255, 0.05);
+      padding: 15px;
+      border-radius: var(--radius);
+      margin: 15px 0;
+    }
+
+    .bio-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .bio-text {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-light);
+    }
+
+    /* Info Details */
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 15px;
+      background-color: rgba(108, 99, 255, 0.05);
+      border-radius: var(--radius);
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .info-item i {
+      color: var(--primary);
+      font-size: 16px;
+      width: 20px;
+      text-align: center;
+    }
+
+    /* Posts Section */
+    .posts-section h3 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: var(--primary);
+      position: relative;
+      display: inline-block;
+    }
+
+    .posts-section h3:after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--primary);
     }
 
     .post-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 14px;
-      margin-top: 20px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
     }
 
     .post-item {
-      background-color: #eceff1;
-      height: 120px;
-      border-radius: 8px;
+      aspect-ratio: 1/1;
+      overflow: hidden;
+      border-radius: var(--radius);
+      position: relative;
+      cursor: pointer;
     }
 
-    @media screen and (max-width: 500px) {
-      .profile-container {
-        margin: 20px;
-        padding: 16px;
+    .post-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .post-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 10px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .post-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .post-item:hover .post-overlay {
+      opacity: 1;
+    }
+
+    .post-likes, 
+    .post-comments {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+    }
+
+    /* Private Posts Message */
+    .private-posts-message {
+      text-align: center;
+      padding: 30px 20px;
+      background: rgba(108, 99, 255, 0.05);
+      border-radius: var(--radius);
+    }
+
+    .lock-icon {
+      font-size: 36px;
+      display: block;
+      margin-bottom: 16px;
+      color: var(--primary);
+    }
+
+    /* Latest Post */
+    .last-post {
+      background-color: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 5px 15px var(--shadow);
+      position: relative;
+      margin-top: 20px;
+    }
+
+    .post-cover {
+      height: 180px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .last-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background-color: var(--primary);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .post-title {
+      padding: 15px;
+      font-size: 16px;
+    }
+
+    .post-CTA {
+      background-color: var(--primary);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 14px;
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      transition: var(--transition);
+    }
+
+    .post-CTA:hover {
+      background-color: var(--primary-dark);
+    }
+
+    /* Bottom Navigation */
+    nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 0;
+      box-shadow: 0 -2px 10px var(--shadow);
+      z-index: 100;
+    }
+
+    nav a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: var(--text-light);
+      padding: 8px 16px;
+      position: relative;
+    }
+
+    nav a i {
+      font-size: 20px;
+      margin-bottom: 3px;
+      transition: var(--transition);
+    }
+
+    nav a.active-link {
+      color: var(--primary);
+    }
+
+    nav a:hover i {
+      transform: translateY(-3px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .profile-body {
+        grid-template-columns: 1fr;
       }
     }
+
+    @media (max-width: 768px) {
+      .post-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 576px) {
+      .profile-body {
+        padding: 15px;
+      }
+      
+      .post-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+    }
+      /* Post Overlay Styles */
+  .overlay-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .overlay-container.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .post-overlay-content {
+    width: 90%;
+    max-width: 900px;
+    height: 85vh;
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .post-image-container {
+    height: 100%;
+    background: #f1f1f1;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .post-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .post-details {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .post-header {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .post-user-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .post-username {
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .post-time {
+    color: var(--text-light);
+    font-size: 12px;
+  }
+
+  .post-caption {
+    padding: 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .comments-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px 15px;
+  }
+
+  .comment {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .comment-user-img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .comment-content {
+    flex-grow: 1;
+  }
+
+  .comment-username {
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  .comment-text {
+    font-size: 13px;
+    margin-top: 2px;
+  }
+
+  .comment-time {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-top: 3px;
+  }
+
+  .post-actions {
+    padding: 15px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+
+  .action-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: var(--text);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    padding: 0;
+  }
+
+  .action-btn:hover {
+    color: var(--primary);
+  }
+
+  .like-btn.active {
+    color: var(--secondary);
+  }
+
+  .like-btn.active i {
+    font-weight: 900;
+  }
+
+  .like-count {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .comment-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .comment-input {
+    flex-grow: 1;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 8px 15px;
+    font-size: 14px;
+    outline: none;
+  }
+
+  .comment-input:focus {
+    border-color: var(--primary);
+  }
+
+  .post-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .post-btn:hover {
+    background: var(--primary-dark);
+  }
+
+  .close-overlay {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 36px;
+    height: 36px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+    cursor: pointer;
+    transition: var(--transition);
+    z-index: 10;
+  }
+
+  .close-overlay:hover {
+    background: rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+  }
+
+  /* Comment Popup */
+  .comment-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 450px;
+    background: white;
+    border-radius: var(--radius);
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 1100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .comment-popup.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .comment-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .comment-popup-title {
+    font-size: 18px;
+    color: var(--primary);
+    font-weight: 600;
+  }
+
+  .close-comment-popup {
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .comment-popup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .comment-popup-input {
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius);
+    padding: 12px 15px;
+    font-size: 14px;
+    outline: none;
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .comment-popup-input:focus {
+    border-color: var(--primary);
+  }
+
+  .comment-popup-btn {
+    background: linear-gradient(120deg, var(--primary), var(--primary-dark));
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .comment-popup-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(var(--primary-rgb), 0.3);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .post-overlay-content {
+      grid-template-columns: 1fr;
+      height: 95vh;
+      width: 95%;
+    }
+
+    .post-image-container {
+      height: 40vh;
+    }
+  }
+  </style>r existing CSS styles here - I'm not including them to save space */
   </style>
 </head>
-
 <body>
-  <div class="header">
-    <a href="{% url 'feed:home' %}" class="back-button">←</a>
-    <h2>{{ profile_user.username }}</h2>
+  <!-- Particle Background -->
+  <div id="particles-js"></div>
+  
+  <div class="container">
+    <div class="profile-card">
+      <!-- Profile Header -->
+      <div class="profile-header">
+        <a href="{% url 'feed:home' %}" class="back-button">
+          <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <div class="profile-image">
+          <img src="{{ profile_user.profile_picture.url }}" alt="Profile Picture">
+        </div>
+        <h1 class="username">{{ profile_user.full_name }}</h1>
+        <small class="page-title">@{{ profile_user.username }}</small>
+      </div>
+
+      <!-- Profile Body -->
+      <div class="profile-body">
+        <!-- Left Column -->
+        <div class="profile-actions">
+          {% if request.user.username == profile_user.username %}
+            <button class="btn btn-edit" onclick="window.location.href='{% url 'accounts:edit_profile' %}'">
+              <i class="fas fa-edit"></i> Edit Profile
+            </button>
+            <button class="btn btn-post" onclick="window.location.href='{% url 'feed:create_post' %}'">
+              <i class="fas fa-plus"></i> Create Post
+            </button>
+          {% else %}
+            <form method="POST" action="{% url 'feed:crush_action' profile_user.id %}" class="crush-form">
+              {% csrf_token %}
+              
+              {% if is_mutual %}
+                <button type="submit" name="crush_action" value="uncrush" class="heart-btn btn-mutual">
+                  <i class="fas fa-heart"></i> Mutual Crush
+                </button>
+              {% elif sent_crush %}
+                <button type="submit" name="crush_action" value="uncrush" class="heart-btn btn-sent">
+                  <i class="fas fa-heart"></i> Sent a Crush
+                </button>
+              {% elif received_crush %}
+                <button type="submit" name="crush_action" value="accept_crush" class="heart-btn btn-received">
+                  <i class="far fa-heart"></i> Accept Crush
+                </button>
+              {% else %}
+                <button type="submit" name="crush_action" value="send_crush" class="heart-btn btn-send">
+                  <i class="far fa-heart"></i> Send Crush
+                </button>
+              {% endif %}
+            </form>
+            
+            <button class="btn btn-message">
+              <i class="fas fa-comment"></i> Message
+            </button>
+          {% endif %}
+          
+          <section class="bio">
+            <div class="bio-header">
+              <i class="fa fa-info-circle"></i>
+              Bio
+            </div>
+            <p class="bio-text">
+              {{ profile_user.bio|default:"No bio added yet." }}
+            </p>
+          </section>
+          
+          <div class="info-details">
+            <div class="info-item">
+              <i class="fas fa-university"></i>
+              <span>{{ profile_user.college }}</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-graduation-cap"></i>
+              <span>{{ profile_user.department }}</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-birthday-cake"></i>
+              <span>{{ profile_user.dob }}</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-venus-mars"></i>
+              <span>{{ profile_user.gender }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column - Posts Section -->
+        <div class="posts-section">
+          <h3>Posts</h3>
+          {% if request.user == profile_user or is_mutual %}
+            {% if posts %}
+              <div class="post-grid">
+                {% for post in posts %}
+                  <div class="post-item" data-post-id="{{ post.id }}" onclick="openPostOverlay({{ post.id }})">
+                    <img src="{{ post.image.url }}" alt="Post">
+                    <div class="post-overlay">
+                      <span class="post-likes"><i class="fas fa-heart"></i> {{ post.likes_count }}</span>
+                      <span class="post-comments"><i class="fas fa-comment"></i> {{ post.comments_count }}</span>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+              
+              <!-- Last Post Featured -->
+              {% if latest_post %}
+              <div class="last-post">
+                <div class="post-cover" style="background-image: url('{{ latest_post.image.url }}')">
+                  <span class="last-badge">Latest Post</span>
+                </div>
+                <h3 class="post-title">{{ latest_post.caption|truncatechars:30 }}</h3>
+                <button class="post-CTA" onclick="openPostOverlay({{ latest_post.id }})">View</button>
+              </div>
+              {% endif %}
+            {% else %}
+              <p class="no-posts">No posts yet.</p>
+            {% endif %}
+          {% else %}
+            <div class="private-posts-message">
+              <i class="fas fa-lock lock-icon"></i>
+              <p>Only mutual crushes can see {{ profile_user.username }}'s posts.</p>
+              {% if sent_crush %}
+                <p>You've sent a crush. Waiting for {{ profile_user.username }} to accept.</p>
+              {% elif received_crush %}
+                <p>{{ profile_user.username }} sent you a crush. Accept to see their posts!</p>
+              {% else %}
+                <p>Send a crush and if it's mutual, you'll see their posts!</p>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="profile-container">
-    <img src="{{ profile_user.profile_picture.url }}" alt="Profile Picture" class="profile-picture" />
-    <div class="username">@{{ profile_user.username }}</div>
-    <div class="bio">{{ profile_user.bio|default:"No bio added yet." }}</div>
-
-    <div class="info">
-      <p><strong>College:</strong> {{ profile_user.college }}</p>
-      <p><strong>Department:</strong> {{ profile_user.department }}</p>
-      <p><strong>DOB:</strong> {{ profile_user.dob }}</p>
-      <p><strong>Gender:</strong> {{ profile_user.gender }}</p>
-    </div>
-
-    {% if request.user.username == profile_user.username %}
-    <div class="profile-buttons">
-        <a href="/accounts/edit-profile/" class="btn btn-edit">✏️ Edit Profile</a>
-    </div>
-{% else %}
-<div class="profile-buttons">
-  <form method="POST" action="{% url 'feed:crush_action' profile_user.id %}">
-    {% csrf_token %}
-
-    {% if is_mutual %}
-        <button type="submit" name="crush_action" value="uncrush">
-            <img src="{% static 'feed/heart-red.png' %}" class="btn-heart" alt="Heart" />
-            <p>Mutual Crush 💖</p>
-        </button>
-    
-    {% elif sent_crush %}
-        <button type="submit" name="crush_action" value="uncrush">
-            <img src="{% static 'feed/heart-pink.png' %}" class="btn-heart" alt="Heart" />
-            <p>Sent a Crush</p>
-        </button>
-
-    {% elif received_crush %}
-        <button type="submit" name="crush_action" value="accept_crush">
-            <img src="{% static 'feed/heart-empty.png' %}" class="btn-heart" alt="Heart" />
-            <p>Accept Crush</p>
-        </button>
-
-    {% else %}
-        <button type="submit" name="crush_action" value="send_crush">
-            <img src="{% static 'feed/heart-empty.png' %}" class="btn-heart" alt="Heart" />
-            <p>Send Crush</p>
-        </button>
-    {% endif %}
-  </form>
-</div>
-
-
-    
-    </div>
-{% endif %}
-
-
-    <div class="post-grid">
-      <!-- Placeholder for posts -->
-      <div class="post-item"></div>
-      <div class="post-item"></div>
-      <div class="post-item"></div>
-      <div class="post-item"></div>
+  <!-- Bottom Navigation -->
+  <nav>
+    <a href="{% url 'feed:home' %}">
+      <i class="fas fa-home"></i>
+    </a>
+    <a href="{% url 'feed:explore' %}">
+      <i class="fas fa-compass"></i>
+    </a>
+    <a href="{% url 'feed:create_post' %}">
+      <i class="fas fa-plus-circle"></i>
+    </a>
+    <a href="#" class="active-link">
+      <i class="fas fa-user-friends"></i>
+    </a>
+    <a href="{% url 'feed:confession' %}">
+      <i class="fas fa-bell"></i>
+    </a>
+  </nav>
+  
+  <!-- Post Overlay -->
+  <div class="overlay-container" id="postOverlay">
+    <div class="post-overlay-content">
+      <div class="post-image-container">
+        <img src="" alt="Post" id="overlayPostImage">
+      </div>
+      <div class="post-details">
+        <div class="post-header">
+          <img src="" alt="User" class="post-user-img" id="overlayUserImage">
+          <div>
+            <div class="post-username" id="overlayUsername"></div>
+            <div class="post-time">Posted <span id="overlayTime"></span></div>
+          </div>
+        </div>
+        <div class="post-caption" id="overlayCaption"></div>
+        <div class="comments-container" id="commentsContainer">
+          <!-- Comments will be loaded here by JavaScript -->
+        </div>
+        <div class="post-actions">
+          <div class="action-buttons">
+            <form method="POST" action="" id="likeForm" style="display: inline;">
+              {% csrf_token %}
+              <button type="submit" class="action-btn like-btn" id="likeButton">
+                <i class="far fa-heart" id="likeIcon"></i>
+              </button>
+            </form>
+            <span class="like-count" id="likeCount">0 likes</span>
+          </div>
+          <form method="POST" action="" id="commentForm" class="comment-form">
+            {% csrf_token %}
+            <input type="text" name="content" class="comment-input" placeholder="Add a comment..." required>
+            <button type="submit" class="post-btn">Post</button>
+          </form>
+          
+          <!-- For post owners, add delete button -->
+          <form method="POST" action="" id="deletePostForm" style="display: none; margin-top: 10px;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-post" style="background-color: #ff3b30;">Delete Post</button>
+          </form>
+        </div>
+      </div>
+      <div class="close-overlay" id="closeOverlay">
+        <i class="fas fa-times"></i>
+      </div>
     </div>
   </div>
+
+  <script>
+    // Initialize particles.js
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#6c63ff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5, random: false },
+        size: { value: 3, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#6c63ff",
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: "none",
+          random: false,
+          straight: false,
+          out_mode: "out",
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "grab" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
+        },
+        modes: {
+          grab: { distance: 140, line_linked: { opacity: 1 } },
+          push: { particles_nb: 4 }
+        }
+      }
+    });
+
+    // Post overlay functionality
+    const postOverlay = document.getElementById('postOverlay');
+    const overlayPostImage = document.getElementById('overlayPostImage');
+    const overlayUserImage = document.getElementById('overlayUserImage');
+    const overlayUsername = document.getElementById('overlayUsername');
+    const overlayTime = document.getElementById('overlayTime');
+    const overlayCaption = document.getElementById('overlayCaption');
+    const commentsContainer = document.getElementById('commentsContainer');
+    const closeOverlay = document.getElementById('closeOverlay');
+    const likeButton = document.getElementById('likeButton');
+    const likeIcon = document.getElementById('likeIcon');
+    const likeCount = document.getElementById('likeCount');
+    const likeForm = document.getElementById('likeForm');
+    const commentForm = document.getElementById('commentForm');
+    const deletePostForm = document.getElementById('deletePostForm');
+
+    // Function to open post overlay
+    function openPostOverlay(postId) {
+      // Update form actions with post ID
+      likeForm.action = `{% url 'feed:like_post' 999 %}`.replace('999', postId);
+      commentForm.action = `{% url 'feed:add_comment' 999 %}`.replace('999', postId);
+      deletePostForm.action = `{% url 'feed:delete_post' 999 %}`.replace('999', postId);
+      
+      // Fetch post data from Django backend
+      fetch(`{% url 'feed:get_post_data' 999 %}`.replace('999', postId))
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            const post = data.post;
+            
+            // Set post content
+            overlayPostImage.src = post.image;
+            overlayUserImage.src = post.user_image;
+            overlayUsername.textContent = post.username;
+            overlayTime.textContent = post.time;
+            overlayCaption.textContent = post.caption;
+            likeCount.textContent = `${post.likes_count} likes`;
+            
+            // Update like button state
+            if (post.liked) {
+              likeIcon.classList.remove('far');
+              likeIcon.classList.add('fas');
+              likeButton.classList.add('active');
+            } else {
+              likeIcon.classList.remove('fas');
+              likeIcon.classList.add('far');
+              likeButton.classList.remove('active');
+            }
+            
+            // Load comments
+            commentsContainer.innerHTML = '';
+            if (post.comments.length === 0) {
+              commentsContainer.innerHTML = '<p style="text-align: center; color: var(--text-light); padding: 20px;">No comments yet.</p>';
+            } else {
+              post.comments.forEach(comment => {
+                const commentElement = document.createElement('div');
+                commentElement.className = 'comment';
+                
+                // Create comment HTML with delete form if user can delete
+                let deleteForm = '';
+                if (comment.can_delete) {
+                  deleteForm = `
+                    <form method="POST" action="{% url 'feed:delete_comment' 999 %}".replace('999', comment.id) style="display: inline;">
+                      {% csrf_token %}
+                      <button type="submit" style="background: none; border: none; color: #ff3b30; font-size: 12px; cursor: pointer;">
+                        Delete
+                      </button>
+                    </form>
+                  `;
+                }
+                
+                commentElement.innerHTML = `
+                  <img src="${comment.user_image}" alt="${comment.username}" class="comment-user-img">
+                  <div class="comment-content">
+                    <div class="comment-username">${comment.username}</div>
+                    <div class="comment-text">${comment.content}</div>
+                    <div class="comment-time">
+                      ${comment.time} ${deleteForm}
+                    </div>
+                  </div>
+                `;
+                
+                commentsContainer.appendChild(commentElement);
+              });
+            }
+            
+            // Show delete post button if user is owner
+            if (post.is_owner) {
+              deletePostForm.style.display = 'block';
+            } else {
+              deletePostForm.style.display = 'none';
+            }
+            
+            // Show overlay
+            postOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          } else {
+            alert('Error loading post: ' + data.error);
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('An error occurred while loading the post.');
+        });
+    }
+    
+    // Close overlay
+    closeOverlay.addEventListener('click', function() {
+      postOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+    
+    // Close overlay when clicking outside content
+    postOverlay.addEventListener('click', function(e) {
+      if (e.target === postOverlay) {
+        postOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
 </body>
-
-
 </html>

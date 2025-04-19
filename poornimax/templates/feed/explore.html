@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore | PoornimaX</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+  <script src="https://kit.fontawesome.com/b8b432d7d3.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+  <style>
+    /* Base Styles */
+    :root {
+      --primary: #6c63ff;
+      --primary-light: #8f88ff;
+      --primary-dark: #5046e5;
+      --secondary: #ff6584;
+      --bg: #f8f9fa;
+      --text: #333;
+      --text-light: #777;
+      --card-bg: #fff;
+      --shadow: rgba(0, 0, 0, 0.1);
+      --radius: 12px;
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding-bottom: 70px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    button {
+      cursor: pointer;
+      border: none;
+      outline: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* Layout */
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 15px;
+    }
+
+    /* Particles Background */
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.2;
+    }
+
+    /* Main Card */
+    .explore-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 20px var(--shadow);
+      overflow: hidden;
+      animation: fadeInUp 0.5s ease;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Header Section */
+    .explore-header {
+      background: linear-gradient(120deg, var(--primary), var(--primary-dark));
+      padding: 20px;
+      position: relative;
+      color: white;
+      text-align: center;
+      animation: gradientFlow 10s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .explore-header h2 {
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    /* Back Button */
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      transition: var(--transition);
+    }
+
+    .back-button:hover {
+      background: rgba(255, 255, 255, 0.4);
+      transform: scale(1.1);
+    }
+
+    /* Search Container */
+    .explore-body {
+      padding: 25px;
+    }
+
+    .search-container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 14px 20px;
+      padding-left: 48px;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 30px;
+      font-size: 15px;
+      transition: var(--transition);
+      background-color: white;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-light);
+      font-size: 18px;
+      pointer-events: none;
+      transition: var(--transition);
+    }
+
+    .search-input:focus + .search-icon {
+      color: var(--primary);
+    }
+
+    .search-button {
+      background-color: var(--primary);
+      color: white;
+      padding: 14px 20px;
+      border-radius: 30px;
+      transition: var(--transition);
+    }
+
+    .search-button:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    /* Create Confession Button */
+    .create-confession-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(to right, var(--secondary), #ff8da3);
+      color: white;
+      padding: 14px 20px;
+      border-radius: 30px;
+      font-weight: 500;
+      margin-bottom: 30px;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(255, 101, 132, 0.3);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 4px 15px rgba(255, 101, 132, 0.3); }
+      50% { box-shadow: 0 4px 20px rgba(255, 101, 132, 0.5); }
+      100% { box-shadow: 0 4px 15px rgba(255, 101, 132, 0.3); }
+    }
+
+    .create-confession-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 101, 132, 0.4);
+    }
+
+    .create-confession-btn i {
+      font-size: 18px;
+      margin-right: 5px;
+    }
+
+    /* Section Titles */
+    .section-title {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: var(--primary);
+      position: relative;
+      display: inline-block;
+      padding-bottom: 8px;
+    }
+
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--primary);
+      animation: slideIn 1s ease;
+    }
+
+    @keyframes slideIn {
+      from { width: 0; opacity: 0; }
+      to { width: 60px; opacity: 1; }
+    }
+
+    /* User Cards */
+    .search-results {
+      margin-bottom: 30px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .user-card {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 15px;
+      background-color: white;
+      border-radius: var(--radius);
+      margin-bottom: 15px;
+      box-shadow: 0 3px 10px var(--shadow);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .user-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 0;
+      background-color: var(--primary);
+      transition: height 0.3s ease;
+    }
+
+    .user-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-card:hover::before {
+      height: 100%;
+    }
+
+    .user-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid white;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+      transition: var(--transition);
+    }
+
+    .user-card:hover .user-avatar {
+      transform: scale(1.05);
+    }
+
+    .user-info {
+      flex: 1;
+    }
+
+    .user-name {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .user-details {
+      font-size: 14px;
+      color: var(--text-light);
+    }
+
+    /* No Results */
+    .no-results {
+      padding: 20px;
+      text-align: center;
+      background-color: rgba(108, 99, 255, 0.05);
+      border-radius: var(--radius);
+      color: var(--text-light);
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+
+    /* Confessions Grid */
+    .confessions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .confession-card {
+      background-color: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 5px 15px var(--shadow);
+      transition: var(--transition);
+      position: relative;
+      animation: fadeInStaggered 0.5s ease backwards;
+    }
+
+    @keyframes fadeInStaggered {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .confession-card:nth-child(1) { animation-delay: 0.1s; }
+    .confession-card:nth-child(2) { animation-delay: 0.2s; }
+    .confession-card:nth-child(3) { animation-delay: 0.3s; }
+    .confession-card:nth-child(4) { animation-delay: 0.4s; }
+    .confession-card:nth-child(5) { animation-delay: 0.5s; }
+    .confession-card:nth-child(6) { animation-delay: 0.6s; }
+
+    .confession-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .confession-accent {
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    }
+
+    .confession-content {
+      padding: 18px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text);
+      min-height: 100px;
+    }
+
+    .confession-meta {
+      padding: 12px 18px;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      color: var(--text-light);
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: rgba(108, 99, 255, 0.03);
+    }
+
+    .confession-time {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .confession-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .action-btn {
+      color: var(--text-light);
+      transition: var(--transition);
+    }
+
+    .action-btn:hover {
+      color: var(--primary);
+    }
+
+    .action-btn.heart:hover {
+      color: var(--secondary);
+    }
+
+    /* Bottom Navigation */
+    nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 0;
+      box-shadow: 0 -2px 10px var(--shadow);
+      z-index: 100;
+    }
+
+    nav a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: var(--text-light);
+      padding: 8px 16px;
+      position: relative;
+    }
+
+    nav a i {
+      font-size: 20px;
+      margin-bottom: 3px;
+      transition: var(--transition);
+    }
+
+    nav a.active-link {
+      color: var(--primary);
+    }
+
+    nav a:hover i {
+      transform: translateY(-3px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .confessions-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .confessions-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .explore-body {
+        padding: 20px;
+      }
+      
+      .search-button span {
+        display: none;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .explore-header h2 {
+        font-size: 20px;
+      }
+      
+      .explore-body {
+        padding: 15px;
+      }
+      
+      .user-card {
+        padding: 12px;
+      }
+      
+      .search-input {
+        padding: 12px 15px 12px 40px;
+      }
+      
+      .search-button {
+        padding: 12px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Particle Background -->
+  <div id="particles-js"></div>
+  
+  <div class="container">
+    <div class="explore-card">
+      <!-- Header -->
+      <div class="explore-header">
+        <a href="{% url 'feed:home' %}" class="back-button">
+          <i class="fas fa-arrow-left"></i>
+        </a>
+        <h2>Explore</h2>
+      </div>
+
+      <!-- Explore Body -->
+      <div class="explore-body">
+        <!-- Search Form -->
+        <form action="{% url 'feed:explore' %}" method="GET" class="search-container">
+          <input type="text" name="q" placeholder="Search users..." value="{{ query }}" class="search-input">
+          <i class="fas fa-search search-icon"></i>
+          <button type="submit" class="search-button">
+            <i class="fas fa-search"></i> <span>Search</span>
+          </button>
+        </form>
+        
+        <!-- Create Confession Button -->
+        <a href="{% url 'feed:confession' %}" class="create-confession-btn">
+          <i class="fas fa-feather-alt"></i> Create Confession
+        </a>
+
+        <!-- Search Results -->
+        {% if query %}
+          <div class="search-results">
+            <h3 class="section-title">Search Results</h3>
+            
+            {% if users %}
+              {% for user in users %}
+                <a href="{% url 'feed:profile' user.id %}" class="user-card">
+                  <img src="{{ user.profile_picture.url }}" alt="{{ user.username }}" class="user-avatar">
+                  <div class="user-info">
+                    <div class="user-name">{{ user.username }}</div>
+                    <div class="user-details">{{ user.college }} • {{ user.department }}</div>
+                  </div>
+                  <i class="fas fa-chevron-right" style="color: var(--text-light);"></i>
+                </a>
+              {% endfor %}
+            {% else %}
+              <div class="no-results">
+                <i class="fas fa-search" style="font-size: 24px; margin-bottom: 10px; color: var(--primary-light);"></i>
+                <p>No users found matching "{{ query }}"</p>
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        <!-- Confessions Section -->
+        <h3 class="section-title">Anonymous Confessions</h3>
+        
+        {% if confessions %}
+          <div class="confessions-grid">
+            {% for confession in confessions %}
+              <div class="confession-card">
+                <div class="confession-accent"></div>
+                <div class="confession-content">{{ confession.content }}</div>
+                <div class="confession-meta">
+                  <div class="confession-time">
+                    {% if confession.is_anonymous %}
+                      <i class="fas fa-user-secret"></i> Anonymous
+                    {% else %}
+                      <i class="fas fa-user"></i> {{ confession.user.username }}
+                    {% endif %}
+                    <span>•</span>
+                    <span><i class="far fa-clock"></i> {{ confession.created_at|date:"F d, Y" }}</span>
+                  </div>
+                  <div class="confession-actions">
+                    <a href="#" class="action-btn heart"><i class="far fa-heart"></i></a>
+                    <a href="#" class="action-btn"><i class="far fa-comment"></i></a>
+                    <a href="#" class="action-btn"><i class="far fa-share-square"></i></a>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="no-results">
+            <i class="fas fa-comment-slash" style="font-size: 24px; margin-bottom: 10px; color: var(--primary-light);"></i>
+            <p>No confessions yet. Be the first to share!</p>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav>
+    <a href="{% url 'feed:home' %}">
+      <i class="fas fa-home"></i>
+    </a>
+    <a href="{% url 'feed:explore' %}" class="active-link">
+      <i class="fas fa-compass"></i>
+    </a>
+    <a href="{% url 'feed:create_post' %}">
+      <i class="fas fa-plus-circle"></i>
+    </a>
+    <a href="#">
+      <i class="fas fa-user-friends"></i>
+    </a>
+    <a href="{% url 'feed:confession' %}">
+      <i class="fas fa-bell"></i>
+    </a>
+  </nav>
+
+  <script>
+    // Initialize particles.js
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#6c63ff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5, random: false },
+        size: { value: 3, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#6c63ff",
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: "none",
+          random: false,
+          straight: false,
+          out_mode: "out",
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "grab" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
+        },
+        modes: {
+          grab: { distance: 140, line_linked: { opacity: 1 } },
+          push: { particles_nb: 4 }
+        }
+      }
+    });
+
+    // Search input focus animation
+    const searchInput = document.querySelector('.search-input');
+    searchInput.addEventListener('focus', function() {
+      this.style.transform = 'scale(1.02)';
+      setTimeout(() => {
+        this.style.transform = 'scale(1)';
+      }, 200);
+    });
+
+    // Confession cards hover effect
+    const confessionCards = document.querySelectorAll('.confession-card');
+    confessionCards.forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+      });
+    });
+
+    // User card hover effect for mobile
+    const userCards = document.querySelectorAll('.user-card');
+    userCards.forEach(card => {
+      card.addEventListener('touchstart', function() {
+        this.classList.add('hover');
+      });
+      card.addEventListener('touchend', function() {
+        setTimeout(() => {
+          this.classList.remove('hover');
+        }, 300);
+      });
+    });
+  </script>
+</body>
+</html>

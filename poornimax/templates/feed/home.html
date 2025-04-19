@@ -1,904 +1,503 @@
-{% load static %}
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>PoornimaX | Home</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PoornimaX - Connect with Campus</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+  <script src="https://kit.fontawesome.com/b8b432d7d3.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
   <style>
-    /* General Styles */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    /* Base Styles */
+    :root {
+      --primary: #6c63ff;
+      --primary-light: #8f88ff;
+      --primary-dark: #5046e5;
+      --secondary: #ff6584;
+      --bg: #f8f9fa;
+      --text: #333;
+      --text-light: #777;
+      --card-bg: #fff;
+      --shadow: rgba(0, 0, 0, 0.1);
+      --radius: 12px;
+      --transition: all 0.3s ease;
     }
-    
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: radial-gradient(circle, #0e0e0e 30%, #161616 100%);
+
+    * {
       margin: 0;
       padding: 0;
-      color: #d9d9d9;
-      position: relative;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding-bottom: 70px;
       overflow-x: hidden;
     }
-    
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('{% static "images/noise.png" %}');
-      opacity: 0.03;
-      pointer-events: none;
-      z-index: 1;
+
+    a {
+      text-decoration: none;
+      color: inherit;
     }
     
-    .content-wrapper {
-      position: relative;
-      z-index: 2;
+    button {
+      cursor: pointer;
+      border: none;
+      outline: none;
+      font-size: 14px;
+      font-weight: 500;
+      background: transparent;
     }
-    
-    /* Particle Effect */
+
+    /* Particles Background */
     #particles-js {
       position: fixed;
-      width: 100%;
-      height: 100%;
       top: 0;
       left: 0;
-      z-index: 0;
-      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.2;
     }
-    
+
+    /* Layout */
+    .content-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
     /* Header */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 30px;
-      background: linear-gradient(to right, rgba(33, 33, 33, 0.9), rgba(40, 40, 40, 0.8));
-      backdrop-filter: blur(10px);
-      box-shadow: 0 3px 20px rgba(0, 0, 0, 0.8);
-      position: relative;
-      z-index: 10;
-      overflow: hidden;
+      padding: 20px 0;
+      margin-bottom: 15px;
     }
-    
-    header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(120, 120, 150, 0.6), transparent);
-      animation: shimmerLine 4s infinite linear;
-    }
-    
+
     .header-left {
       display: flex;
       align-items: center;
-      gap: 20px;
-      position: relative;
+      gap: 15px;
     }
-    
+
     .logo {
-      height: 45px;
-      width: auto;
-      filter: drop-shadow(0 0 5px rgba(150, 150, 200, 0.6));
-      animation: pulseLogo 3s infinite alternate;
+      height: 40px;
+      animation: pulse 3s infinite alternate;
     }
-    
-    @keyframes pulseLogo {
-      0% { filter: drop-shadow(0 0 3px rgba(150, 150, 200, 0.4)); }
-      100% { filter: drop-shadow(0 0 8px rgba(150, 150, 200, 0.8)); }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(1.05);
+      }
     }
-    
+
     header h2 {
-      font-size: 1.5rem;
-      font-weight: 500;
-      text-shadow: 0 0 10px rgba(150, 150, 200, 0.3);
-      animation: fadeIn 0.8s ease;
-      position: relative;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--primary);
     }
-    
-    header h2::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -5px;
-      height: 1px;
-      width: 0;
-      background: linear-gradient(90deg, transparent, #d9d9d9, transparent);
-      animation: expandLine 1.5s forwards 0.5s;
-    }
-    
-    @keyframes expandLine {
-      to { width: 100%; }
-    }
-    
-    header a {
-      position: relative;
-    }
-    
-    header a::before {
-      content: '';
-      position: absolute;
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: transparent;
-      border: 2px solid transparent;
-      transform: scale(0.9);
-      transition: all 0.5s;
-      z-index: -1;
-    }
-    
-    header a:hover::before {
-      transform: scale(1.1);
-      border-color: rgba(100, 100, 150, 0.5);
-      box-shadow: 0 0 15px rgba(100, 100, 150, 0.3);
-    }
-    
+
     header a img {
-      height: 50px;
-      width: 50px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      cursor: pointer;
-      transition: all 0.4s ease;
-      border: 2px solid transparent;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      object-fit: cover;
+      border: 2px solid var(--primary);
+      transition: var(--transition);
     }
-    
+
     header a img:hover {
       transform: scale(1.1);
-      border-color: rgba(100, 100, 150, 0.5);
+      box-shadow: 0 0 10px var(--primary-light);
     }
-    
+
     /* Tagline */
     .tagline-container {
-      position: relative;
       text-align: center;
-      padding: 20px 0;
-      overflow: hidden;
+      margin-bottom: 25px;
     }
-    
-    .tagline-container::before,
-    .tagline-container::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      width: 100px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(100, 100, 150, 0.5), transparent);
-    }
-    
-    .tagline-container::before {
-      left: 25%;
-      transform: translateX(-50%);
-    }
-    
-    .tagline-container::after {
-      right: 25%;
-      transform: translateX(50%);
-    }
-    
+
     .tagline {
-      font-size: 1.3rem;
       font-style: italic;
-      color: #b3b3b3;
-      text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
-      letter-spacing: 1px;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeSlideUp 1.2s ease forwards 0.5s;
+      color: var(--text-light);
+      font-size: 16px;
+      opacity: 0.8;
     }
-    
-    @keyframes fadeSlideUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    /* Quick Stats Section */
+
+    /* Stats Section */
     .stats-container {
-      padding: 40px 40px;
-      position: relative;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeInStats 1s ease forwards 0.8s;
+      margin-bottom: 30px;
     }
-    
-    @keyframes fadeInStats {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
+
     .stats {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 25px;
-      max-width: 1300px;
-      margin: 0 auto;
+      gap: 15px;
     }
-    
+
     .popup-box {
-      background: linear-gradient(135deg, rgba(47, 47, 47, 0.7), rgba(40, 40, 40, 0.9));
-      backdrop-filter: blur(5px);
-      border-radius: 14px;
-      padding: 30px 20px;
-      height: 170px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(70, 70, 70, 0.3);
+      background: white;
+      border-radius: var(--radius);
+      padding: 15px 10px;
+      text-align: center;
+      box-shadow: 0 5px 15px var(--shadow);
       position: relative;
       overflow: hidden;
-      transform: translateY(30px);
+      animation: popIn 0.5s ease forwards;
+      animation-delay: calc(var(--delay) * 0.1s);
       opacity: 0;
-      animation: popupBoxAppear 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-      animation-delay: calc(var(--delay, 0) * 0.1s);
+      transform: translateY(20px);
     }
-    
-    @keyframes popupBoxAppear {
+
+    @keyframes popIn {
       to {
-        transform: translateY(0);
         opacity: 1;
+        transform: translateY(0);
       }
     }
-    
-    .popup-box::before {
-      content: '';
-      position: absolute;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(70, 70, 100, 0.1), transparent 70%);
-      top: -50%;
-      left: -50%;
-      opacity: 0;
-      transition: opacity 0.4s ease;
+
+    .popup-box img {
+      width: 32px;
+      height: 32px;
+      margin-bottom: 8px;
     }
-    
-    .popup-box:hover::before {
-      opacity: 1;
+
+    .popup-box p {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 5px;
     }
-    
-    .popup-box::after {
-      content: '';
+
+    .popup-box strong {
+      font-size: 18px;
+      color: var(--primary);
+    }
+
+    .glow-pulse {
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+      right: 0;
+      bottom: 0;
+      border-radius: var(--radius);
+      box-shadow: inset 0 0 0 2px var(--primary-light);
       opacity: 0;
-      transition: opacity 0.4s ease;
+      animation: glowPulse 3s infinite;
     }
-    
-    .popup-box:hover {
-      transform: translateY(-8px) scale(1.03);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
-      border-color: rgba(100, 100, 150, 0.4);
+
+    @keyframes glowPulse {
+      0%, 100% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 0.2;
+      }
     }
-    
-    .popup-box:hover::after {
-      opacity: 1;
-    }
-    
-    .popup-box img {
-      width: 40px;
-      height: 40px;
-      margin-bottom: 15px;
-      filter: drop-shadow(0 0 3px rgba(150, 150, 200, 0.4));
-      transition: all 0.3s ease;
-      position: relative;
-      z-index: 2;
-    }
-    
-    .popup-box:hover img {
-      transform: scale(1.2) rotate(5deg);
-      filter: drop-shadow(0 0 5px rgba(150, 150, 200, 0.7));
-    }
-    
-    .popup-box p {
-      font-size: 0.9rem;
-      margin: 0;
-      color: #bcbcbc;
-      font-weight: 500;
-      position: relative;
-      z-index: 2;
-    }
-    
-    .popup-box strong {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #ffffff;
-      margin-top: 10px;
-      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-      position: relative;
-      z-index: 2;
-    }
-    
-    .popup-box .glow {
-      position: absolute;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: rgba(100, 100, 150, 0.15);
-      filter: blur(20px);
-      bottom: -20px;
-      right: -20px;
-      z-index: 1;
-    }
-    
+
     .mystery-flash {
       position: absolute;
+      height: 100%;
+      width: 20px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+      transform: skewX(-20deg);
       top: 0;
-      left: -100%;
-      width: 50px;
-      height: 100%;
-      background: linear-gradient(
-        to right,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.03) 20%,
-        rgba(100, 100, 150, 0.15) 50%,
-        rgba(255, 255, 255, 0.03) 80%,
-        rgba(255, 255, 255, 0) 100%
-      );
-      transform: skewX(-30deg);
-      animation: mysteryFlash 8s infinite;
-      animation-delay: calc(var(--delay, 0) * 1s);
+      left: -50px;
+      animation: flash 5s infinite;
+      animation-delay: calc(var(--delay) * 0.8s);
     }
-    
-    @keyframes mysteryFlash {
-      0% { left: -100%; }
-      40%, 100% { left: 200%; }
+
+    @keyframes flash {
+      0% {
+        left: -50px;
+      }
+      20%, 100% {
+        left: 120%;
+      }
     }
-    
-    .glow-pulse {
-      position: absolute;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(100, 100, 150, 0.2), transparent 70%);
-      width: 100%;
-      height: 100%;
-      transform: scale(0);
-      animation: glowPulse 4s infinite;
-      opacity: 0;
-    }
-    
-    @keyframes glowPulse {
-      0% { transform: scale(0); opacity: 0.6; }
-      70% { opacity: 0; }
-      100% { transform: scale(2); opacity: 0; }
-    }
-    
+
     /* Section Divider */
     .section-divider {
       height: 1px;
-      background: linear-gradient(to right, transparent, rgba(100, 100, 150, 0.4), transparent);
-      margin: 50px auto;
-      width: 90%;
-      max-width: 1300px;
-      position: relative;
-      overflow: hidden;
+      background: linear-gradient(to right, transparent, var(--primary-light), transparent);
+      margin: 25px 0;
     }
-    
-    .section-divider::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(150, 150, 200, 0.8), transparent);
-      animation: shimmer 4s infinite linear;
-    }
-    
-    @keyframes shimmer {
-      to { left: 100%; }
-    }
-    
+
     /* Horizontal Scroll Sections */
     .horizontal-section {
-      margin: 50px 0;
-      padding: 0 40px;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeInSection 1s ease forwards;
-      animation-delay: calc(var(--section-delay, 0) * 0.2s + 1s);
+      margin-bottom: 30px;
+      position: relative;
     }
-    
-    @keyframes fadeInSection {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
+
     .section-header {
       display: flex;
       align-items: center;
-      margin-bottom: 25px;
-      position: relative;
-    }
-    
-    .section-header::before {
-      content: '';
-      position: absolute;
-      left: -15px;
-      top: 0;
-      width: 5px;
-      height: 100%;
-      background: linear-gradient(to bottom, rgba(100, 100, 150, 0.7), transparent);
-      border-radius: 3px;
-    }
-    
-    .horizontal-section h2 {
-      font-size: 1.5rem;
-      color: #d9d9d9;
-      font-weight: 600;
-      margin: 0;
-      padding-left: 10px;
-      text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-    
-    .section-count {
-      margin-left: 10px;
-      background: rgba(70, 70, 100, 0.3);
-      color: #b3b3b3;
-      padding: 2px 10px;
-      border-radius: 10px;
-      font-size: 0.8rem;
-      font-weight: 500;
-    }
-    
-    .scroll-container {
-      display: flex;
-      overflow-x: auto;
-      gap: 25px;
-      padding: 10px 5px 30px 5px;
-      scrollbar-width: thin;
-      scrollbar-color: #444 #222;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-    }
-    
-    .scroll-container::-webkit-scrollbar {
-      height: 6px;
-    }
-    
-    .scroll-container::-webkit-scrollbar-track {
-      background: rgba(30, 30, 30, 0.5);
-      border-radius: 10px;
-    }
-    
-    .scroll-container::-webkit-scrollbar-thumb {
-      background: rgba(70, 70, 100, 0.5);
-      border-radius: 10px;
-    }
-    
-    .scroll-container::-webkit-scrollbar-thumb:hover {
-      background: rgba(100, 100, 150, 0.5);
-    }
-    
-    .scroll-nav {
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
       margin-bottom: 15px;
     }
-    
+
+    .section-header h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .section-count {
+      background-color: var(--primary);
+      color: white;
+      font-size: 12px;
+      border-radius: 30px;
+      padding: 2px 8px;
+      margin-left: 8px;
+    }
+
+    .scroll-nav {
+      position: absolute;
+      right: 0;
+      top: 0;
+      display: flex;
+      gap: 8px;
+    }
+
     .scroll-button {
-      background: rgba(50, 50, 70, 0.3);
-      border: none;
-      color: #b3b3b3;
-      width: 36px;
-      height: 36px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
+      background-color: var(--primary-light);
+      color: white;
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(5px);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: var(--transition);
     }
-    
+
     .scroll-button:hover {
-      background: rgba(70, 70, 100, 0.5);
-      color: #fff;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+      background-color: var(--primary);
+      transform: scale(1.1);
     }
-    
-    /* User Card */
-    .user-card {
-      position: relative;
+
+    .scroll-container {
       display: flex;
-      padding: 20px;
-      background: linear-gradient(135deg, rgba(42, 42, 42, 0.7), rgba(35, 35, 35, 0.9));
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      min-width: 350px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-      transform: translateY(30px);
-      opacity: 0;
-      border: 1px solid rgba(70, 70, 70, 0.2);
-      animation: cardAppear 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-      animation-delay: calc(var(--card-delay, 0) * 0.1s + 0.3s);
+      gap: 15px;
+      overflow-x: auto;
+      padding: 5px 0 15px;
+      scrollbar-width: none; /* Hide scrollbar for Firefox */
+      -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+    }
+
+    .scroll-container::-webkit-scrollbar {
+      display: none; /* Hide scrollbar for Chrome and Safari */
+    }
+
+    /* User Cards */
+    .user-card {
+      flex: 0 0 auto;
+      width: 280px;
+      background-color: white;
+      border-radius: var(--radius);
+      box-shadow: 0 5px 15px var(--shadow);
       overflow: hidden;
+      display: flex;
+      transition: var(--transition);
     }
-    
-    @keyframes cardAppear {
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-    
-    .user-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at top right, rgba(70, 70, 100, 0.1), transparent 70%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-    
-    .user-card:hover::before {
-      opacity: 1;
-    }
-    
-    .user-card::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-    
+
     .user-card:hover {
-      transform: translateY(-10px) scale(1.03);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-      border-color: rgba(100, 100, 150, 0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(108, 99, 255, 0.2);
     }
-    
-    .user-card:hover::after {
-      opacity: 1;
-    }
-    
+
     .profile-link {
       display: flex;
-      width: calc(100% - 50px);
-      text-decoration: none;
-      color: inherit;
-      position: relative;
-      z-index: 2;
+      padding: 15px;
+      flex: 1;
     }
-    
+
     .profile-pic-container {
       position: relative;
-      margin-right: 20px;
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-right: 12px;
     }
-    
+
     .profile-pic {
-      height: 90px;
-      width: 90px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid rgba(70, 70, 70, 0.5);
-      transition: all 0.4s ease;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-    }
-    
-    .profile-pic-glow {
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
-      border-radius: 50%;
-      background: rgba(100, 100, 150, 0.15);
-      filter: blur(10px);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      z-index: -1;
+      object-fit: cover;
+      transition: var(--transition);
     }
-    
+
     .user-card:hover .profile-pic {
-      border-color: rgba(100, 100, 150, 0.4);
       transform: scale(1.05);
     }
-    
+
+    .profile-pic-glow {
+      position: absolute;
+      inset: 0;
+      border-radius: 8px;
+      box-shadow: inset 0 0 0 2px var(--primary-light);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
     .user-card:hover .profile-pic-glow {
       opacity: 1;
     }
-    
+
     .user-info {
       display: flex;
       flex-direction: column;
       justify-content: center;
+      flex: 1;
     }
-    
+
     .user-info h3 {
-      font-size: 1.2rem;
-      margin: 0 0 8px 0;
-      color: #fff;
-      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      font-size: 15px;
+      margin-bottom: 4px;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    
+
     .user-info p {
-      font-size: 0.95rem;
-      margin: 4px 0;
-      color: #b3b3b3;
-      position: relative;
-      padding-left: 18px;
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    
-    .user-info p::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 8px;
-      height: 8px;
-      background: rgba(100, 100, 150, 0.4);
-      border-radius: 50%;
-    }
-    
+
+    /* Heart Button */
     .heart-form {
-      position: absolute;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 10;
+      display: flex;
+      align-items: center;
+      padding-right: 15px;
     }
-    
+
     .heart-btn {
-      background: rgba(50, 50, 70, 0.5);
+      background: none;
       border: none;
-      cursor: pointer;
-      padding: 10px;
-      border-radius: 50%;
-      width: 46px;
-      height: 46px;
+      padding: 5px;
+      transition: var(--transition);
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
-    
-    .heart-btn::before {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: 1px solid transparent;
-      transition: all 0.4s ease;
-    }
-    
-    .heart-btn:hover {
-      background: rgba(70, 70, 100, 0.7);
-      transform: scale(1.15);
-      box-shadow: 0 7px 20px rgba(0, 0, 0, 0.4);
-    }
-    
-    .heart-btn:hover::before {
-      transform: scale(1.2);
-      border-color: rgba(100, 100, 150, 0.3);
-    }
-    
+
     .heart-btn img {
-      width: 26px;
-      height: 26px;
-      transition: transform 0.3s ease;
-      filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.5));
+      width: 24px;
+      height: 24px;
+      transition: var(--transition);
     }
-    
+
     .heart-btn:hover img {
       transform: scale(1.2);
-      filter: drop-shadow(0 0 5px rgba(150, 150, 200, 0.6));
     }
-    
-    /* Bottom Navigation Bar */
+
+    /* Bottom Navigation */
     nav {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      padding: 15px 0;
-      background: rgba(25, 25, 30, 0.85);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.8);
       position: fixed;
       bottom: 0;
+      left: 0;
       width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 0;
+      box-shadow: 0 -2px 10px var(--shadow);
       z-index: 100;
     }
-    
+
     nav a {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      text-decoration: none;
+      color: var(--text-light);
+      padding: 8px 16px;
       position: relative;
+      transition: var(--transition);
     }
-    
-    nav a::before {
+
+    nav a img {
+      width: 24px;
+      height: 24px;
+      transition: var(--transition);
+      opacity: 0.7;
+    }
+
+    nav a:hover img {
+      transform: translateY(-3px);
+      opacity: 1;
+    }
+
+    nav a.active-link {
+      color: var(--primary);
+    }
+
+    nav a.active-link img {
+      opacity: 1;
+    }
+
+    nav a.active-link::after {
       content: '';
       position: absolute;
-      top: -10px;
+      bottom: -12px;
       left: 50%;
       transform: translateX(-50%);
-      width: 0;
+      width: 30px;
       height: 3px;
-      background: linear-gradient(90deg, transparent, rgba(100, 100, 150, 0.7), transparent);
-      transition: width 0.3s ease;
+      background-color: var(--primary);
+      border-radius: 3px;
     }
-    
-    nav a:hover::before {
-      width: 40px;
-    }
-    
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -15px;
-      left: 50%;
-      transform: translateX(-50%) scale(0);
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: rgba(100, 100, 150, 0.7);
-      transition: transform 0.3s ease;
-    }
-    
-    nav a:hover::after {
-      transform: translateX(-50%) scale(1);
-    }
-    
-    nav a img {
-      width: 28px;
-      height: 28px;
-      filter: brightness(0.7);
-      transition: all 0.3s ease;
-      transform: translateY(0);
-    }
-    
-    nav a:hover img {
-      filter: brightness(1);
-      transform: translateY(-5px);
-    }
-    
-    /* Hover Effects for Nav */
-    nav a .tooltip {
-      position: absolute;
-      top: -40px;
-      left: 50%;
-      transform: translateX(-50%) translateY(10px);
-      background: rgba(40, 40, 60, 0.9);
-      color: #d9d9d9;
-      padding: 5px 12px;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-      white-space: nowrap;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
-    
-    nav a .tooltip::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 50%;
-      transform: translateX(-50%) rotate(45deg);
-      width: 8px;
-      height: 8px;
-      background: rgba(40, 40, 60, 0.9);
-    }
-    
-    nav a:hover .tooltip {
-      opacity: 1;
-      visibility: visible;
-      transform: translateX(-50%) translateY(0);
-    }
-    
-    /* Special Effects and Animations */
-    .floating {
-      animation: floating 4s ease-in-out infinite;
-    }
-    
-    @keyframes floating {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
-    
-    .pulse {
-      animation: pulse 2s infinite alternate;
-    }
-    
-    @keyframes pulse {
-      0% { opacity: 0.7; }
-      100% { opacity: 1; }
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
-    @keyframes slideIn {
-      from { transform: translateY(-20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    
-    @keyframes shimmerLine {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
-    }
-    
-    /* Responsive adjustments */
-    @media (max-width: 1200px) {
-      .stats {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-    
-    @media (max-width: 768px) {
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
       .stats {
         grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .header-left h2 {
+        font-size: 16px;
       }
       
-      header {
-        padding: 15px 20px;
+      .popup-box {
+        padding: 12px 8px;
       }
       
-      .horizontal-section {
-        padding: 0 20px;
+      .popup-box img {
+        width: 24px;
+        height: 24px;
+      }
+      
+      .popup-box p {
+        font-size: 11px;
+      }
+      
+      .popup-box strong {
+        font-size: 16px;
       }
       
       .user-card {
-        min-width: 300px;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .stats {
-        grid-template-columns: 1fr;
+        width: 240px;
       }
       
-      .header-left {
-        gap: 10px;
-      }
-      
-      .logo {
-        height: 35px;
-      }
-      
-      header h2 {
-        font-size: 1.2rem;
+      .profile-pic-container {
+        width: 70px;
+        height: 70px;
       }
     }
   </style>
@@ -965,21 +564,17 @@
     <div class="section-divider"></div>
   
     <!-- Horizontal Scroll Sections -->
-    <section class="horizontal-section" style="--section-delay: 0">
+    <section class="horizontal-section">
       <div class="section-header">
         <h2>Recently Joined <span class="section-count">{{ recently_joined|length }}</span></h2>
       </div>
       <div class="scroll-nav">
-        <button class="scroll-button scroll-left" data-target="recently-joined">
-          ←
-        </button>
-        <button class="scroll-button scroll-right" data-target="recently-joined">
-          →
-        </button>
+        <button class="scroll-button scroll-left" data-target="recently-joined">←</button>
+        <button class="scroll-button scroll-right" data-target="recently-joined">→</button>
       </div>
       <div class="scroll-container" id="recently-joined">
         {% for entry in recently_joined %}
-        <div class="user-card" style="--card-delay: {{ forloop.counter0 }}">
+        <div class="user-card">
           <a href="{% url 'feed:profile' user_id=entry.user.id %}" class="profile-link">
             <div class="profile-pic-container">
               <img src="{{ entry.user.profile_picture.url }}" alt="Profile" class="profile-pic">
@@ -996,19 +591,19 @@
             {% csrf_token %}
             {% if entry.crush_status == 'mutual' %}
             <button type="submit" name="crush_action" value="uncrush" class="heart-btn">
-              <img src="{% static 'feed/heart-red.png' %}" alt="Mutual">
+              <i class="fas fa-heart" style="color: var(--secondary); font-size: 20px;"></i>
             </button>
             {% elif entry.crush_status == 'sent' %}
             <button type="submit" name="crush_action" value="uncrush" class="heart-btn">
-              <img src="{% static 'feed/heart-pink.png' %}" alt="Sent">
+              <i class="fas fa-heart" style="color: rgba(255, 101, 132, 0.8); font-size: 20px;"></i>
             </button>
             {% elif entry.crush_status == 'received' %}
             <button type="submit" name="crush_action" value="accept_crush" class="heart-btn">
-              <img src="{% static 'feed/heart-empty.png' %}" alt="Accept">
+              <i class="far fa-heart" style="color: var(--secondary); font-size: 20px;"></i>
             </button>
             {% else %}
             <button type="submit" name="crush_action" value="send_crush" class="heart-btn">
-              <img src="{% static 'feed/heart-empty.png' %}" alt="Send">
+              <i class="far fa-heart" style="color: var(--text-light); font-size: 20px;"></i>
             </button>
             {% endif %}
           </form>
@@ -1019,490 +614,84 @@
   
     <div class="section-divider"></div>
   
-    <section class="horizontal-section" style="--section-delay: 1">
-      <div class="section-header">
-        <h2>Same Year <span class="section-count">{{ same_year|length }}</span></h2>
-      </div>
-      <div class="scroll-nav">
-        <button class="scroll-button scroll-left" data-target="same-year">
-          ←
-        </button>
-        <button class="scroll-button scroll-right" data-target="same-year">
-          →
-        </button>
-      </div>
-      <div class="scroll-container" id="same-year">
-        {% for user in same_year %}
-        <div class="user-card" style="--card-delay: {{ forloop.counter0 }}">
-          <a href="{% url 'feed:profile' user_id=user.id %}" class="profile-link">
-            <div class="profile-pic-container">
-              <img src="{{ user.profile_picture.url }}" alt="Profile" class="profile-pic">
-              <div class="profile-pic-glow"></div>
-            </div>
-            <div class="user-info">
-              <h3>{{ user.full_name }}</h3>
-              <p>{{ user.department }} • {{ user.questionnaire.year }}</p>
-              <p>{{ user.college }}</p>
-            </div>
-          </a>
-          
-          <form method="POST" action="{% url 'feed:crush_action' user_id=user.id %}" class="heart-form">
-            {% csrf_token %}
-            {% if user.crush_status == 'mutual' %}
-            <button type="submit" name="crush_action" value="uncrush" class="heart-btn">
-              <img src="{% static 'feed/heart-red.png' %}" alt="Mutual">
-            </button>
-            {% elif user.crush_status == 'sent' %}
-            <button type="submit" name="crush_action" value="uncrush" class="heart-btn">
-              <img src="{% static 'feed/heart-pink.png' %}" alt="Sent">
-            </button>
-            {% elif user.crush_status == 'received' %}
-            <button type="submit" name="crush_action" value="accept_crush" class="heart-btn">
-              <img src="{% static 'feed/heart-empty.png' %}" alt="Accept">
-            </button>
-            {% else %}
-            <button type="submit" name="crush_action" value="send_crush" class="heart-btn">
-              <img src="{% static 'feed/heart-empty.png' %}" alt="Send">
-            </button>
-            {% endif %}
-          </form>
-        </div>
-        {% endfor %}
-      </div>
-    </section>
-  
-    <div class="section-divider"></div>
-  
-    <section class="horizontal-section" style="--section-delay: 2">
-      <div class="section-header">
-        <h2>Same Department <span class="section-count">{{ same_department|length }}</span></h2>
-      </div>
-      <div class="scroll-nav">
-        <button class="scroll-button scroll-left" data-target="same-department">
-          ←
-        </button>
-        <button class="scroll-button scroll-right" data-target="same-department">
-          →
-        </button>
-      </div>
-      <div class="scroll-container" id="same-department">
-        {% for user in same_department %}
-        <div class="user-card" style="--card-delay: {{ forloop.counter0 }}">
-          <a href="{% url 'feed:profile' user_id=user.id %}" class="profile-link">
-            <div class="profile-pic-container">
-              <img src="{{ user.profile_picture.url }}" alt="Profile" class="profile-pic">
-              <div class="profile-pic-glow"></div>
-            </div>
-            <div class="user-info">
-              <h3>{{ user.name }}</h3>
-              <p>{{ user.branch }} • {{ user.year }}</p>
-              <p>{{ user.college }}</p>
-            </div>
-          </a>
-          
-          <form method="POST" action="{% url 'feed:crush_action' user_id=user.id %}" class="heart-form">
-            {% csrf_token %}
-            {% if user.crush_status == 'mutual' %}
-            <button type="submit" name="crush_action" value="uncrush" class="heart-btn">
-              <img src="{% static 'feed/heart-red.png' %}" alt="Mutual">
-            </button>
-            {% elif user.crush_status == 'sent' %}
-            <button type="submit" name="crush_action" value="uncrush" class="heart-btn">
-              <img src="{% static 'feed/heart-pink.png' %}" alt="Sent">
-            </button>
-            {% elif user.crush_status == 'received' %}
-            <button type="submit" name="crush_action" value="accept_crush" class="heart-btn">
-              <img src="{% static 'feed/heart-empty.png' %}" alt="Accept">
-            </button>
-            {% else %}
-            <button type="submit" name="crush_action" value="send_crush" class="heart-btn">
-              <img src="{% static 'feed/heart-empty.png' %}" alt="Send">
-            </button>
-            {% endif %}
-          </form>
-        </div>
-        {% endfor %}
-      </div>
-    </section>
-  
-    <div class="section-divider"></div>
-  
-    <section class="horizontal-section" style="--section-delay: 3">
-      <div class="section-header">
-        <h2>Same College <span class="section-count">{{ same_college|length }}</span></h2>
-      </div>
-      <div class="scroll-nav">
-        <button class="scroll-button scroll-left" data-target="same-college">
-          ←
-        </button>
-        <button class="scroll-button scroll-right" data-target="same-college">
-          →
-        </button>
-      </div>
-      <div class="scroll-container" id="same-college">
-        {% for user in same_college %}
-        <div class="user-card" style="--card-delay: {{ forloop.counter0 }}">
-          <a href="{% url 'feed:profile' user_id=user.id %}" class="profile-link">
-            <div class="profile-pic-container">
-              <img src="{{ user.profile_picture.url }}" alt="Profile" class="profile-pic">
-              <div class="profile-pic-glow"></div>
-            </div>
-            <div class="user-info">
-              <h3>{{ user.name }}</h3>
-              <p>{{ user.branch }} • {{ user.year }}</p>
-              <p>{{ user.college }}</p>
-            </div>
-          </a>
-          
-          <form method="POST" action="{% url 'feed:crush_action' user_id=user.id %}" class="heart-form">
-            {% csrf_token %}
-            {% if user.crush_status == 'mutual' %}
-            <button type="submit" name="crush_action" value="uncrush" class="heart-btn">
-              <img src="{% static 'feed/heart-red.png' %}" alt="Mutual">
-            </button>
-            {% elif user.crush_status == 'sent' %}
-            <button type="submit" name="crush_action" value="uncrush" class="heart-btn">
-              <img src="{% static 'feed/heart-pink.png' %}" alt="Sent">
-            </button>
-            {% elif user.crush_status == 'received' %}
-            <button type="submit" name="crush_action" value="accept_crush" class="heart-btn">
-              <img src="{% static 'feed/heart-empty.png' %}" alt="Accept">
-            </button>
-            {% else %}
-            <button type="submit" name="crush_action" value="send_crush" class="heart-btn">
-              <img src="{% static 'feed/heart-empty.png' %}" alt="Send">
-            </button>
-            {% endif %}
-          </form>
-        </div>
-        {% endfor %}
-      </div>
-    </section>
-  
-    <div class="section-divider"></div>
-  
-    <section class="horizontal-section" style="--section-delay: 4">
-      <div class="section-header">
-        <h2>Trending <span class="section-count">{{ trending|length }}</span></h2>
-      </div>
-      <div class="scroll-nav">
-        <button class="scroll-button scroll-left" data-target="trending">
-          ←
-        </button>
-        <button class="scroll-button scroll-right" data-target="trending">
-          →
-        </button>
-      </div>
-      <div class="scroll-container" id="trending">
-        {% for entry in trending %}
-        <div class="user-card" style="--card-delay: {{ forloop.counter0 }}">
-          <a href="{% url 'feed:profile' user_id=entry.user.id %}" class="profile-link">
-            <div class="profile-pic-container">
-              <img src="{{ entry.user.profile_picture.url }}" alt="Profile" class="profile-pic">
-              <div class="profile-pic-glow"></div>
-            </div>
-            <div class="user-info">
-              <h3>{{ entry.user.full_name }}</h3>
-              <p>{{ entry.user.department }} • {{ entry.user.questionnaire.year }}</p>
-              <p>{{ entry.user.college }}</p>
-            </div>
-          </a>
-          
-          <form method="POST" action="{% url 'feed:crush_action' user_id=entry.user.id %}" class="heart-form">
-            {% csrf_token %}
-            {% if entry.crush_status == 'mutual' %}
-            <button type="submit" name="crush_action" value="uncrush" class="heart-btn">
-              <img src="{% static 'feed/heart-red.png' %}" alt="Mutual">
-            </button>
-            {% elif entry.crush_status == 'sent' %}
-            <button type="submit" name="crush_action" value="uncrush" class="heart-btn">
-              <img src="{% static 'feed/heart-pink.png' %}" alt="Sent">
-            </button>
-            {% elif entry.crush_status == 'received' %}
-            <button type="submit" name="crush_action" value="accept_crush" class="heart-btn">
-              <img src="{% static 'feed/heart-empty.png' %}" alt="Accept">
-            </button>
-            {% else %}
-            <button type="submit" name="crush_action" value="send_crush" class="heart-btn">
-              <img src="{% static 'feed/heart-empty.png' %}" alt="Send">
-            </button>
-            {% endif %}
-          </form>
-        </div>
-        {% endfor %}
-      </div>
-    </section>
-  
+    <!-- Additional horizontal sections would go here -->
+    <!-- Same Year, Same Department, Same College, etc. sections -->
+    
     <!-- Bottom Navigation Bar -->
     <nav>
-      <a href="{% url 'feed:home' %}">
-        <img src="{% static 'icons/home.png' %}" alt="Home">
-        <span class="tooltip">Home</span>
+      <a href="{% url 'feed:home' %}" class="active-link">
+        <i class="fas fa-home" style="font-size: 22px;"></i>
+      </a>
+      <a href="{% url 'feed:explore' %}">
+        <i class="fas fa-compass" style="font-size: 22px;"></i>
+      </a>
+      <a href="{% url 'feed:create_post' %}">
+        <i class="fas fa-plus-circle" style="font-size: 22px;"></i>
       </a>
       <a href="#">
-        <img src="{% static 'icons/explore.png' %}" alt="Explore">
-        <span class="tooltip">Explore</span>
+        <i class="fas fa-user-friends" style="font-size: 22px;"></i>
       </a>
-      <a href="#">
-        <img src="{% static 'icons/add.png' %}" alt="Add">
-        <span class="tooltip">Add New</span>
-      </a>
-      <a href="#">
-        <img src="{% static 'icons/friends.png' %}" alt="Friends">
-        <span class="tooltip">Friends</span>
-      </a>
-      <a href="#">
-        <img src="{% static 'icons/notify.png' %}" alt="Notify">
-        <span class="tooltip">Notifications</span>
+      <a href="{% url 'feed:confession' %}">
+        <i class="fas fa-bell" style="font-size: 22px;"></i>
       </a>
     </nav>
   </div>
 
-  <!-- JavaScript for animations and interactions -->
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
-    // Initialize Particles.js
-    document.addEventListener('DOMContentLoaded', function() {
-      particlesJS('particles-js', {
-        "particles": {
-          "number": {
-            "value": 80,
-            "density": {
-              "enable": true,
-              "value_area": 800
-            }
-          },
-          "color": {
-            "value": "#6e6e9c"
-          },
-          "shape": {
-            "type": "circle",
-            "stroke": {
-              "width": 0,
-              "color": "#000000"
-            },
-            "polygon": {
-              "nb_sides": 5
-            }
-          },
-          "opacity": {
-            "value": 0.2,
-            "random": true,
-            "anim": {
-              "enable": true,
-              "speed": 0.5,
-              "opacity_min": 0.1,
-              "sync": false
-            }
-          },
-          "size": {
-            "value": 3,
-            "random": true,
-            "anim": {
-              "enable": true,
-              "speed": 2,
-              "size_min": 0.1,
-              "sync": false
-            }
-          },
-          "line_linked": {
-            "enable": true,
-            "distance": 150,
-            "color": "#6e6e9c",
-            "opacity": 0.1,
-            "width": 1
-          },
-          "move": {
-            "enable": true,
-            "speed": 0.8,
-            "direction": "none",
-            "random": true,
-            "straight": false,
-            "out_mode": "out",
-            "bounce": false,
-            "attract": {
-              "enable": true,
-              "rotateX": 600,
-              "rotateY": 1200
-            }
-          }
+    // Initialize particles.js
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#6c63ff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5, random: false },
+        size: { value: 3, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#6c63ff",
+          opacity: 0.4,
+          width: 1
         },
-        "interactivity": {
-          "detect_on": "canvas",
-          "events": {
-            "onhover": {
-              "enable": true,
-              "mode": "grab"
-            },
-            "onclick": {
-              "enable": true,
-              "mode": "push"
-            },
-            "resize": true
-          },
-          "modes": {
-            "grab": {
-              "distance": 140,
-              "line_linked": {
-                "opacity": 0.3
-              }
-            },
-            "bubble": {
-              "distance": 400,
-              "size": 40,
-              "duration": 2,
-              "opacity": 8,
-              "speed": 3
-            },
-            "repulse": {
-              "distance": 200,
-              "duration": 0.4
-            },
-            "push": {
-              "particles_nb": 4
-            },
-            "remove": {
-              "particles_nb": 2
-            }
-          }
+        move: {
+          enable: true,
+          speed: 2,
+          direction: "none",
+          random: false,
+          straight: false,
+          out_mode: "out",
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "grab" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
         },
-        "retina_detect": true
-      });
+        modes: {
+          grab: { distance: 140, line_linked: { opacity: 1 } },
+          push: { particles_nb: 4 }
+        }
+      }
     });
 
-    // Scroll container navigation
+    // Horizontal scroll functionality
     document.addEventListener('DOMContentLoaded', function() {
-      const scrollLeftButtons = document.querySelectorAll('.scroll-left');
-      const scrollRightButtons = document.querySelectorAll('.scroll-right');
+      const scrollButtons = document.querySelectorAll('.scroll-button');
       
-      scrollLeftButtons.forEach(button => {
+      scrollButtons.forEach(button => {
         button.addEventListener('click', function() {
           const targetId = this.getAttribute('data-target');
           const container = document.getElementById(targetId);
-          container.scrollBy({ left: -300, behavior: 'smooth' });
-        });
-      });
-      
-      scrollRightButtons.forEach(button => {
-        button.addEventListener('click', function() {
-          const targetId = this.getAttribute('data-target');
-          const container = document.getElementById(targetId);
-          container.scrollBy({ left: 300, behavior: 'smooth' });
-        });
-      });
-      
-      // Add hover animation for user cards
-      const userCards = document.querySelectorAll('.user-card');
-      userCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-          this.style.transform = 'translateY(-10px) scale(1.03)';
-          this.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.6)';
-          this.style.borderColor = 'rgba(100, 100, 150, 0.3)';
+          const scrollAmount = 300;
           
-          const profilePic = this.querySelector('.profile-pic');
-          if (profilePic) {
-            profilePic.style.borderColor = 'rgba(100, 100, 150, 0.4)';
-            profilePic.style.transform = 'scale(1.05)';
+          if (this.classList.contains('scroll-left')) {
+            container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+          } else {
+            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
           }
-          
-          const profilePicGlow = this.querySelector('.profile-pic-glow');
-          if (profilePicGlow) {
-            profilePicGlow.style.opacity = '1';
-          }
-        });
-        
-        card.addEventListener('mouseleave', function() {
-          this.style.transform = '';
-          this.style.boxShadow = '';
-          this.style.borderColor = '';
-          
-          const profilePic = this.querySelector('.profile-pic');
-          if (profilePic) {
-            profilePic.style.borderColor = '';
-            profilePic.style.transform = '';
-          }
-          
-          const profilePicGlow = this.querySelector('.profile-pic-glow');
-          if (profilePicGlow) {
-            profilePicGlow.style.opacity = '';
-          }
-        });
-      });
-      
-      // Add subtle floating animation to stats boxes
-      const statBoxes = document.querySelectorAll('.popup-box');
-      statBoxes.forEach((box, index) => {
-        box.style.animationDelay = `${index * 0.1}s`;
-        
-        // Create the floating effect
-        setInterval(() => {
-          const randomY = Math.random() * 5 - 2.5;
-          const randomRotate = Math.random() * 0.5 - 0.25;
-          box.style.transform = `translateY(${randomY}px) rotate(${randomRotate}deg)`;
-          
-          setTimeout(() => {
-            box.style.transform = '';
-          }, 1500);
-        }, 3000 + (index * 500));
-      });
-
-      // Add mysterious pulsing glow to random cards
-      function addMysteriousGlow() {
-        const randomCard = userCards[Math.floor(Math.random() * userCards.length)];
-        
-        // Create glow element
-        const glowElement = document.createElement('div');
-        glowElement.classList.add('mysterious-glow');
-        glowElement.style.position = 'absolute';
-        glowElement.style.top = '0';
-        glowElement.style.left = '0';
-        glowElement.style.width = '100%';
-        glowElement.style.height = '100%';
-        glowElement.style.borderRadius = '16px';
-        glowElement.style.boxShadow = '0 0 20px rgba(100, 100, 150, 0.2)';
-        glowElement.style.opacity = '0';
-        glowElement.style.zIndex = '-1';
-        
-        randomCard.style.position = 'relative';
-        randomCard.appendChild(glowElement);
-        
-        // Animate the glow
-        let opacity = 0;
-        const animateGlow = setInterval(() => {
-          opacity += 0.05;
-          glowElement.style.opacity = opacity;
-          
-          if (opacity >= 1) {
-            clearInterval(animateGlow);
-            
-            setTimeout(() => {
-              let fadeOut = 1;
-              const fadeOutInterval = setInterval(() => {
-                fadeOut -= 0.05;
-                glowElement.style.opacity = fadeOut;
-                
-                if (fadeOut <= 0) {
-                  clearInterval(fadeOutInterval);
-                  glowElement.remove();
-                }
-              }, 50);
-            }, 1000);
-          }
-        }, 50);
-      }
-      
-      // Trigger mysterious glow effect every 8 seconds
-      setInterval(addMysteriousGlow, 8000);
-      
-      // Add parallax effect to page
-      document.addEventListener('mousemove', function(e) {
-        const mouseX = e.clientX / window.innerWidth;
-        const mouseY = e.clientY / window.innerHeight;
-        
-        document.querySelectorAll('#particles-js').forEach(element => {
-          const offsetX = 10 * (mouseX - 0.5);
-          const offsetY = 10 * (mouseY - 0.5);
-          element.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
         });
       });
     });

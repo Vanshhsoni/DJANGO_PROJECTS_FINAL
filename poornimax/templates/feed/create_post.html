@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Post | PoornimaX</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+  <script src="https://kit.fontawesome.com/b8b432d7d3.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+  <style>
+    /* Base Styles */
+    :root {
+      --primary: #6c63ff;
+      --primary-light: #8f88ff;
+      --primary-dark: #5046e5;
+      --secondary: #ff6584;
+      --bg: #f8f9fa;
+      --text: #333;
+      --text-light: #777;
+      --card-bg: #fff;
+      --shadow: rgba(0, 0, 0, 0.1);
+      --border: #e0e0e0;
+      --radius: 12px;
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding-bottom: 70px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    button {
+      cursor: pointer;
+      border: none;
+      outline: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* Layout */
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 0 15px;
+    }
+
+    /* Particles Background */
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.2;
+    }
+
+    /* Main Card */
+    .create-post-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 20px var(--shadow);
+      overflow: hidden;
+      animation: fadeInUp 0.5s ease;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Header Section */
+    .create-post-header {
+      background: linear-gradient(120deg, var(--primary), var(--primary-dark));
+      padding: 20px;
+      position: relative;
+      color: white;
+      text-align: center;
+      animation: gradientFlow 10s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .create-post-header h2 {
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    /* Back Button */
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      transition: var(--transition);
+    }
+
+    .back-button:hover {
+      background: rgba(255, 255, 255, 0.4);
+      transform: scale(1.1);
+    }
+
+    /* Form Elements */
+    .create-post-body {
+      padding: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--text);
+      font-size: 16px;
+    }
+
+    input[type="file"] {
+      width: 100%;
+      padding: 12px;
+      background-color: rgba(108, 99, 255, 0.03);
+      border: 1px dashed var(--primary-light);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    input[type="file"]:hover {
+      background-color: rgba(108, 99, 255, 0.06);
+    }
+
+    .preview-container {
+      margin-top: 15px;
+      text-align: center;
+      background-color: rgba(108, 99, 255, 0.03);
+      border-radius: var(--radius);
+      padding: 15px;
+      border: 1px dashed var(--primary-light);
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .preview-image {
+      max-width: 100%;
+      max-height: 300px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    textarea {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: var(--radius);
+      font-size: 15px;
+      min-height: 120px;
+      transition: var(--transition);
+      resize: vertical;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+    }
+
+    .btn-post {
+      background: linear-gradient(to right, var(--primary), var(--primary-dark));
+      color: white;
+      padding: 14px 20px;
+      width: 100%;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-post:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(108, 99, 255, 0.4);
+    }
+
+    .btn-post::after {
+      content: "";
+      position: absolute;
+      width: 120%;
+      height: 120%;
+      background: rgba(255, 255, 255, 0.2);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      border-radius: 50%;
+      transition: transform 0.4s ease;
+    }
+
+    .btn-post:active::after {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    /* Upload Icon */
+    .upload-icon {
+      font-size: 44px;
+      color: var(--primary-light);
+      margin-bottom: 15px;
+    }
+
+    .upload-text {
+      display: block;
+      margin-top: 10px;
+      color: var(--text-light);
+      font-size: 14px;
+    }
+
+    /* Bottom Navigation */
+    nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 0;
+      box-shadow: 0 -2px 10px var(--shadow);
+      z-index: 100;
+    }
+
+    nav a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: var(--text-light);
+      padding: 8px 16px;
+      position: relative;
+    }
+
+    nav a i {
+      font-size: 20px;
+      margin-bottom: 3px;
+      transition: var(--transition);
+    }
+
+    nav a.active-link {
+      color: var(--primary);
+    }
+
+    nav a:hover i {
+      transform: translateY(-3px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        margin: 20px auto;
+      }
+      
+      .create-post-body {
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .create-post-header h2 {
+        font-size: 20px;
+      }
+      
+      .create-post-body {
+        padding: 15px;
+      }
+      
+      .btn-post {
+        padding: 12px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Particle Background -->
+  <div id="particles-js"></div>
+  
+  <div class="container">
+    <div class="create-post-card">
+      <!-- Header -->
+      <div class="create-post-header">
+        <a href="{% url 'feed:home' %}" class="back-button">
+          <i class="fas fa-arrow-left"></i>
+        </a>
+        <h2>Create Post</h2>
+      </div>
+
+      <!-- Create Post Body -->
+      <div class="create-post-body">
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          <div class="form-group">
+            <label for="id_image">Upload Photo</label>
+            <div id="upload-area" style="text-align: center; cursor: pointer;">
+              <i class="fas fa-cloud-upload-alt upload-icon"></i>
+              <div style="position: relative; overflow: hidden;">
+                <input type="file" id="id_image" name="image" style="opacity: 0; position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                <button type="button" class="btn-post" style="margin-bottom: 10px;">Choose Image</button>
+              </div>
+              <span class="upload-text">JPG, PNG or GIF • Max 10MB</span>
+            </div>
+            
+            <div id="preview-container" class="preview-container">
+              <img id="preview" class="preview-image" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="id_caption">Write a Caption</label>
+            <textarea id="id_caption" name="caption" placeholder="What's on your mind?"></textarea>
+          </div>
+
+          <button type="submit" class="btn-post">
+            <i class="fas fa-paper-plane" style="margin-right: 8px;"></i> Share Post
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav>
+    <a href="{% url 'feed:home' %}">
+      <i class="fas fa-home"></i>
+    </a>
+    <a href="{% url 'feed:explore' %}">
+      <i class="fas fa-compass"></i>
+    </a>
+    <a href="{% url 'feed:create_post' %}" class="active-link">
+      <i class="fas fa-plus-circle"></i>
+    </a>
+    <a href="#">
+      <i class="fas fa-user-friends"></i>
+    </a>
+    <a href="{% url 'feed:confession' %}">
+      <i class="fas fa-bell"></i>
+    </a>
+  </nav>
+
+  <script>
+    // Initialize particles.js
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#6c63ff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5, random: false },
+        size: { value: 3, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#6c63ff",
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: "none",
+          random: false,
+          straight: false,
+          out_mode: "out",
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "grab" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
+        },
+        modes: {
+          grab: { distance: 140, line_linked: { opacity: 1 } },
+          push: { particles_nb: 4 }
+        }
+      }
+    });
+
+    // Image preview functionality
+    document.getElementById('id_image').addEventListener('change', function(e) {
+      const previewContainer = document.getElementById('preview-container');
+      const preview = document.getElementById('preview');
+      const file = e.target.files[0];
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          preview.src = e.target.result;
+          previewContainer.style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Button click triggers file input
+    document.querySelector('#upload-area button').addEventListener('click', function() {
+      document.getElementById('id_image').click();
+    });
+
+    // Textarea animation
+    const textarea = document.getElementById('id_caption');
+    textarea.addEventListener('focus', function() {
+      this.style.transform = 'scale(1.01)';
+      setTimeout(() => {
+        this.style.transform = 'scale(1)';
+      }, 200);
+    });
+  </script>
+</body>
+</html>
