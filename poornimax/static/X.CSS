@@ -1,764 +1,347 @@
-<style>
-    /* Base Styles */
-    :root {
-      --primary: #6c63ff;
-      --primary-light: #8f88ff;
-      --primary-dark: #5046e5;
-      --secondary: #ff6584;
-      --bg: #f8f9fa;
-      --text: #333;
-      --text-light: #777;
-      --card-bg: #fff;
-      --shadow: rgba(0, 0, 0, 0.1);
-      --radius: 12px;
-      --transition: all 0.3s ease;
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoornimaX - Engage</title>
+    <style>
+        :root {
+            --primary: #6c63ff;
+            --primary-light: #8f88ff;
+            --primary-dark: #5046e5;
+            --secondary: #ff6584;
+            --secondary-light: #ff85a2;
+            --bg: #0e0e0e;
+            --bg-card: #212121;
+            --text: #d9d9d9;
+            --text-light: #787878;
+            --shadow: rgba(0, 0, 0, 0.8);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+        }
 
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      padding-bottom: 70px;
-    }
+        body {
+            background: radial-gradient(circle, var(--bg) 30%, #161616 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            color: var(--text);
+        }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
+        }
+
+        .loader {
+            width: 80px;
+            height: 40px;
+            display: flex;
+        }
+
+        .loader:before,
+        .loader:after {
+            content: "";
+            margin: 0 -2px 0 0;
+            flex: 1;
+            --c: no-repeat linear-gradient(var(--primary) 0 0);
+            background: var(--c), var(--c), var(--c), var(--c);
+            animation: l13-1 1s infinite linear, l13-2 1s infinite linear;
+        }
+
+        .loader:after {
+            transform: scale(-1);
+            margin: 0 0 0 -2px;
+        }
+
+        @keyframes l13-1 {
+            0%, 3%   {background-size: 0 4px, 4px 0, 0 4px, 4px 0;}
+            12.5%    {background-size: 50% 4px, 4px 0, 0 4px, 4px 0;}
+            25%      {background-size: 50% 4px, 4px 50%, 0 4px, 4px 0;}
+            37.5%    {background-size: 50% 4px, 4px 50%, 50% 4px, 4px 0;}
+            46%, 54% {background-size: 50% 4px, 4px 50%, 50% 4px, 4px 50%;}
+            62.5%    {background-size: 0 4px, 4px 50%, 50% 4px, 4px 50%;}
+            75%      {background-size: 0 4px, 4px 0, 50% 4px, 4px 50%;}
+            87.5%    {background-size: 0 4px, 4px 0, 0 4px, 4px 50%;}
+            96%,100% {background-size: 0 4px, 4px 0, 0 4px, 4px 0;}
+        }
+
+        @keyframes l13-2 {
+            0%,49.9%  {background-position: 0 20px, 50% 20px, 20px 100%, 100% 100%;}
+            50%,100%  {background-position: right 20px top 20px, 50% 100%, 100% 100%, 100% 20px;}
+        }
+
+        /* Particle Background */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        /* Container Styling */
+        .container {
+            text-align: center;
+            padding: 40px;
+            border-radius: var(--radius);
+            background: var(--bg-card);
+            box-shadow: 0 0 25px var(--shadow);
+            width: 95%;
+            max-width: 450px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(108, 99, 255, 0.3);
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .container:hover::before {
+            opacity: 1;
+        }
+
+        h1 {
+            background: linear-gradient(45deg, var(--primary), var(--primary-light));
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            color: #b3b3b3;
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        p.subtext {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        /* Button Styling */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 14px 35px;
+            border-radius: 30px;
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(108, 99, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        /* Mystery Flash Effect */
+        .mystery-flash {
+            position: absolute;
+            height: 100%;
+            width: 30px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: skewX(-20deg);
+            top: 0;
+            left: -100px;
+            animation: flash 5s infinite;
+        }
+
+        @keyframes flash {
+            0% {
+                left: -100px;
+            }
+            20%, 100% {
+                left: 120%;
+            }
+        }
+
+        /* Floating Elements */
+        @keyframes float-bubble {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-15px) rotate(10deg);
+            }
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            animation: float-bubble 5s infinite ease-in-out;
+            opacity: 0.6;
+        }
+
+        .floating-element.circle {
+            background: linear-gradient(45deg, var(--primary-dark), var(--primary));
+        }
+
+        .floating-element.square {
+            border-radius: 8px;
+            background: linear-gradient(45deg, var(--secondary), var(--secondary-light));
+        }
+
+        /* Brand Text */
+        .brand-text {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: 400;
+            letter-spacing: 2px;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader-container" id="loaderContainer">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
     
-    button {
-      cursor: pointer;
-      border: none;
-      outline: none;
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    /* Layout */
-    .container {
-      max-width: 1000px;
-      margin: 30px auto;
-      padding: 0 15px;
-    }
-
-    /* Particles Background */
-    #particles-js {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      opacity: 0.2;
-    }
-
-    /* Cards & Sections */
-    .profile-card {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      border-radius: var(--radius);
-      box-shadow: 0 8px 20px var(--shadow);
-      overflow: hidden;
-    }
-
-    .profile-header {
-      background: linear-gradient(120deg, var(--primary), var(--primary-dark));
-      padding: 30px 20px;
-      position: relative;
-      color: white;
-      text-align: center;
-    }
-
-    /* Back Button */
-    .back-button {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      width: 36px;
-      height: 36px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      transition: var(--transition);
-    }
-
-    .back-button:hover {
-      background: rgba(255, 255, 255, 0.4);
-      transform: scale(1.1);
-    }
-
-    /* Profile Image */
-    .profile-image {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      margin: 0 auto 15px;
-      border: 4px solid white;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      overflow: hidden;
-    }
-
-    .profile-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .username {
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 5px;
-    }
-
-    .page-title {
-      font-size: 16px;
-      opacity: 0.8;
-    }
-
-    /* Profile Body Layout */
-    .profile-body {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 25px;
-      padding: 25px;
-    }
-
-    /* Buttons */
-    .btn {
-      padding: 12px 20px;
-      border-radius: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: var(--transition);
-      width: 100%;
-      margin-bottom: 10px;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .btn-edit {
-      background-color: var(--primary);
-      color: white;
-    }
-
-    .btn-post {
-      background-color: var(--secondary);
-      color: white;
-    }
-
-    .btn-message {
-      background-color: var(--bg);
-      color: var(--text);
-      border: 1px solid var(--text-light);
-    }
-
-    .heart-btn {
-      padding: 12px 20px;
-      border-radius: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: var(--transition);
-      width: 100%;
-      margin-bottom: 10px;
-    }
-
-    .btn-mutual {
-      background-color: var(--secondary);
-      color: white;
-    }
-
-    .btn-sent {
-      background-color: rgba(255, 101, 132, 0.8);
-      color: white;
-    }
-
-    .btn-received {
-      background-color: var(--bg);
-      color: var(--secondary);
-      border: 1px solid var(--secondary);
-    }
-
-    .btn-send {
-      background-color: var(--bg);
-      color: var(--text);
-      border: 1px solid var(--text-light);
-    }
-
-    /* Bio Section */
-    .bio {
-      background-color: rgba(108, 99, 255, 0.05);
-      padding: 15px;
-      border-radius: var(--radius);
-      margin: 15px 0;
-    }
-
-    .bio-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 600;
-      color: var(--primary);
-      margin-bottom: 10px;
-    }
-
-    .bio-text {
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--text-light);
-    }
-
-    /* Info Details */
-    .info-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 15px;
-      background-color: rgba(108, 99, 255, 0.05);
-      border-radius: var(--radius);
-      font-size: 14px;
-      margin-bottom: 8px;
-    }
-
-    .info-item i {
-      color: var(--primary);
-      font-size: 16px;
-      width: 20px;
-      text-align: center;
-    }
-
-    /* Posts Section */
-    .posts-section h3 {
-      font-size: 18px;
-      margin-bottom: 20px;
-      color: var(--primary);
-      position: relative;
-      display: inline-block;
-    }
-
-    .posts-section h3:after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 60px;
-      height: 3px;
-      background: var(--primary);
-    }
-
-    .post-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      margin-bottom: 25px;
-    }
-
-    .post-item {
-      aspect-ratio: 1/1;
-      overflow: hidden;
-      border-radius: var(--radius);
-      position: relative;
-      cursor: pointer;
-    }
-
-    .post-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: var(--transition);
-    }
-
-    .post-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      padding: 10px;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      opacity: 0;
-      transition: var(--transition);
-    }
-
-    .post-item:hover img {
-      transform: scale(1.05);
-    }
-
-    .post-item:hover .post-overlay {
-      opacity: 1;
-    }
-
-    .post-likes, 
-    .post-comments {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 12px;
-    }
-
-    /* Private Posts Message */
-    .private-posts-message {
-      text-align: center;
-      padding: 30px 20px;
-      background: rgba(108, 99, 255, 0.05);
-      border-radius: var(--radius);
-    }
-
-    .lock-icon {
-      font-size: 36px;
-      display: block;
-      margin-bottom: 16px;
-      color: var(--primary);
-    }
-
-    /* Latest Post */
-    .last-post {
-      background-color: white;
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: 0 5px 15px var(--shadow);
-      position: relative;
-      margin-top: 20px;
-    }
-
-    .post-cover {
-      height: 180px;
-      background-size: cover;
-      background-position: center;
-      position: relative;
-    }
-
-    .last-badge {
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      background-color: var(--primary);
-      color: white;
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 500;
-    }
-
-    .post-title {
-      padding: 15px;
-      font-size: 16px;
-    }
-
-    .post-CTA {
-      background-color: var(--primary);
-      color: white;
-      padding: 8px 20px;
-      border-radius: 20px;
-      font-size: 14px;
-      position: absolute;
-      bottom: 15px;
-      right: 15px;
-      transition: var(--transition);
-    }
-
-    .post-CTA:hover {
-      background-color: var(--primary-dark);
-    }
-
-    /* Bottom Navigation */
-    nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: white;
-      display: flex;
-      justify-content: space-around;
-      padding: 12px 0;
-      box-shadow: 0 -2px 10px var(--shadow);
-      z-index: 100;
-    }
-
-    nav a {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: var(--text-light);
-      padding: 8px 16px;
-      position: relative;
-    }
-
-    nav a i {
-      font-size: 20px;
-      margin-bottom: 3px;
-      transition: var(--transition);
-    }
-
-    nav a.active-link {
-      color: var(--primary);
-    }
-
-    nav a:hover i {
-      transform: translateY(-3px);
-    }
-
-    /* Responsive Design */
-    @media (max-width: 992px) {
-      .profile-body {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .post-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 576px) {
-      .profile-body {
-        padding: 15px;
-      }
-      
-      .post-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-      }
-    }
-      /* Post Overlay Styles */
-  .overlay-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(5px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-  }
-
-  .overlay-container.active {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .post-overlay-content {
-    width: 90%;
-    max-width: 900px;
-    height: 85vh;
-    background: white;
-    border-radius: var(--radius);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    display: grid;
-    grid-template-columns: 3fr 2fr;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .post-image-container {
-    height: 100%;
-    background: #f1f1f1;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .post-image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-  .post-details {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-
-  .post-header {
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
-
-  .post-user-img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-
-  .post-username {
-    font-weight: 600;
-    font-size: 15px;
-  }
-
-  .post-time {
-    color: var(--text-light);
-    font-size: 12px;
-  }
-
-  .post-caption {
-    padding: 15px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    font-size: 14px;
-    flex-shrink: 0;
-  }
-
-  .comments-container {
-    flex-grow: 1;
-    overflow-y: auto;
-    padding: 10px 15px;
-  }
-
-  .comment {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-  }
-
-  .comment-user-img {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    object-fit: cover;
-    flex-shrink: 0;
-  }
-
-  .comment-content {
-    flex-grow: 1;
-  }
-
-  .comment-username {
-    font-weight: 600;
-    font-size: 13px;
-  }
-
-  .comment-text {
-    font-size: 13px;
-    margin-top: 2px;
-  }
-
-  .comment-time {
-    font-size: 11px;
-    color: var(--text-light);
-    margin-top: 3px;
-  }
-
-  .post-actions {
-    padding: 15px;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .action-buttons {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-  }
-
-  .action-btn {
-    background: none;
-    border: none;
-    font-size: 20px;
-    color: var(--text);
-    cursor: pointer;
-    transition: var(--transition);
-    display: flex;
-    align-items: center;
-    padding: 0;
-  }
-
-  .action-btn:hover {
-    color: var(--primary);
-  }
-
-  .like-btn.active {
-    color: var(--secondary);
-  }
-
-  .like-btn.active i {
-    font-weight: 900;
-  }
-
-  .like-count {
-    font-size: 14px;
-    font-weight: 600;
-  }
-
-  .comment-form {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
-
-  .comment-input {
-    flex-grow: 1;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-    padding: 8px 15px;
-    font-size: 14px;
-    outline: none;
-  }
-
-  .comment-input:focus {
-    border-color: var(--primary);
-  }
-
-  .post-btn {
-    background: var(--primary);
-    color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 8px 15px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: var(--transition);
-  }
-
-  .post-btn:hover {
-    background: var(--primary-dark);
-  }
-
-  .close-overlay {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 36px;
-    height: 36px;
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text);
-    cursor: pointer;
-    transition: var(--transition);
-    z-index: 10;
-  }
-
-  .close-overlay:hover {
-    background: rgba(0, 0, 0, 0.2);
-    transform: scale(1.1);
-  }
-
-  /* Comment Popup */
-  .comment-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 450px;
-    background: white;
-    border-radius: var(--radius);
-    padding: 25px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    z-index: 1100;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-  }
-
-  .comment-popup.active {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .comment-popup-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-
-  .comment-popup-title {
-    font-size: 18px;
-    color: var(--primary);
-    font-weight: 600;
-  }
-
-  .close-comment-popup {
-    background: none;
-    border: none;
-    color: var(--text);
-    font-size: 20px;
-    cursor: pointer;
-  }
-
-  .comment-popup-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .comment-popup-input {
-    width: 100%;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: var(--radius);
-    padding: 12px 15px;
-    font-size: 14px;
-    outline: none;
-    resize: vertical;
-    min-height: 100px;
-  }
-
-  .comment-popup-input:focus {
-    border-color: var(--primary);
-  }
-
-  .comment-popup-btn {
-    background: linear-gradient(120deg, var(--primary), var(--primary-dark));
-    color: white;
-    border: none;
-    border-radius: 30px;
-    padding: 12px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: var(--transition);
-  }
-
-  .comment-popup-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(var(--primary-rgb), 0.3);
-  }
-
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .post-overlay-content {
-      grid-template-columns: 1fr;
-      height: 95vh;
-      width: 95%;
-    }
-
-    .post-image-container {
-      height: 40vh;
-    }
-  }
-  </style>
+    <!-- Floating Elements -->
+    <div class="floating-element circle" style="width: 25px; height: 25px; left: 15%; bottom: 20%; animation-delay: 0s;"></div>
+    <div class="floating-element square" style="width: 18px; height: 18px; left: 25%; top: 20%; animation-delay: -1.5s;"></div>
+    <div class="floating-element circle" style="width: 40px; height: 40px; right: 20%; top: 30%; animation-delay: -2.2s;"></div>
+    <div class="floating-element square" style="width: 15px; height: 15px; right: 15%; bottom: 25%; animation-delay: -3.5s;"></div>
+
+    <div class="container">
+        <div class="mystery-flash"></div>
+        <h1>PoornimaX</h1>
+        <h2>Where connections spark and stories begin</h2>
+        <p class="subtext">Your doorway to infinite connections and boundless opportunities.</p>
+        
+        <div class="btn-container">
+            <a href="{% url 'accounts:load_login' %}">
+                <button class="btn">Login</button>
+            </a>
+            <a href="{% url 'accounts:load_signup' %}">
+                <button class="btn btn-secondary">Signup</button>
+            </a>
+        </div>
+        
+        <p class="brand-text">WHERE JOURNEYS BEGIN</p>
+    </div>
+
+    <script>
+        // Loading animation
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const loader = document.getElementById('loaderContainer');
+                loader.style.opacity = '0';
+                setTimeout(function() {
+                    loader.style.visibility = 'hidden';
+                }, 500);
+            }, 1000);
+        });
+
+        // Initialize particles.js
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 1000 } },
+                color: { value: "#6c63ff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#6c63ff",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: false,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false,
+                    attract: { enable: true, rotateX: 600, rotateY: 1200 }
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true
+                },
+                modes: {
+                    grab: { distance: 140, line_linked: { opacity: 1 } },
+                    push: { particles_nb: 4 }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

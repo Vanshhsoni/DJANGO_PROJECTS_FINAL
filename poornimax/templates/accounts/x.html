@@ -5,314 +5,819 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PoornimaX</title>
     <style>
-        /* General Layout */
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #001a33;
-            color: #f1f1f1;
+        :root {
+            --primary: #6c63ff;
+            --primary-light: #8f88ff;
+            --primary-dark: #5046e5;
+            --secondary: #ff6584;
+            --secondary-light: #ff85a2;
+            --bg: #f5f5f7;
+            --bg-card: #ffffff;
+            --bg-dark: #1f1f30;
+            --text: #333333;
+            --text-light: #787878;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle, var(--bg) 30%, #e8e8e8 100%);
+            color: var(--text);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Loading Screen */
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
+        }
+
+        .loader {
+            width: 80px;
+            height: 40px;
+            display: flex;
+        }
+
+        .loader:before,
+        .loader:after {
+            content: "";
+            margin: 0 -2px 0 0;
+            flex: 1;
+            --c: no-repeat linear-gradient(var(--primary) 0 0);
+            background: var(--c), var(--c), var(--c), var(--c);
+            animation: l13-1 1s infinite linear, l13-2 1s infinite linear;
+        }
+
+        .loader:after {
+            transform: scale(-1);
+            margin: 0 0 0 -2px;
+        }
+
+        @keyframes l13-1 {
+            0%, 3%   {background-size: 0 4px, 4px 0, 0 4px, 4px 0;}
+            12.5%    {background-size: 50% 4px, 4px 0, 0 4px, 4px 0;}
+            25%      {background-size: 50% 4px, 4px 50%, 0 4px, 4px 0;}
+            37.5%    {background-size: 50% 4px, 4px 50%, 50% 4px, 4px 0;}
+            46%, 54% {background-size: 50% 4px, 4px 50%, 50% 4px, 4px 50%;}
+            62.5%    {background-size: 0 4px, 4px 50%, 50% 4px, 4px 50%;}
+            75%      {background-size: 0 4px, 4px 0, 50% 4px, 4px 50%;}
+            87.5%    {background-size: 0 4px, 4px 0, 0 4px, 4px 50%;}
+            96%,100% {background-size: 0 4px, 4px 0, 0 4px, 4px 0;}
+        }
+
+        @keyframes l13-2 {
+            0%,49.9%  {background-position: 0 20px, 50% 20px, 20px 100%, 100% 100%;}
+            50%,100%  {background-position: right 20px top 20px, 50% 100%, 100% 100%, 100% 20px;}
+        }
+
+        /* Particle Background */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
         }
 
         /* Header */
         header {
             text-align: center;
-            padding: 20px;
+            padding: 40px 20px;
+            border-bottom: 1px solid rgba(108, 99, 255, 0.2);
+            position: relative;
+        }
+
+        header h1 {
+            background: linear-gradient(45deg, var(--primary), var(--primary-light));
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
             font-size: 2.5rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            color: #00aaff;
-            border-bottom: 2px solid #0d3c5b;
+            font-weight: 600;
+            letter-spacing: 2px;
         }
 
-        /* Container */
-        .container {
-            background-color: #0d3c5b;
-            margin: 20px auto;
-            padding: 30px;
-            border-radius: 10px;
-            width: 85%;
+        .header-subtitle {
+            color: var(--text-light);
+            font-style: italic;
+            margin-top: 5px;
+            font-size: 1rem;
+        }
+
+        /* Main Container */
+        .main-container {
             max-width: 900px;
-            box-shadow: 0 0 20px rgba(0, 76, 153, 0.4);
+            margin: 20px auto 80px;
+            padding: 0 20px;
         }
 
-        /* Question Set Styling */
-        .question-set {
-            margin-bottom: 30px;
+        /* Section Styles */
+        .section {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: 0 10px 30px var(--shadow);
+            padding: 30px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
         }
 
-        h2 {
-            color: #00aaff;
-            font-size: 2rem;
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(108, 99, 255, 0.15);
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-icon {
+            width: 30px;
+            height: 30px;
+            fill: var(--primary);
+        }
+
+        /* Question Styles */
+        .question {
+            background: rgba(245, 245, 247, 0.5);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .question:hover {
+            background: rgba(245, 245, 247, 0.9);
+        }
+
+        .question-title {
+            font-size: 1.2rem;
+            color: var(--text);
             margin-bottom: 15px;
-            font-weight: 700;
-            border-left: 5px solid #00aaff;
-            padding-left: 10px;
+            font-weight: 500;
         }
 
-        /* Individual Question Box */
-        .question-box {
-            margin: 20px 0;
-            padding: 15px;
-            background-color: #001a33;
-            border: 1px solid #00aaff;
-            border-radius: 5px;
+        /* Input Styles */
+        .text-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            margin-top: 5px;
         }
 
-        .question-box h3 {
-            margin-bottom: 10px;
+        .text-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
         }
 
-        .options label {
+        /* Radio Options */
+        .options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .radio-option {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .radio-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .radio-label {
             display: block;
-            margin-bottom: 5px;
+            padding: 10px 15px;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            transition: var(--transition);
+            font-size: 0.95rem;
         }
 
-        hr {
-            border: 0;
-            height: 2px;
-            background-color: #00aaff;
-            margin: 30px 0;
+        .radio-option input[type="radio"]:checked + .radio-label {
+            background: rgba(108, 99, 255, 0.1);
+            border-color: var(--primary);
+            color: var(--primary-dark);
+            font-weight: 500;
+        }
+
+        .radio-option input[type="radio"]:focus + .radio-label {
+            box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.3);
+        }
+
+        .radio-label:hover {
+            border-color: var(--primary-light);
         }
 
         /* Submit Button */
-        button {
-            background-color: #00aaff;
+        .submit-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, var(--primary-dark), var(--primary));
             color: white;
-            padding: 10px 20px;
+            padding: 14px 40px;
+            border-radius: 30px;
             border: none;
-            border-radius: 5px;
+            font-size: 1.1rem;
             cursor: pointer;
-            margin-top: 20px;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(108, 99, 255, 0.5);
         }
 
         /* Footer */
-        footer {
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+            color: white;
             text-align: center;
-            padding: 10px;
+            padding: 15px 0;
             font-size: 1rem;
-            background-color: #001a33;
-            color: #00aaff;
-            border-top: 2px solid #0d3c5b;
+            font-weight: 600;
+            letter-spacing: 3px;
+            box-shadow: 0 -5px 20px rgba(108, 99, 255, 0.2);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .options {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
+
 <body>
-    <header>PoornimaX</header>
-    <form method="POST" action="{% url 'accounts:questionnaire_view' %}">
-        {% csrf_token %}
-        <div class="container">
+    <!-- Loading Screen -->
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
 
-            <!-- Set 1 -->
-                <!-- Set 1: Comma-separated text inputs for multiple choice questions -->
-    <div class="question-set">
-    <h2>Set 2: Single Choice Questions</h2>
-    <div class="question-box">
-    <label>Hobbies (comma-separated):</label>
-    <input required type="text" name="hobbies" placeholder="e.g. Music, Sports, Gaming" value="{{ questionnaire.hobbies|default:'' }}" />
-    </div>
-    <div class="question-box">
-    <label>College Events (comma-separated):</label>
-    <input required type="text" name="college_events" placeholder="e.g. Fests, Hackathons, Sports" value="{{ questionnaire.college_events|default:'' }}" />
-    </div>
-    <div class="question-box">
-    <label>Weekend Plans (comma-separated):</label>
-    <input required type="text" name="weekend_plans" placeholder="e.g. Binge-watching, Gym, Sleeping" value="{{ questionnaire.weekend_plans|default:'' }}" />
-    </div>
-    <div class="question-box">
-    <label>What do you value most in friendships? (comma-separated):</label>
-    <input required type="text" name="friendship_values" placeholder="e.g. Loyalty, Humor, Communication" value="{{ questionnaire.friendship_values|default:'' }}" />
-    </div>
-    <div class="question-box">
-    <label>What kind of content do you like to post? (comma-separated):</label>
-    <input required type="text" name="content_posting" placeholder="e.g. Memes, Vlogs, Food pics" value="{{ questionnaire.content_posting|default:'' }}" />
-    </div>
-    <div class="question-box">
-    <label>What excites you the most in college? (comma-separated):</label>
-    <input required  type="text" name="college_excitements" placeholder="e.g. Internships, Career prep, Friends" value="{{ questionnaire.college_excitements|default:'' }}" />
-    </div>
-    <div class="question-box">
-    <label>How do you prefer to learn? (comma-separated):</label>
-    <input required  type="text" name="learning_preferences" placeholder="e.g. Videos, Books, Group study" value="{{ questionnaire.learning_preferences|default:'' }}" />
-    </div>
-    <div class="question-box">
-    <label>How do you typically relax? (comma-separated):</label>
-    <input required type="text" name="relaxation_methods" placeholder="e.g. Music, Gaming, Meditation" value="{{ questionnaire.relaxation_methods|default:'' }}" />
-    </div>
-    </div>
-            <hr>
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
 
-            <div class="question-set">
-                <h2>Set 2: Single Choice Questions</h2>
+    <header>
+        <h1>PoornimaX</h1>
+        <div class="header-subtitle">Let's find your perfect connection</div>
+    </header>
 
-                <div class="question-box">
-                    <h3>Are you Introvert or Extrovert</h3>
+    <div class="main-container">
+        <form method="POST" action="{% url 'accounts:questionnaire_view' %}">
+            {% csrf_token %}
+            
+            <!-- Interests Section -->
+            <div class="section">
+                <h2 class="section-title">
+                    <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 100-16 8 8 0 000 16zm-1-5h2v2h-2v-2zm0-8h2v6h-2V7z"/>
+                    </svg>
+                    Tell Us About You
+                </h2>
+                
+                <div class="question">
+                    <label class="question-title">What are your favorite hobbies?</label>
+                    <input required type="text" class="text-input" name="hobbies" placeholder="e.g., Photography, Gaming, Hiking, Reading, Music" value="{{ questionnaire.hobbies|default:'' }}" />
+                </div>
+                
+                <div class="question">
+                    <label class="question-title">Which college events do you enjoy the most?</label>
+                    <input required type="text" class="text-input" name="college_events" placeholder="e.g., Tech Fests, Cultural Nights, Hackathons, Debates" value="{{ questionnaire.college_events|default:'' }}" />
+                </div>
+                
+                <div class="question">
+                    <label class="question-title">How do you typically spend your weekends?</label>
+                    <input required type="text" class="text-input" name="weekend_plans" placeholder="e.g., City exploration, Movie marathons, Coffee shop work, Dancing" value="{{ questionnaire.weekend_plans|default:'' }}" />
+                </div>
+                
+                <div class="question">
+                    <label class="question-title">What qualities make someone a great friend to you?</label>
+                    <input required type="text" class="text-input" name="friendship_values" placeholder="e.g., Honesty, Humor, Dependability, Open-mindedness" value="{{ questionnaire.friendship_values|default:'' }}" />
+                </div>
+                
+                <div class="question">
+                    <label class="question-title">What kind of content do you enjoy creating or sharing?</label>
+                    <input required type="text" class="text-input" name="content_posting" placeholder="e.g., Travel stories, Tech tutorials, Artistic photos, Music mixes" value="{{ questionnaire.content_posting|default:'' }}" />
+                </div>
+                
+                <div class="question">
+                    <label class="question-title">What aspects of college life inspire you most?</label>
+                    <input required type="text" class="text-input" name="college_excitements" placeholder="e.g., Diverse perspectives, Innovation opportunities, Networking" value="{{ questionnaire.college_excitements|default:'' }}" />
+                </div>
+                
+                <div class="question">
+                    <label class="question-title">How do you prefer to learn new concepts?</label>
+                    <input required type="text" class="text-input" name="learning_preferences" placeholder="e.g., Visual demonstrations, Group discussions, Hands-on projects" value="{{ questionnaire.learning_preferences|default:'' }}" />
+                </div>
+                
+                <div class="question">
+                    <label class="question-title">What helps you unwind after a stressful day?</label>
+                    <input required type="text" class="text-input" name="relaxation_methods" placeholder="e.g., Nature walks, Music playlists, Creative expression, Mindfulness" value="{{ questionnaire.relaxation_methods|default:'' }}" />
+                </div>
+            </div>
+            
+            <!-- Personality Section -->
+            <div class="section">
+                <h2 class="section-title">
+                    <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2a8 8 0 100 16 8 8 0 000-16zm0 4a4 4 0 110 8 4 4 0 010-8z"/>
+                    </svg>
+                    Your Personality Profile
+                </h2>
+                
+                <div class="question">
+                    <p class="question-title">How would you describe your social energy?</p>
                     <div class="options">
-                        <label><input required  type="radio" name="introvert_extrovert" value="Introvert" > Introvert</label>
-                        <label><input required  type="radio" name="introvert_extrovert" value="Extrovert" >  Extrovert</label>
-                        <label><input required  type="radio" name="introvert_extrovert" value="Ambivert" > Ambivert</label>
-                        <label><input required  type="radio" name="introvert_extrovert" value="Shy" > Shy</label>
+                        <label class="radio-option">
+                            <input required type="radio" name="introvert_extrovert" value="Introvert">
+                            <span class="radio-label">Introvert</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="introvert_extrovert" value="Extrovert">
+                            <span class="radio-label">Extrovert</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="introvert_extrovert" value="Ambivert">
+                            <span class="radio-label">Ambivert</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="introvert_extrovert" value="Shy">
+                            <span class="radio-label">Reserved</span>
+                        </label>
                     </div>
                 </div>
-            
-                <div class="question-box">
-                    <h3>What’s your ideal first meet-up?</h3>
+                
+                <div class="question">
+                    <p class="question-title">Your ideal first meet-up would be:</p>
                     <div class="options">
-                        <label><input required type="radio" name="first_meet" value="Canteen chai"> Canteen chai</label>
-                        <label><input required type="radio" name="first_meet" value="Library talk" > Library talk</label>
-                        <label><input required type="radio" name="first_meet" value="Random walk" > Random walk</label>
-                        <label><input required type="radio" name="first_meet" value="Event hangout"> Event hangout</label>
-                        <label><input required type="radio" name="first_meet" value="Virtual hangout"> Virtual hangout (online)</label>
+                        <label class="radio-option">
+                            <input required type="radio" name="first_meet" value="Canteen chai">
+                            <span class="radio-label">Café conversation</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="first_meet" value="Library talk">
+                            <span class="radio-label">Quiet study spot</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="first_meet" value="Random walk">
+                            <span class="radio-label">Campus stroll</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="first_meet" value="Event hangout">
+                            <span class="radio-label">College event</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="first_meet" value="Virtual hangout">
+                            <span class="radio-label">Virtual hangout</span>
+                        </label>
                     </div>
                 </div>
-            
-                <div class="question-box">
-                    <h3>Night owl or early bird?</h3>
+                
+                <div class="question">
+                    <p class="question-title">Are you more productive at night or during the day?</p>
                     <div class="options">
-                        <label><input required type="radio" name="sleep_type" value="Night owl"> Night owl</label>
-                        <label><input required type="radio" name="sleep_type" value="Early bird"> Early bird</label>
-                        <label><input required type="radio" name="sleep_type" value="Depends"> Neither, depends on my mood</label>
+                        <label class="radio-option">
+                            <input required type="radio" name="sleep_type" value="Night owl">
+                            <span class="radio-label">Night owl</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="sleep_type" value="Early bird">
+                            <span class="radio-label">Early bird</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="sleep_type" value="Depends">
+                            <span class="radio-label">Adaptable to both</span>
+                        </label>
                     </div>
                 </div>
-            
-                <div class="question-box">
-                    <h3>What’s more important in a person?</h3>
+                
+                <div class="question">
+                    <p class="question-title">What quality draws you most to someone?</p>
                     <div class="options">
-                        <label><input required type="radio" name="important_trait" value="Looks"> Looks</label>
-                        <label><input required type="radio" name="important_trait" value="Vibe"> Vibe</label>
-                        <label><input required type="radio" name="important_trait" value="Communication"> Communication</label>
-                        <label><input required type="radio" name="important_trait" value="Ambition"> Ambition</label>
-                        <label><input required type="radio" name="important_trait" value="Humor"> Humor</label>
+                        <label class="radio-option">
+                            <input required type="radio" name="important_trait" value="Looks">
+                            <span class="radio-label">Appearance</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="important_trait" value="Vibe">
+                            <span class="radio-label">Energy/Vibe</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="important_trait" value="Communication">
+                            <span class="radio-label">Communication</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="important_trait" value="Ambition">
+                            <span class="radio-label">Ambition</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="important_trait" value="Humor">
+                            <span class="radio-label">Humor</span>
+                        </label>
                     </div>
                 </div>
-            
-                <div class="question-box">
-                    <h3>Which year are you in?</h3>
+                
+                <div class="question">
+                    <p class="question-title">Which year of college are you in?</p>
                     <div class="options">
-                        <label><input required type="radio" name="year" value="1st Year"> 1st Year</label>
-                        <label><input required type="radio" name="year" value="2nd Year"> 2nd Year</label>
-                        <label><input required type="radio" name="year" value="3rd Year"> 3rd Year</label>
-                        <label><input required type="radio" name="year" value="Final Year"> Final Year</label>
-                        <label><input required type="radio" name="year" value="Postgraduate"> Postgraduate</label>
+                        <label class="radio-option">
+                            <input required type="radio" name="year" value="1st Year">
+                            <span class="radio-label">1st Year</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="year" value="2nd Year">
+                            <span class="radio-label">2nd Year</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="year" value="3rd Year">
+                            <span class="radio-label">3rd Year</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="year" value="Final Year">
+                            <span class="radio-label">Final Year</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="year" value="Postgraduate">
+                            <span class="radio-label">Postgraduate</span>
+                        </label>
                     </div>
                 </div>
-            
-                <div class="question-box">
-                    <h3>What’s your communication style?</h3>
+                
+                <div class="question">
+                    <p class="question-title">How would you describe your communication style?</p>
                     <div class="options">
-                        <label><input required type="radio" name="comm_style" value="Dry Texter"> Dry Texter</label>
-                        <label><input required type="radio" name="comm_style" value="Emojis & Memes"> Emojis & Memes</label>
-                        <label><input required type="radio" name="comm_style" value="Deep Conversations"> Deep Conversations</label>
-                        <label><input required type="radio" name="comm_style" value="Voice Notes Lover"> Voice Notes Lover</label>
-                        <label><input required type="radio" name="comm_style" value="Frequent Calls"> Frequent Calls</label>
+                        <label class="radio-option">
+                            <input required type="radio" name="comm_style" value="Dry Texter">
+                            <span class="radio-label">Short & direct</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="comm_style" value="Emojis & Memes">
+                            <span class="radio-label">Visual & expressive</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="comm_style" value="Deep Conversations">
+                            <span class="radio-label">Thoughtful & deep</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="comm_style" value="Voice Notes Lover">
+                            <span class="radio-label">Voice messages</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="comm_style" value="Frequent Calls">
+                            <span class="radio-label">Video/voice calls</span>
+                        </label>
                     </div>
                 </div>
-            
-                <div class="question-box">
-                    <h3>How often do you post on social media?</h3>
+                
+                <div class="question">
+                    <p class="question-title">What's your relationship with social media?</p>
                     <div class="options">
-                        <label><input required type="radio" name="posting_frequency" value="Rarely"> Rarely</label>
-                        <label><input required type="radio" name="posting_frequency" value="Occasionally"> Occasionally</label>
-                        <label><input required type="radio" name="posting_frequency" value="Frequently"> Frequently</label>
-                        <label><input required type="radio" name="posting_frequency" value="Almost daily"> Almost daily</label>
-                        <label><input required type="radio" name="posting_frequency" value="Only when important"> Only when I have something important to share</label>
+                        <label class="radio-option">
+                            <input required type="radio" name="posting_frequency" value="Rarely">
+                            <span class="radio-label">Minimal presence</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="posting_frequency" value="Occasionally">
+                            <span class="radio-label">Occasional updates</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="posting_frequency" value="Frequently">
+                            <span class="radio-label">Active participant</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="posting_frequency" value="Almost daily">
+                            <span class="radio-label">Daily contributor</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="posting_frequency" value="Only when important">
+                            <span class="radio-label">Meaningful moments only</span>
+                        </label>
                     </div>
                 </div>
-            
-                <div class="question-box">
-                    <h3>How do you make decisions?</h3>
+                
+                <div class="question">
+                    <p class="question-title">When making important decisions, you typically:</p>
                     <div class="options">
-                        <label><input required type="radio" name="decision_style" value="Logically"> Logically</label>
-                        <label><input required type="radio" name="decision_style" value="Emotionally"> Emotionally</label>
-                        <label><input required type="radio" name="decision_style" value="Mix"> Mix of both</label>
-                        <label><input required type="radio" name="decision_style" value="Impulsive"> Impulsive</label>
+                        <label class="radio-option">
+                            <input required type="radio" name="decision_style" value="Logically">
+                            <span class="radio-label">Analyze rationally</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="decision_style" value="Emotionally">
+                            <span class="radio-label">Trust your feelings</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="decision_style" value="Mix">
+                            <span class="radio-label">Balance both approaches</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="decision_style" value="Impulsive">
+                            <span class="radio-label">Go with your instinct</span>
+                        </label>
                     </div>
                 </div>
-            
-                <div class="question-box">
-                    <h3>How do you like to spend your free time?</h3>
+                
+                <div class="question">
+                    <p class="question-title">Your ideal free time is spent:</p>
                     <div class="options">
-                        <label><input required type="radio" name="free_time" value="Alone"> Alone, doing my own thing</label>
-                        <label><input required type="radio" name="free_time" value="With friends"> Hanging with friends</label>
-                        <label><input required type="radio" name="free_time" value="Exploring"> Exploring new activities</label>
-                        <label><input required type="radio" name="free_time" value="Creative"> Doing something creative (art, writing, etc.)</label>
+                        <label class="radio-option">
+                            <input required type="radio" name="free_time" value="Alone">
+                            <span class="radio-label">On personal interests</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="free_time" value="With friends">
+                            <span class="radio-label">Socializing with friends</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="free_time" value="Exploring">
+                            <span class="radio-label">Discovering new things</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="free_time" value="Creative">
+                            <span class="radio-label">On creative pursuits</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Connections Section -->
+            <div class="section">
+                <h2 class="section-title">
+                    <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                    </svg>
+                    Relationship Preferences
+                </h2>
+                
+                <div class="question">
+                    <p class="question-title">Your current relationship status</p>
+                    <div class="options">
+                        <label class="radio-option">
+                            <input required type="radio" name="relationship_status" value="Single">
+                            <span class="radio-label">Single</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="relationship_status" value="Taken">
+                            <span class="radio-label">In a relationship</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="relationship_status" value="It's complicated">
+                            <span class="radio-label">It's complicated</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="relationship_status" value="Not telling">
+                            <span class="radio-label">Prefer not to say</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="relationship_status" value="Open">
+                            <span class="radio-label">Open relationship</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p class="question-title">On PoornimaX, I'm looking for:</p>
+                    <div class="options">
+                        <label class="radio-option">
+                            <input required type="radio" name="looking_for" value="Girlfriend">
+                            <span class="radio-label">Girlfriend</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="looking_for" value="Boyfriend">
+                            <span class="radio-label">Boyfriend</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="looking_for" value="Friend">
+                            <span class="radio-label">Friendship</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="looking_for" value="BFF">
+                            <span class="radio-label">Best friend</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="looking_for" value="College mate">
+                            <span class="radio-label">Study partner</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="looking_for" value="Serious partner">
+                            <span class="radio-label">Serious relationship</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="looking_for" value="Hookup">
+                            <span class="radio-label">Casual connection</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="looking_for" value="FWB">
+                            <span class="radio-label">Friends with benefits</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="looking_for" value="Chill vibe">
+                            <span class="radio-label">No expectations</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="looking_for" value="Not sure yet">
+                            <span class="radio-label">Still figuring it out</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="looking_for" value="Chat">
+                            <span class="radio-label">Interesting conversations</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p class="question-title">Your approach to dating or connections:</p>
+                    <div class="options">
+                        <label class="radio-option">
+                            <input required type="radio" name="dating_approach" value="Slow">
+                            <span class="radio-label">Building gradually</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="dating_approach" value="Dive in">
+                            <span class="radio-label">Jumping right in</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="dating_approach" value="Long-term">
+                            <span class="radio-label">Seeking lasting connection</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="dating_approach" value="Fun">
+                            <span class="radio-label">Keeping it light</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p class="question-title">How important is compatibility to you?</p>
+                    <div class="options">
+                        <label class="radio-option">
+                            <input required type="radio" name="compatibility" value="Very">
+                            <span class="radio-label">Essential</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="compatibility" value="Somewhat">
+                            <span class="radio-label">Somewhat important</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="compatibility" value="Open">
+                            <span class="radio-label">Open to differences</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="compatibility" value="Not important">
+                            <span class="radio-label">Not a priority</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p class="question-title">Are shared interests important to you?</p>
+                    <div class="options">
+                        <label class="radio-option">
+                            <input required type="radio" name="similar_interests" value="Yes">
+                            <span class="radio-label">Very important</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="similar_interests" value="Open">
+                            <span class="radio-label">Variety is interesting</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="similar_interests" value="Unique">
+                            <span class="radio-label">Prefer complementary differences</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p class="question-title">Your perspective on relationships:</p>
+                    <div class="options">
+                        <label class="radio-option">
+                            <input required type="radio" name="relationship_view" value="Serious">
+                            <span class="radio-label">Meaningful commitment</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="relationship_view" value="Casual">
+                            <span class="radio-label">Light and casual</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="relationship_view" value="Unsure">
+                            <span class="radio-label">Still discovering</span>
+                        </label>
+                        <label class="radio-option">
+                            <input required type="radio" name="relationship_view" value="Journey">
+                            <span class="radio-label">It's about the experience</span>
+                        </label>
                     </div>
                 </div>
             </div>
 
-            <div class="question-set">
-                <h2>Set 3: Relationship Intent Questions</h2>
-            
-                <div class="question-box">
-                    <h3>Your current relationship status</h3>
-                    <div class="options">
-                        <label><input required type="radio" name="relationship_status" value="Single"> Single</label>
-                        <label><input required type="radio" name="relationship_status" value="Taken"> Taken</label>
-                        <label><input required type="radio" name="relationship_status" value="It’s complicated"> It’s complicated</label>
-                        <label><input required type="radio" name="relationship_status" value="Not telling"> Not telling</label>
-                        <label><input required type="radio" name="relationship_status" value="Open"> In an open relationship</label>
-                    </div>
-                </div>
-            
-                <div class="question-box">
-                    <h3>You’re looking for</h3>
-                    <div class="options">
-                        <label><input required type="radio" name="looking_for" value="Girlfriend"> Girlfriend</label>
-                        <label><input required type="radio" name="looking_for" value="Boyfriend"> Boyfriend</label>
-                        <label><input required type="radio" name="looking_for" value="Hookup"> Hookup</label>
-                        <label><input required type="radio" name="looking_for" value="Serious partner"> Serious partner</label>
-                        <label><input required type="radio" name="looking_for" value="Friend"> Friend</label>
-                        <label><input required type="radio" name="looking_for" value="BFF"> BFF</label>
-                        <label><input required type="radio" name="looking_for" value="College mate"> College mate</label>
-                        <label><input required type="radio" name="looking_for" value="FWB"> FWB</label>
-                        <label><input required type="radio" name="looking_for" value="Chill vibe"> Chill vibe</label>
-                        <label><input required type="radio" name="looking_for" value="Not sure yet"> Not sure yet</label>
-                        <label><input required type="radio" name="looking_for" value="Chat"> Someone to chat with</label>
-                    </div>
-                </div>
-            
-                <div class="question-box">
-                    <h3>What is your approach to dating?</h3>
-                    <div class="options">
-                        <label><input required type="radio" name="dating_approach" value="Slow"> I like to take things slow</label>
-                        <label><input required type="radio" name="dating_approach" value="Dive in"> I dive in quickly and see where it goes</label>
-                        <label><input required type="radio" name="dating_approach" value="Long-term"> I prefer long-term commitment</label>
-                        <label><input required type="radio" name="dating_approach" value="Fun"> I’m just here for fun</label>
-                    </div>
-                </div>
-            
-                <div class="question-box">
-                    <h3>How important is compatibility for you?</h3>
-                    <div class="options">
-                        <label><input required type="radio" name="compatibility" value="Very"> Very important</label>
-                        <label><input required type="radio" name="compatibility" value="Somewhat"> Somewhat important</label>
-                        <label><input required type="radio" name="compatibility" value="Open"> I’m open to exploring any kind of relationship</label>
-                        <label><input required type="radio" name="compatibility" value="Not important"> Not important at all</label>
-                    </div>
-                </div>
-            
-                <div class="question-box">
-                    <h3>Are you looking for someone with similar interests?</h3>
-                    <div class="options">
-                        <label><input required type="radio" name="similar_interests" value="Yes"> Yes, definitely</label>
-                        <label><input required type="radio" name="similar_interests" value="Open"> I’m open to different interests</label>
-                        <label><input required type="radio" name="similar_interests" value="Unique"> I prefer someone with unique interests</label>
-                    </div>
-                </div>
-            
-                <div class="question-box">
-                    <h3>How do you view relationships?</h3>
-                    <div class="options">
-                        <label><input required type="radio" name="relationship_view" value="Serious"> Serious commitment</label>
-                        <label><input required type="radio" name="relationship_view" value="Casual"> Fun and casual</label>
-                        <label><input required type="radio" name="relationship_view" value="Unsure"> I’m unsure</label>
-                        <label><input required type="radio" name="relationship_view" value="Journey"> Just enjoying the journey</label>
-                    </div>
-                </div>
+            <div class="submit-container">
+                <button type="submit" class="submit-btn">Find My Matches</button>
             </div>
-                <button type="submit">Submit</button>
-        </div>
-    </form>
-    <footer>YOU KNOW WHO I AM</footer>
+        </form>
+    </div>
+    
+    <div class="footer">
+        YOU KNOW WHO I AM
+    </div>
+
+    <script>
+        // Loading screen animation
+        window.addEventListener("load", () => {
+            setTimeout(() => {
+                const loader = document.querySelector(".loader-container");
+                if (loader) {
+                    loader.style.opacity = "0";
+                    loader.style.visibility = "hidden";
+                }
+            }, 1500); // Reduced to 1.5 seconds for better UX
+        });
+        
+        // Initialize particles.js
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#6c63ff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#6c63ff", opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: "none", random: false, straight: false, out_mode: "out" }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true
+                }
+            },
+            retina_detect: true
+        });
+    </script>
 </body>
+
 </html>

@@ -139,3 +139,14 @@ class UserQuestionnaire(models.Model):
 
     def __str__(self):
         return f"Questionnaire - {self.user.username}"
+
+class ProfileView(models.Model):
+    viewer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile_views_made')
+    viewed = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile_views_received')
+    timestamp = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        unique_together = ('viewer', 'viewed', 'timestamp')
+        
+    def __str__(self):
+        return f"{self.viewer.username} viewed {self.viewed.username}'s profile"

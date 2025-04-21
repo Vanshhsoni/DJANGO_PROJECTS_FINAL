@@ -17,7 +17,103 @@ from django.db import models
 from datetime import datetime 
 
 
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.http import JsonResponse
+from django.utils.timesince import timesince
+from .forms import *
+from .models import *
+from accounts.models import *
 
+@login_required
+def profile(request, user_id):
+    profile_user = get_object_or_404(User, id=user_id)
+    if request.user != profile_user:
+        # Create profile view record
+        ProfileView.objects.create(viewer=request.user, viewed=profile_user)
+        
+    # Check crush status without filtering by is_mutual
+    sent_crush = Crush.objects.filter(sender=request.user, receiver=profile_user).exists()
+    received_crush = Crush.objects.filter(sender=profile_user, receiver=request.user).exists()
+    
+    # Check if both users have sent crushes to each other and at least one is marked mutual
+    is_mutual = False
+    if sent_crush and received_crush:
+        sent_crush_obj = Crush.objects.get(sender=request.user, receiver=profile_user)
+        received_crush_obj = Crush.objects.get(sender=profile_user, receiver=request.user)
+        is_mutual = sent_crush_obj.is_mutual or received_crush_obj.is_mutual
+    
+    # Get user's posts
+    posts = Post.objects.filter(user=profile_user).order_by('-created_at')
+    
+    # Get the latest post
+    latest_post = posts.first()
+    
+    # Add like and comment counts to posts
+    for post in posts:
+        post.likes_count = Like.objects.filter(post=post).count()
+        post.comments_count = Comment.objects.filter(post=post).count()
+    
+    # Calculate compatibility score when viewing another user's profile
+    compatibility_score = 0
+    if request.user != profile_user:
+        try:
+            user_questionnaire = UserQuestionnaire.objects.get(user=request.user)
+            other_user_questionnaire = UserQuestionnaire.objects.get(user=profile_user)
+            
+            # Set 3: Relationship Intent (Most Weighting)
+            compatibility_score += compare_single_choice(user_questionnaire.relationship_status, other_user_questionnaire.relationship_status, max_points=25)
+            compatibility_score += compare_single_choice(user_questionnaire.dating_approach, other_user_questionnaire.dating_approach, max_points=20)
+            compatibility_score += compare_single_choice(user_questionnaire.compatibility, other_user_questionnaire.compatibility, max_points=15)
+            compatibility_score += compare_single_choice(user_questionnaire.relationship_view, other_user_questionnaire.relationship_view, max_points=15)
+            compatibility_score += compare_single_choice(user_questionnaire.similar_interests, other_user_questionnaire.similar_interests, max_points=10)
+
+            # Set 1: Multiple Choice Inputs (Medium Weighting)
+            compatibility_score += compare_multiple_choice(user_questionnaire.hobbies, other_user_questionnaire.hobbies) * 5
+            compatibility_score += compare_multiple_choice(user_questionnaire.college_events, other_user_questionnaire.college_events) * 5
+            compatibility_score += compare_multiple_choice(user_questionnaire.weekend_plans, other_user_questionnaire.weekend_plans) * 5
+            compatibility_score += compare_multiple_choice(user_questionnaire.friendship_values, other_user_questionnaire.friendship_values) * 5
+            compatibility_score += compare_multiple_choice(user_questionnaire.content_posting, other_user_questionnaire.content_posting) * 5
+            compatibility_score += compare_multiple_choice(user_questionnaire.college_excitements, other_user_questionnaire.college_excitements) * 5
+            compatibility_score += compare_multiple_choice(user_questionnaire.learning_preferences, other_user_questionnaire.learning_preferences) * 5
+            compatibility_score += compare_multiple_choice(user_questionnaire.relaxation_methods, other_user_questionnaire.relaxation_methods) * 5
+
+            # Set 2: Single Choice Inputs (Least Weighting)
+            compatibility_score += compare_single_choice(user_questionnaire.introvert_extrovert, other_user_questionnaire.introvert_extrovert) * 3
+            compatibility_score += compare_single_choice(user_questionnaire.first_meet, other_user_questionnaire.first_meet) * 3
+            compatibility_score += compare_single_choice(user_questionnaire.sleep_type, other_user_questionnaire.sleep_type) * 3
+            compatibility_score += compare_single_choice(user_questionnaire.important_trait, other_user_questionnaire.important_trait) * 3
+            compatibility_score += compare_single_choice(user_questionnaire.year, other_user_questionnaire.year) * 3
+            compatibility_score += compare_single_choice(user_questionnaire.comm_style, other_user_questionnaire.comm_style) * 3
+            compatibility_score += compare_single_choice(user_questionnaire.posting_frequency, other_user_questionnaire.posting_frequency) * 3
+            compatibility_score += compare_single_choice(user_questionnaire.decision_style, other_user_questionnaire.decision_style) * 3
+            compatibility_score += compare_single_choice(user_questionnaire.free_time, other_user_questionnaire.free_time) * 3
+
+            # Capping the score to a maximum of 99% (realistic compatibility)
+            compatibility_score = min(compatibility_score, 99)
+            
+            # Ensuring that the compatibility score never goes below 10%
+            compatibility_score = max(compatibility_score, 10)
+            
+            # Round to nearest integer
+            compatibility_score = round(compatibility_score)
+            
+        except UserQuestionnaire.DoesNotExist:
+            # If either user hasn't completed the questionnaire
+            compatibility_score = None
+    
+    context = {
+        'profile_user': profile_user,
+        'sent_crush': sent_crush,
+        'received_crush': received_crush,
+        'is_mutual': is_mutual,
+        'posts': posts,
+        'latest_post': latest_post,
+        'compatibility_score': compatibility_score,
+    }
+    
+    return render(request, 'feed/profile.html', context)
 
 # Helper function to compare compatibility
 def compare_multiple_choice(user_answer, other_user_answer, max_points=5):
@@ -105,7 +201,10 @@ from accounts.models import Crush, Friendship
 def home(request):
     current_user = request.user
     all_users = User.objects.exclude(id=current_user.id)
-
+    
+    # Count unique viewers instead of total views
+    profile_views = ProfileView.objects.filter(viewed=current_user).values('viewer').distinct().count()
+    
     def get_crush_status(person):
         sent = Crush.objects.filter(sender=current_user, receiver=person).first()
         received = Crush.objects.filter(sender=person, receiver=current_user).first()
@@ -135,7 +234,15 @@ def home(request):
     # Crush stats
     hearts_sent = Crush.objects.filter(sender=current_user, is_mutual=False).count()
     hearts_received = Crush.objects.filter(receiver=current_user, is_mutual=False).count()
-    friends = Friendship.objects.filter(models.Q(user1=current_user) | models.Q(user2=current_user)).count()
+    
+    # Only count mutual crushes as friends
+    friends = Crush.objects.filter(
+        (models.Q(sender=current_user) & models.Q(receiver__in=all_users) & models.Q(is_mutual=True)) |
+        (models.Q(receiver=current_user) & models.Q(sender__in=all_users) & models.Q(is_mutual=True))
+    ).count()
+    
+    # Since each mutual crush is counted twice (once in each direction), divide by 2
+    friends = friends // 2
 
     # Add crush status mapping for each group
     def annotate_users_with_crush(users):
@@ -147,6 +254,7 @@ def home(request):
         ]
 
     context = {
+        'profile_views': profile_views,
         'recently_joined': annotate_users_with_crush(recently_joined),
         'trending': annotate_users_with_crush(trending),
         'same_year': annotate_users_with_crush(same_year),
@@ -154,17 +262,10 @@ def home(request):
         'same_college': annotate_users_with_crush(same_college),
         'hearts_sent': hearts_sent,
         'hearts_received': hearts_received,
-        'friends': friends,
-        'profile_views': 0,
-        'unfriended_recently': 0,
-        'notifications': 0,
-        'top_matches': 0,
-        'recent_friends': 0,
+        'friends': friends
     }
 
     return render(request, 'feed/home.html', context)
-
-
 
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -256,50 +357,7 @@ def crush_action(request, user_id):
     return HttpResponse("Invalid request", status=400)
 
 
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from django.http import JsonResponse
-from django.utils.timesince import timesince
-from .forms import *
-from .models import *
 
-@login_required
-def profile(request, user_id):
-    profile_user = get_object_or_404(User, id=user_id)
-    
-    # Check crush status without filtering by is_mutual
-    sent_crush = Crush.objects.filter(sender=request.user, receiver=profile_user).exists()
-    received_crush = Crush.objects.filter(sender=profile_user, receiver=request.user).exists()
-    
-    # Check if both users have sent crushes to each other and at least one is marked mutual
-    is_mutual = False
-    if sent_crush and received_crush:
-        sent_crush_obj = Crush.objects.get(sender=request.user, receiver=profile_user)
-        received_crush_obj = Crush.objects.get(sender=profile_user, receiver=request.user)
-        is_mutual = sent_crush_obj.is_mutual or received_crush_obj.is_mutual
-    
-    # Get user's posts
-    posts = Post.objects.filter(user=profile_user).order_by('-created_at')
-    
-    # Get the latest post
-    latest_post = posts.first()
-    
-    # Add like and comment counts to posts
-    for post in posts:
-        post.likes_count = Like.objects.filter(post=post).count()
-        post.comments_count = Comment.objects.filter(post=post).count()
-    
-    context = {
-        'profile_user': profile_user,
-        'sent_crush': sent_crush,
-        'received_crush': received_crush,
-        'is_mutual': is_mutual,
-        'posts': posts,
-        'latest_post': latest_post,
-    }
-    
-    return render(request, 'feed/profile.html', context)
 
 # Add this to feed/views.py
 from django.shortcuts import render, redirect, get_object_or_404
