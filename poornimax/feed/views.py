@@ -597,3 +597,132 @@ def get_post_data(request, post_id):
             'is_owner': post.user == request.user
         }
     })
+
+# Existing imports...
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+
+
+@login_required
+def hearts_sent(request):
+    """Display all users to whom the current user has sent hearts (excluding mutual hearts)"""
+    # Modified to exclude mutual hearts
+    sent_crushes = Crush.objects.filter(sender=request.user, is_mutual=False).select_related('receiver')
+    
+    context = {
+        'user': request.user,
+        'sent_hearts': [
+            {
+                'user': crush.receiver,
+                'crush_status': 'sent',  # Always 'sent' since we filtered is_mutual=False
+                'sent_date': crush.timestamp
+            }
+            for crush in sent_crushes
+        ]
+    }
+    return render(request, 'feed/hearts_sent.html', context)
+
+@login_required
+def hearts_received(request):
+    """Display all users who have sent hearts to the current user (excluding mutual hearts)"""
+    # Modified to exclude mutual hearts
+    received_crushes = Crush.objects.filter(receiver=request.user, is_mutual=False).select_related('sender')
+    
+    context = {
+        'user': request.user,
+        'received_hearts': [
+            {
+                'user': crush.sender,
+                'crush_status': 'received',  # Always 'received' since we filtered is_mutual=False
+                'received_date': crush.timestamp
+            }
+            for crush in received_crushes
+        ]
+    }
+    return render(request, 'feed/hearts_received.html', context)
+
+@login_required
+def friends_list(request):
+    current_user = request.user
+    all_users = User.objects.exclude(id=current_user.id)
+   
+    # Count unique viewers instead of total views
+    profile_views = ProfileView.objects.filter(viewed=current_user).values('viewer').distinct().count()
+   
+    # Crush stats
+    hearts_sent = Crush.objects.filter(sender=current_user, is_mutual=False).count()
+    hearts_received = Crush.objects.filter(receiver=current_user, is_mutual=False).count()
+    
+    # Find mutual crushes (these are the friends)
+    mutual_crushes = Crush.objects.filter(
+        models.Q(sender=current_user, is_mutual=True) | 
+        models.Q(receiver=current_user, is_mutual=True)
+    ).select_related('sender', 'receiver')
+    
+    # Extract unique friends from mutual crushes
+    friends_list = []
+    processed_users = set()
+    
+    for crush in mutual_crushes:
+        friend = crush.receiver if crush.sender == current_user else crush.sender
+        
+        # Avoid duplicate entries
+        if friend.id not in processed_users:
+            processed_users.add(friend.id)
+            friends_list.append({
+                'user': friend
+            })
+    
+    # Count of unique friends
+    friends_count = len(friends_list)
+    
+    context = {
+        'user': request.user,
+        'friends': friends_list,
+        'profile_views': profile_views,
+        'hearts_sent': hearts_sent,
+        'hearts_received': hearts_received,
+        'friends_count': friends_count
+    }
+    return render(request, 'feed/friends.html', context)
+    current_user = request.user
+    all_users = User.objects.exclude(id=current_user.id)
+   
+    # Count unique viewers instead of total views
+    profile_views = ProfileView.objects.filter(viewed=current_user).values('viewer').distinct().count()
+   
+    # Crush stats
+    hearts_sent = Crush.objects.filter(sender=current_user, is_mutual=False).count()
+    hearts_received = Crush.objects.filter(receiver=current_user, is_mutual=False).count()
+    
+    # Only count mutual crushes as friends
+    mutual_crushes = Crush.objects.filter(
+        (models.Q(sender=current_user) & models.Q(receiver__in=all_users) & models.Q(is_mutual=True)) |
+        (models.Q(receiver=current_user) & models.Q(sender__in=all_users) & models.Q(is_mutual=True))
+    ).count()
+   
+    # Since each mutual crush is counted twice (once in each direction), divide by 2
+    friends_count = mutual_crushes // 2
+    
+    """Display all users who have mutual hearts with the current user (friends)"""
+    # Get all friendships involving the current user
+    friendships = Friendship.objects.filter(
+        models.Q(user1=request.user) | models.Q(user2=request.user)
+    ).select_related('user1', 'user2')
+   
+    friends_list = []
+    for friendship in friendships:
+        friend = friendship.user2 if friendship.user1 == request.user else friendship.user1
+        friends_list.append({
+            'user': friend
+        })
+   
+    context = {
+        'user': request.user,
+        'friends': friends_list,
+        'profile_views': profile_views,
+        'hearts_sent': hearts_sent,
+        'hearts_received': hearts_received,
+        'friends_count': friends_count
+    }
+    return render(request, 'feed/friends.html', context)

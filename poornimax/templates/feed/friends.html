@@ -1,0 +1,896 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PoornimaX - Hearts Sent</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+<style>
+    /* Base Styles */
+:root {
+  --primary: #6c63ff;
+  --primary-light: #8f88ff;
+  --primary-dark: #5a52cc;
+  --text: #333;
+  --text-light: #666;
+  --background: #f8f9fc;
+  --radius: 15px;
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 60px; /* For bottom nav */
+}
+
+/* Particle Background */
+#particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0.6;
+}
+
+.content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header Styles */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  margin-bottom: 30px;
+}
+
+.header-left h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.5px;
+}
+
+header a img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary);
+  box-shadow: 0 2px 10px rgba(108, 99, 255, 0.3);
+  transition: var(--transition);
+}
+
+header a img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(108, 99, 255, 0.5);
+}
+
+/* Page Title */
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.page-title i {
+  font-size: 28px;
+  color: var(--primary);
+}
+
+.page-title h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.page-subtitle {
+  color: var(--text-light);
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+/* Stats Section */
+.stats-container {
+  margin-bottom: 40px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.popup-box {
+  background: white;
+  border-radius: var(--radius);
+  padding: 20px 15px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(108, 99, 255, 0.15);
+  position: relative;
+  overflow: hidden;
+  animation: popIn 0.5s ease forwards;
+  animation-delay: calc(var(--delay, 0) * 0.1s + 2s);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: var(--transition);
+  border: 1px solid rgba(108, 99, 255, 0.1);
+}
+
+.popup-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(108, 99, 255, 0.2);
+}
+
+@keyframes popIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.popup-box-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--primary-light), var(--primary));
+  border-radius: 15px;
+  margin: 0 auto 12px;
+  transform: rotate(0deg);
+  transition: var(--transition);
+}
+
+.popup-box:hover .popup-box-icon {
+  transform: rotate(10deg) scale(1.1);
+}
+
+.popup-box-icon i {
+  font-size: 24px;
+  color: white;
+}
+
+.popup-box p {
+  font-size: 14px;
+  color: var(--text-light);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.popup-box strong {
+  font-size: 24px;
+  background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-weight: 700;
+}
+
+.glow-pulse {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--radius);
+  box-shadow: inset 0 0 0 2px var(--primary-light);
+  opacity: 0;
+  animation: glowPulse 3s infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+.mystery-flash {
+  position: absolute;
+  height: 100%;
+  width: 30px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+  transform: skewX(-20deg);
+  top: 0;
+  left: -100px;
+  animation: flash 5s infinite;
+  animation-delay: calc(var(--delay, 0) * 0.8s + 2s);
+}
+
+@keyframes flash {
+  0% {
+    left: -100px;
+  }
+  20%, 100% {
+    left: 120%;
+  }
+}
+
+/* Section Divider */
+.section-divider {
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--primary-light), transparent);
+  margin: 35px 0;
+  position: relative;
+}
+
+.section-divider::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background-color: var(--primary-light);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--primary-light);
+}
+
+
+/* Horizontal Scroll Sections */
+.horizontal-section {
+  margin-bottom: 35px;
+  position: relative;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.section-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+  position: relative;
+  padding-left: 15px;
+}
+
+.section-header h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 20px;
+  background: linear-gradient(to bottom, var(--primary), var(--primary-light));
+  border-radius: 3px;
+}
+
+.section-count {
+  background: linear-gradient(45deg, var(--primary), var(--primary-light));
+  color: white;
+  font-size: 12px;
+  border-radius: 30px;
+  padding: 3px 10px;
+  margin-left: 10px;
+  box-shadow: 0 2px 8px rgba(108, 99, 255, 0.3);
+}
+
+.scroll-nav {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  gap: 10px;
+}
+
+.scroll-button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--primary), var(--primary-light));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  box-shadow: 0 3px 10px rgba(108, 99, 255, 0.25);
+  cursor: pointer;
+  border: none;
+}
+
+.scroll-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(108, 99, 255, 0.4);
+}
+
+.scroll-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 10px 5px 20px;
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome and Safari */
+}
+
+/* Friends Grid */
+.hearts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+/* User Card */
+.user-card {
+  background-color: white;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+  position: relative;
+  --delay: 0;
+  animation: popIn 0.5s ease forwards;
+  animation-delay: calc(var(--delay) * 0.1s + 0.5s);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(108, 99, 255, 0.15);
+}
+
+.user-card .mystery-flash {
+  animation-delay: calc(var(--delay) * 0.5s + 2s);
+}
+
+.profile-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  padding: 20px;
+}
+
+.profile-pic-container {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 15px;
+}
+
+.profile-pic {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  z-index: 1;
+  position: relative;
+  border: 3px solid var(--primary);
+}
+
+.profile-pic-glow {
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--primary), var(--primary-light));
+  z-index: 0;
+  opacity: 0.7;
+  filter: blur(8px);
+}
+
+.user-info {
+  text-align: center;
+}
+
+.user-info h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.user-info p {
+  font-size: 14px;
+  color: var(--text-light);
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.heart-date {
+  font-size: 13px !important;
+  color: #888 !important;
+  margin-top: 10px !important;
+}
+
+/* Friend Actions */
+.friend-actions {
+  display: flex;
+  justify-content: center;
+  padding: 0 20px 20px;
+}
+
+.message-btn {
+  background: linear-gradient(135deg, var(--primary-light), var(--primary));
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 18px;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 10px rgba(108, 99, 255, 0.3);
+}
+
+.message-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(108, 99, 255, 0.4);
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 50px 20px;
+  grid-column: 1 / -1;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: var(--radius);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  animation: popIn 0.5s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.empty-state i {
+  font-size: 60px;
+  color: #c7cad8;
+  margin-bottom: 20px;
+}
+
+.empty-state h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.empty-state p {
+  color: #777;
+  max-width: 350px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* Bottom Navigation */
+nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  padding: 12px 0;
+  z-index: 100;
+}
+
+nav a {
+  color: #888;
+  text-decoration: none;
+  font-size: 22px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  transition: var(--transition);
+}
+
+nav a:hover {
+  color: var(--primary);
+}
+
+nav a.active-link {
+  color: var(--primary);
+  background-color: #f4f3ff;
+}
+
+/* Animation for particle interaction */
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(108, 99, 255, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(108, 99, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(108, 99, 255, 0); }
+}
+
+.profile-pic:hover {
+  animation: pulse 1.5s infinite;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .hearts-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+  
+  .page-title h1 {
+    font-size: 24px;
+  }
+  
+  .tab-navigation {
+    overflow-x: auto;
+    padding-bottom: 10px;
+    margin-bottom: 20px; 
+  }
+  
+  .tab-link {
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+  
+  .section-header h2 {
+    font-size: 18px;
+  }
+  
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .hearts-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  header {
+    margin-bottom: 20px;
+  }
+  
+  .profile-pic-container {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .page-title h1 {
+    font-size: 22px;
+  }
+  
+  .page-subtitle {
+    font-size: 14px;
+  }
+  
+  nav a {
+    font-size: 20px;
+    padding: 6px 12px;
+  }
+  
+  .stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .popup-box strong {
+    font-size: 20px;
+  }
+}
+/* Stats Section */
+.stats-container {
+      margin-bottom: 40px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .popup-box {
+      background: white;
+      border-radius: var(--radius);
+      padding: 20px 15px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(108, 99, 255, 0.15);
+      position: relative;
+      overflow: hidden;
+      animation: popIn 0.5s ease forwards;
+      animation-delay: calc(var(--delay) * 0.1s + 2s);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: var(--transition);
+      border: 1px solid rgba(108, 99, 255, 0.1);
+    }
+
+    .popup-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(108, 99, 255, 0.2);
+    }
+
+    @keyframes popIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .popup-box-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary-light), var(--primary));
+      border-radius: 15px;
+      margin: 0 auto 12px;
+      transform: rotate(0deg);
+      transition: var(--transition);
+    }
+
+    .popup-box:hover .popup-box-icon {
+      transform: rotate(10deg) scale(1.1);
+    }
+
+    .popup-box-icon i {
+      font-size: 24px;
+      color: white;
+    }
+
+    .popup-box p {
+      font-size: 14px;
+      color: var(--text-light);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .popup-box strong {
+      font-size: 24px;
+      background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      font-weight: 700;
+    }
+
+    .glow-pulse {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: var(--radius);
+      box-shadow: inset 0 0 0 2px var(--primary-light);
+      opacity: 0;
+      animation: glowPulse 3s infinite;
+    }
+
+    @keyframes glowPulse {
+      0%, 100% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 0.2;
+      }
+    }
+
+    .mystery-flash {
+      position: absolute;
+      height: 100%;
+      width: 30px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+      transform: skewX(-20deg);
+      top: 0;
+      left: -100px;
+      animation: flash 5s infinite;
+      animation-delay: calc(var(--delay) * 0.8s + 2s);
+    }
+
+    @keyframes flash {
+      0% {
+        left: -100px;
+      }
+      20%, 100% {
+        left: 120%;
+      }
+    }
+</style>
+</head>
+<body>
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+    
+    <div class="content-wrapper">
+      <!-- Top Section -->
+      <header>
+        <div class="header-left">
+          <h2>PoornimaX</h2>
+        </div>
+        <!-- Profile Link for Logged-In User -->
+        <a href="{% url 'feed:profile' user_id=user.id %}">
+          <img src="{{ user.profile_picture.url }}" alt="Profile">
+        </a>
+      </header>
+    
+      <!-- Page Title -->
+      <div class="page-title">
+        <i class="fas fa-user-friends"></i>
+        <h1>Your Friends</h1>
+      </div>
+      
+      <p class="page-subtitle">People you've connected with</p>
+      
+<!-- Quick Stats Section -->
+<section class="stats-container">
+    <div class="stats">
+      <div class="popup-box" style="--delay: 0">
+        <a href="{% url 'feed:hearts_sent' %}">
+        <div class="mystery-flash" style="--delay: 0"></div>
+        <div class="glow-pulse"></div>
+        <div class="popup-box-icon">
+          <i class="fas fa-heart-circle-plus"></i>
+        </div>
+        <p>Hearts Sent</p>
+        <strong>{{ hearts_sent }}</strong>
+    </a>
+      </div>
+      
+      <div class="popup-box" style="--delay: 1">
+        <a href="{% url 'feed:hearts_received' %}">
+        <div class="mystery-flash" style="--delay: 1"></div>
+        <div class="glow-pulse"></div>
+        <div class="popup-box-icon">
+          <i class="fas fa-heart-circle-check"></i>
+        </div>
+        <p>Hearts Received</p>
+        <strong>{{ hearts_received }}</strong>
+        </a>
+      </div>
+      
+      
+      
+      <div class="popup-box" style="--delay: 3">
+        
+        <div class="mystery-flash" style="--delay: 3"></div>
+        <div class="glow-pulse"></div>
+        <div class="popup-box-icon">
+          <i class="fas fa-eye"></i>
+        </div>
+        <p>Profile Views</p>
+        <strong>{{ profile_views }}</strong>
+      </div>
+    </div>
+  </section>
+      
+      <!-- Friends Grid -->
+      <div class="hearts-grid">
+        {% if friends %}
+          {% for entry in friends %}
+            <div class="user-card">
+              <a href="{% url 'feed:profile' user_id=entry.user.id %}" class="profile-link">
+                <div class="profile-pic-container">
+                  <img src="{{ entry.user.profile_picture.url }}" alt="Profile" class="profile-pic">
+                  <div class="profile-pic-glow"></div>
+                </div>
+                <div class="user-info">
+                  <h3>{{ entry.user.full_name }}</h3>
+                  <p><i class="fas fa-graduation-cap"></i> {{ entry.user.department }} • 
+                    {% if entry.user.questionnaire %}{{ entry.user.questionnaire.year }}{% else %}Student{% endif %}</p>
+                  <p><i class="fas fa-university"></i> {{ entry.user.college }}</p>
+                  <p class="heart-date"><i class="fas fa-clock"></i> Friends since {{ entry.friendship_since|date:"M d, Y" }}</p>
+                </div>
+              </a>
+              
+              <div class="friend-actions">
+                <a href="#" class="message-btn">
+                  <i class="fas fa-comment"></i>
+                </a>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <!-- Empty State -->
+          <div class="empty-state">
+            <i class="far fa-user-circle"></i>
+            <h3>No friends yet</h3>
+            <p>When you and another person both send hearts to each other, you'll become friends!</p>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  
+    <!-- Bottom Navigation Bar -->
+    <nav>
+      <a href="{% url 'feed:home' %}">
+        <i class="fas fa-home"></i>
+      </a>
+      <a href="{% url 'feed:explore' %}">
+        <i class="fas fa-compass"></i>
+      </a>
+      <a href="{% url 'feed:create_post' %}">
+        <i class="fas fa-plus-circle"></i>
+      </a>
+      <a href="{% url 'feed:friends_list' %}" class="active-link">
+        <i class="fas fa-user-friends"></i>
+      </a>
+      <a href="{% url 'feed:confession' %}">
+        <i class="fas fa-bell"></i>
+      </a>
+    </nav>
+  
+    <script>
+      // Initialize particles.js
+      particlesJS('particles-js', {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 1000 } },
+          color: { value: "#6c63ff" },
+          shape: { type: "circle" },
+          opacity: { value: 0.5, random: true },
+          size: { value: 3, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#6c63ff",
+            opacity: 0.4,
+            width: 1
+          },
+          move: {
+            enable: true,
+            speed: 2,
+            direction: "none",
+            random: false,
+            straight: false,
+            out_mode: "out",
+            bounce: false,
+            attract: { enable: true, rotateX: 600, rotateY: 1200 }
+          }
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "grab" },
+            onclick: { enable: true, mode: "push" },
+            resize: true
+          },
+          modes: {
+            grab: { distance: 140, line_linked: { opacity: 1 } },
+            push: { particles_nb: 4 }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -16,4 +16,7 @@ urlpatterns = [
     path('comment/<int:comment_id>/delete/', views.delete_comment, name='delete_comment'),
     path('post/<int:post_id>/delete/', views.delete_post, name='delete_post'),
     path('post/<int:post_id>/data/', views.get_post_data, name='get_post_data'),
+    path('hearts/sent/', views.hearts_sent, name='hearts_sent'),
+    path('hearts/received/', views.hearts_received, name='hearts_received'),
+    path('friends/', views.friends_list, name='friends_list'),
 ]
