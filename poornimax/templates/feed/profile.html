@@ -775,13 +775,206 @@
       height: 40vh;
     }
   }
+/* Logout Button */
+.logout-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: var(--transition);
+}
+
+.logout-button:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(1.1);
+}
+
+/* Options Menu for Delete Account */
+.options-menu {
+  position: absolute;
+  top: 20px;
+  right: 70px;
+}
+
+.options-button {
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.options-button:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(1.1);
+}
+
+.options-dropdown {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  width: 180px;
+  z-index: 10;
+  display: none;
+  overflow: hidden;
+}
+
+.options-dropdown.active {
+  display: block;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 15px;
+  color: var(--text);
+  transition: var(--transition);
+  font-size: 14px;
+}
+
+.option-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.delete-account {
+  color: #ff3b30;
+}
+
+.delete-account i {
+  color: #ff3b30;
+}
+
+/* Make sure the options dropdown is above particle background */
+.options-dropdown {
+  z-index: 999;
+}
+
+/* For responsiveness on small screens */
+@media (max-width: 576px) {
+  .logout-button,
+  .options-button {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .logout-button {
+    right: 15px;
+    top: 15px;
+  }
+  
+  .options-menu {
+    right: 60px;
+    top: 15px;
+  }
+}
+/* Compatibility Chart */
+.compatibility-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: rgba(108, 99, 255, 0.05);
+  border-radius: var(--radius);
+}
+
+.doughnut-chart-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 10px;
+}
+
+.compatibility-percentage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.compatibility-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 5px;
+}
+
+/* Relationship Status & Looking For Section */
+.relationship-info {
+  background-color: rgba(108, 99, 255, 0.05);
+  padding: 15px;
+  border-radius: var(--radius);
+  margin: 15px 0;
+}
+
+.relationship-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.relationship-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.relationship-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.relationship-item i {
+  color: var(--primary);
+  width: 20px;
+  text-align: center;
+}
+
+.relationship-item span {
+  color: var(--text);
+}
+  
   </style>
 </head>
 <body>
-    <div class="loader-container" id="loaderContainer">
-    <div class="loader">
-    </div>
-  </div>
   <!-- Particle Background -->
   <div id="particles-js"></div>
   
@@ -793,6 +986,26 @@
           <i class="fas fa-arrow-left"></i>
         </a>
         
+        <!-- Only show options menu and logout button on own profile -->
+        {% if request.user.username == profile_user.username %}
+        <!-- Added 3-dot menu for options -->
+        <div class="options-menu">
+          <button class="options-button" id="optionsButton">
+            <i class="fas fa-ellipsis-v"></i>
+          </button>
+          <div class="options-dropdown" id="optionsDropdown">
+            <a href="{% url 'accounts:delete_account' %}" class="option-item delete-account">
+              <i class="fas fa-user-times"></i> Delete Account
+            </a>
+          </div>
+        </div>
+        
+        <!-- Added logout button -->
+        <a href="{% url 'accounts:logout' %}" class="logout-button">
+          <i class="fas fa-sign-out-alt"></i>
+        </a>
+        {% endif %}
+        
         <div class="profile-image">
           <img src="{{ profile_user.profile_picture.url }}" alt="Profile Picture">
         </div>
@@ -801,132 +1014,151 @@
       </div>
 
       <!-- Profile Body -->
-      <!-- Profile Body -->
-<div class="profile-body">
-  <!-- Left Column -->
-  <div class="profile-actions">
-    {% if request.user.username == profile_user.username %}
-      <button class="btn btn-edit" onclick="window.location.href='{% url 'accounts:edit_profile' %}'">
-        <i class="fas fa-edit"></i> Edit Profile
-      </button>
-      <button class="btn btn-post" onclick="window.location.href='{% url 'feed:create_post' %}'">
-        <i class="fas fa-plus"></i> Create Post
-      </button>
-    {% else %}
-      <!-- Compatibility Chart (New) -->
-      <div class="compatibility-container">
-        <div class="doughnut-chart-container">
-          <canvas id="compatibilityChart"></canvas>
-          <div class="compatibility-percentage">{{ compatibility_score }}%</div>
+      <div class="profile-body">
+        <!-- Left Column -->
+        <div class="profile-actions">
+          {% if request.user.username == profile_user.username %}
+            <button class="btn btn-edit" onclick="window.location.href='{% url 'accounts:edit_profile' %}'">
+              <i class="fas fa-edit"></i> Edit Profile
+            </button>
+            <button class="btn btn-post" onclick="window.location.href='{% url 'feed:create_post' %}'">
+              <i class="fas fa-plus"></i> Create Post
+            </button>
+          {% else %}
+            <!-- Compatibility Chart -->
+            <div class="compatibility-container">
+              <div class="doughnut-chart-container">
+                <canvas id="compatibilityChart"></canvas>
+                <div class="compatibility-percentage">{{ compatibility_score }}%</div>
+              </div>
+              <div class="compatibility-label">Compatibility Score</div>
+            </div>
+            
+            <form method="POST" action="{% url 'feed:crush_action' profile_user.id %}" class="crush-form">
+              {% csrf_token %}
+              
+              {% if is_mutual %}
+                <button type="submit" name="crush_action" value="uncrush" class="heart-btn btn-mutual">
+                  <i class="fas fa-heart"></i> Mutual Crush
+                </button>
+              {% elif sent_crush %}
+                <button type="submit" name="crush_action" value="uncrush" class="heart-btn btn-sent">
+                  <i class="fas fa-heart"></i> Sent a Crush
+                </button>
+              {% elif received_crush %}
+                <button type="submit" name="crush_action" value="accept_crush" class="heart-btn btn-received">
+                  <i class="far fa-heart"></i> Accept Crush
+                </button>
+              {% else %}
+                <button type="submit" name="crush_action" value="send_crush" class="heart-btn btn-send">
+                  <i class="far fa-heart"></i> Send Crush
+                </button>
+              {% endif %}
+            </form>
+            
+            <button class="btn btn-message">
+              <i class="fas fa-comment"></i> Message
+            </button>
+          {% endif %}
+          
+          <section class="bio">
+            <div class="bio-header">
+              <i class="fa fa-info-circle"></i>
+              Bio
+            </div>
+            <p class="bio-text">
+              {{ profile_user.bio|default:"No bio added yet." }}
+            </p>
+          </section>
+          
+          <!-- Add Relationship Status & Looking For Section -->
+          {% if profile_user.questionnaire %}
+          <section class="relationship-info">
+            <div class="relationship-header">
+              <i class="fa fa-heart"></i>
+              Relationship Info
+            </div>
+            <div class="relationship-details">
+              <div class="relationship-item">
+                <i class="fas fa-heart-pulse"></i>
+                <span><strong>Status:</strong> {{ profile_user.questionnaire.relationship_status }}</span>
+              </div>
+              <div class="relationship-item">
+                <i class="fas fa-search"></i>
+                <span><strong>Looking For:</strong> {{ profile_user.questionnaire.looking_for|default:"Not specified" }}</span>
+              </div>
+            </div>
+          </section>
+          {% endif %}
+          
+          <div class="info-details">
+            <div class="info-item">
+              <i class="fas fa-university"></i>
+              <span>{{ profile_user.college }}</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-graduation-cap"></i>
+              <span>{{ profile_user.department }}</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-birthday-cake"></i>
+              <span>{{ profile_user.dob }}</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-venus-mars"></i>
+              <span>{{ profile_user.gender }}</span>
+            </div>
+          </div>
         </div>
-        <div class="compatibility-label">Compatibility Score</div>
-      </div>
-      
-      <form method="POST" action="{% url 'feed:crush_action' profile_user.id %}" class="crush-form">
-        {% csrf_token %}
-        
-        {% if is_mutual %}
-          <button type="submit" name="crush_action" value="uncrush" class="heart-btn btn-mutual">
-            <i class="fas fa-heart"></i> Mutual Crush
-          </button>
-        {% elif sent_crush %}
-          <button type="submit" name="crush_action" value="uncrush" class="heart-btn btn-sent">
-            <i class="fas fa-heart"></i> Sent a Crush
-          </button>
-        {% elif received_crush %}
-          <button type="submit" name="crush_action" value="accept_crush" class="heart-btn btn-received">
-            <i class="far fa-heart"></i> Accept Crush
-          </button>
-        {% else %}
-          <button type="submit" name="crush_action" value="send_crush" class="heart-btn btn-send">
-            <i class="far fa-heart"></i> Send Crush
-          </button>
-        {% endif %}
-      </form>
-      
-      <button class="btn btn-message">
-        <i class="fas fa-comment"></i> Message
-      </button>
-    {% endif %}
-    
-    <section class="bio">
-      <div class="bio-header">
-        <i class="fa fa-info-circle"></i>
-        Bio
-      </div>
-      <p class="bio-text">
-        {{ profile_user.bio|default:"No bio added yet." }}
-      </p>
-    </section>
-    
-    <div class="info-details">
-      <div class="info-item">
-        <i class="fas fa-university"></i>
-        <span>{{ profile_user.college }}</span>
-      </div>
-      <div class="info-item">
-        <i class="fas fa-graduation-cap"></i>
-        <span>{{ profile_user.department }}</span>
-      </div>
-      <div class="info-item">
-        <i class="fas fa-birthday-cake"></i>
-        <span>{{ profile_user.dob }}</span>
-      </div>
-      <div class="info-item">
-        <i class="fas fa-venus-mars"></i>
-        <span>{{ profile_user.gender }}</span>
+
+        <!-- Right Column - Posts Section -->
+        <div class="posts-section">
+          <h3>Posts</h3>
+          {% if request.user == profile_user or is_mutual %}
+            {% if posts %}
+              <div class="post-grid">
+                {% for post in posts %}
+                  <div class="post-item" data-post-id="{{ post.id }}" onclick="openPostOverlay({{ post.id }})">
+                    <img src="{{ post.image.url }}" alt="Post">
+                    <div class="post-overlay">
+                      <span class="post-likes"><i class="fas fa-heart"></i> {{ post.likes_count }}</span>
+                      <span class="post-comments"><i class="fas fa-comment"></i> {{ post.comments_count }}</span>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+              
+              <!-- Last Post Featured -->
+              {% if latest_post %}
+              <div class="last-post">
+                <div class="post-cover" style="background-image: url('{{ latest_post.image.url }}')">
+                  <span class="last-badge">Latest Post</span>
+                </div>
+                <h3 class="post-title">{{ latest_post.caption|truncatechars:30 }}</h3>
+                <button class="post-CTA" onclick="openPostOverlay({{ latest_post.id }})">View</button>
+              </div>
+              {% endif %}
+            {% else %}
+              <p class="no-posts">No posts yet.</p>
+            {% endif %}
+          {% else %}
+            <div class="private-posts-message">
+              <i class="fas fa-lock lock-icon"></i>
+              <p>Only mutual crushes can see {{ profile_user.username }}'s posts.</p>
+              {% if sent_crush %}
+                <p>You've sent a crush. Waiting for {{ profile_user.username }} to accept.</p>
+              {% elif received_crush %}
+                <p>{{ profile_user.username }} sent you a crush. Accept to see their posts!</p>
+              {% else %}
+                <p>Send a crush and if it's mutual, you'll see their posts!</p>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Right Column - Posts Section -->
-  <div class="posts-section">
-    <h3>Posts</h3>
-    {% if request.user == profile_user or is_mutual %}
-      {% if posts %}
-        <div class="post-grid">
-          {% for post in posts %}
-            <div class="post-item" data-post-id="{{ post.id }}" onclick="openPostOverlay({{ post.id }})">
-              <img src="{{ post.image.url }}" alt="Post">
-              <div class="post-overlay">
-                <span class="post-likes"><i class="fas fa-heart"></i> {{ post.likes_count }}</span>
-                <span class="post-comments"><i class="fas fa-comment"></i> {{ post.comments_count }}</span>
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-        
-        <!-- Last Post Featured -->
-        {% if latest_post %}
-        <div class="last-post">
-          <div class="post-cover" style="background-image: url('{{ latest_post.image.url }}')">
-            <span class="last-badge">Latest Post</span>
-          </div>
-          <h3 class="post-title">{{ latest_post.caption|truncatechars:30 }}</h3>
-          <button class="post-CTA" onclick="openPostOverlay({{ latest_post.id }})">View</button>
-        </div>
-        {% endif %}
-      {% else %}
-        <p class="no-posts">No posts yet.</p>
-      {% endif %}
-    {% else %}
-      <div class="private-posts-message">
-        <i class="fas fa-lock lock-icon"></i>
-        <p>Only mutual crushes can see {{ profile_user.username }}'s posts.</p>
-        {% if sent_crush %}
-          <p>You've sent a crush. Waiting for {{ profile_user.username }} to accept.</p>
-        {% elif received_crush %}
-          <p>{{ profile_user.username }} sent you a crush. Accept to see their posts!</p>
-        {% else %}
-          <p>Send a crush and if it's mutual, you'll see their posts!</p>
-        {% endif %}
-      </div>
-    {% endif %}
-  </div>
-</div>
-
-
-  
   <!-- Post Overlay -->
   <div class="overlay-container" id="postOverlay">
     <div class="post-overlay-content">
@@ -973,27 +1205,28 @@
       </div>
     </div>
   </div>
-    </div>
+
   <!-- Bottom Navigation -->
-    <nav>
-      <a href="{% url 'feed:home' %}">
-        <i class="fas fa-home"></i>
-      </a>
-      <a href="{% url 'feed:explore' %}">
-        <i class="fas fa-compass"></i>
-      </a>
-      <a href="{% url 'feed:create_post' %}">
-        <i class="fas fa-plus-circle"></i>
-      </a>
-      <a href="#" class="active-link">
-        <i class="fas fa-user-friends"></i>
-      </a>
-      <a href="{% url 'feed:confession' %}">
-        <i class="fas fa-bell"></i>
-      </a>
-    </nav>
-    <script>
-      window.addEventListener('load', function() {
+  <nav>
+    <a href="{% url 'feed:home' %}">
+      <i class="fas fa-home"></i>
+    </a>
+    <a href="{% url 'feed:explore' %}">
+      <i class="fas fa-compass"></i>
+    </a>
+    <a href="{% url 'feed:create_post' %}">
+      <i class="fas fa-plus-circle"></i>
+    </a>
+    <a href="#" class="active-link">
+      <i class="fas fa-user-friends"></i>
+    </a>
+    <a href="{% url 'feed:confession' %}">
+      <i class="fas fa-bell"></i>
+    </a>
+  </nav>
+  
+  <script>
+    window.addEventListener('load', function() {
       setTimeout(function() {
         const loader = document.getElementById('loaderContainer');
         loader.style.opacity = '0';
@@ -1003,164 +1236,217 @@
       }, 1000); // Display for 1 second instead of 2
     });
 
-      // Initialize particles.js
-      particlesJS('particles-js', {
-        particles: {
-          number: { value: 80, density: { enable: true, value_area: 800 } },
-          color: { value: "#6c63ff" },
-          shape: { type: "circle" },
-          opacity: { value: 0.5, random: false },
-          size: { value: 3, random: true },
-          line_linked: {
-            enable: true,
-            distance: 150,
-            color: "#6c63ff",
-            opacity: 0.4,
-            width: 1
-          },
-          move: {
-            enable: true,
-            speed: 2,
-            direction: "none",
-            random: false,
-            straight: false,
-            out_mode: "out",
-            bounce: false
-          }
+    // Initialize particles.js
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#6c63ff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5, random: false },
+        size: { value: 3, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#6c63ff",
+          opacity: 0.4,
+          width: 1
         },
-        interactivity: {
-          detect_on: "canvas",
-          events: {
-            onhover: { enable: true, mode: "grab" },
-            onclick: { enable: true, mode: "push" },
-            resize: true
+        move: {
+          enable: true,
+          speed: 2,
+          direction: "none",
+          random: false,
+          straight: false,
+          out_mode: "out",
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "grab" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
+        },
+        modes: {
+          grab: { distance: 140, line_linked: { opacity: 1 } },
+          push: { particles_nb: 4 }
+        }
+      }
+    });
+
+    // Compatibility Chart initialization
+    if (document.getElementById('compatibilityChart')) {
+      const compatibilityScore = parseInt('{{ compatibility_score|default:0 }}');
+      const ctx = document.getElementById('compatibilityChart').getContext('2d');
+      
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          datasets: [{
+            data: [compatibilityScore, 100 - compatibilityScore],
+            backgroundColor: [
+              'rgba(108, 99, 255, 0.8)',
+              'rgba(221, 221, 221, 0.5)'
+            ],
+            borderWidth: 0,
+            cutout: '75%'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              enabled: false
+            }
           },
-          modes: {
-            grab: { distance: 140, line_linked: { opacity: 1 } },
-            push: { particles_nb: 4 }
+          animation: {
+            animateRotate: true,
+            animateScale: true
           }
         }
       });
-  
-      // Post overlay functionality
-      const postOverlay = document.getElementById('postOverlay');
-      const overlayPostImage = document.getElementById('overlayPostImage');
-      const overlayUserImage = document.getElementById('overlayUserImage');
-      const overlayUsername = document.getElementById('overlayUsername');
-      const overlayTime = document.getElementById('overlayTime');
-      const overlayCaption = document.getElementById('overlayCaption');
-      const commentsContainer = document.getElementById('commentsContainer');
-      const closeOverlay = document.getElementById('closeOverlay');
-      const likeButton = document.getElementById('likeButton');
-      const likeIcon = document.getElementById('likeIcon');
-      const likeCount = document.getElementById('likeCount');
-      const likeForm = document.getElementById('likeForm');
-      const commentForm = document.getElementById('commentForm');
-      const deletePostForm = document.getElementById('deletePostForm');
-  
-      // Function to open post overlay
-      function openPostOverlay(postId) {
-        // Update form actions with post ID
-        likeForm.action = `{% url 'feed:like_post' 999 %}`.replace('999', postId);
-        commentForm.action = `{% url 'feed:add_comment' 999 %}`.replace('999', postId);
-        deletePostForm.action = `{% url 'feed:delete_post' 999 %}`.replace('999', postId);
-        
-        // Fetch post data from Django backend
-        fetch(`{% url 'feed:get_post_data' 999 %}`.replace('999', postId))
-          .then(response => response.json())
-          .then(data => {
-            if (data.success) {
-              const post = data.post;
-              
-              // Set post content
-              overlayPostImage.src = post.image;
-              overlayUserImage.src = post.user_image;
-              overlayUsername.textContent = post.username;
-              overlayTime.textContent = post.time;
-              overlayCaption.textContent = post.caption;
-              likeCount.textContent = `${post.likes_count} likes`;
-              
-              // Update like button state
-              if (post.liked) {
-                likeIcon.classList.remove('far');
-                likeIcon.classList.add('fas');
-                likeButton.classList.add('active');
-              } else {
-                likeIcon.classList.remove('fas');
-                likeIcon.classList.add('far');
-                likeButton.classList.remove('active');
-              }
-              
-              // Load comments
-              commentsContainer.innerHTML = '';
-              if (post.comments.length === 0) {
-                commentsContainer.innerHTML = '<p style="text-align: center; color: var(--text-light); padding: 20px;">No comments yet.</p>';
-              } else {
-                post.comments.forEach(comment => {
-                  const commentElement = document.createElement('div');
-                  commentElement.className = 'comment';
-                  
-                  // Create comment HTML with delete form if user can delete
-                  let deleteForm = '';
-                  if (comment.can_delete) {
-                    deleteForm = `
-                      <form method="POST" action="{% url 'feed:delete_comment' 999 %}".replace('999', comment.id) style="display: inline;">
-                        {% csrf_token %}
-                        <button type="submit" style="background: none; border: none; color: #ff3b30; font-size: 12px; cursor: pointer;">
-                          Delete
-                        </button>
-                      </form>
-                    `;
-                  }
-                  
-                  commentElement.innerHTML = `
-                    <img src="${comment.user_image}" alt="${comment.username}" class="comment-user-img">
-                    <div class="comment-content">
-                      <div class="comment-username">${comment.username}</div>
-                      <div class="comment-text">${comment.content}</div>
-                      <div class="comment-time">
-                        ${comment.time} ${deleteForm}
-                      </div>
-                    </div>
-                  `;
-                  
-                  commentsContainer.appendChild(commentElement);
-                });
-              }
-              
-              // Show delete post button if user is owner
-              if (post.is_owner) {
-                deletePostForm.style.display = 'block';
-              } else {
-                deletePostForm.style.display = 'none';
-              }
-              
-              // Show overlay
-              postOverlay.classList.add('active');
-              document.body.style.overflow = 'hidden';
-            } else {
-              alert('Error loading post: ' + data.error);
-            }
-          })
-          .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred while loading the post.');
-          });
-      }
+    }
+
+    // Post overlay functionality
+    const postOverlay = document.getElementById('postOverlay');
+    const overlayPostImage = document.getElementById('overlayPostImage');
+    const overlayUserImage = document.getElementById('overlayUserImage');
+    const overlayUsername = document.getElementById('overlayUsername');
+    const overlayTime = document.getElementById('overlayTime');
+    const overlayCaption = document.getElementById('overlayCaption');
+    const commentsContainer = document.getElementById('commentsContainer');
+    const closeOverlay = document.getElementById('closeOverlay');
+    const likeButton = document.getElementById('likeButton');
+    const likeIcon = document.getElementById('likeIcon');
+    const likeCount = document.getElementById('likeCount');
+    const likeForm = document.getElementById('likeForm');
+    const commentForm = document.getElementById('commentForm');
+    const deletePostForm = document.getElementById('deletePostForm');
+
+    // Toggle options dropdown
+    const optionsButton = document.getElementById('optionsButton');
+    const optionsDropdown = document.getElementById('optionsDropdown');
+    
+    if (optionsButton) {
+      optionsButton.addEventListener('click', function(e) {
+        e.stopPropagation();
+        optionsDropdown.classList.toggle('active');
+      });
+    
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function() {
+        optionsDropdown.classList.remove('active');
+      });
+    }
+    
+    // Function to open post overlay
+    function openPostOverlay(postId) {
+      // Update form actions with post ID
+      likeForm.action = `{% url 'feed:like_post' 999 %}`.replace('999', postId);
+      commentForm.action = `{% url 'feed:add_comment' 999 %}`.replace('999', postId);
+      deletePostForm.action = `{% url 'feed:delete_post' 999 %}`.replace('999', postId);
       
-      // Close overlay
-      closeOverlay.addEventListener('click', function() {
+      // Fetch post data from Django backend
+      fetch(`{% url 'feed:get_post_data' 999 %}`.replace('999', postId))
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            const post = data.post;
+            
+            // Set post content
+            overlayPostImage.src = post.image;
+            overlayUserImage.src = post.user_image;
+            overlayUsername.textContent = post.username;
+            overlayTime.textContent = post.time;
+            overlayCaption.textContent = post.caption;
+            likeCount.textContent = `${post.likes_count} likes`;
+            
+            // Update like button state
+            if (post.liked) {
+              likeIcon.classList.remove('far');
+              likeIcon.classList.add('fas');
+              likeButton.classList.add('active');
+            } else {
+              likeIcon.classList.remove('fas');
+              likeIcon.classList.add('far');
+              likeButton.classList.remove('active');
+            }
+            
+            // Load comments
+            commentsContainer.innerHTML = '';
+            if (post.comments.length === 0) {
+              commentsContainer.innerHTML = '<p style="text-align: center; color: var(--text-light); padding: 20px;">No comments yet.</p>';
+            } else {
+              post.comments.forEach(comment => {
+                const commentElement = document.createElement('div');
+                commentElement.className = 'comment';
+                
+                // Create comment HTML with delete form if user can delete
+                let deleteForm = '';
+                if (comment.can_delete) {
+                  deleteForm = `
+                    <form method="POST" action="{% url 'feed:delete_comment' 999 %}".replace('999', comment.id) style="display: inline;">
+                      {% csrf_token %}
+                      <button type="submit" style="background: none; border: none; color: #ff3b30; font-size: 12px; cursor: pointer;">
+                        Delete
+                      </button>
+                    </form>
+                  `;
+                }
+                
+                commentElement.innerHTML = `
+                  <img src="${comment.user_image}" alt="${comment.username}" class="comment-user-img">
+                  <div class="comment-content">
+                    <div class="comment-username">${comment.username}</div>
+                    <div class="comment-text">${comment.content}</div>
+                    <div class="comment-time">
+                      ${comment.time} ${deleteForm}
+                    </div>
+                  </div>
+                `;
+                
+                commentsContainer.appendChild(commentElement);
+              });
+            }
+            
+            // Show delete post button if user is owner
+            if (post.is_owner) {
+              deletePostForm.style.display = 'block';
+            } else {
+              deletePostForm.style.display = 'none';
+            }
+            
+            // Show overlay
+            postOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          } else {
+            alert('Error loading post: ' + data.error);
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('An error occurred while loading the post.');
+        });
+    }
+    
+    // Close overlay
+    closeOverlay.addEventListener('click', function() {
+      postOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+    
+    // Close overlay when clicking outside content
+    postOverlay.addEventListener('click', function(e) {
+      if (e.target === postOverlay) {
         postOverlay.classList.remove('active');
         document.body.style.overflow = '';
-      });
-      
-      // Close overlay when clicking outside content
-      postOverlay.addEventListener('click', function(e) {
-        if (e.target === postOverlay) {
-          postOverlay.classList.remove('active');
-          document.body.style.overflow = '';
-        }
-      });
-    </script>
+      }
+    });
+  </script>
 </body>
 </html>

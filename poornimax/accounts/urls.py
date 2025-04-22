@@ -19,4 +19,6 @@ urlpatterns = [
     path('questionnaire/', views.questionnaire_view, name='questionnaire_view'),
     path('z/', views.z, name='z'),
     path('edit-profile/', views.edit_profile, name='edit_profile'),
+    path('delete-account/', views.delete_account, name='delete_account'),
+    path('logout/', views.logout_view, name='logout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

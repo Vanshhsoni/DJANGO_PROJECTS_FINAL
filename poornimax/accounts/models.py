@@ -106,6 +106,7 @@ class Friendship(models.Model):
 
 
 # Questionnaire Model
+# Questionnaire Model
 class UserQuestionnaire(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='questionnaire')
 
@@ -131,11 +132,24 @@ class UserQuestionnaire(models.Model):
     free_time = models.CharField(max_length=100, choices=[('Alone, doing my own thing', 'Alone, doing my own thing'), ('Hanging with friends', 'Hanging with friends'), ('Exploring new activities', 'Exploring new activities'), ('Doing something creative (art, writing, etc.)', 'Doing something creative (art, writing, etc.)')])
 
     # Set 3: Relationship Intent
-    relationship_status = models.CharField(max_length=100, choices=[('Single', 'Single'), ('Taken', 'Taken'), ('It’s complicated', 'It’s complicated'), ('Not telling', 'Not telling'), ('In an open relationship', 'In an open relationship')])
-    dating_approach = models.CharField(max_length=100, choices=[('I like to take things slow', 'I like to take things slow'), ('I dive in quickly and see where it goes', 'I dive in quickly and see where it goes'), ('I prefer long-term commitment', 'I prefer long-term commitment'), ('I’m just here for fun', 'I’m just here for fun')])
-    compatibility = models.CharField(max_length=100, choices=[('Very important', 'Very important'), ('Somewhat important', 'Somewhat important'), ('I’m open to exploring any kind of relationship', 'I’m open to exploring any kind of relationship'), ('Not important at all', 'Not important at all')])
-    similar_interests = models.CharField(max_length=100, choices=[('Yes, definitely', 'Yes, definitely'), ('I’m open to different interests', 'I’m open to different interests'), ('I prefer finding someone with unique interests', 'I prefer finding someone with unique interests')])
-    relationship_view = models.CharField(max_length=100, choices=[('Serious commitment', 'Serious commitment'), ('Fun and casual', 'Fun and casual'), ('I’m unsure', 'I’m unsure'), ('Just enjoying the journey', 'Just enjoying the journey')])
+    relationship_status = models.CharField(max_length=100, choices=[('Single', 'Single'), ('Taken', 'Taken'), ('It\'s complicated', 'It\'s complicated'), ('Not telling', 'Not telling'), ('In an open relationship', 'In an open relationship')])
+    dating_approach = models.CharField(max_length=100, choices=[('I like to take things slow', 'I like to take things slow'), ('I dive in quickly and see where it goes', 'I dive in quickly and see where it goes'), ('I prefer long-term commitment', 'I prefer long-term commitment'), ('I\'m just here for fun', 'I\'m just here for fun')])
+    compatibility = models.CharField(max_length=100, choices=[('Very important', 'Very important'), ('Somewhat important', 'Somewhat important'), ('I\'m open to exploring any kind of relationship', 'I\'m open to exploring any kind of relationship'), ('Not important at all', 'Not important at all')])
+    similar_interests = models.CharField(max_length=100, choices=[('Yes, definitely', 'Yes, definitely'), ('I\'m open to different interests', 'I\'m open to different interests'), ('I prefer finding someone with unique interests', 'I prefer finding someone with unique interests')])
+    relationship_view = models.CharField(max_length=100, choices=[('Serious commitment', 'Serious commitment'), ('Fun and casual', 'Fun and casual'), ('I\'m unsure', 'I\'m unsure'), ('Just enjoying the journey', 'Just enjoying the journey')])
+    looking_for = models.CharField(max_length=100, choices=[
+        ('Girlfriend', 'Girlfriend'),
+        ('Boyfriend', 'Boyfriend'),
+        ('Friend', 'Friendship'),
+        ('BFF', 'Best friend'),
+        ('College mate', 'Study partner'),
+        ('Serious partner', 'Serious relationship'),
+        ('Hookup', 'Casual connection'),
+        ('FWB', 'Friends with benefits'),
+        ('Chill vibe', 'No expectations'),
+        ('Not sure yet', 'Still figuring it out'),
+        ('Chat', 'Interesting conversations')
+    ], blank=True, null=True)
 
     def __str__(self):
         return f"Questionnaire - {self.user.username}"

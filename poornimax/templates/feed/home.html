@@ -727,16 +727,19 @@
     <section class="stats-container">
       <div class="stats">
         <div class="popup-box" style="--delay: 0">
+          <a href="{% url 'feed:hearts_sent' %}">
           <div class="mystery-flash" style="--delay: 0"></div>
           <div class="glow-pulse"></div>
           <div class="popup-box-icon">
             <i class="fas fa-heart-circle-plus"></i>
+          </a>
           </div>
           <p>Hearts Sent</p>
           <strong>{{ hearts_sent }}</strong>
         </div>
         
         <div class="popup-box" style="--delay: 1">
+          <a href="{% url 'feed:hearts_received' %}">
           <div class="mystery-flash" style="--delay: 1"></div>
           <div class="glow-pulse"></div>
           <div class="popup-box-icon">
@@ -744,9 +747,11 @@
           </div>
           <p>Hearts Received</p>
           <strong>{{ hearts_received }}</strong>
+          </a>
         </div>
         
         <div class="popup-box" style="--delay: 2">
+          <a href="{% url 'feed:friends_list' %}">
           <div class="mystery-flash" style="--delay: 2"></div>
           <div class="glow-pulse"></div>
           <div class="popup-box-icon">
@@ -754,6 +759,7 @@
           </div>
           <p>Friends</p>
           <strong>{{ friends }}</strong>
+          </a>
         </div>
         
         <div class="popup-box" style="--delay: 3">
@@ -988,7 +994,7 @@
     <a href="{% url 'feed:create_post' %}">
       <i class="fas fa-plus-circle"></i>
     </a>
-    <a href="#">
+    <a href="{% url 'feed:friends_list' %}">
       <i class="fas fa-user-friends"></i>
     </a>
     <a href="{% url 'feed:confession' %}">

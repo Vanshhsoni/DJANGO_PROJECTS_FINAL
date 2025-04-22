@@ -5,7 +5,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-ll(dkrpdb5wrj+#(zvmhz=a9c*a84%$#!34ib$9ymj6o2i8tzh'
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'accounts.User'  # Assuming 'accounts' is your app name
 

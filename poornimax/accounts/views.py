@@ -2,7 +2,7 @@ import os
 import random
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import get_user_model, login
+from django.contrib.auth import get_user_model, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.core.files.storage import FileSystemStorage
@@ -195,6 +195,7 @@ def questionnaire_view(request):
         questionnaire.compatibility = data.get('compatibility')
         questionnaire.similar_interests = data.get('similar_interests')
         questionnaire.relationship_view = data.get('relationship_view')
+        questionnaire.looking_for = data.get('looking_for')
 
         user.has_answered_questionnaire = True
         user.save()
@@ -246,3 +247,15 @@ def edit_profile(request):
         'user': user,
         'questionnaire': questionnaire
     })
+@login_required
+def delete_account(request):
+    user = request.user
+    logout(request)
+    user.delete()
+    messages.success(request, "Your account has been deleted successfully.")
+    return redirect('accounts:login_signup')
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, "You have been logged out successfully.")
+    return redirect('accounts:login_signup')
