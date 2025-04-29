@@ -99,3 +99,14 @@ DEFAULT_FROM_EMAIL = 'sonivanshmaster@gmail.com'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+from django.core.files import locks
+
+def dummy_lock(f, flags):
+    pass
+
+def dummy_unlock(f):
+    pass
+
+locks.lock = dummy_lock
+locks.unlock = dummy_unlock
